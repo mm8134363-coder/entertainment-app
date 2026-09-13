@@ -26,18 +26,16 @@ button{
 
 .app{
   width:100%;
-  max-width:600px;
+  max-width:520px;
   min-height:100vh;
   margin:auto;
   background:#f7f7fb;
-  position:relative;
-  overflow:hidden;
 }
 
-/* LOGIN */
+/* تسجيل الدخول */
 #loginPage{
   min-height:100vh;
-  padding:30px 20px;
+  padding:35px 22px;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -47,89 +45,81 @@ button{
   width:100%;
   background:white;
   border-radius:30px;
-  padding:35px 28px;
+  padding:35px 25px;
   text-align:center;
-  box-shadow:0 15px 45px #0004;
+  box-shadow:0 10px 40px #0003;
 }
 
 .logo{
   width:110px;
   height:110px;
-  border-radius:50%;
   margin:auto;
-  background:linear-gradient(135deg,#6b00d7,#1469ee);
+  border-radius:50%;
   display:flex;
   align-items:center;
   justify-content:center;
-  color:white;
   font-size:55px;
+  color:white;
+  background:linear-gradient(135deg,#6b13df,#176df0);
 }
 
 .login-box h1{
   margin-top:25px;
-  font-size:32px;
+  font-size:34px;
 }
 
 .subtitle{
-  color:#888;
   margin:12px 0 25px;
+  color:#888;
+  font-size:17px;
 }
 
 .input{
   width:100%;
-  height:58px;
+  padding:17px;
+  margin:8px 0;
   border:1px solid #ddd;
-  border-radius:18px;
-  padding:0 18px;
+  border-radius:16px;
   font-size:17px;
-  margin-bottom:14px;
   outline:none;
+  text-align:right;
 }
 
 .main-btn{
   width:100%;
-  height:58px;
-  border-radius:18px;
+  padding:17px;
+  margin-top:12px;
+  border-radius:16px;
   color:white;
   font-size:19px;
   font-weight:bold;
-  background:linear-gradient(90deg,#6b00d7,#1469ee);
+  background:linear-gradient(90deg,#6710dc,#2475f4);
 }
 
-.divider{
-  display:flex;
-  align-items:center;
-  gap:10px;
+.or{
   margin:25px 0;
-  color:#aaa;
-}
-
-.divider span{
-  flex:1;
-  height:1px;
-  background:#ddd;
+  color:#999;
 }
 
 .social{
   width:100%;
-  height:55px;
+  padding:15px;
+  margin:7px 0;
+  border-radius:15px;
   background:white;
   border:1px solid #ddd;
-  border-radius:17px;
-  margin-bottom:12px;
-  font-size:16px;
+  font-size:17px;
 }
 
-.facebook{color:#1877f2}
-.google{color:#db4437}
+.social.facebook{color:#1877f2}
+.social.gmail{color:#db4437}
 
 .note{
-  color:#999;
   margin-top:25px;
-  font-size:14px;
+  color:#999;
 }
 
-/* APP */
+/* التطبيق */
 #appPage{
   display:none;
   min-height:100vh;
@@ -137,27 +127,24 @@ button{
 }
 
 .header{
-  height:75px;
-  background:linear-gradient(90deg,#5b0bc9,#1769ed);
+  padding:20px;
   color:white;
+  background:linear-gradient(135deg,#4c13a8,#2269ed);
   display:flex;
-  align-items:center;
   justify-content:space-between;
-  padding:0 18px;
+  align-items:center;
 }
 
-.header-title{
-  font-size:22px;
-  font-weight:bold;
+.header h2{
+  font-size:23px;
 }
 
 .coins{
   background:#ffffff22;
-  padding:10px 14px;
+  padding:9px 13px;
   border-radius:20px;
 }
 
-/* PAGES */
 .page{
   display:none;
   padding:18px;
@@ -167,930 +154,50 @@ button{
   display:block;
 }
 
-.welcome{
-  background:linear-gradient(135deg,#6b00d7,#1469ee);
-  color:white;
-  padding:22px;
-  border-radius:22px;
-  margin-bottom:18px;
-}
-
-.welcome h2{
-  margin-bottom:8px;
-}
-
-.cards{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:14px;
-}
-
 .card{
   background:white;
   border-radius:20px;
-  padding:22px 10px;
-  text-align:center;
-  box-shadow:0 4px 15px #0000000c;
-}
-
-.card-icon{
-  font-size:40px;
-  margin-bottom:10px;
-}
-
-.card h3{
-  font-size:17px;
-}
-
-.section-title{
-  margin:15px 0;
-  font-size:21px;
-}
-
-/* ROOMS */
-.room{
-  background:white;
-  border-radius:20px;
-  margin-bottom:14px;
-  padding:15px;
-  display:flex;
-  align-items:center;
-  gap:12px;
-  box-shadow:0 3px 12px #0000000c;
-}
-
-.room-img{
-  width:65px;
-  height:65px;
-  border-radius:17px;
-  background:linear-gradient(135deg,#6b00d7,#1469ee);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:white;
-  font-size:30px;
-}
-
-.room-info{
-  flex:1;
-}
-
-.room-info h3{
-  margin-bottom:6px;
-}
-
-.join{
-  background:#5c16d7;
-  color:white;
-  padding:10px 15px;
-  border-radius:13px;
-}
-
-/* STATUS */
-.status{
-  background:white;
-  border-radius:20px;
-  padding:15px;
-  margin-bottom:14px;
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-
-.avatar{
-  width:55px;
-  height:55px;
-  border-radius:50%;
-  background:linear-gradient(135deg,#6b00d7,#1469ee);
-  color:white;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:22px;
-}
-
-/* PROFILE */
-.profile{
-  background:white;
-  border-radius:25px;
-  overflow:hidden;
-}
-
-.cover{
-  height:150px;
-  background:linear-gradient(135deg,#24104f,#1469ee);
-}
-
-.profile-body{
   padding:20px;
-  text-align:center;
-}
-
-.big-avatar{
-  width:95px;
-  height:95px;
-  border-radius:50%;
-  background:linear-gradient(135deg,#6b00d7,#1469ee);
-  border:5px solid white;
-  margin:-65px auto 10px;
-  position:relative;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:white;
-  font-size:40px;
-}
-
-.profile-btn{
-  width:100%;
-  padding:14px;
-  margin-top:10px;
-  border-radius:15px;
-  background:#f1eff8;
-}
-
-/* FAMILY */
-.family-box{
-  background:white;
-  border-radius:25px;
-  padding:22px;
-}
-
-.cost{
-  background:#fff4d6;
-  color:#9b6500;
-  padding:15px;
-  border-radius:15px;
-  margin:15px 0;
-  text-align:center;
-  font-weight:bold;
-}
-
-.level{
-  background:#e9f2ff;
-  color:#1769ed;
-  padding:15px;
-  border-radius:15px;
   margin-bottom:15px;
-  text-align:center;
+  box-shadow:0 3px 15px #0000000d;
 }
 
-/* CHAT */
-.chat{
-  background:white;
-  border-radius:20px;
-  padding:15px;
-  min-height:450px;
+.welcome{
+  background:linear-gradient(135deg,#6514d7,#2674f4);
+  color:white;
 }
 
-.message{
-  padding:12px 15px;
-  border-radius:16px;
-  background:#f0edfa;
+.welcome h2{
   margin-bottom:10px;
-  width:fit-content;
-  max-width:80%;
 }
 
-.message.me{
-  margin-right:auto;
-  background:#5d19d5;
-  color:white;
+.menu-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
 }
 
-.chat-input{
-  display:flex;
-  gap:8px;
-  margin-top:15px;
-}
-
-.chat-input input{
-  flex:1;
-  height:50px;
-  border:1px solid #ddd;
-  border-radius:15px;
-  padding:10px;
-}
-
-.chat-input button{
-  width:70px;
-  border-radius:15px;
-  color:white;
-  background:#5d19d5;
-}
-
-/* NAV */
-.bottom-nav{
-  position:fixed;
-  bottom:0;
-  left:50%;
-  transform:translateX(-50%);
-  width:100%;
-  max-width:600px;
-  height:72px;
+.menu-btn{
   background:white;
-  border-top:1px solid #ddd;
+  border-radius:18px;
+  padding:20px 8px;
+  font-size:15px;
+  box-shadow:0 3px 12px #0001;
+}
+
+.menu-btn div{
+  font-size:30px;
+  margin-bottom:8px;
+}
+
+/* الرومات */
+.room{
   display:flex;
-  justify-content:space-around;
   align-items:center;
-  z-index:20;
+  gap:12px;
+  padding:15px 0;
+  border-bottom:1px solid #eee;
 }
 
-.nav-btn{
-  background:none;
-  color:#888;
-  font-size:12px;
-  text-align:center;
-}
-
-.nav-btn div{
-  font-size:25px;
-  margin-bottom:3px;
-}
-
-.nav-btn.active{
-  color:#5d19d5;
-}
-
-/* MODAL */
-.modal{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:#0008;
-  z-index:50;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-}
-
-.modal-box{
-  width:100%;
-  max-width:450px;
-  background:white;
-  border-radius:25px;
-  padding:25px;
-}
-
-.close{
-  float:left;
-  background:#eee;
-  border-radius:50%;
-  width:35px;
-  height:35px;
-}
-
-.option{
-  width:100%;
-  padding:15px;
-  border-radius:15px;
-  background:#f5f3fa;
-  margin-top:12px;
-  text-align:right;
-}
-
-@media(max-width:400px){
-  .login-box{padding:28px 18px}
-  .login-box h1{font-size:27px}
-}
-</style>
-</head>
-
-<body>
-
-<!-- LOGIN -->
-<div id="loginPage">
-  <div class="login-box">
-
-    <div class="logo">★</div>
-
-    <h1>تطبيق ترفيهي</h1>
-    <p class="subtitle">ترفيه وتسلية ودردشة مع الأصدقاء</p>
-
-    <input id="phone" class="input" type="tel"
-           placeholder="رقم الهاتف">
-
-    <input id="password" class="input" type="password"
-           placeholder="كلمة المرور">
-
-    <button class="main-btn" onclick="login()">
-      تسجيل الدخول
-    </button>
-
-    <div class="divider">
-      <span></span>
-      أو الدخول بواسطة
-      <span></span>
-    </div>
-
-    <button class="social" onclick="phoneLogin()">
-      📱 الدخول برقم الهاتف
-    </button>
-
-    <button class="social facebook" onclick="socialLogin('Facebook')">
-      f&nbsp; الدخول باستخدام Facebook
-    </button>
-
-    <button class="social google" onclick="socialLogin('Gmail')">
-      G&nbsp; الدخول باستخدام Gmail
-    </button>
-
-    <p class="note">
-      برنامج ترفيه وتسلية فقط
-    </p>
-
-  </div>
-</div>
-
-
-<!-- APPLICATION -->
-<div id="appPage">
-
-  <header class="header">
-    <div class="header-title" id="headerTitle">
-      الرئيسية
-    </div>
-
-    <div class="coins">
-      🪙 <span id="coinCount">0</span>
-    </div>
-  </header>
-
-
-  <!-- HOME -->
-  <section id="home" class="page active">
-
-    <div class="welcome">
-      <h2>أهلاً بك 👋</h2>
-      <p>استمتع بالدردشة والرومات والحالات مع أصدقائك.</p>
-    </div>
-
-    <h2 class="section-title">الخدمات</h2>
-
-    <div class="cards">
-
-      <div class="card" onclick="showPage('chat')">
-        <div class="card-icon">💬</div>
-        <h3>الدردشة</h3>
-      </div>
-
-      <div class="card" onclick="showPage('status')">
-        <div class="card-icon">⭕</div>
-        <h3>الحالات</h3>
-      </div>
-
-      <div class="card" onclick="showPage('rooms')">
-        <div class="card-icon">🎙️</div>
-        <h3>الرومات</h3>
-      </div>
-
-      <div class="card" onclick="showPage('family')">
-        <div class="card-icon">👨‍👩‍👧‍👦</div>
-        <h3>العائلات</h3>
-      </div>
-
-      <div class="card" onclick="showPage('profile')">
-        <div class="card-icon">👤</div>
-        <h3>الملف الشخصي</h3>
-      </div>
-
-      <div class="card" onclick="openGifts()">
-        <div class="card-icon">🎁</div>
-        <h3>الهدايا</h3>
-      </div>
-
-    </div>
-  </section>
-
-
-  <!-- CHAT -->
-  <section id="chat" class="page">
-
-    <h2 class="section-title">💬 الدردشة</h2>
-
-    <div class="chat" id="chatBox">
-
-      <div class="message">
-        أهلاً وسهلاً بك في التطبيق 👋
-      </div>
-
-      <div class="message">
-        يمكنك الدردشة مع أصدقائك هنا.
-      </div>
-
-    </div>
-
-    <div class="chat-input">
-      <input id="chatText" placeholder="اكتب رسالة...">
-      <button onclick="sendMessage()">إرسال</button>
-    </div>
-
-  </section>
-
-
-  <!-- STATUS -->
-  <section id="status" class="page">
-
-    <h2 class="section-title">⭕ الحالات</h2>
-
-    <div class="status">
-      <div class="avatar">👤</div>
-      <div>
-        <b>حالتك</b>
-        <p>أضف حالة جديدة</p>
-      </div>
-    </div>
-
-    <div class="status">
-      <div class="avatar">A</div>
-      <div>
-        <b>أحمد</b>
-        <p>متصل الآن 🟢</p>
-      </div>
-    </div>
-
-    <div class="status">
-      <div class="avatar">M</div>
-      <div>
-        <b>محمد</b>
-        <p>منذ 10 دقائق</p>
-      </div>
-    </div>
-
-  </section>
-
-
-  <!-- ROOMS -->
-  <section id="rooms" class="page">
-
-    <h2 class="section-title">🎙️ الرومات</h2>
-
-    <div class="room">
-      <div class="room-img">🎤</div>
-      <div class="room-info">
-        <h3>روم الأصدقاء</h3>
-        <p>👥 25 مستخدم</p>
-      </div>
-      <button class="join" onclick="joinRoom('روم الأصدقاء')">
-        دخول
-      </button>
-    </div>
-
-    <div class="room">
-      <div class="room-img">🎵</div>
-      <div class="room-info">
-        <h3>روم الموسيقى</h3>
-        <p>👥 42 مستخدم</p>
-      </div>
-      <button class="join" onclick="joinRoom('روم الموسيقى')">
-        دخول
-      </button>
-    </div>
-
-    <div class="room">
-      <div class="room-img">😂</div>
-      <div class="room-info">
-        <h3>روم الترفيه</h3>
-        <p>👥 18 مستخدم</p>
-      </div>
-      <button class="join" onclick="joinRoom('روم الترفيه')">
-        دخول
-      </button>
-    </div>
-
-  </section>
-
-
-  <!-- FAMILY -->
-  <section id="family" class="page">
-
-    <h2 class="section-title">👨‍👩‍👧‍👦 إنشاء عائلة</h2>
-
-    <div class="family-box">
-
-      <h3>إنشاء عائلة جديدة</h3>
-
-      <p style="margin-top:10px;color:#777">
-        أنشئ عائلتك وابدأ بإضافة المشرفين والأعضاء.
-      </p>
-
-      <div class="cost">
-        🪙 تكلفة إنشاء العائلة<br>
-        5,000,000 كوين
-      </div>
-
-      <div class="level">
-        ⭐ إنشاء مجاني عند الوصول إلى المستوى 30
-      </div>
-
-      <input id="familyName"
-             class="input"
-             placeholder="اسم العائلة">
-
-      <button class="main-btn"
-              onclick="createFamily()">
-        إنشاء العائلة
-      </button>
-
-      <p style="margin-top:15px;color:#888;text-align:center">
-        تبدأ العائلة بالمشرفين حسب نظام الإدارة.
-      </p>
-
-    </div>
-
-  </section>
-
-
-  <!-- PROFILE -->
-  <section id="profile" class="page">
-
-    <h2 class="section-title">👤 الملف الشخصي</h2>
-
-    <div class="profile">
-
-      <div class="cover"></div>
-
-      <div class="profile-body">
-
-        <div class="big-avatar">👤</div>
-
-        <h2 id="userName">مستخدم جديد</h2>
-
-        <p style="color:#888;margin:8px">
-          المستوى: <b id="level">1</b>
-        </p>
-
-        <button class="profile-btn">
-          📷 تغيير الصورة الشخصية
-        </button>
-
-        <button class="profile-btn">
-          🖼️ تغيير صورة الغلاف
-        </button>
-
-        <button class="profile-btn">
-          🎂 السن
-        </button>
-
-        <button class="profile-btn">
-          🌍 الدولة
-        </button>
-
-        <button class="profile-btn">
-          📱 ربط رقم الهاتف
-        </button>
-
-        <button class="profile-btn"
-                onclick="logout()">
-          🚪 تسجيل الخروج
-        </button>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- BOTTOM NAV -->
-  <nav class="bottom-nav">
-
-    <button class="nav-btn active"
-            onclick="showPage('home',this)">
-      <div>🏠</div>
-      الرئيسية
-    </button>
-
-    <button class="nav-btn"
-            onclick="showPage('chat',this)">
-      <div>💬</div>
-      الدردشة
-    </button>
-
-    <button class="nav-btn"
-            onclick="showPage('status',this)">
-      <div>⭕</div>
-      الحالات
-    </button>
-
-    <button class="nav-btn"
-            onclick="showPage('rooms',this)">
-      <div>🎙️</div>
-      الرومات
-    </button>
-
-    <button class="nav-btn"
-            onclick="showPage('profile',this)">
-      <div>👤</div>
-      حسابي
-    </button>
-
-  </nav>
-
-</div>
-
-
-<!-- GIFTS MODAL -->
-<div id="giftModal" class="modal">
-
-  <div class="modal-box">
-
-    <button class="close"
-            onclick="closeGifts()">×</button>
-
-    <h2>🎁 الهدايا</h2>
-
-    <p style="margin-top:10px;color:#777">
-      اختر هدية لإرسالها
-    </p>
-
-    <button class="option"
-            onclick="sendGift('❤️',100)">
-      ❤️ قلب — 100 كوين
-    </button>
-
-    <button class="option"
-            onclick="sendGift('🌹',500)">
-      🌹 وردة — 500 كوين
-    </button>
-
-    <button class="option"
-            onclick="sendGift('💎',1000)">
-      💎 ألماسة — 1,000 كوين
-    </button>
-
-    <button class="option"
-            onclick="sendGift('👑',5000)">
-      👑 تاج — 5,000 كوين
-    </button>
-
-  </div>
-
-</div>
-
-
-<script>
-
-/* DATA */
-let coins = 0;
-let currentLevel = 1;
-let loggedIn = false;
-
-
-/* LOGIN */
-function login(){
-
-  const phone = document.getElementById("phone").value;
-  const password = document.getElementById("password").value;
-
-  if(!phone || !password){
-    alert("من فضلك اكتب رقم الهاتف وكلمة المرور");
-    return;
-  }
-
-  enterApp("مستخدم " + phone.slice(-4));
-}
-
-
-function phoneLogin(){
-
-  const phone = prompt("اكتب رقم الهاتف:");
-
-  if(!phone){
-    return;
-  }
-
-  enterApp("مستخدم " + phone.slice(-4));
-}
-
-
-function socialLogin(type){
-
-  alert(
-    "سيتم ربط تسجيل الدخول باستخدام " +
-    type +
-    " عند إضافة نظام الحسابات الحقيقي."
-  );
-
-  enterApp("مستخدم جديد");
-}
-
-
-function enterApp(name){
-
-  loggedIn = true;
-
-  document.getElementById("loginPage").style.display="none";
-  document.getElementById("appPage").style.display="block";
-
-  document.getElementById("userName").textContent=name;
-
-  coins = 10000;
-
-  updateCoins();
-
-  showPage("home");
-}
-
-
-/* NAVIGATION */
-function showPage(page,button){
-
-  document.querySelectorAll(".page").forEach(p=>{
-    p.classList.remove("active");
-  });
-
-  const target=document.getElementById(page);
-
-  if(target){
-    target.classList.add("active");
-  }
-
-  document.querySelectorAll(".nav-btn").forEach(b=>{
-    b.classList.remove("active");
-  });
-
-  if(button){
-    button.classList.add("active");
-  }
-
-  const titles={
-    home:"الرئيسية",
-    chat:"الدردشة",
-    status:"الحالات",
-    rooms:"الرومات",
-    family:"العائلات",
-    profile:"الملف الشخصي"
-  };
-
-  document.getElementById("headerTitle").textContent=
-    titles[page] || "تطبيق ترفيهي";
-}
-
-
-/* COINS */
-function updateCoins(){
-
-  document.getElementById("coinCount").textContent=
-    coins.toLocaleString("en-US");
-
-}
-
-
-/* ROOMS */
-function joinRoom(name){
-
-  alert("تم دخول " + name + " 🎙️");
-}
-
-
-/* CHAT */
-function sendMessage(){
-
-  const input=document.getElementById("chatText");
-  const text=input.value.trim();
-
-  if(!text){
-    return;
-  }
-
-  const box=document.getElementById("chatBox");
-
-  const msg=document.createElement("div");
-
-  msg.className="message me";
-
-  msg.textContent=text;
-
-  box.appendChild(msg);
-
-  input.value="";
-
-  box.scrollTop=box.scrollHeight;
-}
-
-
-/* FAMILY */
-function createFamily(){
-
-  const name=document.getElementById("familyName").value.trim();
-
-  if(!name){
-    alert("اكتب اسم العائلة أولاً");
-    return;
-  }
-
-  if(currentLevel>=30){
-
-    alert(
-      "🎉 تم السماح بإنشاء العائلة مجانًا لأن مستواك 30 أو أكثر."
-    );
-
-    return;
-  }
-
-  if(coins<5000000){
-
-    alert(
-      "رصيدك غير كافٍ.\n" +
-      "تكلفة إنشاء العائلة: 5,000,000 كوين."
-    );
-
-    return;
-  }
-
-  const confirmCreate=
-    confirm(
-      "إنشاء عائلة باسم: " +
-      name +
-      "\n\nالتكلفة: 5,000,000 كوين"
-    );
-
-  if(!confirmCreate){
-    return;
-  }
-
-  coins-=5000000;
-
-  updateCoins();
-
-  alert(
-    "🎉 تم إنشاء العائلة بنجاح!\n" +
-    "اسم العائلة: " + name
-  );
-}
-
-
-/* GIFTS */
-function openGifts(){
-
-  document.getElementById("giftModal").style.display="flex";
-
-}
-
-
-function closeGifts(){
-
-  document.getElementById("giftModal").style.display="none";
-
-}
-
-
-function sendGift(gift,cost){
-
-  if(coins<cost){
-
-    alert("رصيد الكوينز غير كافٍ.");
-
-    return;
-  }
-
-  coins-=cost;
-
-  updateCoins();
-
-  alert(
-    "🎁 تم إرسال " +
-    gift +
-    "\nخصم " +
-    cost.toLocaleString("en-US") +
-    " كوين."
-  );
-
-  closeGifts();
-}
-
-
-/* LOGOUT */
-function logout(){
-
-  const ok=confirm("هل تريد تسجيل الخروج؟");
-
-  if(!ok){
-    return;
-  }
-
-  loggedIn=false;
-
-  document.getElementById("appPage").style.display="none";
-  document.getElementById("loginPage").style.display="flex";
-
-}
-
-
-/* CLOSE MODAL */
-document.getElementById("giftModal").addEventListener(
-  "click",
-  function(e){
-
-    if(e.target===this){
-      closeGifts();
-    }
-
-  }
-);
-
-</script>
-
-</body>
-  </html>
+.room-icon{
+  width:55
