@@ -604,24 +604,14 @@
       document.getElementById("homePage").style.display = "block";
     }
 function createFamily() {
-  if (userData.level >= 30 || userData.coins >= 5000000) {
-
-    let familyName = prompt("👨‍👩‍👧‍👦 اكتب اسم العائلة:");
-
-    if (!familyName || familyName.trim() === "") {
-      alert("❌ من فضلك اكتب اسم العائلة");
-      return;
-    }
-
-    if (userData.level < 30) {
-      userData.coins -= 5000000;
-      saveUserData();
-    }
-
-    alert("🎉 تم إنشاء عائلة: " + familyName);
-
+  if (userData.level >= 30) {
+    alert("🎉 يمكنك إنشاء عائلة مجانًا لأن مستواك 30 أو أكثر");
+  } else if (userData.coins >= 5000000) {
+    userData.coins -= 5000000;
+    saveUserData();
+    alert("🎉 تم إنشاء العائلة بنجاح مقابل 5,000,000 كوينز");
   } else {
-    alert("❌ إنشاء العائلة يحتاج 5,000,000 كوينز أو الوصول إلى المستوى 30");
+    alert("❌ تحتاج إلى 5,000,000 كوينز أو الوصول إلى المستوى 30");
   }
 }
 
