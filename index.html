@@ -619,8 +619,622 @@
 
       window.scrollTo(0, 0);
     }
+/* =====================================================
+   نظام الحساب والإعدادات وحفظ بيانات المستخدم
+   ===================================================== */
 
-  </script>
+// بيانات المستخدم الافتراضية
+let userData = {
+  name: "المستخدم",
+  age: "",
+  country: "",
+  phone: "",
+  level: 1,
+  coins: 0,
+  profileImage: "👤",
+  coverImage: ""
+};
+
+
+// تحميل البيانات المحفوظة من الجهاز
+function loadUserData() {
+
+  const savedData = localStorage.getItem("entertainmentUserData");
+
+  if (savedData) {
+
+    try {
+      userData = JSON.parse(savedData);
+    } catch (error) {
+      console.log("تعذر قراءة بيانات المستخدم");
+    }
+
+  }
+
+  updateUserInterface();
+}
+
+
+// حفظ بيانات المستخدم
+function saveUserData() {
+
+  localStorage.setItem(
+    "entertainmentUserData",
+    JSON.stringify(userData)
+  );
+
+  updateUserInterface();
+}
+
+
+// تحديث البيانات الظاهرة في الصفحة
+function updateUserInterface() {
+
+  const profileName = document.querySelector(
+    "#profileSection h2"
+  );
+
+  if (profileName) {
+    profileName.textContent = userData.name || "المستخدم";
+  }
+
+
+  const profileLevel = document.querySelector(
+    "#profileSection p"
+  );
+
+  if (profileLevel) {
+    profileLevel.textContent =
+      "المستوى " + userData.level;
+  }
+
+
+  // تحديث رصيد الكوينز
+  const coinElements = document.querySelectorAll(
+    ".coins, .coin-count, #coinCount"
+  );
+
+  coinElements.forEach(function(element) {
+    element.textContent = userData.coins;
+  });
+
+}
+
+
+// =====================================================
+// تعديل الاسم
+// =====================================================
+
+function editUserName() {
+
+  const newName = prompt(
+    "اكتب الاسم الجديد:",
+    userData.name
+  );
+
+  if (newName === null) {
+    return;
+  }
+
+  const cleanName = newName.trim();
+
+  if (cleanName === "") {
+
+    alert("من فضلك اكتب اسم صحيح");
+    return;
+
+  }
+
+  if (cleanName.length < 2) {
+
+    alert("الاسم يجب أن يكون حرفين على الأقل");
+    return;
+
+  }
+
+  userData.name = cleanName;
+
+  saveUserData();
+
+  alert("تم تغيير الاسم بنجاح ✅");
+}
+
+
+// =====================================================
+// تعديل السن
+// =====================================================
+
+function editUserAge() {
+
+  const newAge = prompt(
+    "اكتب السن:",
+    userData.age
+  );
+
+  if (newAge === null) {
+    return;
+  }
+
+  const age = parseInt(newAge);
+
+  if (isNaN(age)) {
+
+    alert("من فضلك اكتب السن بالأرقام");
+    return;
+
+  }
+
+  if (age < 13 || age > 100) {
+
+    alert("السن يجب أن يكون بين 13 و100");
+    return;
+
+  }
+
+  userData.age = age;
+
+  saveUserData();
+
+  alert("تم حفظ السن ✅");
+}
+
+
+// =====================================================
+// اختيار الدولة
+// =====================================================
+
+function editUserCountry() {
+
+  const countries = [
+    "مصر",
+    "السعودية",
+    "الإمارات",
+    "الكويت",
+    "قطر",
+    "البحرين",
+    "عمان",
+    "الأردن",
+    "العراق",
+    "المغرب",
+    "الجزائر",
+    "تونس",
+    "ليبيا",
+    "دولة أخرى"
+  ];
+
+  let message = "اختر الدولة:\n\n";
+
+  countries.forEach(function(country, index) {
+
+    message +=
+      (index + 1) +
+      " - " +
+      country +
+      "\n";
+
+  });
+
+  const choice = prompt(message);
+
+  if (choice === null) {
+    return;
+  }
+
+  const number = parseInt(choice);
+
+  if (
+    isNaN(number) ||
+    number < 1 ||
+    number > countries.length
+  ) {
+
+    alert("اختيار غير صحيح");
+    return;
+
+  }
+
+  userData.country = countries[number - 1];
+
+  saveUserData();
+
+  alert(
+    "تم اختيار " +
+    userData.country +
+    " ✅"
+  );
+}
+
+
+// =====================================================
+// ربط رقم الهاتف
+// =====================================================
+
+function editUserPhone() {
+
+  const newPhone = prompt(
+    "اكتب رقم الهاتف:",
+    userData.phone
+  );
+
+  if (newPhone === null) {
+    return;
+  }
+
+  const phone = newPhone.trim();
+
+  if (phone === "") {
+
+    alert("من فضلك اكتب رقم الهاتف");
+    return;
+
+  }
+
+  if (phone.length < 8) {
+
+    alert("رقم الهاتف غير صحيح");
+    return;
+
+  }
+
+  userData.phone = phone;
+
+  saveUserData();
+
+  alert("تم حفظ رقم الهاتف ✅");
+}
+
+
+// =====================================================
+// تعديل الملف الشخصي بالكامل
+// =====================================================
+
+function editProfile() {
+
+  const newName = prompt(
+    "الاسم:",
+    userData.name
+  );
+
+  if (newName === null) {
+    return;
+  }
+
+  if (newName.trim() === "") {
+
+    alert("الاسم لا يمكن أن يكون فارغًا");
+    return;
+
+  }
+
+  userData.name = newName.trim();
+
+  const newAge = prompt(
+    "السن:",
+    userData.age
+  );
+
+  if (newAge !== null && newAge.trim() !== "") {
+
+    const age = parseInt(newAge);
+
+    if (!isNaN(age)) {
+      userData.age = age;
+    }
+
+    }
+    } // إغلاق دالة editProfile
+
+
+// =====================================================
+// تعديل الصورة الشخصية
+// =====================================================
+
+function editProfileImage() {
+
+  const imageUrl = prompt(
+    "ضع رابط الصورة الشخصية:",
+    ""
+  );
+
+  if (imageUrl === null) {
+    return;
+  }
+
+  const cleanUrl = imageUrl.trim();
+
+  if (cleanUrl === "") {
+    alert("لم يتم تغيير الصورة");
+    return;
+  }
+
+  userData.profileImage = cleanUrl;
+
+  saveUserData();
+
+  alert("تم حفظ الصورة الشخصية ✅");
+}
+
+
+// =====================================================
+// تعديل صورة الغلاف
+// =====================================================
+
+function editCoverImage() {
+
+  const imageUrl = prompt(
+    "ضع رابط صورة الغلاف:",
+    ""
+  );
+
+  if (imageUrl === null) {
+    return;
+  }
+
+  const cleanUrl = imageUrl.trim();
+
+  if (cleanUrl === "") {
+    alert("لم يتم تغيير الغلاف");
+    return;
+  }
+
+  userData.coverImage = cleanUrl;
+
+  saveUserData();
+
+  alert("تم حفظ صورة الغلاف ✅");
+}
+
+
+// =====================================================
+// الخصوصية والأمان
+// =====================================================
+
+function privacySecurity() {
+
+  alert(
+    "🔒 الخصوصية والأمان\n\n" +
+    "سيتم إضافة إعدادات الحماية والخصوصية هنا.\n\n" +
+    "• حماية الحساب\n" +
+    "• الأجهزة المسجلة\n" +
+    "• إعدادات الخصوصية\n" +
+    "• تسجيل الخروج"
+  );
+}
+
+
+// =====================================================
+// إضافة الكوينز
+// =====================================================
+
+function addCoins(amount) {
+
+  amount = Number(amount);
+
+  if (isNaN(amount) || amount <= 0) {
+    return;
+  }
+
+  userData.coins += amount;
+
+  saveUserData();
+}
+
+
+// =====================================================
+// خصم الكوينز
+// =====================================================
+
+function removeCoins(amount) {
+
+  amount = Number(amount);
+
+  if (isNaN(amount) || amount <= 0) {
+    return false;
+  }
+
+  if (userData.coins < amount) {
+
+    alert("رصيد الكوينز غير كافٍ ❌");
+
+    return false;
+  }
+
+  userData.coins -= amount;
+
+  saveUserData();
+
+  return true;
+}
+
+
+// =====================================================
+// نظام المستوى
+// =====================================================
+
+function setUserLevel(level) {
+
+  level = Number(level);
+
+  if (isNaN(level) || level < 1) {
+    return;
+  }
+
+  userData.level = level;
+
+  saveUserData();
+}
+
+
+// =====================================================
+// تسجيل الخروج
+// =====================================================
+
+function logoutUser() {
+
+  const confirmLogout = confirm(
+    "هل تريد تسجيل الخروج؟"
+  );
+
+  if (!confirmLogout) {
+    return;
+  }
+
+  const loginPage =
+    document.getElementById("loginPage");
+
+  const homePage =
+    document.getElementById("homePage");
+
+  if (homePage) {
+    homePage.style.display = "none";
+  }
+
+  if (loginPage) {
+    loginPage.style.display = "block";
+  }
+}
+
+
+// =====================================================
+// تشغيل النظام بعد تحميل الصفحة
+// =====================================================
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function() {
+
+    loadUserData();
+
+
+    // أزرار الحساب
+    const actionButtons =
+      document.querySelectorAll(
+        "#profileSection .action-btn"
+      );
+
+
+    if (actionButtons.length > 0) {
+
+      actionButtons[0].onclick =
+        function() {
+          editProfile();
+        };
+
+    }
+
+
+    if (actionButtons.length > 1) {
+
+      actionButtons[1].onclick =
+        function() {
+
+          editProfileImage();
+
+        };
+
+    }
+
+
+    // أزرار الإعدادات
+    const settingButtons =
+      document.querySelectorAll(
+        "#settingsSection .action-btn"
+      );
+
+
+    if (settingButtons.length > 0) {
+
+      settingButtons[0].onclick =
+        function() {
+
+          editUserName();
+
+        };
+
+    }
+
+
+    if (settingButtons.length > 1) {
+
+      settingButtons[1].onclick =
+        function() {
+
+          editUserAge();
+
+        };
+
+    }
+
+
+    if (settingButtons.length > 2) {
+
+      settingButtons[2].onclick =
+        function() {
+
+          editUserCountry();
+
+        };
+
+    }
+
+
+    if (settingButtons.length > 3) {
+
+      settingButtons[3].onclick =
+        function() {
+
+          editUserPhone();
+
+        };
+
+    }
+
+
+    if (settingButtons.length > 4) {
+
+      settingButtons[4].onclick =
+        function() {
+
+          privacySecurity();
+
+        };
+
+    }
+
+  }
+);
+
+
+// =====================================================
+// حفظ البيانات قبل مغادرة الصفحة
+// =====================================================
+
+window.addEventListener(
+  "beforeunload",
+  function() {
+
+    try {
+
+      localStorage.setItem(
+        "entertainmentUserData",
+        JSON.stringify(userData)
+      );
+
+    } catch (error) {
+
+      console.log(
+        "تعذر حفظ بيانات المستخدم"
+      );
+
+    }
+
+  }
+);
+
+
+// =====================================================
+// نهاية النظام
+// =====================================================  </script>
 
 </body>
   </html>
