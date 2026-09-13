@@ -6,187 +6,200 @@
 <title>تطبيق ترفيهي</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,sans-serif;
+}
+
 body{
-font-family:Arial,sans-serif;
-background:linear-gradient(135deg,#24104f,#5720a8,#1469ee);
-min-height:100vh;
-color:#222
+  min-height:100vh;
+  background:linear-gradient(135deg,#24104f,#5720a8,#1469ee);
+  color:#222;
 }
-.app{
-max-width:500px;
-margin:auto;
-min-height:100vh;
-background:#f7f7fb;
-position:relative;
-padding-bottom:75px
-}
-header{
-background:linear-gradient(90deg,#6516d8,#2670ef);
-color:white;
-padding:18px;
-text-align:center;
-font-size:22px;
-font-weight:bold;
-position:sticky;
-top:0;
-z-index:5
-}
-.page{display:none;padding:18px}
-.page.active{display:block}
 
-.login{
-min-height:100vh;
-background:linear-gradient(135deg,#24104f,#5c18c9,#2775ef);
-display:flex;
-align-items:center;
-justify-content:center;
-padding:20px
-}
-.login-box{
-background:white;
-width:100%;
-border-radius:28px;
-padding:30px 22px;
-text-align:center;
-box-shadow:0 15px 40px #0005
-}
-.logo{
-width:105px;height:105px;
-border-radius:50%;
-margin:0 auto 18px;
-background:linear-gradient(135deg,#6515d8,#2876ef);
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:55px;
-color:white
-}
-h1{font-size:30px;margin-bottom:8px}
-.sub{color:#888;margin-bottom:25px}
-input{
-width:100%;
-padding:17px;
-border:1px solid #ddd;
-border-radius:15px;
-margin-bottom:12px;
-font-size:16px;
-text-align:right
-}
 button{
-border:0;
-border-radius:15px;
-padding:15px;
-font-size:16px;
-font-weight:bold;
-cursor:pointer
+  border:0;
+  cursor:pointer;
+  font-size:16px;
 }
-.login-btn{
-width:100%;
-color:white;
-background:linear-gradient(90deg,#6515d8,#2876ef);
-margin:8px 0 20px
+
+.app{
+  width:100%;
+  max-width:520px;
+  min-height:100vh;
+  margin:auto;
+  background:#f7f7fb;
+  position:relative;
+  overflow:hidden;
 }
+
+/* LOGIN */
+.login-page{
+  min-height:100vh;
+  padding:35px 22px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.login-box{
+  width:100%;
+  background:white;
+  border-radius:30px;
+  padding:35px 22px;
+  box-shadow:0 10px 35px rgba(0,0,0,.2);
+  text-align:center;
+}
+
+.logo{
+  width:145px;
+  height:145px;
+  margin:auto;
+  border-radius:50%;
+  background:linear-gradient(135deg,#7114df,#176df1);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
+  font-size:75px;
+  box-shadow:0 8px 25px rgba(70,30,200,.3);
+}
+
+.login-box h1{
+  margin-top:22px;
+  font-size:34px;
+}
+
+.subtitle{
+  color:#999;
+  margin:12px 0 28px;
+  font-size:17px;
+}
+
+.input{
+  width:100%;
+  height:58px;
+  border:1px solid #ddd;
+  border-radius:18px;
+  padding:0 18px;
+  margin-bottom:14px;
+  font-size:17px;
+  outline:none;
+  text-align:right;
+}
+
+.input:focus{
+  border-color:#4d55ed;
+}
+
+.main-btn{
+  width:100%;
+  height:60px;
+  border-radius:18px;
+  color:white;
+  background:linear-gradient(90deg,#7214d9,#2877ef);
+  font-size:20px;
+  font-weight:bold;
+  margin:5px 0 25px;
+}
+
+.divider{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  color:#aaa;
+  margin:20px 0;
+}
+
+.divider span{
+  height:1px;
+  background:#ddd;
+  flex:1;
+}
+
 .social{
-width:100%;
-background:white;
-border:1px solid #ddd;
-margin-top:10px
+  width:100%;
+  height:58px;
+  border:1px solid #ddd;
+  border-radius:17px;
+  background:white;
+  margin-bottom:12px;
+  font-size:17px;
 }
-.facebook{color:#1877f2}
-.gmail{color:#d44}
-.note{color:#aaa;font-size:13px;margin-top:25px}
 
-.card{
-background:white;
-border-radius:20px;
-padding:18px;
-margin-bottom:15px;
-box-shadow:0 4px 15px #0000000d
+.facebook{
+  color:#1877f2;
 }
-.welcome{
-background:linear-gradient(135deg,#6515d8,#2876ef);
-color:white
-}
-.stats{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:10px;
-margin-top:15px
-}
-.stat{
-background:#ffffff22;
-padding:12px;
-border-radius:15px;
-text-align:center
-}
-.stat b{display:block;font-size:20px;margin-bottom:4px}
 
-.section-title{
-font-size:20px;
-font-weight:bold;
-margin:20px 0 12px
+.google{
+  color:#db4437;
 }
-.grid{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:12px
-}
-.item{
-background:white;
-border-radius:18px;
-padding:22px 10px;
-text-align:center;
-box-shadow:0 4px 12px #0000000b;
-font-size:16px
-}
-.item .icon{font-size:35px;margin-bottom:8px}
 
-.room{
-display:flex;
-align-items:center;
-gap:12px
+.phone{
+  color:#4384ca;
 }
-.room-img{
-width:55px;height:55px;
-border-radius:50%;
-background:linear-gradient(135deg,#731bdc,#2477ef);
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:27px;
-color:white
-}
-.room-info{flex:1}
-.room-info b{display:block;margin-bottom:5px}
-.online{color:#21a45b;font-size:13px}
 
-.profile-cover{
-height:150px;
-border-radius:20px;
-background:linear-gradient(135deg,#6515d8,#2876ef);
-position:relative;
-margin-bottom:55px
+.footer-text{
+  color:#aaa;
+  margin-top:25px;
 }
+
+/* HOME */
+.home{
+  display:none;
+  min-height:100vh;
+  padding-bottom:75px;
+}
+
+.top{
+  background:linear-gradient(135deg,#24104f,#6122b8,#276ff0);
+  color:white;
+  padding:22px 18px;
+  border-radius:0 0 28px 28px;
+}
+
+.top-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.user-info{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
 .avatar{
-position:absolute;
-bottom:-45px;
-right:calc(50% - 50px);
-width:100px;height:100px;
-border-radius:50%;
-background:white;
-border:5px solid white;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:50px
+  width:55px;
+  height:55px;
+  border-radius:50%;
+  background:white;
+  color:#6122b8;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:27px;
 }
 
-.family{
-border:2px solid #eadbff;
-background:linear-gradient(135deg,#fff,#f5edff)
+.user-name{
+  font-size:20px;
+  font-weight:bold;
 }
-.price{
-font-size:25px;
-font-weight:bold;
-color:#661 
+
+.user-level{
+  font-size:13px;
+  opacity:.8;
+  margin-top:5px;
+}
+
+.coin-box{
+  background:rgba(255,255,255,.18);
+  border-radius:20px;
+  padding:10px 13px;
+  text-align:center;
+}
+
+.coin-box
