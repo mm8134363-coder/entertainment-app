@@ -641,7 +641,7 @@ let userData = {
   age: "",
   country: "",
   phone: "",
-  level: 30,
+  level: 1,
   coins: 0,
   profileImage: "👤",
   coverImage: ""
@@ -657,6 +657,7 @@ function loadUserData() {
 
     try {
       userData = JSON.parse(savedData);
+userData.level = 30;
     } catch (error) {
       console.log("تعذر قراءة بيانات المستخدم");
     }
