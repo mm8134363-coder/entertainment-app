@@ -1,220 +1,192 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>تطبيق ترفيهي</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>تطبيق ترفيهي</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+font-family:Arial,sans-serif;
+background:linear-gradient(135deg,#24104f,#5720a8,#1469ee);
+min-height:100vh;
+color:#222
+}
+.app{
+max-width:500px;
+margin:auto;
+min-height:100vh;
+background:#f7f7fb;
+position:relative;
+padding-bottom:75px
+}
+header{
+background:linear-gradient(90deg,#6516d8,#2670ef);
+color:white;
+padding:18px;
+text-align:center;
+font-size:22px;
+font-weight:bold;
+position:sticky;
+top:0;
+z-index:5
+}
+.page{display:none;padding:18px}
+.page.active{display:block}
 
-    body {
-      min-height: 100vh;
-      background: linear-gradient(135deg, #20243a, #6a11cb);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
+.login{
+min-height:100vh;
+background:linear-gradient(135deg,#24104f,#5c18c9,#2775ef);
+display:flex;
+align-items:center;
+justify-content:center;
+padding:20px
+}
+.login-box{
+background:white;
+width:100%;
+border-radius:28px;
+padding:30px 22px;
+text-align:center;
+box-shadow:0 15px 40px #0005
+}
+.logo{
+width:105px;height:105px;
+border-radius:50%;
+margin:0 auto 18px;
+background:linear-gradient(135deg,#6515d8,#2876ef);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:55px;
+color:white
+}
+h1{font-size:30px;margin-bottom:8px}
+.sub{color:#888;margin-bottom:25px}
+input{
+width:100%;
+padding:17px;
+border:1px solid #ddd;
+border-radius:15px;
+margin-bottom:12px;
+font-size:16px;
+text-align:right
+}
+button{
+border:0;
+border-radius:15px;
+padding:15px;
+font-size:16px;
+font-weight:bold;
+cursor:pointer
+}
+.login-btn{
+width:100%;
+color:white;
+background:linear-gradient(90deg,#6515d8,#2876ef);
+margin:8px 0 20px
+}
+.social{
+width:100%;
+background:white;
+border:1px solid #ddd;
+margin-top:10px
+}
+.facebook{color:#1877f2}
+.gmail{color:#d44}
+.note{color:#aaa;font-size:13px;margin-top:25px}
 
-    .login-box {
-      width: 100%;
-      max-width: 420px;
-      background: white;
-      border-radius: 25px;
-      padding: 30px 22px;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.25);
-      text-align: center;
-    }
+.card{
+background:white;
+border-radius:20px;
+padding:18px;
+margin-bottom:15px;
+box-shadow:0 4px 15px #0000000d
+}
+.welcome{
+background:linear-gradient(135deg,#6515d8,#2876ef);
+color:white
+}
+.stats{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:10px;
+margin-top:15px
+}
+.stat{
+background:#ffffff22;
+padding:12px;
+border-radius:15px;
+text-align:center
+}
+.stat b{display:block;font-size:20px;margin-bottom:4px}
 
-    .logo {
-      width: 90px;
-      height: 90px;
-      margin: 0 auto 15px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #6a11cb, #2575fc);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 32px;
-      font-weight: bold;
-    }
+.section-title{
+font-size:20px;
+font-weight:bold;
+margin:20px 0 12px
+}
+.grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:12px
+}
+.item{
+background:white;
+border-radius:18px;
+padding:22px 10px;
+text-align:center;
+box-shadow:0 4px 12px #0000000b;
+font-size:16px
+}
+.item .icon{font-size:35px;margin-bottom:8px}
 
-    h1 {
-      color: #20243a;
-      margin-bottom: 8px;
-      font-size: 28px;
-    }
+.room{
+display:flex;
+align-items:center;
+gap:12px
+}
+.room-img{
+width:55px;height:55px;
+border-radius:50%;
+background:linear-gradient(135deg,#731bdc,#2477ef);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:27px;
+color:white
+}
+.room-info{flex:1}
+.room-info b{display:block;margin-bottom:5px}
+.online{color:#21a45b;font-size:13px}
 
-    .subtitle {
-      color: #777;
-      margin-bottom: 25px;
-      font-size: 15px;
-    }
+.profile-cover{
+height:150px;
+border-radius:20px;
+background:linear-gradient(135deg,#6515d8,#2876ef);
+position:relative;
+margin-bottom:55px
+}
+.avatar{
+position:absolute;
+bottom:-45px;
+right:calc(50% - 50px);
+width:100px;height:100px;
+border-radius:50%;
+background:white;
+border:5px solid white;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:50px
+}
 
-    .input {
-      width: 100%;
-      padding: 15px;
-      border: 1px solid #ddd;
-      border-radius: 14px;
-      margin-bottom: 12px;
-      font-size: 16px;
-      outline: none;
-    }
-
-    .input:focus {
-      border-color: #6a11cb;
-    }
-
-    .login-btn {
-      width: 100%;
-      padding: 15px;
-      border: none;
-      border-radius: 14px;
-      background: linear-gradient(135deg, #6a11cb, #2575fc);
-      color: white;
-      font-size: 17px;
-      font-weight: bold;
-      cursor: pointer;
-      margin-top: 5px;
-    }
-
-    .login-btn:active {
-      transform: scale(0.98);
-    }
-
-    .divider {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin: 22px 0;
-      color: #999;
-    }
-
-    .divider::before,
-    .divider::after {
-      content: "";
-      flex: 1;
-      height: 1px;
-      background: #ddd;
-    }
-
-    .social-btn {
-      width: 100%;
-      padding: 13px;
-      border-radius: 14px;
-      margin-bottom: 10px;
-      background: white;
-      border: 1px solid #ddd;
-      font-size: 15px;
-      cursor: pointer;
-    }
-
-    .phone {
-      color: #2575fc;
-    }
-
-    .facebook {
-      color: #1877f2;
-    }
-
-    .google {
-      color: #db4437;
-    }
-
-    .note {
-      margin-top: 18px;
-      color: #999;
-      font-size: 12px;
-    }
-  </style>
-</head>
-
-<body>
-
-  <div class="login-box">
-
-    <div class="logo">★</div>
-
-    <h1>تطبيق ترفيهي</h1>
-
-    <p class="subtitle">
-      ترفيه وتسلية ودردشة مع الأصدقاء
-    </p>
-
-    <input
-      class="input"
-      type="text"
-      id="phone"
-      placeholder="رقم الهاتف"
-    >
-
-    <input
-      class="input"
-      type="password"
-      id="password"
-      placeholder="كلمة المرور"
-    >
-
-    <button class="login-btn" onclick="login()">
-      تسجيل الدخول
-    </button>
-
-    <div class="divider">
-      أو الدخول بواسطة
-    </div>
-
-    <button class="social-btn phone" onclick="phoneLogin()">
-      📱 الدخول برقم الهاتف
-    </button>
-
-    <button class="social-btn facebook" onclick="facebookLogin()">
-      f الدخول باستخدام Facebook
-    </button>
-
-    <button class="social-btn google" onclick="googleLogin()">
-      G الدخول باستخدام Gmail
-    </button>
-
-    <p class="note">
-      برنامج ترفيه وتسلية فقط
-    </p>
-
-  </div>
-
-  <script>
-
-    function login() {
-      const phone = document.getElementById("phone").value;
-      const password = document.getElementById("password").value;
-
-      if (phone === "" || password === "") {
-        alert("من فضلك اكتب رقم الهاتف وكلمة المرور");
-        return;
-      }
-
-      alert("تم تسجيل الدخول بنجاح");
-    }
-
-    function phoneLogin() {
-      alert("سيتم تجهيز تسجيل الدخول برقم الهاتف لاحقًا");
-    }
-
-    function facebookLogin() {
-      alert("سيتم ربط تسجيل الدخول بفيسبوك لاحقًا");
-    }
-
-    function googleLogin() {
-      alert("سيتم ربط تسجيل الدخول بجوجل لاحقًا");
-    }
-
-  </script>
-
-</body>
-  </html>
+.family{
+border:2px solid #eadbff;
+background:linear-gradient(135deg,#fff,#f5edff)
+}
+.price{
+font-size:25px;
+font-weight:bold;
+color:#661 
