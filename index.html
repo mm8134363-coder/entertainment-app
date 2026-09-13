@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تطبيق ترفيهي</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 420px;
+      background: white;
+      border-radius: 25px;
+      padding: 30px 25px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+      text-align: center;
+    }
+
+    .logo {
+      width: 85px;
+      height: 85px;
+      margin: 0 auto 15px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ffcc00, #ff6b00);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 38px;
+    }
+
+    h1 {
+      color: #222;
+      margin-bottom: 8px;
+      font-size: 28px;
+    }
+
+    .subtitle {
+      color: #777;
+      margin-bottom: 28px;
+      font-size: 15px;
+    }
+
+    .login-title {
+      font-size: 19px;
+      color: #333;
+      margin-bottom: 18px;
+      font-weight: bold;
+    }
+
+    .btn {
+      width: 100%;
+      border: none;
+      padding: 14px;
+      margin: 7px 0;
+      border-radius: 14px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .google {
+      background: #f5f5f5;
+      color: #333;
+      border: 1px solid #ddd;
+    }
+
+    .facebook {
+      background: #1877f2;
+      color: white;
+    }
+
+    .phone {
+      background: #21b573;
+      color: white;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 20px 0;
+      color: #999;
+      font-size: 13px;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: "";
+      height: 1px;
+      background: #ddd;
+      flex: 1;
+    }
+
+    .terms {
+      margin-top: 20px;
+      color: #999;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .home {
+      display: none;
+      text-align: center;
+    }
+
+    .welcome {
+      font-size: 24px;
+      color: #222;
+      margin-bottom: 10px;
+    }
+
+    .home-text {
+      color: #777;
+      margin-bottom: 25px;
+    }
+
+    .menu {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .menu button {
+      border: none;
+      background: #f5f5f5;
+      border-radius: 16px;
+      padding: 20px 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <!-- صفحة تسجيل الدخول -->
+    <div id="loginPage">
+
+      <div class="logo">⭐</div>
+
+      <h1>تطبيق ترفيهي</h1>
+
+      <p class="subtitle">
+        برنامج ترفيه وتسلية ومجتمع اجتماعي
+      </p>
+
+      <div class="login-title">
+        تسجيل الدخول
+      </div>
+
+      <button class="btn google" onclick="login('Google')">
+        🔵 الدخول باستخدام Gmail
+      </button>
+
+      <button class="btn facebook" onclick="login('Facebook')">
+        📘 الدخول باستخدام Facebook
+      </button>
+
+      <button class="btn phone" onclick="login('الهاتف')">
+        📱 الدخول باستخدام رقم الهاتف
+      </button>
+
+      <div class="divider">
+        تسجيل آمن وسهل
+      </div>
+
+      <p class="terms">
+        باستخدام التطبيق أنت توافق على شروط الاستخدام
+        وسياسة الخصوصية.
+      </p>
+
+    </div>
+
+    <!-- الصفحة الرئيسية -->
+    <div id="homePage" class="home">
+
+      <div class="logo">⭐</div>
+
+      <div class="welcome">
+        أهلاً وسهلاً بك 👋
+      </div>
+
+      <p class="home-text">
+        مرحبًا بك في تطبيق ترفيهي
+      </p>
+
+      <div class="menu">
+
+        <button>💬<br>الدردشة</button>
+
+        <button>📢<br>الحالات</button>
+
+        <button>🎙️<br>الرومات</button>
+
+        <button>👤<br>الملف الشخصي</button>
+
+        <button>👨‍👩‍👧‍👦<br>العائلات</button>
+
+        <button>🎁<br>الهدايا</button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    function login(method) {
+
+      alert("تم اختيار تسجيل الدخول بواسطة " + method);
+
+      document.getElementById("loginPage").style.display = "none";
+      document.getElementById("homePage").style.display = "block";
+    }
+  </script>
+
+</body>
+</html>
