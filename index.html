@@ -1,203 +1,626 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>تطبيق ترفيهي</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>برنامج ترفيه وتسلية</title>
 
-<style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-  font-family:Arial,sans-serif;
-}
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-body{
-  min-height:100vh;
-  background:linear-gradient(135deg,#24104f,#5720a8,#1469ee);
-  color:#222;
-}
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f6fa;
+      color: #222;
+    }
 
-button{
-  border:0;
-  cursor:pointer;
-}
+    button {
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
 
-.app{
-  width:100%;
-  max-width:520px;
-  min-height:100vh;
-  margin:auto;
-  background:#f7f7fb;
-}
+    .app {
+      max-width: 500px;
+      margin: auto;
+      min-height: 100vh;
+      background: #fff;
+    }
 
-/* تسجيل الدخول */
-#loginPage{
-  min-height:100vh;
-  padding:35px 22px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
+    /* تسجيل الدخول */
+    .login-page {
+      min-height: 100vh;
+      padding: 40px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #6514d7, #2674f4);
+    }
 
-.login-box{
-  width:100%;
-  background:white;
-  border-radius:30px;
-  padding:35px 25px;
-  text-align:center;
-  box-shadow:0 10px 40px #0003;
-}
+    .login-box {
+      width: 100%;
+      background: white;
+      border-radius: 25px;
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 10px 35px #0003;
+    }
 
-.logo{
-  width:110px;
-  height:110px;
-  margin:auto;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:55px;
-  color:white;
-  background:linear-gradient(135deg,#6b13df,#176df0);
-}
+    .logo {
+      width: 85px;
+      height: 85px;
+      margin: 0 auto 15px;
+      border-radius: 25px;
+      background: linear-gradient(135deg, #6514d7, #2674f4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 35px;
+      font-weight: bold;
+    }
 
-.login-box h1{
-  margin-top:25px;
-  font-size:34px;
-}
+    .login-box h1 {
+      margin-bottom: 8px;
+    }
 
-.subtitle{
-  margin:12px 0 25px;
-  color:#888;
-  font-size:17px;
-}
+    .login-box p {
+      color: #777;
+      margin-bottom: 25px;
+    }
 
-.input{
-  width:100%;
-  padding:17px;
-  margin:8px 0;
-  border:1px solid #ddd;
-  border-radius:16px;
-  font-size:17px;
-  outline:none;
-  text-align:right;
-}
+    .login-input {
+      width: 100%;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 14px;
+      margin-bottom: 12px;
+      font-size: 16px;
+      text-align: right;
+    }
 
-.main-btn{
-  width:100%;
-  padding:17px;
-  margin-top:12px;
-  border-radius:16px;
-  color:white;
-  font-size:19px;
-  font-weight:bold;
-  background:linear-gradient(90deg,#6710dc,#2475f4);
-}
+    .main-login-btn {
+      width: 100%;
+      padding: 15px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #6514d7, #2674f4);
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
 
-.or{
-  margin:25px 0;
-  color:#999;
-}
+    .social-btn {
+      width: 100%;
+      padding: 13px;
+      border-radius: 14px;
+      background: #f2f2f2;
+      margin-top: 8px;
+      font-size: 15px;
+    }
 
-.social{
-  width:100%;
-  padding:15px;
-  margin:7px 0;
-  border-radius:15px;
-  background:white;
-  border:1px solid #ddd;
-  font-size:17px;
-}
+    /* التطبيق */
+    .home-page {
+      display: none;
+      min-height: 100vh;
+      padding-bottom: 80px;
+    }
 
-.social.facebook{color:#1877f2}
-.social.gmail{color:#db4437}
+    .topbar {
+      padding: 18px;
+      background: linear-gradient(135deg, #6514d7, #2674f4);
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-.note{
-  margin-top:25px;
-  color:#999;
-}
+    .topbar h2 {
+      font-size: 20px;
+    }
 
-/* التطبيق */
-#appPage{
-  display:none;
-  min-height:100vh;
-  padding-bottom:80px;
-}
+    .coins {
+      background: #ffffff25;
+      padding: 8px 12px;
+      border-radius: 20px;
+    }
 
-.header{
-  padding:20px;
-  color:white;
-  background:linear-gradient(135deg,#4c13a8,#2269ed);
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
+    .content {
+      padding: 15px;
+    }
 
-.header h2{
-  font-size:23px;
-}
+    .card {
+      background: white;
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 15px;
+      box-shadow: 0 3px 15px #0000000d;
+    }
 
-.coins{
-  background:#ffffff22;
-  padding:9px 13px;
-  border-radius:20px;
-}
+    .welcome {
+      background: linear-gradient(135deg, #6514d7, #2674f4);
+      color: white;
+    }
 
-.page{
-  display:none;
-  padding:18px;
-}
+    .welcome h2 {
+      margin-bottom: 10px;
+    }
 
-.page.active{
-  display:block;
-}
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
 
-.card{
-  background:white;
-  border-radius:20px;
-  padding:20px;
-  margin-bottom:15px;
-  box-shadow:0 3px 15px #0000000d;
-}
+    .menu-btn {
+      background: white;
+      border-radius: 18px;
+      padding: 20px 8px;
+      font-size: 15px;
+      box-shadow: 0 3px 12px #0001;
+    }
 
-.welcome{
-  background:linear-gradient(135deg,#6514d7,#2674f4);
-  color:white;
-}
+    .menu-btn div {
+      font-size: 30px;
+      margin-bottom: 8px;
+    }
 
-.welcome h2{
-  margin-bottom:10px;
-}
+    /* الرومات */
+    .room {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 15px 0;
+      border-bottom: 1px solid #eee;
+    }
 
-.menu-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
-}
+    .room-icon {
+      width: 55px;
+      height: 55px;
+      border-radius: 15px;
+      object-fit: cover;
+      background: #eee;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 25px;
+    }
 
-.menu-btn{
-  background:white;
-  border-radius:18px;
-  padding:20px 8px;
-  font-size:15px;
-  box-shadow:0 3px 12px #0001;
-}
+    .room-info {
+      flex: 1;
+    }
 
-.menu-btn div{
-  font-size:30px;
-  margin-bottom:8px;
-}
+    .room-info h3 {
+      margin-bottom: 5px;
+    }
 
-/* الرومات */
-.room{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  padding:15px 0;
-  border-bottom:1px solid #eee;
-}
+    .room-info p {
+      color: #888;
+      font-size: 13px;
+    }
 
-.room-icon{
-  width:55
+    .join-btn {
+      background: #6514d7;
+      color: white;
+      padding: 9px 14px;
+      border-radius: 12px;
+    }
+
+    /* شريط التنقل */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 500px;
+      height: 70px;
+      background: white;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      box-shadow: 0 -3px 15px #0001;
+      z-index: 10;
+    }
+
+    .nav-btn {
+      background: white;
+      color: #777;
+      font-size: 12px;
+    }
+
+    .nav-btn div {
+      font-size: 23px;
+      margin-bottom: 4px;
+    }
+
+    .nav-btn.active {
+      color: #6514d7;
+      font-weight: bold;
+    }
+
+    /* الصفحات */
+    .section {
+      display: none;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    .profile {
+      text-align: center;
+    }
+
+    .profile-img {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: #eee;
+      margin: 0 auto 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 35px;
+    }
+
+    .action-btn {
+      width: 100%;
+      padding: 14px;
+      border-radius: 14px;
+      background: #f1f1f1;
+      margin-top: 10px;
+      font-size: 15px;
+    }
+
+    .family-box {
+      text-align: center;
+      background: linear-gradient(135deg, #fff4d6, #fff);
+    }
+
+    .family-price {
+      font-size: 26px;
+      font-weight: bold;
+      color: #6514d7;
+      margin: 12px 0;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- تسجيل الدخول -->
+  <div class="login-page" id="loginPage">
+    <div class="login-box">
+
+      <div class="logo">★</div>
+
+      <h1>مرحبًا بك</h1>
+      <p>برنامج ترفيه وتسلية</p>
+
+      <input
+        class="login-input"
+        id="phone"
+        type="tel"
+        placeholder="رقم الهاتف"
+      >
+
+      <button class="main-login-btn" onclick="login()">
+        تسجيل الدخول
+      </button>
+
+      <button class="social-btn">
+        تسجيل الدخول بواسطة Google
+      </button>
+
+      <button class="social-btn">
+        تسجيل الدخول بواسطة Facebook
+      </button>
+
+    </div>
+  </div>
+
+
+  <!-- التطبيق -->
+  <div class="app home-page" id="homePage">
+
+    <div class="topbar">
+      <h2>برنامج الترفيه</h2>
+      <div class="coins">🪙 0</div>
+    </div>
+
+    <div class="content">
+
+      <!-- الرئيسية -->
+      <div class="section active" id="homeSection">
+
+        <div class="card welcome">
+          <h2>أهلًا بك 👋</h2>
+          <p>استمتع بالدردشة والرومات والحالات.</p>
+        </div>
+
+        <div class="menu-grid">
+
+          <button class="menu-btn" onclick="showSection('chatSection')">
+            <div>💬</div>
+            دردشة
+          </button>
+
+          <button class="menu-btn" onclick="showSection('statusSection')">
+            <div>⭕</div>
+            حالات
+          </button>
+
+          <button class="menu-btn" onclick="showSection('roomsSection')">
+            <div>🎙️</div>
+            الرومات
+          </button>
+
+          <button class="menu-btn" onclick="showSection('familySection')">
+            <div>👨‍👩‍👧</div>
+            العائلات
+          </button>
+
+          <button class="menu-btn" onclick="showSection('profileSection')">
+            <div>👤</div>
+            حسابي
+          </button>
+
+          <button class="menu-btn" onclick="showSection('settingsSection')">
+            <div>⚙️</div>
+            الإعدادات
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- الدردشة -->
+      <div class="section" id="chatSection">
+
+        <div class="card">
+          <h2>💬 الدردشة</h2>
+          <p style="margin-top:10px;color:#777;">
+            هنا ستظهر المحادثات.
+          </p>
+
+          <input
+            class="login-input"
+            style="margin-top:20px;"
+            placeholder="اكتب رسالة..."
+          >
+
+          <button class="main-login-btn">
+            إرسال
+          </button>
+        </div>
+
+      </div>
+
+
+      <!-- الحالات -->
+      <div class="section" id="statusSection">
+
+        <div class="card">
+          <h2>⭕ الحالات</h2>
+
+          <div class="room">
+            <div class="room-icon">👤</div>
+
+            <div class="room-info">
+              <h3>حالة جديدة</h3>
+              <p>أضف حالتك الآن</p>
+            </div>
+
+            <button class="join-btn">
+              إضافة
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- الرومات -->
+      <div class="section" id="roomsSection">
+
+        <div class="card">
+          <h2>🎙️ الرومات</h2>
+
+          <div class="room">
+
+            <div class="room-icon">🎵</div>
+
+            <div class="room-info">
+              <h3>الروم العام</h3>
+              <p>غرفة ترفيهية</p>
+            </div>
+
+            <button class="join-btn">
+              دخول
+            </button>
+
+          </div>
+
+          <div class="room">
+
+            <div class="room-icon">🎤</div>
+
+            <div class="room-info">
+              <h3>روم الأصدقاء</h3>
+              <p>غرفة دردشة</p>
+            </div>
+
+            <button class="join-btn">
+              دخول
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- العائلة -->
+      <div class="section" id="familySection">
+
+        <div class="card family-box">
+
+          <h2>👨‍👩‍👧 إنشاء عائلة</h2>
+
+          <p style="margin-top:10px;">
+            أنشئ عائلتك وابدأ بإضافة المشرفين والأعضاء.
+          </p>
+
+          <div class="family-price">
+            🪙 5,000,000
+          </div>
+
+          <p>
+            إنشاء مجاني عند الوصول إلى المستوى 30
+          </p>
+
+          <button class="main-login-btn" style="margin-top:15px;">
+            إنشاء عائلة
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- الملف الشخصي -->
+      <div class="section" id="profileSection">
+
+        <div class="card profile">
+
+          <div class="profile-img">👤</div>
+
+          <h2>المستخدم</h2>
+
+          <p style="color:#777;margin-top:7px;">
+            المستوى 1
+          </p>
+
+          <button class="action-btn">
+            ✏️ تعديل الملف الشخصي
+          </button>
+
+          <button class="action-btn">
+            🖼️ تعديل الصورة والغلاف
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- الإعدادات -->
+      <div class="section" id="settingsSection">
+
+        <div class="card">
+
+          <h2>⚙️ الإعدادات</h2>
+
+          <button class="action-btn">
+            الاسم
+          </button>
+
+          <button class="action-btn">
+            السن
+          </button>
+
+          <button class="action-btn">
+            الدولة
+          </button>
+
+          <button class="action-btn">
+            رقم الهاتف
+          </button>
+
+          <button class="action-btn">
+            🔒 الخصوصية والأمان
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- شريط التنقل -->
+    <div class="bottom-nav">
+
+      <button class="nav-btn active"
+              onclick="showSection('homeSection')">
+        <div>🏠</div>
+        الرئيسية
+      </button>
+
+      <button class="nav-btn"
+              onclick="showSection('chatSection')">
+        <div>💬</div>
+        الدردشة
+      </button>
+
+      <button class="nav-btn"
+              onclick="showSection('roomsSection')">
+        <div>🎙️</div>
+        الرومات
+      </button>
+
+      <button class="nav-btn"
+              onclick="showSection('profileSection')">
+        <div>👤</div>
+        حسابي
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <script>
+
+    function login() {
+
+      const phone = document.getElementById("phone").value;
+
+      if (phone.trim() === "") {
+        alert("من فضلك اكتب رقم الهاتف");
+        return;
+      }
+
+      document.getElementById("loginPage").style.display = "none";
+      document.getElementById("homePage").style.display = "block";
+    }
+
+
+    function showSection(sectionId) {
+
+      const sections = document.querySelectorAll(".section");
+
+      sections.forEach(function(section) {
+        section.classList.remove("active");
+      });
+
+      const selected = document.getElementById(sectionId);
+
+      if (selected) {
+        selected.classList.add("active");
+      }
+
+      window.scrollTo(0, 0);
+    }
+
+  </script>
+
+</body>
+  </html>
