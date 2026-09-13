@@ -1,119 +1,220 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>تطبيق ترفيهي</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تطبيق ترفيهي</title>
 
-<style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-  font-family:Arial,sans-serif;
-}
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
 
-body{
-  background:#f3f5fa;
-  color:#20243a;
-  min-height:100vh;
-}
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #20243a, #6a11cb);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
 
-button{
-  border:0;
-  cursor:pointer;
-}
+    .login-box {
+      width: 100%;
+      max-width: 420px;
+      background: white;
+      border-radius: 25px;
+      padding: 30px 22px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+      text-align: center;
+    }
 
-.page{
-  display:none;
-  min-height:100vh;
-}
+    .logo {
+      width: 90px;
+      height: 90px;
+      margin: 0 auto 15px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 32px;
+      font-weight: bold;
+    }
 
-.page.active{
-  display:block;
-}
+    h1 {
+      color: #20243a;
+      margin-bottom: 8px;
+      font-size: 28px;
+    }
 
-/* تسجيل الدخول */
-.login{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-  background:linear-gradient(135deg,#5b45d9,#9b63e8);
-}
+    .subtitle {
+      color: #777;
+      margin-bottom: 25px;
+      font-size: 15px;
+    }
 
-.login-box{
-  width:100%;
-  max-width:420px;
-  background:white;
-  border-radius:25px;
-  padding:30px 22px;
-  text-align:center;
-  box-shadow:0 15px 40px #0003;
-}
+    .input {
+      width: 100%;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 14px;
+      margin-bottom: 12px;
+      font-size: 16px;
+      outline: none;
+    }
 
-.logo{
-  width:85px;
-  height:85px;
-  margin:auto;
-  border-radius:25px;
-  background:linear-gradient(135deg,#6a4ce8,#c45cff);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:white;
-  font-size:38px;
-  font-weight:bold;
-}
+    .input:focus {
+      border-color: #6a11cb;
+    }
 
-.login h1{
-  margin-top:18px;
-  font-size:28px;
-}
+    .login-btn {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 5px;
+    }
 
-.login p{
-  margin:10px 0 25px;
-  color:#777;
-}
+    .login-btn:active {
+      transform: scale(0.98);
+    }
 
-.login-btn{
-  width:100%;
-  padding:15px;
-  border-radius:14px;
-  margin-top:12px;
-  font-size:16px;
-  font-weight:bold;
-}
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 22px 0;
+      color: #999;
+    }
 
-.facebook{
-  background:#1877f2;
-  color:white;
-}
+    .divider::before,
+    .divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: #ddd;
+    }
 
-.google{
-  background:#fff;
-  border:1px solid #ddd;
-}
+    .social-btn {
+      width: 100%;
+      padding: 13px;
+      border-radius: 14px;
+      margin-bottom: 10px;
+      background: white;
+      border: 1px solid #ddd;
+      font-size: 15px;
+      cursor: pointer;
+    }
 
-.phone{
-  background:#6b4ce6;
-  color:white;
-}
+    .phone {
+      color: #2575fc;
+    }
 
-/* الهيدر */
-.header{
-  background:linear-gradient(135deg,#5d47d9,#8957df);
-  color:white;
-  padding:20px 18px 25px;
-  border-radius:0 0 25px 25px;
-}
+    .facebook {
+      color: #1877f2;
+    }
 
-.header-row{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
+    .google {
+      color: #db4437;
+    }
 
-.header h2{
-  font-size:22
+    .note {
+      margin-top: 18px;
+      color: #999;
+      font-size: 12px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="login-box">
+
+    <div class="logo">★</div>
+
+    <h1>تطبيق ترفيهي</h1>
+
+    <p class="subtitle">
+      ترفيه وتسلية ودردشة مع الأصدقاء
+    </p>
+
+    <input
+      class="input"
+      type="text"
+      id="phone"
+      placeholder="رقم الهاتف"
+    >
+
+    <input
+      class="input"
+      type="password"
+      id="password"
+      placeholder="كلمة المرور"
+    >
+
+    <button class="login-btn" onclick="login()">
+      تسجيل الدخول
+    </button>
+
+    <div class="divider">
+      أو الدخول بواسطة
+    </div>
+
+    <button class="social-btn phone" onclick="phoneLogin()">
+      📱 الدخول برقم الهاتف
+    </button>
+
+    <button class="social-btn facebook" onclick="facebookLogin()">
+      f الدخول باستخدام Facebook
+    </button>
+
+    <button class="social-btn google" onclick="googleLogin()">
+      G الدخول باستخدام Gmail
+    </button>
+
+    <p class="note">
+      برنامج ترفيه وتسلية فقط
+    </p>
+
+  </div>
+
+  <script>
+
+    function login() {
+      const phone = document.getElementById("phone").value;
+      const password = document.getElementById("password").value;
+
+      if (phone === "" || password === "") {
+        alert("من فضلك اكتب رقم الهاتف وكلمة المرور");
+        return;
+      }
+
+      alert("تم تسجيل الدخول بنجاح");
+    }
+
+    function phoneLogin() {
+      alert("سيتم تجهيز تسجيل الدخول برقم الهاتف لاحقًا");
+    }
+
+    function facebookLogin() {
+      alert("سيتم ربط تسجيل الدخول بفيسبوك لاحقًا");
+    }
+
+    function googleLogin() {
+      alert("سيتم ربط تسجيل الدخول بجوجل لاحقًا");
+    }
+
+  </script>
+
+</body>
+  </html>
