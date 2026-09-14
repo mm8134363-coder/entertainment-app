@@ -2032,5 +2032,54 @@ document.addEventListener("DOMContentLoaded",function(){
 });
 
   </script>
+  <script>
+function checkFamilyCreation(){
+
+  const coins = 6000000;
+  const userCoins = 0;
+
+  const userLevel = 0;
+  const userVip = 0;
+
+  if(userLevel >= 30 || userVip >= 4){
+
+    openFamilyCreate();
+    return;
+  }
+
+  if(userCoins >= coins){
+
+    openFamilyCreate();
+    return;
+  }
+
+  alert(
+    "لا يمكن إنشاء العائلة حالياً.\n\n" +
+    "تحتاج إلى 6,000,000 كوينز\n" +
+    "أو مستوى 30\n" +
+    "أو VIP 4."
+  );
+}
+
+
+/* تشغيل الشروط عند الضغط على زر إنشاء العائلة */
+
+document.addEventListener("DOMContentLoaded", function(){
+
+  const button =
+    document.querySelector(".create-family-btn");
+
+  if(button){
+
+    button.onclick = function(){
+
+      checkFamilyCreation();
+
+    };
+
+  }
+
+});
+  </script>
 </body>
   </html>
