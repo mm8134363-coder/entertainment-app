@@ -125,7 +125,17 @@ body{
   padding:18px;
 }
 
-/* الصفحة الرئيسية */
+/* ================= الصفحات ================= */
+
+.page{
+  display:none;
+}
+
+.page.active{
+  display:block;
+}
+
+/* ================= الرئيسية ================= */
 
 .home-card{
   background:#fff;
@@ -161,14 +171,6 @@ body{
 }
 
 /* ================= الرومات ================= */
-
-.page{
-  display:none;
-}
-
-.page.active{
-  display:block;
-}
 
 .page-title{
   display:flex;
@@ -250,7 +252,7 @@ body{
   padding:10px 0 20px;
 }
 
-/* الصورة للعرض فقط */
+/* الصورة غير قابلة للتغيير */
 .account-avatar{
   width:95px;
   height:95px;
@@ -268,7 +270,7 @@ body{
   pointer-events:none;
 }
 
-/* الاسم للعرض فقط */
+/* الاسم غير قابل للتعديل */
 .account-name{
   margin-top:12px;
   font-size:20px;
@@ -301,4 +303,918 @@ body{
 
 .stat-icon{
   display:block;
-  font
+  font-size:23px;
+  margin-bottom:6px;
+}
+
+.stat-title{
+  display:block;
+  color:#777;
+  font-size:12px;
+  margin-bottom:5px;
+}
+
+.stat-box strong{
+  font-size:15px;
+}
+
+/* قائمة الحساب */
+
+.account-menu{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.account-item{
+  min-height:58px;
+  padding:10px 15px;
+  border-radius:16px;
+  background:#fff;
+  display:flex;
+  align-items:center;
+  gap:13px;
+  box-shadow:0 3px 12px rgba(0,0,0,.06);
+  cursor:pointer;
+}
+
+.account-item span{
+  width:32px;
+  text-align:center;
+  font-size:22px;
+}
+
+.account-item b{
+  flex:1;
+  font-size:15px;
+}
+
+.account-item i{
+  font-style:normal;
+  color:#999;
+  font-size:24px;
+}
+
+/* ================= الصفحة الشخصية ================= */
+
+.profile-page{
+  padding:18px 16px 30px;
+}
+
+.profile-top{
+  background:linear-gradient(135deg,#21143a,#3d1760);
+  color:#fff;
+  border-radius:22px;
+  padding:25px 15px;
+  text-align:center;
+  margin-bottom:15px;
+}
+
+.profile-avatar{
+  width:100px;
+  height:100px;
+  border-radius:50%;
+  overflow:hidden;
+  margin:auto;
+  border:3px solid #d49aff;
+}
+
+.profile-avatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.profile-name{
+  font-size:20px;
+  font-weight:bold;
+  margin-top:10px;
+}
+
+.profile-id{
+  color:#ccc;
+  font-size:13px;
+  margin-top:6px;
+}
+
+/* VIP + الثروة + الكاريزما */
+
+.profile-stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin-top:18px;
+}
+
+.profile-stat{
+  background:rgba(255,255,255,.1);
+  border-radius:14px;
+  padding:12px 4px;
+}
+
+.profile-stat small{
+  display:block;
+  color:#ccc;
+  margin-bottom:5px;
+}
+
+.profile-stat strong{
+  font-size:14px;
+}
+
+/* شريط الدخلة */
+
+.entry-bar{
+  background:#fff;
+  border-radius:18px;
+  padding:17px;
+  margin-bottom:12px;
+  box-shadow:0 3px 12px rgba(0,0,0,.06);
+}
+
+.entry-bar h3{
+  margin-bottom:6px;
+}
+
+.entry-bar p{
+  color:#777;
+  font-size:13px;
+}
+
+/* الإطارات */
+
+.profile-section{
+  background:#fff;
+  border-radius:18px;
+  padding:17px;
+  margin-bottom:12px;
+  box-shadow:0 3px 12px rgba(0,0,0,.06);
+}
+
+.profile-section h3{
+  margin-bottom:14px;
+}
+
+.frames{
+  display:flex;
+  gap:12px;
+  overflow-x:auto;
+}
+
+.frame{
+  min-width:70px;
+  height:70px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+  border:3px solid #8b3dff;
+  background:#eee;
+}
+
+.gifts{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+}
+
+.gift{
+  background:#f5f2fa;
+  border-radius:14px;
+  padding:12px 4px;
+  text-align:center;
+  font-size:27px;
+}
+
+.gift span{
+  display:block;
+  font-size:11px;
+  margin-top:5px;
+  color:#777;
+}
+
+/* ================= الشريط السفلي ================= */
+
+.bottom-nav{
+  position:fixed;
+  bottom:0;
+  right:0;
+  left:0;
+  height:70px;
+  background:#fff;
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+  border-top:1px solid #eee;
+  box-shadow:0 -3px 15px rgba(0,0,0,.08);
+  z-index:100;
+}
+
+.nav-item{
+  border:0;
+  background:none;
+  color:#888;
+  font-size:12px;
+  text-align:center;
+  cursor:pointer;
+}
+
+.nav-item span{
+  display:block;
+  font-size:22px;
+  margin-bottom:3px;
+}
+
+.nav-item.active{
+  color:#7b2cff;
+  font-weight:bold;
+}
+
+/* إخفاء الصفحات الداخلية */
+
+.inner-page{
+  display:none;
+}
+
+.inner-page.active{
+  display:block;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= تسجيل الدخول ================= -->
+
+<div class="login-page" id="loginPage">
+
+  <div class="login-box">
+
+    <div class="logo">★</div>
+
+    <h1>تطبيق ترفيهي</h1>
+
+    <p class="subtitle">
+      ترفيه وتسلية فقط
+    </p>
+
+    <input
+      type="text"
+      id="loginName"
+      placeholder="اكتب اسمك"
+    >
+
+    <button class="login-btn" onclick="login()">
+      دخول
+    </button>
+
+    <div class="or">أو</div>
+
+    <button class="social-btn facebook">
+      الدخول بواسطة Facebook
+    </button>
+
+    <button class="social-btn gmail">
+      الدخول بواسطة Gmail
+    </button>
+
+    <button class="social-btn phone">
+      الدخول بواسطة رقم الهاتف
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- ================= التطبيق ================= -->
+
+<div class="app" id="app">
+
+  <!-- الشريط العلوي -->
+
+  <div class="top-bar">
+
+    <h2 id="topTitle">الرئيسية</h2>
+
+    <p>أهلاً بك في التطبيق</p>
+
+  </div>
+
+
+  <div class="content">
+
+
+    <!-- ================= الرئيسية ================= -->
+
+    <section class="page active" id="home">
+
+      <div class="home-card">
+
+        <h3>مرحباً بك 👋</h3>
+
+        <p>
+          استمتع بالدردشة والحالات والرومات.
+        </p>
+
+      </div>
+
+      <div class="quick-grid">
+
+        <div class="quick-item" onclick="showPage('chat')">
+          <span>💬</span>
+          الدردشة
+        </div>
+
+        <div class="quick-item" onclick="showPage('statuses')">
+          <span>⭕</span>
+          الحالات
+        </div>
+
+        <div class="quick-item" onclick="showPage('rooms')">
+          <span>🎤</span>
+          الرومات
+        </div>
+
+        <div class="quick-item" onclick="showPage('account')">
+          <span>👤</span>
+          حسابي
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= الدردشة ================= -->
+
+    <section class="page" id="chat">
+
+      <div class="page-title">
+        <h2>الدردشة</h2>
+      </div>
+
+      <div class="home-card">
+        <h3>💬 الدردشة</h3>
+        <p>هنا تظهر المحادثات.</p>
+      </div>
+
+    </section>
+
+
+    <!-- ================= الحالات ================= -->
+
+    <section class="page" id="statuses">
+
+      <div class="page-title">
+        <h2>الحالات</h2>
+      </div>
+
+      <div class="home-card">
+        <h3>⭕ الحالات</h3>
+        <p>هنا تظهر حالات المستخدمين.</p>
+      </div>
+
+    </section>
+
+
+    <!-- ================= الرومات ================= -->
+
+    <section class="page" id="rooms">
+
+      <div class="page-title">
+
+        <h2>الرومات</h2>
+
+        <button class="create-room">
+          + إنشاء روم
+        </button>
+
+      </div>
+
+      <div class="room-list">
+
+        <div class="room">
+
+          <div class="room-icon">🎤</div>
+
+          <div class="room-info">
+            <h3>روم الأصدقاء</h3>
+            <p>👥 12 مستخدم</p>
+          </div>
+
+          <button class="join-room">
+            دخول
+          </button>
+
+        </div>
+
+
+        <div class="room">
+
+          <div class="room-icon">🎵</div>
+
+          <div class="room-info">
+            <h3>روم الموسيقى</h3>
+            <p>👥 8 مستخدمين</p>
+          </div>
+
+          <button class="join-room">
+            دخول
+          </button>
+
+        </div>
+
+
+        <div class="room">
+
+          <div class="room-icon">💬</div>
+
+          <div class="room-info">
+            <h3>روم الدردشة</h3>
+            <p>👥 20 مستخدم</p>
+          </div>
+
+          <button class="join-room">
+            دخول
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= الحساب ================= -->
+
+    <section class="page" id="account">
+
+      <div class="account-page">
+
+        <div class="account-header">
+
+          <!-- الصورة ثابتة ولا يوجد زر تعديل -->
+
+          <div class="account-avatar"
+               onclick="showProfile()">
+
+            <img
+              src="https://i.pravatar.cc/150?img=47"
+              alt="الصورة الشخصية"
+            >
+
+          </div>
+
+
+          <!-- الاسم ثابت وغير قابل للتعديل -->
+
+          <div class="account-name">
+            اسم المستخدم
+          </div>
+
+
+          <!-- ID -->
+
+          <div class="account-id">
+            ID: 10000001
+          </div>
+
+        </div>
+
+
+        <!-- الثروة والكاريزما و VIP -->
+
+        <div class="account-stats">
+
+          <div class="stat-box">
+
+            <span class="stat-icon">💰</span>
+
+            <span class="stat-title">
+              الثروة
+            </span>
+
+            <strong>0</strong>
+
+          </div>
+
+
+          <div class="stat-box">
+
+            <span class="stat-icon">✨</span>
+
+            <span class="stat-title">
+              الكاريزما
+            </span>
+
+            <strong>0</strong>
+
+          </div>
+
+
+          <div class="stat-box">
+
+            <span class="stat-icon">👑</span>
+
+            <span class="stat-title">
+              VIP
+            </span>
+
+            <strong>0</strong>
+
+          </div>
+
+        </div>
+
+
+        <!-- القائمة -->
+
+        <div class="account-menu">
+
+          <div class="account-item">
+
+            <span>👛</span>
+
+            <b>المحفظة</b>
+
+            <i>‹</i>
+
+          </div>
+
+
+          <div class="account-item">
+
+            <span>🎁</span>
+
+            <b>دعوة الجداد لربح</b>
+
+            <i>‹</i>
+
+          </div>
+
+
+          <div class="account-item">
+
+            <span>🛍️</span>
+
+            <b>المتجر</b>
+
+            <i>‹</i>
+
+          </div>
+
+
+          <div class="account-item">
+
+            <span>💎</span>
+
+            <b>CP</b>
+
+            <i>‹</i>
+
+          </div>
+
+
+          <div class="account-item">
+
+            <span>⚙️</span>
+
+            <b>الإعدادات</b>
+
+            <i>‹</i>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= الصفحة الشخصية ================= -->
+
+    <section class="inner-page" id="profile">
+
+      <div class="profile-page">
+
+        <div class="profile-top">
+
+          <div class="profile-avatar">
+
+            <img
+              src="https://i.pravatar.cc/150?img=47"
+              alt="الصورة الشخصية"
+            >
+
+          </div>
+
+          <div class="profile-name">
+            اسم المستخدم
+          </div>
+
+          <div class="profile-id">
+            ID: 10000001
+          </div>
+
+
+          <!-- الثروة والكاريزما و VIP -->
+
+          <div class="profile-stats">
+
+            <div class="profile-stat">
+
+              <small>الثروة</small>
+
+              <strong>0</strong>
+
+            </div>
+
+
+            <div class="profile-stat">
+
+              <small>الكاريزما</small>
+
+              <strong>0</strong>
+
+            </div>
+
+
+            <div class="profile-stat">
+
+              <small>VIP</small>
+
+              <strong>0</strong>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- شريط الدخلة -->
+
+        <div class="entry-bar">
+
+          <h3>✨ شريط الدخلة</h3>
+
+          <p>
+            يظهر هنا شريط الدخلة الخاص بالمستخدم.
+          </p>
+
+        </div>
+
+
+        <!-- الإطارات -->
+
+        <div class="profile-section">
+
+          <h3>🖼️ الإطارات</h3>
+
+          <div class="frames">
+
+            <div class="frame">👤</div>
+
+            <div class="frame">⭐</div>
+
+            <div class="frame">👑</div>
+
+            <div class="frame">💎</div>
+
+          </div>
+
+        </div>
+
+
+        <!-- الهدايا -->
+
+        <div class="profile-section">
+
+          <h3>🎁 الهدايا</h3>
+
+          <div class="gifts">
+
+            <div class="gift">
+              🌹
+              <span>وردة</span>
+            </div>
+
+            <div class="gift">
+              💎
+              <span>ألماسة</span>
+            </div>
+
+            <div class="gift">
+              👑
+              <span>تاج</span>
+            </div>
+
+            <div class="gift">
+              🚗
+              <span>سيارة</span>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <button
+          class="login-btn"
+          onclick="backToAccount()"
+          style="margin-top:15px;"
+        >
+          العودة للحساب
+        </button>
+
+      </div>
+
+    </section>
+
+  </div>
+
+
+  <!-- ================= الشريط السفلي ================= -->
+
+  <div class="bottom-nav">
+
+    <button
+      class="nav-item active"
+      onclick="showPage('home')"
+    >
+      <span>🏠</span>
+      الرئيسية
+    </button>
+
+
+    <button
+      class="nav-item"
+      onclick="showPage('chat')"
+    >
+      <span>💬</span>
+      الدردشة
+    </button>
+
+
+    <button
+      class="nav-item"
+      onclick="showPage('statuses')"
+    >
+      <span>⭕</span>
+      الحالات
+    </button>
+
+
+    <button
+      class="nav-item"
+      onclick="showPage('rooms')"
+    >
+      <span>🎤</span>
+      الرومات
+    </button>
+
+
+    <button
+      class="nav-item"
+      onclick="showPage('account')"
+    >
+      <span>👤</span>
+      حسابي
+    </button>
+
+  </div>
+
+</div>
+
+
+<script>
+
+/* ================= تسجيل الدخول ================= */
+
+function login(){
+
+  const name =
+    document.getElementById("loginName").value.trim();
+
+  if(name === ""){
+
+    alert("اكتب اسمك أولاً");
+
+    return;
+  }
+
+  document.getElementById("loginPage").style.display="none";
+
+  document.getElementById("app").style.display="block";
+
+}
+
+
+/* ================= التنقل ================= */
+
+function showPage(pageId){
+
+  document.querySelectorAll(".page").forEach(function(page){
+
+    page.classList.remove("active");
+
+  });
+
+
+  const page =
+    document.getElementById(pageId);
+
+  if(page){
+
+    page.classList.add("active");
+
+  }
+
+
+  document.getElementById("profile")
+    .classList.remove("active");
+
+
+  const titles = {
+
+    home:"الرئيسية",
+
+    chat:"الدردشة",
+
+    statuses:"الحالات",
+
+    rooms:"الرومات",
+
+    account:"حسابي"
+
+  };
+
+
+  document.getElementById("topTitle").textContent =
+    titles[pageId] || "التطبيق";
+
+
+  document.querySelectorAll(".nav-item")
+    .forEach(function(item){
+
+      item.classList.remove("active");
+
+    });
+
+
+  const navItems =
+    document.querySelectorAll(".nav-item");
+
+  if(pageId === "home") navItems[0].classList.add("active");
+
+  if(pageId === "chat") navItems[1].classList.add("active");
+
+  if(pageId === "statuses") navItems[2].classList.add("active");
+
+  if(pageId === "rooms") navItems[3].classList.add("active");
+
+  if(pageId === "account") navItems[4].classList.add("active");
+
+}
+
+
+/* ================= الصفحة الشخصية ================= */
+
+function showProfile(){
+
+  document.querySelectorAll(".page")
+    .forEach(function(page){
+
+      page.classList.remove("active");
+
+    });
+
+
+  document.getElementById("profile")
+    .classList.add("active");
+
+
+  document.getElementById("topTitle")
+    .textContent="الصفحة الشخصية";
+
+}
+
+
+/* العودة للحساب */
+
+function backToAccount(){
+
+  document.getElementById("profile")
+    .classList.remove("active");
+
+  showPage("account");
+
+}
+
+</script>
+
+</body>
+  </html>
