@@ -2957,5 +2957,93 @@ document.getElementById("coverImageInput").onchange = function(event){
   reader.readAsDataURL(file);
 };
 </script>
+  <!-- ================= زر تغيير الغلاف ================= -->
+
+<style>
+#coverChangeBtn{
+  display:none;
+  width:90%;
+  margin:10px auto;
+  padding:12px;
+  border:0;
+  border-radius:14px;
+  background:#7b2cff;
+  color:#fff;
+  font-size:15px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+#coverImageInput{
+  display:none;
+}
+</style>
+
+<button id="coverChangeBtn" type="button">
+  🖼️ تغيير الغلاف
+</button>
+
+<input
+  type="file"
+  id="coverImageInput"
+  accept="image/*"
+>
+
+<script>
+(function(){
+
+  const button = document.getElementById("coverChangeBtn");
+  const input = document.getElementById("coverImageInput");
+  const profile = document.getElementById("profile");
+
+  function checkProfile(){
+
+    if(profile && profile.classList.contains("active")){
+      button.style.display = "block";
+    }else{
+      button.style.display = "none";
+    }
+
+  }
+
+  button.onclick = function(){
+    input.click();
+  };
+
+  input.onchange = function(){
+
+    const file = input.files[0];
+
+    if(!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = function(event){
+
+      const cover =
+        document.querySelector("#profile .profile-top");
+
+      if(cover){
+
+        cover.style.backgroundImage =
+          "url('" + event.target.result + "')";
+
+        cover.style.backgroundSize = "cover";
+        cover.style.backgroundPosition = "center";
+
+      }
+
+    };
+
+    reader.readAsDataURL(file);
+
+  };
+
+  setInterval(checkProfile,200);
+
+  checkProfile();
+
+})();
+</script>
 </body>
   </html>
