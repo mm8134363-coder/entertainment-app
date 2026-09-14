@@ -2185,5 +2185,38 @@ document.addEventListener("DOMContentLoaded", function(){
   margin-top:6px;
 }
 </style>
+  <script>
+document.addEventListener("DOMContentLoaded", function(){
+
+  const familyItems = document.querySelectorAll(".account-item");
+
+  familyItems.forEach(function(item){
+
+    if(item.innerText.includes("العائلة")){
+
+      item.onclick = function(){
+
+        document.querySelectorAll(".page").forEach(function(page){
+          page.classList.remove("active");
+        });
+
+        document.querySelectorAll(".extra-page").forEach(function(page){
+          page.classList.remove("active");
+        });
+
+        const familyPage = document.getElementById("familyPage");
+
+        if(familyPage){
+          familyPage.classList.add("active");
+        }
+
+      };
+
+    }
+
+  });
+
+});
+  </script>
 </body>
   </html>
