@@ -2911,5 +2911,51 @@ document.addEventListener("DOMContentLoaded", function(){
   font-weight:bold;
 }
 </style>
+  <!-- زر تغيير صورة الغلاف -->
+<button id="changeCoverBtn" type="button"
+  style="
+    position:absolute;
+    top:15px;
+    left:15px;
+    z-index:9999;
+    border:0;
+    border-radius:12px;
+    padding:10px 14px;
+    background:#6c4ab6;
+    color:white;
+    font-size:14px;
+    font-weight:bold;
+    cursor:pointer;
+  ">
+  تغيير الغلاف
+</button>
+
+<input id="coverImageInput" type="file" accept="image/*" style="display:none;">
+
+<script>
+document.getElementById("changeCoverBtn").onclick = function(){
+  document.getElementById("coverImageInput").click();
+};
+
+document.getElementById("coverImageInput").onchange = function(event){
+  const file = event.target.files[0];
+
+  if(!file) return;
+
+  const reader = new FileReader();
+
+  reader.onload = function(e){
+    const cover = document.querySelector(".cover");
+
+    if(cover){
+      cover.style.backgroundImage = "url('" + e.target.result + "')";
+      cover.style.backgroundSize = "cover";
+      cover.style.backgroundPosition = "center";
+    }
+  };
+
+  reader.readAsDataURL(file);
+};
+</script>
 </body>
   </html>
