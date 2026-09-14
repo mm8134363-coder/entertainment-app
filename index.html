@@ -2553,12 +2553,23 @@ document.addEventListener(
 
     </div>
 
-
     <div class="settings-group">
 
       <div class="settings-item">
-        <span>🔐</span>
-        <b>الخصوصية والأمان</b>
+        <span>🔔</span>
+        <b>الإشعارات</b>
+        <i>‹</i>
+      </div>
+
+      <div class="settings-item">
+        <span>🔒</span>
+        <b>الخصوصية</b>
+        <i>‹</i>
+      </div>
+
+      <div class="settings-item">
+        <span>🛡️</span>
+        <b>الأمان</b>
         <i>‹</i>
       </div>
 
@@ -2568,14 +2579,7 @@ document.addEventListener(
         <i>‹</i>
       </div>
 
-      <div class="settings-item">
-        <span>🔔</span>
-        <b>الإشعارات</b>
-        <i>‹</i>
-      </div>
-
     </div>
-
 
     <div class="settings-group">
 
@@ -2587,12 +2591,11 @@ document.addEventListener(
 
       <div class="settings-item">
         <span>ℹ️</span>
-        <b>عن البرنامج</b>
+        <b>عن التطبيق</b>
         <i>‹</i>
       </div>
 
     </div>
-
 
     <button class="logout-button" onclick="logoutUser()">
       🚪 تسجيل الخروج
@@ -2614,11 +2617,11 @@ document.addEventListener(
   border-radius:18px;
   overflow:hidden;
   margin-bottom:15px;
-  box-shadow:0 3px 12px rgba(0,0,0,.05);
+  box-shadow:0 3px 12px rgba(0,0,0,.06);
 }
 
 .settings-item{
-  min-height:58px;
+  min-height:60px;
   display:flex;
   align-items:center;
   gap:13px;
@@ -2632,9 +2635,9 @@ document.addEventListener(
 }
 
 .settings-item span{
-  font-size:22px;
   width:30px;
   text-align:center;
+  font-size:21px;
 }
 
 .settings-item b{
@@ -2644,20 +2647,20 @@ document.addEventListener(
 
 .settings-item i{
   font-style:normal;
-  font-size:25px;
   color:#999;
+  font-size:24px;
 }
 
 .logout-button{
   width:100%;
-  border:none;
+  border:0;
   border-radius:16px;
-  background:#fff;
   padding:17px;
+  background:#fff;
   font-size:16px;
   font-weight:bold;
   cursor:pointer;
-  box-shadow:0 3px 12px rgba(0,0,0,.05);
+  box-shadow:0 3px 12px rgba(0,0,0,.06);
 }
 
 </style>
@@ -2675,24 +2678,19 @@ function openSettingsPage(){
     page.classList.remove("active");
   });
 
-  const settings =
+  const settingsPage =
     document.getElementById("settingsPage");
 
-  if(settings){
-    settings.classList.add("active");
+  if(settingsPage){
+    settingsPage.classList.add("active");
   }
 
 }
 
 
-/* تسجيل الخروج */
-
 function logoutUser(){
 
-  const confirmLogout =
-    confirm("هل تريد تسجيل الخروج؟");
-
-  if(confirmLogout){
+  if(confirm("هل تريد تسجيل الخروج؟")){
 
     document.querySelectorAll(".page").forEach(function(page){
       page.classList.remove("active");
@@ -2702,11 +2700,11 @@ function logoutUser(){
       page.classList.remove("active");
     });
 
-    const login =
+    const loginPage =
       document.getElementById("loginPage");
 
-    if(login){
-      login.classList.add("active");
+    if(loginPage){
+      loginPage.classList.add("active");
     }
 
   }
@@ -2714,31 +2712,23 @@ function logoutUser(){
 }
 
 
-/* ربط زر الإعدادات الموجود في الحساب */
+/* فتح الإعدادات من الحساب */
 
-document.addEventListener(
-  "DOMContentLoaded",
-  function(){
+document.addEventListener("DOMContentLoaded", function(){
 
-    document
-      .querySelectorAll(".account-item")
-      .forEach(function(item){
+  document.querySelectorAll(".account-item").forEach(function(item){
 
-        if(item.innerText.includes("الإعدادات")){
+    if(item.innerText.includes("الإعدادات")){
 
-          item.onclick =
-            function(){
+      item.onclick = function(){
+        openSettingsPage();
+      };
 
-              openSettingsPage();
+    }
 
-            };
+  });
 
-        }
-
-      });
-
-  }
-);
+});
 
 </script>
 </body>
