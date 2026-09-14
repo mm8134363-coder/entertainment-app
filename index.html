@@ -2218,5 +2218,301 @@ document.addEventListener("DOMContentLoaded", function(){
 
 });
   </script>
+  <!-- ================= المستوى والثروة ================= -->
+
+<div class="extra-page" id="levelWealthPage">
+
+  <div class="extra-header">
+    <button class="back-btn" onclick="backToAccount()">‹</button>
+    <h2>المستوى والثروة</h2>
+  </div>
+
+  <div class="level-wealth-container">
+
+    <!-- المستوى -->
+    <div class="lw-card">
+
+      <div class="lw-icon">🏆</div>
+
+      <div class="lw-title">المستوى</div>
+
+      <div class="lw-number">
+        مستوى <span id="userLevelDisplay">0</span>
+      </div>
+
+      <div class="lw-progress">
+        <div id="levelProgressBar"></div>
+      </div>
+
+      <div class="lw-info">
+        <span>التقدم</span>
+        <strong id="levelProgressText">0%</strong>
+      </div>
+
+    </div>
+
+
+    <!-- الثروة -->
+    <div class="lw-card">
+
+      <div class="lw-icon">💎</div>
+
+      <div class="lw-title">الثروة</div>
+
+      <div class="lw-number">
+        <span id="wealthDisplay">0</span>
+      </div>
+
+      <div class="lw-progress">
+        <div id="wealthProgressBar"></div>
+      </div>
+
+      <div class="lw-info">
+        <span>التقدم للثروة التالية</span>
+        <strong id="wealthProgressText">0%</strong>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<style>
+
+/* ===== صفحة المستوى والثروة ===== */
+
+#levelWealthPage{
+  padding-bottom:90px;
+}
+
+.level-wealth-container{
+  padding:15px;
+}
+
+.lw-card{
+  background:#fff;
+  border-radius:20px;
+  padding:22px;
+  margin-bottom:15px;
+  box-shadow:0 3px 12px rgba(0,0,0,.06);
+}
+
+.lw-icon{
+  width:65px;
+  height:65px;
+  margin:0 auto 12px;
+  border-radius:50%;
+  background:#f2f2f5;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:32px;
+}
+
+.lw-title{
+  text-align:center;
+  font-size:18px;
+  font-weight:bold;
+  margin-bottom:8px;
+}
+
+.lw-number{
+  text-align:center;
+  font-size:28px;
+  font-weight:bold;
+  margin-bottom:18px;
+}
+
+.lw-progress{
+  width:100%;
+  height:13px;
+  background:#eeeeef;
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.lw-progress div{
+  width:0%;
+  height:100%;
+  background:#777;
+  border-radius:20px;
+  transition:width .4s ease;
+}
+
+.lw-info{
+  display:flex;
+  justify-content:space-between;
+  margin-top:10px;
+  color:#777;
+  font-size:14px;
+}
+
+.lw-info strong{
+  color:#222;
+}
+
+</style>
+
+
+<script>
+
+/* ===== بيانات المستوى والثروة ===== */
+
+let accountLevel = 0;
+let accountWealth = 0;
+
+
+/* ===== فتح صفحة المستوى والثروة ===== */
+
+function openLevelWealthPage(){
+
+  document.querySelectorAll(".page").forEach(function(page){
+    page.classList.remove("active");
+  });
+
+  document.querySelectorAll(".extra-page").forEach(function(page){
+    page.classList.remove("active");
+  });
+
+  const levelPage =
+    document.getElementById("levelWealthPage");
+
+  if(levelPage){
+
+    levelPage.classList.add("active");
+
+    updateLevelWealth();
+
+  }
+
+}
+
+
+/* ===== تحديث البيانات ===== */
+
+function updateLevelWealth(){
+
+  const levelDisplay =
+    document.getElementById("userLevelDisplay");
+
+  const wealthDisplay =
+    document.getElementById("wealthDisplay");
+
+  const levelBar =
+    document.getElementById("levelProgressBar");
+
+  const wealthBar =
+    document.getElementById("wealthProgressBar");
+
+  const levelText =
+    document.getElementById("levelProgressText");
+
+  const wealthText =
+    document.getElementById("wealthProgressText");
+
+
+  if(levelDisplay){
+    levelDisplay.textContent = accountLevel;
+  }
+
+  if(wealthDisplay){
+    wealthDisplay.textContent =
+      accountWealth.toLocaleString("en-US");
+  }
+
+
+  /* تقدم المستوى */
+
+  let levelPercent = 0;
+
+  if(accountLevel > 0){
+    levelPercent = accountLevel % 100;
+  }
+
+  if(accountLevel >= 100){
+    levelPercent = 100;
+  }
+
+
+  /* تقدم الثروة */
+
+  let wealthPercent = 0;
+
+  if(accountWealth > 0){
+
+    wealthPercent =
+      Math.min(
+        100,
+        Math.floor((accountWealth / 1000000) * 100)
+      );
+
+  }
+
+
+  if(levelBar){
+    levelBar.style.width =
+      levelPercent + "%";
+  }
+
+  if(wealthBar){
+    wealthBar.style.width =
+      wealthPercent + "%";
+  }
+
+  if(levelText){
+    levelText.textContent =
+      levelPercent + "%";
+  }
+
+  if(wealthText){
+    wealthText.textContent =
+      wealthPercent + "%";
+  }
+
+}
+
+
+/* ===== تشغيل الصفحة ===== */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function(){
+
+    updateLevelWealth();
+
+    /*
+      ربط زر المستوى والثروة
+      تلقائياً إذا كان موجوداً في الحساب
+    */
+
+    document
+      .querySelectorAll(".account-item")
+      .forEach(function(item){
+
+        const text =
+          item.innerText.trim();
+
+        if(
+          text.includes("المستوى") ||
+          text.includes("الثروة")
+        ){
+
+          item.onclick =
+            function(){
+
+              openLevelWealthPage();
+
+            };
+
+        }
+
+      });
+
+  }
+);
+
+    </script>
 </body>
   </html>
