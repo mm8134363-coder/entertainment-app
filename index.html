@@ -3371,12 +3371,181 @@ document.getElementById("coverImageInput").onchange = function(event){
 </div>
 
 
+
 <script>
 
-/* فتح المحادثة الخاصة */
+/* ================= المحادثة الخاصة ================= */
 
 function openPrivateChat(name, photo){
 
- 
+  const page =
+    document.getElementById("privateChatPage");
+
+  if(!page) return;
+
+  page.classList.add("active");
+
+  const chatName =
+    document.getElementById("privateChatName");
+
+  const chatPhoto =
+    document.getElementById("privateChatPhoto");
+
+  if(chatName){
+    chatName.textContent = name || "المستخدم";
+  }
+
+  if(chatPhoto && photo){
+    chatPhoto.src = photo;
+  }
+
+}
+
+
+/* ================= قائمة الثلاث نقاط ================= */
+
+function togglePrivateChatMenu(){
+
+  const menu =
+    document.getElementById("privateChatMenu");
+
+  if(menu){
+    menu.classList.toggle("active");
+  }
+
+}
+
+
+/* ================= إرسال رسالة ================= */
+
+function sendPrivateMessage(){
+
+  const input =
+    document.getElementById("privateChatText");
+
+  const messages =
+    document.getElementById("privateChatMessages");
+
+  if(!input || !messages) return;
+
+  const text =
+    input.value.trim();
+
+  if(text === "") return;
+
+  const message =
+    document.createElement("div");
+
+  message.className =
+    "private-message me";
+
+  const bubble =
+    document.createElement("div");
+
+  bubble.className =
+    "private-bubble";
+
+  bubble.textContent = text;
+
+  message.appendChild(bubble);
+
+  messages.appendChild(message);
+
+  input.value = "";
+
+  messages.scrollTop =
+    messages.scrollHeight;
+
+}
+
+
+/* ================= زر Enter ================= */
+
+function privateChatEnter(event){
+
+  if(event.key === "Enter"){
+
+    sendPrivateMessage();
+
+  }
+
+}
+
+
+/* ================= زيارة الصفحة الشخصية ================= */
+
+function openPrivateUserProfile(){
+
+  const menu =
+    document.getElementById("privateChatMenu");
+
+  if(menu){
+    menu.classList.remove("active");
+  }
+
+  alert("سيتم فتح الصفحة الشخصية للمستخدم.");
+
+}
+
+
+/* ================= إضافة صديق ================= */
+
+function addPrivateFriend(){
+
+  const menu =
+    document.getElementById("privateChatMenu");
+
+  if(menu){
+    menu.classList.remove("active");
+  }
+
+  alert("تم إرسال طلب الصداقة.");
+
+}
+
+
+/* ================= حظر ================= */
+
+function blockPrivateUser(){
+
+  const menu =
+    document.getElementById("privateChatMenu");
+
+  if(menu){
+    menu.classList.remove("active");
+  }
+
+  alert("تم حظر المستخدم.");
+
+}
+
+
+/* ================= صورة ================= */
+
+function sendPrivateImage(){
+
+  alert("اختيار صورة وإرسالها.");
+
+}
+
+
+/* ================= رسالة صوتية ================= */
+
+function sendPrivateVoice(){
+
+  alert("تسجيل رسالة صوتية.");
+
+}
+
+
+/* ================= هدية ================= */
+
+function sendPrivateGift(){
+
+  alert("فتح الهدايا.");
+
+}
+
+</script>
 </body>
   </html>
