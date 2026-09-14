@@ -1,256 +1,304 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>تطبيق ترفيهي</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تطبيق ترفيهي</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,sans-serif;
+}
 
-    body {
-      background: #f5f5f5;
-      min-height: 100vh;
-    }
+body{
+  background:#f4f4f6;
+  min-height:100vh;
+}
 
-    .login-page {
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
+/* ================= تسجيل الدخول ================= */
 
-    .login-box {
-      width: 100%;
-      max-width: 400px;
-      background: white;
-      padding: 30px 22px;
-      border-radius: 25px;
-      box-shadow: 0 5px 25px rgba(0,0,0,0.1);
-      text-align: center;
-    }
+.login-page{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+  background:linear-gradient(135deg,#171126,#35135c);
+}
 
-    .logo {
-      width: 85px;
-      height: 85px;
-      border-radius: 50%;
-      background: linear-gradient(135deg,#7b2cff,#ff3cac);
-      margin: 0 auto 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 35px;
-      font-weight: bold;
-    }
+.login-box{
+  width:100%;
+  max-width:400px;
+  background:#fff;
+  padding:30px 22px;
+  border-radius:25px;
+  text-align:center;
+  box-shadow:0 10px 35px rgba(0,0,0,.25);
+}
 
-    h1 {
-      margin-bottom: 8px;
-      color: #222;
-    }
+.logo{
+  width:85px;
+  height:85px;
+  margin:0 auto 20px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(135deg,#7b2cff,#ff3cac);
+  color:#fff;
+  font-size:34px;
+  font-weight:bold;
+}
 
-    .subtitle {
-      color: #777;
-      margin-bottom: 25px;
-    }
+.login-box h1{
+  margin-bottom:8px;
+}
 
-    input {
-      width: 100%;
-      padding: 15px;
-      margin-bottom: 14px;
-      border: 1px solid #ddd;
-      border-radius: 14px;
-      font-size: 16px;
-      outline: none;
-    }
+.subtitle{
+  color:#777;
+  margin-bottom:25px;
+}
 
-    input:focus {
-      border-color: #7b2cff;
-    }
+.login-box input{
+  width:100%;
+  padding:15px;
+  margin-bottom:14px;
+  border:1px solid #ddd;
+  border-radius:14px;
+  font-size:16px;
+}
 
-    .login-btn {
-      width: 100%;
-      padding: 15px;
-      border: none;
-      border-radius: 14px;
-      background: linear-gradient(135deg,#7b2cff,#ff3cac);
-      color: white;
-      font-size: 17px;
-      font-weight: bold;
-      cursor: pointer;
-      margin-bottom: 20px;
-    }
+.login-btn,
+.social-btn{
+  width:100%;
+  padding:14px;
+  margin-bottom:10px;
+  border-radius:14px;
+  font-size:16px;
+  cursor:pointer;
+}
 
-    .or {
-      color: #999;
-      margin: 10px 0 18px;
-    }
+.login-btn{
+  border:0;
+  background:linear-gradient(135deg,#7b2cff,#ff3cac);
+  color:#fff;
+  font-weight:bold;
+}
 
-    .social-btn {
-      width: 100%;
-      padding: 13px;
-      margin-bottom: 10px;
-      border: 1px solid #ddd;
-      background: white;
-      border-radius: 14px;
-      font-size: 16px;
-      cursor: pointer;
-    }
+.social-btn{
+  background:#fff;
+  border:1px solid #ddd;
+}
 
-    .facebook {
-      color: #1877f2;
-    }
+.facebook{color:#1877f2;}
+.gmail{color:#db4437;}
+.phone{color:#333;}
 
-    .gmail {
-      color: #db4437;
-    }
+.or{
+  color:#999;
+  margin:12px 0;
+}
 
-    .phone {
-      color: #333;
-    }
+/* ================= التطبيق ================= */
 
-    .home-page {
-      display: none;
-      min-height: 100vh;
-      padding-bottom: 80px;
-    }
+.app{
+  display:none;
+  min-height:100vh;
+  padding-bottom:75px;
+}
 
-    .top-bar {
-      background: linear-gradient(135deg,#7b2cff,#ff3cac);
-      color: white;
-      padding: 22px;
-      border-radius: 0 0 25px 25px;
-    }
+.top-bar{
+  padding:22px 18px;
+  color:#fff;
+  background:linear-gradient(135deg,#7b2cff,#ff3cac);
+  border-radius:0 0 25px 25px;
+}
 
-    .top-bar h2 {
-      margin-bottom: 8px;
-    }
+.top-bar h2{
+  margin-bottom:6px;
+}
 
-    .content {
-      padding: 20px;
-    }
+.content{
+  padding:18px;
+}
 
-    .welcome-card {
-      background: white;
-      padding
-<!-- قسم الرومات -->
-<section id="rooms" class="page">
+/* الصفحة الرئيسية */
 
-  <div class="page-title">
-    <h2>الرومات</h2>
-    <button class="create-room">+ إنشاء روم</button>
-  </div>
+.home-card{
+  background:#fff;
+  padding:20px;
+  border-radius:20px;
+  margin-bottom:15px;
+  box-shadow:0 3px 12px rgba(0,0,0,.06);
+}
 
-  <div class="room-list">
+.home-card h3{
+  margin-bottom:8px;
+}
 
-    <div class="room">
-      <div class="room-icon">🎤</div>
-      <div class="room-info">
-        <h3>روم الأصدقاء</h3>
-        <p>👥 12 مستخدم</p>
-      </div>
-      <button class="join-room">دخول</button>
-    </div>
+.quick-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
 
-    <div class="room">
-      <div class="room-icon">🎵</div>
-      <div class="room-info">
-        <h3>روم الموسيقى</h3>
-        <p>👥 8 مستخدمين</p>
-      </div>
-      <button class="join-room">دخول</button>
-    </div>
+.quick-item{
+  background:#fff;
+  padding:20px 10px;
+  text-align:center;
+  border-radius:18px;
+  box-shadow:0 3px 12px rgba(0,0,0,.06);
+  cursor:pointer;
+}
 
-    <div class="room">
-      <div class="room-icon">💬</div>
-      <div class="room-info">
-        <h3>روم الدردشة</h3>
-        <p>👥 20 مستخدم</p>
-      </div>
-      <button class="join-room">دخول</button>
-    </div>
+.quick-item span{
+  display:block;
+  font-size:28px;
+  margin-bottom:8px;
+}
 
-  </div>
-<!-- ===== الحساب ===== -->
-<section class="account-page">
+/* ================= الرومات ================= */
 
-  <div class="account-header">
+.page{
+  display:none;
+}
 
-    <!-- الصورة: عرض فقط وغير قابلة للتغيير -->
-    <div class="account-avatar">
-      <img src="https://i.pravatar.cc/150?img=47" alt="الصورة الشخصية">
-    </div>
+.page.active{
+  display:block;
+}
 
-    <!-- الاسم: عرض فقط وغير قابل للتعديل -->
-    <div class="account-name">اسم المستخدم</div>
+.page-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:18px;
+}
 
-    <!-- ID -->
-    <div class="account-id">ID: 10000001</div>
+.page-title h2{
+  font-size:22px;
+}
 
-  </div>
+.create-room{
+  border:0;
+  padding:10px 14px;
+  border-radius:12px;
+  background:#7b2cff;
+  color:#fff;
+}
 
-  <!-- الثروة والكاريزما و VIP -->
-  <div class="account-stats">
+.room-list{
+  background:#fff;
+  border-radius:20px;
+  padding:5px 15px;
+}
 
-    <div class="stat-box">
-      <span class="stat-icon">💰</span>
-      <span class="stat-title">الثروة</span>
-      <strong>0</strong>
-    </div>
+.room{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:15px 0;
+  border-bottom:1px solid #eee;
+}
 
-    <div class="stat-box">
-      <span class="stat-icon">✨</span>
-      <span class="stat-title">الكاريزما</span>
-      <strong>0</strong>
-    </div>
+.room:last-child{
+  border-bottom:0;
+}
 
-    <div class="stat-box">
-      <span class="stat-icon">👑</span>
-      <span class="stat-title">VIP</span>
-      <strong>0</strong>
-    </div>
+.room-icon{
+  width:55px;
+  height:55px;
+  border-radius:15px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#eee;
+  font-size:27px;
+}
 
-  </div>
+.room-info{
+  flex:1;
+}
 
-  <!-- الخيارات -->
-  <div class="account-menu">
+.room-info h3{
+  margin-bottom:5px;
+}
 
-    <div class="account-item">
-      <span>👛</span>
-      <b>المحفظة</b>
-      <i>›</i>
-    </div>
+.room-info p{
+  color:#888;
+  font-size:13px;
+}
 
-    <div class="account-item">
-      <span>🎁</span>
-      <b>دعوة الجداد لربح</b>
-      <i>›</i>
-    </div>
+.join-room{
+  border:0;
+  padding:9px 15px;
+  border-radius:12px;
+  background:#7b2cff;
+  color:#fff;
+}
 
-    <div class="account-item">
-      <span>🛍️</span>
-      <b>المتجر</b>
-      <i>›</i>
-    </div>
+/* ================= الحساب ================= */
 
-    <div class="account-item">
-      <span>💎</span>
-      <b>CP</b>
-      <i>›</i>
-    </div>
+.account-page{
+  padding:20px 16px;
+}
 
-    <div class="account-item">
-      <span>⚙️</span>
-      <b>الإعدادات</b>
-      <i>›</i>
-    </div>
+.account-header{
+  text-align:center;
+  padding:10px 0 20px;
+}
 
-  </div>
+/* الصورة للعرض فقط */
+.account-avatar{
+  width:95px;
+  height:95px;
+  margin:auto;
+  border-radius:50%;
+  overflow:hidden;
+  border:3px solid #8b3dff;
+  box-shadow:0 0 18px rgba(123,44,255,.35);
+}
 
-</section>
+.account-avatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  pointer-events:none;
+}
+
+/* الاسم للعرض فقط */
+.account-name{
+  margin-top:12px;
+  font-size:20px;
+  font-weight:bold;
+}
+
+/* ID */
+.account-id{
+  margin-top:7px;
+  color:#777;
+  font-size:13px;
+}
+
+/* الثروة والكاريزما و VIP */
+
+.account-stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin-bottom:18px;
+}
+
+.stat-box{
+  background:#fff;
+  border-radius:17px;
+  padding:14px 5px;
+  text-align:center;
+  box-shadow:0 3px 12px rgba(0,0,0,.06);
+}
+
+.stat-icon{
+  display:block;
+  font
