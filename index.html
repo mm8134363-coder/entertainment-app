@@ -2731,5 +2731,170 @@ document.addEventListener("DOMContentLoaded", function(){
 });
 
 </script>
+  <script>
+document.addEventListener("DOMContentLoaded", function(){
+
+  const settingsPage = document.getElementById("settingsPage");
+
+  if(!settingsPage) return;
+
+  settingsPage.innerHTML = `
+    <div style="
+      width:100%;
+      min-height:100vh;
+      background:#f4f4f6;
+      direction:rtl;
+      box-sizing:border-box;
+    ">
+
+      <div style="
+        height:60px;
+        background:#fff;
+        display:flex;
+        align-items:center;
+        padding:0 15px;
+        box-sizing:border-box;
+        border-bottom:1px solid #eee;
+      ">
+        <button onclick="backToAccount()" style="
+          border:0;
+          background:none;
+          font-size:30px;
+          cursor:pointer;
+          margin-left:12px;
+        ">‹</button>
+
+        <h2 style="
+          margin:0;
+          font-size:20px;
+        ">الإعدادات</h2>
+      </div>
+
+
+      <div style="padding:15px;box-sizing:border-box;">
+
+        <div style="
+          background:#fff;
+          border-radius:18px;
+          overflow:hidden;
+          margin-bottom:15px;
+        ">
+
+          <div style="padding:18px;border-bottom:1px solid #eee;">
+            👤
+            <b style="margin-right:12px;">تعديل الملف الشخصي</b>
+            <span style="float:left;color:#999;">‹</span>
+          </div>
+
+          <div style="padding:18px;border-bottom:1px solid #eee;">
+            📱
+            <b style="margin-right:12px;">رقم الهاتف</b>
+            <span style="float:left;color:#999;">‹</span>
+          </div>
+
+          <div style="padding:18px;border-bottom:1px solid #eee;">
+            🌍
+            <b style="margin-right:12px;">الدولة</b>
+            <span style="float:left;color:#999;">‹</span>
+          </div>
+
+          <div style="padding:18px;">
+            🎂
+            <b style="margin-right:12px;">العمر</b>
+            <span style="float:left;color:#999;">‹</span>
+          </div>
+
+        </div>
+
+
+        <div style="
+          background:#fff;
+          border-radius:18px;
+          overflow:hidden;
+          margin-bottom:15px;
+        ">
+
+          <div style="padding:18px;border-bottom:1px solid #eee;">
+            🔔
+            <b style="margin-right:12px;">الإشعارات</b>
+            <span style="float:left;color:#999;">‹</span>
+          </div>
+
+          <div style="padding:18px;border-bottom:1px solid #eee;">
+            🔒
+            <b style="margin-right:12px;">الخصوصية</b>
+            <span style="float:left;color:#999;">‹</span>
+          </div>
+
+          <div style="padding:18px;border-bottom:1px solid #eee;">
+            🛡️
+            <b style="margin-right:12px;">الأمان</b>
+            <span style="float:left;color:#999;">‹</span>
+          </div>
+
+          <div onclick="openBlockedPage()" style="
+            padding:18px;
+            cursor:pointer;
+          ">
+            🚫
+            <b style="margin-right:12px;">قائمة الحظر</b>
+            <span style="float:left;color:#999;">‹</span>
+          </div>
+
+        </div>
+
+
+        <div style="
+          background:#fff;
+          border-radius:18px;
+          overflow:hidden;
+          margin-bottom:20px;
+        ">
+
+          <div style="padding:18px;border-bottom:1px solid #eee;">
+            🌐
+            <b style="margin-right:12px;">اللغة</b>
+            <span style="float:left;color:#999;">‹</span>
+          </div>
+
+          <div style="padding:18px;">
+            ℹ️
+            <b style="margin-right:12px;">عن التطبيق</b>
+            <span style="float:left;color:#999;">‹</span>
+          </div>
+
+        </div>
+
+
+        <button onclick="logoutUser()" style="
+          width:100%;
+          padding:17px;
+          border:0;
+          border-radius:16px;
+          background:#fff;
+          font-size:16px;
+          font-weight:bold;
+          cursor:pointer;
+        ">
+          🚪 تسجيل الخروج
+        </button>
+
+      </div>
+
+    </div>
+  `;
+
+  settingsPage.style.display = "block";
+  settingsPage.style.position = "fixed";
+  settingsPage.style.top = "0";
+  settingsPage.style.left = "0";
+  settingsPage.style.right = "0";
+  settingsPage.style.bottom = "0";
+  settingsPage.style.zIndex = "999999";
+  settingsPage.style.background = "#f4f4f6";
+  settingsPage.style.overflowY = "auto";
+
+});
+  </script>
 </body>
   </html>
