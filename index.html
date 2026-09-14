@@ -1199,6 +1199,838 @@ function backToAccount(){
 }
 
 </script>
+<!-- ================= صفحات الحساب الجديدة ================= -->
 
+<style>
+
+.extra-page{
+  display:none;
+  padding:18px 16px 30px;
+}
+
+.extra-page.active{
+  display:block;
+}
+
+.extra-header{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:18px;
+}
+
+.back-btn{
+  border:0;
+  background:#fff;
+  width:42px;
+  height:42px;
+  border-radius:13px;
+  font-size:24px;
+  cursor:pointer;
+  box-shadow:0 3px 12px rgba(0,0,0,.07);
+}
+
+.extra-header h2{
+  font-size:21px;
+}
+
+.big-card{
+  background:#fff;
+  border-radius:20px;
+  padding:20px;
+  margin-bottom:14px;
+  box-shadow:0 3px 12px rgba(0,0,0,.06);
+}
+
+.big-card h3{
+  margin-bottom:8px;
+}
+
+.big-card p{
+  color:#777;
+  font-size:14px;
+  line-height:1.7;
+}
+
+/* المحفظة */
+
+.wallet-box{
+  text-align:center;
+  background:linear-gradient(135deg,#21143a,#7b2cff);
+  color:#fff;
+  border-radius:22px;
+  padding:25px 15px;
+  margin-bottom:15px;
+}
+
+.wallet-icon{
+  font-size:42px;
+  margin-bottom:8px;
+}
+
+.wallet-title{
+  font-size:14px;
+  opacity:.8;
+}
+
+.wallet-balance{
+  font-size:32px;
+  font-weight:bold;
+  margin-top:5px;
+}
+
+.wallet-actions{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+
+.wallet-action{
+  border:0;
+  background:#fff;
+  padding:17px 8px;
+  border-radius:17px;
+  box-shadow:0 3px 12px rgba(0,0,0,.06);
+  font-size:14px;
+}
+
+/* المتجر */
+
+.store-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.store-item{
+  background:#fff;
+  border-radius:18px;
+  padding:18px 10px;
+  text-align:center;
+  box-shadow:0 3px 12px rgba(0,0,0,.06);
+}
+
+.store-item .store-icon{
+  font-size:38px;
+  margin-bottom:8px;
+}
+
+.store-item h3{
+  font-size:15px;
+  margin-bottom:5px;
+}
+
+.store-item p{
+  color:#888;
+  font-size:12px;
+}
+
+/* العائلة */
+
+.family-card{
+  background:linear-gradient(135deg,#35135c,#7b2cff);
+  color:#fff;
+  border-radius:22px;
+  padding:25px 18px;
+  text-align:center;
+  margin-bottom:15px;
+}
+
+.family-icon{
+  font-size:50px;
+  margin-bottom:10px;
+}
+
+.family-card h2{
+  margin-bottom:8px;
+}
+
+.family-card p{
+  opacity:.85;
+  font-size:13px;
+  line-height:1.7;
+}
+
+.family-info{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+  margin-bottom:15px;
+}
+
+.family-stat{
+  background:#fff;
+  border-radius:17px;
+  padding:17px 8px;
+  text-align:center;
+  box-shadow:0 3px 12px rgba(0,0,0,.06);
+}
+
+.family-stat strong{
+  display:block;
+  font-size:20px;
+  margin-bottom:5px;
+}
+
+.family-stat span{
+  color:#888;
+  font-size:12px;
+}
+
+.create-family-btn{
+  width:100%;
+  border:0;
+  padding:16px;
+  border-radius:16px;
+  background:linear-gradient(135deg,#7b2cff,#ff3cac);
+  color:#fff;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+/* CP */
+
+.cp-box{
+  text-align:center;
+  background:#fff;
+  border-radius:22px;
+  padding:25px;
+  box-shadow:0 3px 12px rgba(0,0,0,.06);
+  margin-bottom:15px;
+}
+
+.cp-icon{
+  font-size:48px;
+  margin-bottom:8px;
+}
+
+.cp-number{
+  font-size:30px;
+  font-weight:bold;
+  color:#7b2cff;
+  margin:8px 0;
+}
+
+.cp-label{
+  color:#777;
+  font-size:13px;
+}
+
+.cp-list{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.cp-row{
+  background:#fff;
+  border-radius:16px;
+  padding:16px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  box-shadow:0 3px 12px rgba(0,0,0,.06);
+}
+
+.cp-row span{
+  font-size:25px;
+}
+
+.cp-row b{
+  flex:1;
+}
+
+/* دعوة الجداد */
+
+.invite-box{
+  text-align:center;
+  background:linear-gradient(135deg,#21143a,#3d1760);
+  color:#fff;
+  border-radius:22px;
+  padding:25px 18px;
+  margin-bottom:15px;
+}
+
+.invite-icon{
+  font-size:50px;
+  margin-bottom:10px;
+}
+
+.invite-box h2{
+  margin-bottom:8px;
+}
+
+.invite-box p{
+  color:#ddd;
+  font-size:13px;
+  line-height:1.7;
+}
+
+.invite-code{
+  background:#fff;
+  color:#333;
+  border-radius:15px;
+  padding:15px;
+  margin-top:15px;
+  font-weight:bold;
+}
+
+.invite-btn{
+  width:100%;
+  border:0;
+  padding:15px;
+  border-radius:15px;
+  background:#7b2cff;
+  color:#fff;
+  font-size:15px;
+  margin-top:12px;
+}
+
+/* الإعدادات */
+
+.settings-list{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.setting-row{
+  background:#fff;
+  min-height:58px;
+  padding:12px 15px;
+  border-radius:16px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  box-shadow:0 3px 12px rgba(0,0,0,.06);
+}
+
+.setting-row span{
+  font-size:22px;
+}
+
+.setting-row b{
+  flex:1;
+}
+
+.setting-row i{
+  color:#999;
+  font-style:normal;
+  font-size:22px;
+}
+
+</style>
+
+
+<!-- ================= المحفظة ================= -->
+
+<section class="extra-page" id="walletPage">
+
+  <div class="extra-header">
+
+    <button class="back-btn"
+            onclick="closeExtraPage()">
+      ‹
+    </button>
+
+    <h2>المحفظة</h2>
+
+  </div>
+
+  <div class="wallet-box">
+
+    <div class="wallet-icon">👛</div>
+
+    <div class="wallet-title">
+      رصيد العملات
+    </div>
+
+    <div class="wallet-balance">
+      0
+    </div>
+
+  </div>
+
+  <div class="wallet-actions">
+
+    <button class="wallet-action">
+      💰 شحن
+    </button>
+
+    <button class="wallet-action">
+      🎁 إرسال هدية
+    </button>
+
+    <button class="wallet-action">
+      💎 العملات
+    </button>
+
+    <button class="wallet-action">
+      📜 سجل العمليات
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- ================= دعوة الجداد ================= -->
+
+<section class="extra-page" id="invitePage">
+
+  <div class="extra-header">
+
+    <button class="back-btn"
+            onclick="closeExtraPage()">
+      ‹
+    </button>
+
+    <h2>دعوة الجداد لربح</h2>
+
+  </div>
+
+  <div class="invite-box">
+
+    <div class="invite-icon">
+      🎁
+    </div>
+
+    <h2>
+      ادعو أصحابك
+    </h2>
+
+    <p>
+      شارك كود الدعوة مع أصدقائك
+      واحصل على المكافآت داخل التطبيق.
+    </p>
+
+    <div class="invite-code">
+      10000001
+    </div>
+
+    <button class="invite-btn">
+      مشاركة كود الدعوة
+    </button>
+
+  </div>
+
+  <div class="big-card">
+
+    <h3>🎯 مكافآت الدعوة</h3>
+
+    <p>
+      كلما دعوت مستخدمين جدد
+      يمكنك الحصول على مكافآت حسب نظام التطبيق.
+    </p>
+
+  </div>
+
+</section>
+
+
+<!-- ================= المتجر ================= -->
+
+<section class="extra-page" id="storePage">
+
+  <div class="extra-header">
+
+    <button class="back-btn"
+            onclick="closeExtraPage()">
+      ‹
+    </button>
+
+    <h2>المتجر</h2>
+
+  </div>
+
+  <div class="big-card">
+
+    <h3>🛍️ متجر التطبيق</h3>
+
+    <p>
+      اختر الإطارات والهدايا والعناصر الخاصة بحسابك.
+    </p>
+
+  </div>
+
+  <div class="store-grid">
+
+    <div class="store-item">
+
+      <div class="store-icon">
+        🖼️
+      </div>
+
+      <h3>الإطارات</h3>
+
+      <p>
+        إطارات للملف الشخصي
+      </p>
+
+    </div>
+
+    <div class="store-item">
+
+      <div class="store-icon">
+        🎁
+      </div>
+
+      <h3>الهدايا</h3>
+
+      <p>
+        هدايا للمستخدمين
+      </p>
+
+    </div>
+
+    <div class="store-item">
+
+      <div class="store-icon">
+        👑
+      </div>
+
+      <h3>VIP</h3>
+
+      <p>
+        مزايا VIP
+      </p>
+
+    </div>
+
+    <div class="store-item">
+
+      <div class="store-icon">
+        ✨
+      </div>
+
+      <h3>شريط الدخلة</h3>
+
+      <p>
+        دخول مميز للرومات
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= العائلة ================= -->
+
+<section class="extra-page" id="familyPage">
+
+  <div class="extra-header">
+
+    <button class="back-btn"
+            onclick="closeExtraPage()">
+      ‹
+    </button>
+
+    <h2>العائلة</h2>
+
+  </div>
+
+  <div class="family-card">
+
+    <div class="family-icon">
+      👨‍👩‍👧‍👦
+    </div>
+
+    <h2>
+      إنشاء عائلة
+    </h2>
+
+    <p>
+      يمكنك إنشاء عائلتك الخاصة
+      وإضافة المشرفين والأعضاء.
+    </p>
+
+  </div>
+
+  <div class="family-info">
+
+    <div class="family-stat">
+
+      <strong>
+        5,000,000
+      </strong>
+
+      <span>
+        تكلفة إنشاء العائلة
+      </span>
+
+    </div>
+
+    <div class="family-stat">
+
+      <strong>
+        مستوى 30
+      </strong>
+
+      <span>
+        إنشاء مجاني
+      </span>
+
+    </div>
+
+  </div>
+
+  <button class="create-family-btn">
+    👨‍👩‍👧‍👦 إنشاء عائلة
+  </button>
+
+</section>
+
+
+<!-- ================= CP ================= -->
+
+<section class="extra-page" id="cpPage">
+
+  <div class="extra-header">
+
+    <button class="back-btn"
+            onclick="closeExtraPage()">
+      ‹
+    </button>
+
+    <h2>CP</h2>
+
+  </div>
+
+  <div class="cp-box">
+
+    <div class="cp-icon">
+      💰
+    </div>
+
+    <div class="cp-label">
+      رصيد CP
+    </div>
+
+    <div class="cp-number">
+      0
+    </div>
+
+  </div>
+
+  <div class="cp-list">
+
+    <div class="cp-row">
+
+      <span>🎯</span>
+
+      <b>
+        نقاط النشاط
+      </b>
+
+      <strong>
+        0
+      </strong>
+
+    </div>
+
+    <div class="cp-row">
+
+      <span>🏆</span>
+
+      <b>
+        نقاط الإنجاز
+      </b>
+
+      <strong>
+        0
+      </strong>
+
+    </div>
+
+    <div class="cp-row">
+
+      <span>🎁</span>
+
+      <b>
+        مكافآت CP
+      </b>
+
+      <strong>
+        0
+      </strong>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= الإعدادات ================= -->
+
+<section class="extra-page" id="settingsPage">
+
+  <div class="extra-header">
+
+    <button class="back-btn"
+            onclick="closeExtraPage()">
+      ‹
+    </button>
+
+    <h2>الإعدادات</h2>
+
+  </div>
+
+  <div class="settings-list">
+
+    <div class="setting-row">
+
+      <span>🔔</span>
+
+      <b>
+        الإشعارات
+      </b>
+
+      <i>‹</i>
+
+    </div>
+
+    <div class="setting-row">
+
+      <span>🔒</span>
+
+      <b>
+        الخصوصية
+      </b>
+
+      <i>‹</i>
+
+    </div>
+
+    <div class="setting-row">
+
+      <span>🛡️</span>
+
+      <b>
+        الأمان
+      </b>
+
+      <i>‹</i>
+
+    </div>
+
+    <div class="setting-row">
+
+      <span>🌐</span>
+
+      <b>
+        اللغة
+      </b>
+
+      <i>‹</i>
+
+    </div>
+
+    <div class="setting-row">
+
+      <span>ℹ️</span>
+
+      <b>
+        عن التطبيق
+      </b>
+
+      <i>‹</i>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<script>
+
+/* ================= فتح صفحات الحساب ================= */
+
+function openExtraPage(pageId){
+
+  document.querySelectorAll(".page").forEach(function(page){
+    page.classList.remove("active");
+  });
+
+  document.querySelectorAll(".inner-page").forEach(function(page){
+    page.classList.remove("active");
+  });
+
+  document.querySelectorAll(".extra-page").forEach(function(page){
+    page.classList.remove("active");
+  });
+
+  const page = document.getElementById(pageId);
+
+  if(page){
+    page.classList.add("active");
+  }
+
+  document.getElementById("topTitle").textContent =
+    pageId === "walletPage" ? "المحفظة" :
+    pageId === "invitePage" ? "دعوة الجداد لربح" :
+    pageId === "storePage" ? "المتجر" :
+    pageId === "familyPage" ? "العائلة" :
+    pageId === "cpPage" ? "CP" :
+    "الإعدادات";
+
+}
+
+
+/* ================= إغلاق الصفحات ================= */
+
+function closeExtraPage(){
+
+  document.querySelectorAll(".extra-page").forEach(function(page){
+    page.classList.remove("active");
+  });
+
+  showPage("account");
+
+}
+
+
+/* ================= ربط قائمة الحساب ================= */
+
+document.addEventListener("DOMContentLoaded",function(){
+
+  const items =
+    document.querySelectorAll(".account-item");
+
+  if(items.length >= 6){
+
+    items[0].onclick=function(){
+      openExtraPage("walletPage");
+    };
+
+    items[1].onclick=function(){
+      openExtraPage("invitePage");
+    };
+
+    items[2].onclick=function(){
+      openExtraPage("storePage");
+    };
+
+    items[3].onclick=function(){
+      openExtraPage("familyPage");
+    };
+
+    items[4].onclick=function(){
+      openExtraPage("cpPage");
+    };
+
+    items[5].onclick=function(){
+      openExtraPage("settingsPage");
+    };
+
+  }
+
+});
+
+  </script>
 </body>
   </html>
