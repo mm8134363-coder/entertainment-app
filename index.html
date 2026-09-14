@@ -3045,5 +3045,338 @@ document.getElementById("coverImageInput").onchange = function(event){
 
 })();
 </script>
+  <!-- ================= محادثة خاصة بين مستخدمين ================= -->
+
+<style>
+.private-chat-page{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:#f4f4f6;
+  z-index:500;
+  padding-bottom:75px;
+}
+
+.private-chat-page.active{
+  display:block;
+}
+
+/* رأس المحادثة */
+
+.private-chat-header{
+  height:70px;
+  background:linear-gradient(135deg,#7b2cff,#ff3cac);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  padding:10px 15px;
+  gap:12px;
+}
+
+.private-chat-user{
+  flex:1;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.private-chat-user img{
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  object-fit:cover;
+  border:2px solid #fff;
+  cursor:pointer;
+}
+
+.private-chat-user-info{
+  cursor:pointer;
+}
+
+.private-chat-user-info b{
+  display:block;
+  font-size:16px;
+}
+
+.private-chat-user-info span{
+  font-size:12px;
+  opacity:.8;
+}
+
+.private-chat-more{
+  width:42px;
+  height:42px;
+  border:0;
+  border-radius:13px;
+  background:rgba(255,255,255,.15);
+  color:#fff;
+  font-size:25px;
+  cursor:pointer;
+}
+
+/* قائمة الثلاث نقاط */
+
+.private-chat-menu{
+  display:none;
+  position:absolute;
+  top:65px;
+  left:12px;
+  width:190px;
+  background:#fff;
+  border-radius:16px;
+  padding:7px;
+  box-shadow:0 5px 25px rgba(0,0,0,.18);
+  z-index:510;
+}
+
+.private-chat-menu.active{
+  display:block;
+}
+
+.private-chat-menu button{
+  width:100%;
+  border:0;
+  background:#fff;
+  padding:14px 10px;
+  text-align:right;
+  border-radius:11px;
+  font-size:14px;
+  cursor:pointer;
+}
+
+.private-chat-menu button:hover{
+  background:#f4f1fa;
+}
+
+/* الرسائل */
+
+.private-chat-messages{
+  height:calc(100vh - 145px);
+  overflow-y:auto;
+  padding:15px;
+}
+
+.private-message{
+  display:flex;
+  margin-bottom:12px;
+}
+
+.private-message.me{
+  justify-content:flex-start;
+}
+
+.private-message.other{
+  justify-content:flex-end;
+}
+
+.private-bubble{
+  max-width:75%;
+  padding:11px 14px;
+  border-radius:17px;
+  font-size:14px;
+  line-height:1.5;
+}
+
+.private-message.me .private-bubble{
+  background:#7b2cff;
+  color:#fff;
+  border-bottom-left-radius:5px;
+}
+
+.private-message.other .private-bubble{
+  background:#fff;
+  color:#333;
+  border-bottom-right-radius:5px;
+  box-shadow:0 2px 8px rgba(0,0,0,.06);
+}
+
+/* شريط الإرسال */
+
+.private-chat-input{
+  position:fixed;
+  bottom:0;
+  right:0;
+  left:0;
+  min-height:75px;
+  background:#fff;
+  border-top:1px solid #eee;
+  display:flex;
+  align-items:center;
+  gap:7px;
+  padding:10px;
+  z-index:505;
+}
+
+.private-chat-tool{
+  width:40px;
+  height:40px;
+  border:0;
+  border-radius:12px;
+  background:#f3f0f8;
+  font-size:20px;
+  cursor:pointer;
+}
+
+.private-chat-text{
+  flex:1;
+  height:42px;
+  border:1px solid #ddd;
+  border-radius:15px;
+  padding:0 13px;
+  outline:none;
+  font-size:14px;
+}
+
+.private-chat-send{
+  width:45px;
+  height:42px;
+  border:0;
+  border-radius:14px;
+  background:#7b2cff;
+  color:#fff;
+  font-size:18px;
+  cursor:pointer;
+}
+</style>
+
+
+<div class="private-chat-page" id="privateChatPage">
+
+  <!-- رأس المحادثة -->
+
+  <div class="private-chat-header">
+
+    <div class="private-chat-user">
+
+      <img
+        id="privateChatPhoto"
+        src="https://i.pravatar.cc/150?img=12"
+        onclick="openPrivateUserProfile()"
+      >
+
+      <div
+        class="private-chat-user-info"
+        onclick="openPrivateUserProfile()"
+      >
+        <b id="privateChatName">محمد</b>
+        <span>متصل الآن</span>
+      </div>
+
+    </div>
+
+
+    <!-- الثلاث نقاط -->
+
+    <button
+      class="private-chat-more"
+      onclick="togglePrivateChatMenu()"
+    >
+      ⋮
+    </button>
+
+  </div>
+
+
+  <!-- قائمة الثلاث نقاط -->
+
+  <div
+    class="private-chat-menu"
+    id="privateChatMenu"
+  >
+
+    <button onclick="openPrivateUserProfile()">
+      👤 زيارة الصفحة الشخصية
+    </button>
+
+    <button onclick="addPrivateFriend()">
+      ➕ إضافة صديق
+    </button>
+
+    <button onclick="blockPrivateUser()">
+      🚫 حظر
+    </button>
+
+  </div>
+
+
+  <!-- الرسائل -->
+
+  <div
+    class="private-chat-messages"
+    id="privateChatMessages"
+  >
+
+    <div class="private-message other">
+
+      <div class="private-bubble">
+        أهلاً 👋
+      </div>
+
+    </div>
+
+
+    <div class="private-message me">
+
+      <div class="private-bubble">
+        أهلاً بيك ❤️
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- شريط الإرسال -->
+
+  <div class="private-chat-input">
+
+    <button
+      class="private-chat-tool"
+      onclick="sendPrivateImage()"
+    >
+      🖼️
+    </button>
+
+    <button
+      class="private-chat-tool"
+      onclick="sendPrivateVoice()"
+    >
+      🎙️
+    </button>
+
+    <button
+      class="private-chat-tool"
+      onclick="sendPrivateGift()"
+    >
+      🎁
+    </button>
+
+    <input
+      class="private-chat-text"
+      id="privateChatText"
+      type="text"
+      placeholder="اكتب رسالة..."
+      onkeydown="privateChatEnter(event)"
+    >
+
+    <button
+      class="private-chat-send"
+      onclick="sendPrivateMessage()"
+    >
+      ➤
+    </button>
+
+  </div>
+
+</div>
+
+
+<script>
+
+/* فتح المحادثة الخاصة */
+
+function openPrivateChat(name, photo){
+
+ 
 </body>
   </html>
