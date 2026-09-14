@@ -1,0 +1,1492 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Family Star</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,Tahoma,sans-serif;
+}
+
+body{
+  background:#f5f5f8;
+  color:#222;
+}
+
+button{
+  border:0;
+  cursor:pointer;
+}
+
+.app{
+  max-width:480px;
+  min-height:100vh;
+  margin:auto;
+  background:#fff;
+  position:relative;
+  overflow:hidden;
+}
+
+.screen{
+  display:none;
+  min-height:100vh;
+  padding-bottom:75px;
+}
+
+.screen.active{
+  display:block;
+}
+
+/* تسجيل الدخول */
+.login{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:25px;
+  background:linear-gradient(145deg,#16122d,#5b247a,#c33764);
+}
+
+.login-box{
+  width:100%;
+  background:#fff;
+  border-radius:25px;
+  padding:30px 22px;
+  text-align:center;
+  box-shadow:0 15px 40px rgba(0,0,0,.25);
+}
+
+.logo{
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  margin:0 auto 15px;
+  background:linear-gradient(135deg,#ffd700,#ff7b00);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:35px;
+  font-weight:bold;
+  color:#fff;
+}
+
+.login-box h1{
+  margin-bottom:8px;
+}
+
+.login-box p{
+  color:#777;
+  margin-bottom:25px;
+}
+
+.login-btn{
+  width:100%;
+  padding:14px;
+  margin:7px 0;
+  border-radius:14px;
+  color:#fff;
+  font-size:16px;
+}
+
+.google{background:#4285f4}
+.facebook{background:#1877f2}
+.phone{background:#333}
+
+.phone-form{
+  display:none;
+  margin-top:15px;
+}
+
+.phone-form input{
+  width:100%;
+  padding:13px;
+  border:1px solid #ddd;
+  border-radius:12px;
+  margin-bottom:10px;
+}
+
+/* الهيدر */
+.header{
+  height:60px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 15px;
+  border-bottom:1px solid #eee;
+  background:#fff;
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+
+.header-title{
+  font-size:20px;
+  font-weight:bold;
+}
+
+.icon-btn{
+  background:#f2f2f5;
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  font-size:18px;
+}
+
+/* الرئيسية */
+.banner{
+  margin:15px;
+  height:130px;
+  border-radius:18px;
+  background:linear-gradient(135deg,#3023ae,#c86dd7);
+  color:#fff;
+  padding:20px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.banner h2{
+  margin-bottom:8px;
+}
+
+.section-title{
+  padding:15px;
+  font-size:18px;
+  font-weight:bold;
+}
+
+.activity-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  padding:0 15px;
+}
+
+.activity{
+  background:#fafafa;
+  border-radius:15px;
+  padding:15px 5px;
+  text-align:center;
+  border:1px solid #eee;
+}
+
+.activity .emoji{
+  font-size:28px;
+  margin-bottom:7px;
+}
+
+/* الرومات */
+.room-tabs{
+  display:flex;
+  overflow:auto;
+  padding:10px 15px;
+  gap:8px;
+}
+
+.room-tab{
+  white-space:nowrap;
+  padding:10px 15px;
+  border-radius:20px;
+  background:#f1f1f4;
+}
+
+.room-tab.active{
+  background:#6c3df5;
+  color:#fff;
+}
+
+.room-card{
+  margin:10px 15px;
+  padding:15px;
+  border-radius:16px;
+  background:#fff;
+  box-shadow:0 2px 10px rgba(0,0,0,.08);
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.room-img{
+  width:65px;
+  height:65px;
+  border-radius:15px;
+  background:linear-gradient(135deg,#ff9966,#ff5e62);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+}
+
+.room-info{
+  flex:1;
+}
+
+.room-info h3{
+  margin-bottom:7px;
+}
+
+.room-info small{
+  color:#888;
+}
+
+/* الرسائل */
+.search{
+  margin:15px;
+  background:#f1f1f4;
+  border-radius:15px;
+  padding:12px 15px;
+  border:0;
+  width:calc(100% - 30px);
+  outline:none;
+}
+
+.message-tabs{
+  display:flex;
+  overflow:auto;
+  gap:8px;
+  padding:0 15px 12px;
+}
+
+.message-tab{
+  white-space:nowrap;
+  padding:9px 14px;
+  border-radius:18px;
+  background:#f1f1f4;
+}
+
+.message-tab.active{
+  background:#6c3df5;
+  color:#fff;
+}
+
+.message-item{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:14px 15px;
+  border-bottom:1px solid #eee;
+}
+
+.avatar{
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#667eea,#764ba2);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+  font-weight:bold;
+}
+
+.message-info{
+  flex:1;
+}
+
+.message-info h4{
+  margin-bottom:5px;
+}
+
+.message-info p{
+  color:#888;
+  font-size:13px;
+}
+
+.chat{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:#fff;
+  z-index:50;
+  max-width:480px;
+  margin:auto;
+}
+
+.chat.active{
+  display:flex;
+  flex-direction:column;
+}
+
+.chat-head{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:10px;
+  border-bottom:1px solid #eee;
+}
+
+.chat-user{
+  flex:1;
+}
+
+.chat-menu{
+  position:absolute;
+  left:10px;
+  top:58px;
+  display:none;
+  background:#fff;
+  box-shadow:0 5px 20px rgba(0,0,0,.15);
+  border-radius:12px;
+  overflow:hidden;
+  width:170px;
+}
+
+.chat-menu button{
+  width:100%;
+  padding:13px;
+  background:#fff;
+  text-align:right;
+}
+
+.chat-body{
+  flex:1;
+  padding:15px;
+  background:#f5f5f8;
+}
+
+.chat-msg{
+  background:#fff;
+  padding:10px 14px;
+  border-radius:15px;
+  margin-bottom:10px;
+  width:max-content;
+  max-width:80%;
+}
+
+.chat-input{
+  display:flex;
+  gap:7px;
+  padding:10px;
+  border-top:1px solid #ddd;
+}
+
+.chat-input input{
+  flex:1;
+  border:0;
+  background:#f1f1f4;
+  border-radius:20px;
+  padding:11px;
+  outline:none;
+}
+
+.chat-action{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  background:#6c3df5;
+  color:#fff;
+}
+
+/* أنا */
+.me-top{
+  padding:20px 15px;
+  background:linear-gradient(135deg,#1b1535,#5c2c83);
+  color:#fff;
+}
+
+.me-profile{
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+
+.big-avatar{
+  width:75px;
+  height:75px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#ff9966,#ff5e62);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:30px;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin-top:18px;
+}
+
+.stat{
+  text-align:center;
+}
+
+.stat b{
+  display:block;
+  font-size:18px;
+}
+
+.me-menu{
+  padding:10px 15px;
+}
+
+.menu-row{
+  display:flex;
+  align-items:center;
+  padding:17px 5px;
+  border-bottom:1px solid #eee;
+  gap:12px;
+}
+
+.menu-icon{
+  width:40px;
+  height:40px;
+  border-radius:12px;
+  background:#f1efff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.menu-row span:nth-child(2){
+  flex:1;
+}
+
+/* البروفايل */
+.cover{
+  height:190px;
+  background:linear-gradient(135deg,#3023ae,#c86dd7);
+  position:relative;
+}
+
+.cover-change{
+  position:absolute;
+  bottom:12px;
+  left:12px;
+  background:rgba(0,0,0,.45);
+  color:#fff;
+  padding:8px 12px;
+  border-radius:12px;
+}
+
+.profile-box{
+  padding:0 15px;
+}
+
+.profile-avatar{
+  width:85px;
+  height:85px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#ff9966,#ff5e62);
+  border:4px solid #fff;
+  margin-top:-42px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:32px;
+  position:relative;
+}
+
+.profile-stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  margin:20px 0;
+  text-align:center;
+}
+
+.family-card{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:15px;
+  background:#fafafa;
+  border-radius:15px;
+  margin-bottom:15px;
+}
+
+.family-logo{
+  width:55px;
+  height:55px;
+  border-radius:15px;
+  background:linear-gradient(135deg,#ffd700,#ff8c00);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.gifts-bar{
+  height:70px;
+  background:#f7f7f9;
+  border-radius:15px;
+  display:flex;
+  align-items:center;
+  padding:15px;
+  margin-bottom:20px;
+}
+
+/* صفحات القوائم */
+.page-padding{
+  padding:15px;
+}
+
+.card{
+  background:#fff;
+  border:1px solid #eee;
+  border-radius:16px;
+  padding:16px;
+  margin-bottom:12px;
+}
+
+.balance{
+  background:linear-gradient(135deg,#2b1c57,#7545c7);
+  color:#fff;
+  border-radius:20px;
+  padding:25px;
+  margin-bottom:15px;
+}
+
+.balance h2{
+  font-size:30px;
+  margin-top:10px;
+}
+
+.three-cols{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+
+.box{
+  background:#fafafa;
+  border:1px solid #eee;
+  border-radius:15px;
+  padding:20px 8px;
+  text-align:center;
+}
+
+.box b{
+  display:block;
+  margin-top:8px;
+}
+
+/* المتجر */
+.shop-tabs{
+  display:flex;
+  gap:8px;
+  overflow:auto;
+  padding:12px 15px;
+}
+
+.shop-tab{
+  white-space:nowrap;
+  padding:10px 15px;
+  border-radius:18px;
+  background:#f1f1f4;
+}
+
+.shop-tab.active{
+  background:#6c3df5;
+  color:#fff;
+}
+
+.product-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+  padding:15px;
+}
+
+.product{
+  border:1px solid #eee;
+  border-radius:17px;
+  padding:18px 10px;
+  text-align:center;
+  background:#fff;
+}
+
+.product-img{
+  height:85px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:45px;
+}
+
+.buy{
+  background:#6c3df5;
+  color:#fff;
+  padding:9px 18px;
+  border-radius:15px;
+  margin-top:10px;
+}
+
+/* الإعدادات */
+.setting-section{
+  padding:15px;
+}
+
+.setting-title{
+  color:#888;
+  margin:12px 0;
+  font-size:14px;
+}
+
+.setting-row{
+  display:flex;
+  justify-content:space-between;
+  padding:16px 5px;
+  border-bottom:1px solid #eee;
+}
+
+.setting-row button{
+  background:none;
+}
+
+/* شريط التنقل */
+.bottom-nav{
+  position:fixed;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(480px,100%);
+  height:70px;
+  background:#fff;
+  border-top:1px solid #ddd;
+  display:flex;
+  z-index:30;
+}
+
+.nav-btn{
+  flex:1;
+  background:#fff;
+  color:#777;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+  font-size:12px;
+}
+
+.nav-btn.active{
+  color:#6c3df5;
+  font-weight:bold;
+}
+
+.nav-icon{
+  font-size:21px;
+}
+
+/* تنبيهات */
+.toast{
+  position:fixed;
+  bottom:85px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#222;
+  color:#fff;
+  padding:12px 18px;
+  border-radius:20px;
+  display:none;
+  z-index:100;
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- تسجيل الدخول -->
+<section id="login" class="login">
+  <div class="login-box">
+    <div class="logo">FS</div>
+    <h1>Family Star</h1>
+    <p>ترفيه وتسلية فقط</p>
+
+    <button class="login-btn google" onclick="login()">تسجيل الدخول بجوجل</button>
+    <button class="login-btn facebook" onclick="login()">تسجيل الدخول بفيسبوك</button>
+    <button class="login-btn phone" onclick="showPhone()">الدخول برقم الهاتف</button>
+
+    <div id="phoneForm" class="phone-form">
+      <input id="phoneNumber" type="tel" placeholder="رقم الهاتف">
+      <button class="login-btn phone" onclick="login()">متابعة</button>
+    </div>
+  </div>
+</section>
+
+
+<!-- الرئيسية -->
+<section id="home" class="screen">
+
+  <div class="header">
+    <div class="header-title">Family Star</div>
+    <button class="icon-btn">🔔</button>
+  </div>
+
+  <div class="banner">
+    <h2>أهلاً بك في Family Star</h2>
+    <p>استمتع بالدردشة والرومات والأنشطة</p>
+  </div>
+
+  <div class="section-title">الأنشطة</div>
+
+  <div class="activity-grid">
+    <div class="activity"><div class="emoji">🎁</div>الهدايا</div>
+    <div class="activity"><div class="emoji">🎉</div>الحفلات</div>
+    <div class="activity"><div class="emoji">👑</div>العائلات</div>
+    <div class="activity"><div class="emoji">⭐</div>المميز</div>
+  </div>
+
+  <div class="section-title">الرومات</div>
+
+  <div class="room-card">
+    <div class="room-img">🎤</div>
+    <div class="room-info">
+      <h3>روم التريند</h3>
+      <small>دردشة وترفيه</small>
+    </div>
+    <b>👥 128</b>
+  </div>
+
+  <div class="room-card">
+    <div class="room-img">🔥</div>
+    <div class="room-info">
+      <h3>روم المستخدمين الجدد</h3>
+      <small>مرحباً بالمستخدمين الجدد</small>
+    </div>
+    <b>👥 64</b>
+  </div>
+
+</section>
+
+
+<!-- الرومات -->
+<section id="rooms" class="screen">
+
+  <div class="header">
+    <div class="header-title">الرومات</div>
+    <button class="icon-btn">🔍</button>
+  </div>
+
+  <div class="banner">
+    <h2>الإعلانات</h2>
+    <p>وكيل شحن • نشاط • مسابقات • عروض</p>
+  </div>
+
+  <div class="room-tabs">
+    <button class="room-tab active">أنا</button>
+    <button class="room-tab">الحفلات</button>
+    <button class="room-tab">المستخدمون الجدد</button>
+  </div>
+
+  <div class="room-card">
+    <div class="room-img">❤️</div>
+    <div class="room-info">
+      <h3>الرومات التي أعجبتني</h3>
+      <small>الرومات التي أتابعها</small>
+    </div>
+  </div>
+
+  <div class="room-card">
+    <div class="room-img">🛡️</div>
+    <div class="room-info">
+      <h3>الرومات التي أنا مشرف فيها</h3>
+      <small>إدارة ومتابعة الروم</small>
+    </div>
+  </div>
+
+  <div class="room-card">
+    <div class="room-img">🔥</div>
+    <div class="room-info">
+      <h3>روم تريند</h3>
+      <small>الروم الأكثر نشاطاً</small>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- الرسائل -->
+<section id="messages" class="screen">
+
+  <div class="header">
+    <div class="header-title">الرسائل</div>
+    <button class="icon-btn">✏️</button>
+  </div>
+
+  <input class="search" placeholder="🔍 البحث في الرسائل">
+
+  <div class="message-tabs">
+    <button class="message-tab active">الرسائل</button>
+    <button class="message-tab">الأصدقاء</button>
+    <button class="message-tab">النظام</button>
+    <button class="message-tab">العائلة</button>
+  </div>
+
+  <div class="message-item" onclick="openChat('أحمد')">
+    <div class="avatar">أ</div>
+    <div class="message-info">
+      <h4>أحمد</h4>
+      <p>أهلاً، كيف حالك؟</p>
+    </div>
+    <small>9:20</small>
+  </div>
+
+  <div class="message-item" onclick="openChat('محمد')">
+    <div class="avatar">م</div>
+    <div class="message-info">
+      <h4>محمد</h4>
+      <p>شوف الرسالة الجديدة</p>
+    </div>
+    <small>8:45</small>
+  </div>
+
+  <div class="message-item" onclick="openChat('رسائل النظام')">
+    <div class="avatar">⚙️</div>
+    <div class="message-info">
+      <h4>رسائل النظام</h4>
+      <p>مرحباً بك في Family Star</p>
+    </div>
+  </div>
+
+  <div class="message-item" onclick="openChat('العائلة')">
+    <div class="avatar">👑</div>
+    <div class="message-info">
+      <h4>رسائل العائلة</h4>
+      <p>رسائل أعضاء العائلة فقط</p>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- أنا -->
+<section id="me" class="screen">
+
+  <div class="me-top">
+
+    <div class="me-profile">
+      <div class="big-avatar">👤</div>
+      <div>
+        <h2>مستخدم Family Star</h2>
+        <p>ID: 1000001</p>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <b>0</b>
+        الثروة
+      </div>
+      <div class="stat">
+        <b>0</b>
+        الكريزما
+      </div>
+      <div class="stat">
+        <b>VIP 0</b>
+        المستوى
+      </div>
+    </div>
+
+  </div>
+
+  <div class="me-menu">
+
+    <div class="menu-row" onclick="showPage('wallet')">
+      <div class="menu-icon">💰</div>
+      <span>المحفظة</span>
+      <span>›</span>
+    </div>
+
+    <div class="menu-row" onclick="showPage('family')">
+      <div class="menu-icon">👑</div>
+      <span>العائلة</span>
+      <span>›</span>
+    </div>
+
+    <div class="menu-row" onclick="showPage('shop')">
+      <div class="menu-icon">🛍️</div>
+      <span>المتجر</span>
+      <span>›</span>
+    </div>
+
+    <div class="menu-row" onclick="showPage('cp')">
+      <div class="menu-icon">⭐</div>
+      <span>CP</span>
+      <span>›</span>
+    </div>
+
+    <div class="menu-row" onclick="showPage('profile')">
+      <div class="menu-icon">👤</div>
+      <span>الصفحة الشخصية</span>
+      <span>›</span>
+    </div>
+
+    <div class="menu-row" onclick="showPage('settings')">
+      <div class="menu-icon">⚙️</div>
+      <span>الإعدادات</span>
+      <span>›</span>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- البروفايل -->
+<section id="profile" class="screen">
+
+  <div class="header">
+    <button class="icon-btn" onclick="showPage('me')">‹</button>
+    <div class="header-title">الصفحة الشخصية</div>
+    <div></div>
+  </div>
+
+  <div class="cover">
+    <button class="cover-change" onclick="toast('تغيير صورة الغلاف')">
+      📷 تغيير الغلاف
+    </button>
+  </div>
+
+  <div class="profile-box">
+
+    <div class="profile-avatar">👤</div>
+
+    <h2 style="margin-top:10px;">مستخدم Family Star</h2>
+    <p style="color:#888;">ID: 1000001</p>
+
+    <div class="profile-stats">
+      <div>0<br><small>يتابع</small></div>
+      <div>0<br><small>متابع</small></div>
+      <div>0<br><small>الثروة</small></div>
+      <div>0<br><small>الكريزما</small></div>
+    </div>
+
+    <div class="family-card">
+      <div class="family-logo">👑</div>
+      <div>
+        <b>عائلتي</b>
+        <p style="color:#888;">اسم العائلة</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <b>✨ شارات الدخوليات والإطارات</b>
+    </div>
+
+    <div class="gifts-bar">
+      🎁 شريط الهدايا
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- المحفظة -->
+<section id="wallet" class="screen">
+
+  <div class="header">
+    <button class="icon-btn" onclick="showPage('me')">‹</button>
+    <div class="header-title">المحفظة</div>
+    <div></div>
+  </div>
+
+  <div class="page-padding">
+
+    <div class="balance">
+      <p>الرصيد الإجمالي</p>
+      <h2>0</h2>
+    </div>
+
+    <div class="three-cols">
+
+      <div class="box">
+        🪙
+        <b>0</b>
+        كوينز
+      </div>
+
+      <div class="box">
+        💎
+        <b>0</b>
+        ماس
+      </div>
+
+      <div class="box">
+        💵
+        <b>0</b>
+        نقدي
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- العائلة -->
+<section id="family" class="screen">
+
+  <div class="header">
+    <button class="icon-btn" onclick="showPage('me')">‹</button>
+    <div class="header-title">العائلة</div>
+    <div></div>
+  </div>
+
+  <div class="page-padding">
+
+    <div class="card">
+      <h3>👑 إنشاء عائلة</h3>
+      <p style="margin:10px 0;color:#777;">
+        تكلفة إنشاء العائلة: 5,000,000
+      </p>
+      <p style="color:#777;">
+        الإنشاء المجاني متاح عند المستوى 30.
+      </p>
+      <button class="buy" onclick="toast('سيتم فحص شروط إنشاء العائلة')">
+        إنشاء عائلة
+      </button>
+    </div>
+
+    <div class="family-card">
+      <div class="family-logo">👑</div>
+      <div>
+        <b>عائلتي</b>
+        <p style="color:#888;">المشرفون وأعضاء العائلة</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <b>👥 المشرفون</b>
+      <p style="margin-top:8px;color:#888;">إدارة العائلة</p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- المتجر -->
+<section id="shop" class="screen">
+
+  <div class="header">
+    <button class="icon-btn" onclick="showPage('me')">‹</button>
+    <div class="header-title">المتجر</div>
+    <div></div>
+  </div>
+
+  <div class="shop-tabs">
+    <button class="shop-tab active">الإطارات</button>
+    <button class="shop-tab">الدخوليات</button>
+    <button class="shop-tab">الخواتم</button>
+    <button class="shop-tab">ID مميز</button>
+    <button class="shop-tab">الغلاف</button>
+  </div>
+
+  <div class="product-grid">
+
+    <div class="product">
+      <div class="product-img">⭕</div>
+      <h3>إطار نجوم</h3>
+      <p>1000 🪙</p>
+      <button class="buy" onclick="toast('تم اختيار الإطار')">شراء</button>
+    </div>
+
+    <div class="product">
+      <div class="product-img">✨</div>
+      <h3>دخولية مميزة</h3>
+      <p>2000 🪙</p>
+      <button class="buy" onclick="toast('تم اختيار الدخولية')">شراء</button>
+    </div>
+
+    <div class="product">
+      <div class="product-img">💍</div>
+      <h3>خاتم CP</h3>
+      <p>3000 🪙</p>
+      <button class="buy" onclick="toast('تم اختيار الخاتم')">شراء</button>
+    </div>
+
+    <div class="product">
+      <div class="product-img">🆔</div>
+      <h3>ID مميز</h3>
+      <p>5000 🪙</p>
+      <button class="buy" onclick="toast('تم اختيار ID')">شراء</button>
+    </div>
+
+    <div class="product">
+      <div class="product-img">🖼️</div>
+      <h3>غلاف شخصي</h3>
+      <p>2500 🪙</p>
+      <button class="buy" onclick="toast('تم اختيار الغلاف')">شراء</button>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- CP -->
+<section id="cp" class="screen">
+
+  <div class="header">
+    <button class="icon-btn" onclick="showPage('me')">‹</button>
+    <div class="header-title">CP</div>
+    <div></div>
+  </div>
+
+  <div class="page-padding">
+
+    <div class="balance">
+      <p>مستوى CP</p>
+      <h2>المستوى 1</h2>
+      <p style="margin-top:8px;">0 / 1000 نقطة</p>
+    </div>
+
+    <div class="card">
+      <h3>⭐ النقاط</h3>
+      <p style="margin-top:10px;">0 نقطة CP</p>
+        </div>
+
+    <div class="card">
+      <h3>🎁 الهدايا</h3>
+      <p style="margin-top:10px;">لا توجد هدايا حالياً</p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- الإعدادات -->
+<section id="settings" class="screen">
+
+  <div class="header">
+    <button class="icon-btn" onclick="showPage('me')">‹</button>
+    <div class="header-title">الإعدادات</div>
+    <div></div>
+  </div>
+
+  <div class="setting-section">
+
+    <div class="setting-title">الحساب والملف</div>
+
+    <div class="setting-row">
+      <span>تعديل الملف الشخصي</span>
+      <button>›</button>
+    </div>
+
+    <div class="setting-row">
+      <span>رقم الهاتف</span>
+      <button>›</button>
+    </div>
+
+    <div class="setting-row">
+      <span>ربط الحساب بفيسبوك</span>
+      <button>›</button>
+    </div>
+
+    <div class="setting-row">
+      <span>الصورة الشخصية</span>
+      <button>›</button>
+    </div>
+
+    <div class="setting-row">
+      <span>الدولة</span>
+      <button>مصر ›</button>
+    </div>
+
+    <div class="setting-row">
+      <span>السن</span>
+      <button>›</button>
+    </div>
+
+    <div class="setting-row">
+      <span>النوع</span>
+      <button>ذكر / أنثى ›</button>
+    </div>
+
+    <div class="setting-title">الأمان</div>
+
+    <div class="setting-row">
+      <span>قائمة الحظر</span>
+      <button>›</button>
+    </div>
+
+    <div class="setting-row">
+      <span>الإبلاغ</span>
+      <button>›</button>
+    </div>
+
+    <div class="setting-title">الحساب</div>
+
+    <div class="setting-row">
+      <span>تسجيل الخروج</span>
+      <button onclick="logout()">›</button>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- شريط التنقل -->
+<nav id="bottomNav" class="bottom-nav">
+
+  <button class="nav-btn active" onclick="showPage('home',this)">
+    <span class="nav-icon">🏠</span>
+    الرئيسية
+  </button>
+
+  <button class="nav-btn" onclick="showPage('rooms',this)">
+    <span class="nav-icon">🎤</span>
+    الرومات
+  </button>
+
+  <button class="nav-btn" onclick="showPage('messages',this)">
+    <span class="nav-icon">💬</span>
+    الرسائل
+  </button>
+
+  <button class="nav-btn" onclick="showPage('me',this)">
+    <span class="nav-icon">👤</span>
+    أنا
+  </button>
+
+</nav>
+
+
+<!-- المحادثة -->
+<div id="chat" class="chat">
+
+  <div class="chat-head">
+
+    <button class="icon-btn" onclick="closeChat()">‹</button>
+
+    <div class="avatar">👤</div>
+
+    <div class="chat-user">
+      <b id="chatName">المستخدم</b>
+    </div>
+
+    <button class="icon-btn" onclick="toggleChatMenu()">⋮</button>
+
+    <div id="chatMenu" class="chat-menu">
+      <button onclick="toast('فتح الصفحة الشخصية')">
+        👤 الصفحة الشخصية
+      </button>
+
+      <button onclick="toast('تم حظر المستخدم')">
+        🚫 حظر
+      </button>
+    </div>
+
+  </div>
+
+  <div id="chatBody" class="chat-body">
+    <div class="chat-msg">أهلاً بك 👋</div>
+  </div>
+
+  <div class="chat-input">
+
+    <button class="chat-action" onclick="sendImage()">🖼️</button>
+
+    <input id="chatText" placeholder="اكتب رسالة...">
+
+    <button class="chat-action" onclick="sendGift()">🎁</button>
+
+    <button class="chat-action" onclick="sendText()">➤</button>
+
+  </div>
+
+</div>
+
+
+<div id="toast" class="toast"></div>
+
+</div>
+
+
+<script>
+
+/* تسجيل الدخول */
+function showPhone(){
+
+  document.getElementById("phoneForm").style.display="block";
+
+}
+
+function login(){
+
+  document.getElementById("login").style.display="none";
+
+  document.getElementById("home").classList.add("active");
+
+  document.getElementById("bottomNav").style.display="flex";
+
+  toast("تم الدخول بنجاح");
+
+}
+
+
+/* التنقل */
+function showPage(page,button){
+
+  document.querySelectorAll(".screen").forEach(function(screen){
+
+    screen.classList.remove("active");
+
+  });
+
+  const target=document.getElementById(page);
+
+  if(target){
+
+    target.classList.add("active");
+
+  }
+
+  if(button){
+
+    document.querySelectorAll(".nav-btn").forEach(function(btn){
+
+      btn.classList.remove("active");
+
+    });
+
+    button.classList.add("active");
+
+  }
+
+  window.scrollTo(0,0);
+
+}
+
+
+/* المحادثة */
+function openChat(name){
+
+  document.getElementById("chatName").innerText=name;
+
+  document.getElementById("chat").classList.add("active");
+
+  document.getElementById("chatMenu").style.display="none";
+
+}
+
+function closeChat(){
+
+  document.getElementById("chat").classList.remove("active");
+
+}
+
+function toggleChatMenu(){
+
+  const menu=document.getElementById("chatMenu");
+
+  if(menu.style.display==="block"){
+
+    menu.style.display="none";
+
+  }else{
+
+    menu.style.display="block";
+
+  }
+
+}
+
+function sendText(){
+
+  const input=document.getElementById("chatText");
+
+  const text=input.value.trim();
+
+  if(!text){
+
+    return;
+
+  }
+
+  const msg=document.createElement("div");
+
+  msg.className="chat-msg";
+
+  msg.innerText=text;
+
+  document.getElementById("chatBody").appendChild(msg);
+
+  input.value="";
+
+  document.getElementById("chatBody").scrollTop=
+    document.getElementById("chatBody").scrollHeight;
+
+}
+
+function sendImage(){
+
+  toast("إرسال صورة - سيتم ربطه بالتخزين لاحقاً");
+
+}
+
+function sendGift(){
+
+  toast("علبة الهدايا - سيتم ربطها بالكوينز لاحقاً");
+
+}
+
+
+/* تسجيل الخروج */
+function logout(){
+
+  document.querySelectorAll(".screen").forEach(function(screen){
+
+    screen.classList.remove("active");
+
+  });
+
+  document.getElementById("bottomNav").style.display="none";
+
+  document.getElementById("login").style.display="flex";
+
+  toast("تم تسجيل الخروج");
+
+}
+
+
+/* التنبيه */
+function toast(message){
+
+  const box=document.getElementById("toast");
+
+  box.innerText=message;
+
+  box.style.display="block";
+
+  setTimeout(function(){
+
+    box.style.display="none";
+
+  },2200);
+
+}
+
+
+/* إغلاق قائمة المحادثة */
+document.addEventListener("click",function(e){
+
+  const menu=document.getElementById("chatMenu");
+
+  if(
+    menu &&
+    !e.target.closest(".chat-menu") &&
+    !e.target.closest(".chat-head button")
+  ){
+
+    menu.style.display="none";
+
+  }
+
+});
+
+
+/* البداية */
+document.getElementById("bottomNav").style.display="none";
+
+</script>
+
+</body>
+</html>
