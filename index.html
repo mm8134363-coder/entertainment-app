@@ -3303,5 +3303,186 @@ document.addEventListener("DOMContentLoaded", function(){
 </script>
 
 <!-- ================= نهاية كود الحساب ================= -->
+  <!-- ===== الحساب الكامل ===== -->
+
+<style>
+.full-account{
+  background:#f4f4f6;
+  min-height:100vh;
+  direction:rtl;
+  font-family:Arial,sans-serif;
+}
+
+.full-cover{
+  height:230px;
+  background:linear-gradient(135deg,#6d45a8,#c58bdc);
+  position:relative;
+  border-radius:0 0 25px 25px;
+}
+
+.account-dots{
+  position:absolute;
+  top:15px;
+  right:15px;
+  width:45px;
+  height:45px;
+  border:0;
+  border-radius:50%;
+  background:rgba(0,0,0,.55);
+  color:#fff;
+  font-size:28px;
+  z-index:10;
+}
+
+.account-photo{
+  position:absolute;
+  width:100px;
+  height:100px;
+  border-radius:50%;
+  bottom:-50px;
+  right:50%;
+  transform:translateX(50%);
+  background:#eee;
+  border:5px solid #fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:48px;
+}
+
+.account-info{
+  text-align:center;
+  padding:65px 15px 20px;
+}
+
+.account-name{
+  font-size:23px;
+  font-weight:bold;
+  margin:5px 0;
+}
+
+.account-id{
+  color:#777;
+  margin-bottom:15px;
+}
+
+.account-stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin-top:20px;
+}
+
+.account-stat{
+  background:#fff;
+  border-radius:16px;
+  padding:14px 5px;
+  box-shadow:0 2px 8px rgba(0,0,0,.06);
+}
+
+.account-stat strong{
+  display:block;
+  font-size:18px;
+  margin-bottom:5px;
+}
+
+.account-stat span{
+  color:#777;
+  font-size:13px;
+}
+
+.account-edit-page{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:999999;
+  background:#f4f4f6;
+  overflow:auto;
+}
+
+.account-edit-page.show{
+  display:block;
+}
+
+.edit-top{
+  height:60px;
+  background:#fff;
+  display:flex;
+  align-items:center;
+  gap:15px;
+  padding:0 15px;
+  box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+.edit-top button{
+  border:0;
+  background:none;
+  font-size:30px;
+}
+
+.edit-top h2{
+  margin:0;
+}
+
+.edit-section{
+  background:#fff;
+  margin:15px;
+  padding:18px;
+  border-radius:18px;
+}
+
+.edit-section h3{
+  margin-top:0;
+}
+
+.edit-input{
+  width:100%;
+  box-sizing:border-box;
+  padding:13px;
+  margin:7px 0 14px;
+  border:1px solid #ddd;
+  border-radius:12px;
+  font-size:16px;
+}
+
+.save-edit{
+  width:calc(100% - 30px);
+  margin:0 15px 25px;
+  padding:15px;
+  border:0;
+  border-radius:15px;
+  background:#6d45a8;
+  color:white;
+  font-size:17px;
+  font-weight:bold;
+}
+</style>
+
+
+<div class="full-account" id="newFullAccount">
+
+  <div class="full-cover">
+
+    <!-- الثلاث نقاط ملزوقة على الغلاف -->
+    <button class="account-dots"
+            onclick="openAccountEdit()">
+      ⋮
+    </button>
+
+    <div class="account-photo">
+      👤
+    </div>
+
+  </div>
+
+
+  <div class="account-info">
+
+    <div class="account-name" id="showAccountName">
+      اسم المستخدم
+    </div>
+
+    <div class="account-id">
+      ID: <span id="showAccountID">
 </body>
   </html>
