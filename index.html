@@ -3545,7 +3545,851 @@ function sendPrivateGift(){
   alert("فتح الهدايا.");
 
 }
+/* =========================================================
+   نظام الرسائل + الأصدقاء + المتابعة + رسائل العائلة
+   ========================================================= */
 
+document.addEventListener("DOMContentLoaded", function () {
+
+  /* ---------- بيانات المستخدم ---------- */
+
+  let currentUser = JSON.parse(
+    localStorage.getItem("currentUser") || "null"
+  );
+
+  if (!currentUser) {
+    currentUser = {
+      id: "user_" + Date.now(),
+      name: "مستخدم جديد"
+    };
+
+    localStorage.setItem(
+      "currentUser",
+      JSON.stringify(currentUser)
+    );
+  }
+
+  /* ---------- البيانات ---------- */
+
+  let friends =
+    JSON.parse(localStorage.getItem("friends") || "[]");
+
+  let friendRequests =
+    JSON.parse(localStorage.getItem("friendRequests") || "[]");
+
+  let following =
+    JSON.parse(localStorage.getItem("following") || "[]");
+
+  let followers =
+    JSON.parse(localStorage.getItem("followers") || "[]");
+
+  let systemMessages =
+    JSON.parse(localStorage.getItem("systemMessages") || "[]");
+
+  /*
+    familyMember:
+    null = المستخدم ليس في عائلة
+    object = المستخدم عضو في عائلة
+
+    مثال:
+    {
+      id: "family_1",
+      name: "عائلة النجوم"
+    }
+  */
+
+  let familyMember =
+    JSON.parse(localStorage.getItem("familyMember") || "null");
+
+  /* ---------- حفظ البيانات ---------- */
+
+  function saveData() {
+
+    localStorage.setItem(
+      "friends",
+      JSON.stringify(friends)
+    );
+
+    localStorage.setItem(
+      "friendRequests",
+      JSON.stringify(friendRequests)
+    );
+
+    localStorage.setItem(
+      "following",
+      JSON.stringify(following)
+    );
+
+    localStorage.setItem(
+      "followers",
+      JSON.stringify(followers)
+    );
+
+    localStorage.setItem(
+      "systemMessages",
+      JSON.stringify(systemMessages)
+    );
+
+    localStorage.setItem(
+      "familyMember",
+      JSON.stringify(familyMember)
+    );
+  }
+
+
+  /* =========================================================
+     إنشاء قسم الرسائل
+     ========================================================= */
+
+  let messagesArea =
+    document.querySelector("#messages-area");
+
+  if (!messagesArea) {
+
+    messagesArea = document.createElement("div");
+
+    messagesArea.id = "messages-area";
+
+    document.body.appendChild(messagesArea);
+  }
+
+
+  /* ---------- شكل أقسام الرسائل ---------- */
+
+  messagesArea.innerHTML = "";
+
+  let messagesTitle =
+    document.createElement("h2");
+
+  messagesTitle.textContent = "الرسائل";
+
+  messagesArea.appendChild(messagesTitle);
+
+
+  /* =========================================================
+     رسائل النظام
+     ========================================================= */
+
+  let systemBox =
+    document.createElement("div");
+
+  systemBox.className = "message-section system-messages";
+
+  systemBox.innerHTML =
+    "<strong>رسائل النظام</strong>";
+
+  systemBox.onclick = function () {
+
+    openSystemMessages();
+
+  };
+
+  messagesArea.appendChild(systemBox);
+
+
+  /* =========================================================
+     الأصدقاء
+     ========================================================= */
+
+  let friendsBox =
+    document.createElement("div");
+
+  friendsBox.className = "message-section friends-messages";
+
+  friendsBox.innerHTML =
+    "<strong>الأصدقاء</strong>" +
+    "<span class='friend-count'>" +
+    friends.length +
+    "</span>";
+
+  friendsBox.onclick = function () {
+
+    openFriends();
+
+  };
+
+  messagesArea.appendChild(friendsBox);
+
+
+  /* =========================================================
+     إضافة الأصدقاء
+     ========================================================= */
+
+  let addFriendsBox =
+    document.createElement("div");
+
+  addFriendsBox.className =
+    "message-section add-friends";
+
+  addFriendsBox.innerHTML =
+    "<strong>إضافة الأصدقاء</strong>";
+
+  addFriendsBox.onclick = function () {
+
+    openAddFriends();
+
+  };
+
+  messagesArea.appendChild(addFriendsBox);
+
+
+  /* =========================================================
+     المتابعة
+     ========================================================= */
+
+  let followBox =
+    document.createElement("div");
+
+  followBox.className =
+    "message-section follow-section";
+
+  followBox.innerHTML =
+    "<strong>المتابعة</strong>";
+
+  followBox.onclick = function () {
+
+    openFollow();
+
+  };
+
+  messagesArea.appendChild(followBox);
+
+
+  /* =========================================================
+     رسائل العائلة
+     
+     تظهر فقط إذا كان المستخدم داخل عائلة
+     ========================================================= */
+
+  if (familyMember) {
+
+    let familyBox =
+      document.createElement("div");
+
+    familyBox.className =
+      "message-section family-messages";
+
+    familyBox.innerHTML =
+      "<strong>رسائل العائلة</strong>" +
+      "<div class='family-name'>" +
+      familyMember.name +
+      "</div>";
+
+    familyBox.onclick = function () {
+
+      openFamilyMessages();
+
+    };
+
+    messagesArea.appendChild(familyBox);
+  }
+
+
+  /* =========================================================
+     نافذة رسائل النظام
+     ========================================================= */
+
+  function openSystemMessages() {
+
+    let text = "";
+
+    if (systemMessages.length === 0) {
+
+      text =
+        "لا توجد رسائل نظام حاليًا.";
+
+    } else {
+
+      systemMessages.forEach(function (msg) {
+
+        text +=
+          "📢 " +
+          msg.text +
+          "<br><br>";
+
+      });
+    }
+
+    showMessageWindow(
+      "رسائل النظام",
+      text
+    );
+  }
+
+
+  /* =========================================================
+     نافذة الأصدقاء
+     ========================================================= */
+
+  function openFriends() {
+
+    let text = "";
+
+    if (friends.length === 0) {
+
+      text =
+        "ليس لديك أصدقاء حتى الآن.";
+
+    } else {
+
+      friends.forEach(function (friend) {
+
+        text +=
+          "👤 " +
+          friend.name +
+          "<br>";
+
+      });
+    }
+
+    showMessageWindow(
+      "الأصدقاء",
+      text
+    );
+  }
+
+
+  /* =========================================================
+     إضافة الأصدقاء وطلبات الصداقة
+     ========================================================= */
+
+  function openAddFriends() {
+
+    let windowBox =
+      createWindow("إضافة الأصدقاء");
+
+    let searchInput =
+      document.createElement("input");
+
+    searchInput.placeholder =
+      "ابحث عن المستخدم";
+
+    searchInput.type = "text";
+
+    windowBox.appendChild(searchInput);
+
+
+    let searchButton =
+      document.createElement("button");
+
+    searchButton.textContent =
+      "بحث";
+
+    windowBox.appendChild(searchButton);
+
+
+    let result =
+      document.createElement("div");
+
+    result.className =
+      "search-result";
+
+    windowBox.appendChild(result);
+
+
+    searchButton.onclick = function () {
+
+      let name =
+        searchInput.value.trim();
+
+      if (!name) {
+
+        result.textContent =
+          "اكتب اسم المستخدم أولًا.";
+
+        return;
+      }
+
+      result.innerHTML =
+        "<p>👤 " +
+        name +
+        "</p>";
+
+      let addButton =
+        document.createElement("button");
+
+      addButton.textContent =
+        "إرسال طلب صداقة";
+
+      result.appendChild(addButton);
+
+
+      addButton.onclick = function () {
+
+        friendRequests.push({
+
+          id:
+            "request_" +
+            Date.now(),
+
+          from:
+            currentUser.id,
+
+          to:
+            name,
+
+          status:
+            "pending"
+
+        });
+
+        saveData();
+
+        addButton.textContent =
+          "تم إرسال طلب الصداقة";
+
+        addButton.disabled =
+          true;
+      };
+    };
+  }
+
+
+  /* =========================================================
+     المتابعة والمتابعين
+     ========================================================= */
+
+  function openFollow() {
+
+    let windowBox =
+      createWindow("المتابعة");
+
+    windowBox.innerHTML +=
+      "<p>أنت تتابع: " +
+      following.length +
+      "</p>";
+
+    windowBox.innerHTML +=
+      "<p>يتابعك: " +
+      followers.length +
+      "</p>";
+
+
+    let searchInput =
+      document.createElement("input");
+
+    searchInput.placeholder =
+      "اسم المستخدم";
+
+    windowBox.appendChild(
+      searchInput
+    );
+
+
+    let followButton =
+      document.createElement("button");
+
+    followButton.textContent =
+      "متابعة";
+
+    windowBox.appendChild(
+      followButton
+    );
+
+
+    followButton.onclick =
+      function () {
+
+        let name =
+          searchInput.value.trim();
+
+        if (!name) return;
+
+        if (
+          following.indexOf(name) === -1
+        ) {
+
+          following.push(name);
+
+          saveData();
+
+          followButton.textContent =
+            "تمت المتابعة";
+        }
+      };
+  }
+
+
+  /* =========================================================
+     رسائل العائلة
+     
+     نفس المحادثة لكل أعضاء العائلة
+     ========================================================= */
+
+  function openFamilyMessages() {
+
+    if (!familyMember) {
+
+      alert(
+        "رسائل العائلة متاحة فقط لأعضاء العائلة."
+      );
+
+      return;
+    }
+
+
+    let familyMessagesKey =
+      "familyMessages_" +
+      familyMember.id;
+
+
+    let familyMessages =
+      JSON.parse(
+        localStorage.getItem(
+          familyMessagesKey
+        ) || "[]"
+      );
+
+
+    let windowBox =
+      createWindow(
+        "رسائل العائلة - " +
+        familyMember.name
+      );
+
+
+    let chatArea =
+      document.createElement("div");
+
+    chatArea.className =
+      "family-chat-area";
+
+
+    familyMessages.forEach(
+      function (msg) {
+
+        let message =
+          document.createElement("div");
+
+        message.className =
+          "family-chat-message";
+
+        message.innerHTML =
+          "<strong>" +
+          msg.name +
+          ":</strong> " +
+          msg.text;
+
+        chatArea.appendChild(
+          message
+        );
+      }
+    );
+
+
+    windowBox.appendChild(
+      chatArea
+    );
+
+
+    let input =
+      document.createElement("input");
+
+    input.placeholder =
+      "اكتب رسالة للعائلة...";
+
+    windowBox.appendChild(
+      input
+    );
+
+
+    let sendButton =
+      document.createElement("button");
+
+    sendButton.textContent =
+      "إرسال";
+
+    windowBox.appendChild(
+      sendButton
+    );
+
+
+    sendButton.onclick =
+      function () {
+
+        let text =
+          input.value.trim();
+
+        if (!text) return;
+
+
+        let newMessage = {
+
+          userId:
+            currentUser.id,
+
+          name:
+            currentUser.name,
+
+          text:
+            text,
+
+          time:
+            new Date().toISOString()
+
+        };
+
+
+        familyMessages.push(
+          newMessage
+        );
+
+
+        localStorage.setItem(
+          familyMessagesKey,
+          JSON.stringify(
+            familyMessages
+          )
+        );
+
+
+        let message =
+          document.createElement("div");
+
+        message.className =
+          "family-chat-message";
+
+        message.innerHTML =
+          "<strong>" +
+          currentUser.name +
+          ":</strong> " +
+          text;
+
+        chatArea.appendChild(
+          message
+        );
+
+
+        input.value = "";
+      };
+  }
+
+
+  /* =========================================================
+     إنشاء نافذة داخل التطبيق
+     ========================================================= */
+
+  function createWindow(title) {
+
+    let oldWindow =
+      document.querySelector(
+        ".app-message-window"
+      );
+
+    if (oldWindow) {
+
+      oldWindow.remove();
+
+    }
+
+
+    let overlay =
+      document.createElement("div");
+
+    overlay.className =
+      "app-message-window";
+
+
+    let box =
+      document.createElement("div");
+
+    box.className =
+      "app-message-window-box";
+
+
+    let header =
+      document.createElement("div");
+
+    header.className =
+      "app-message-window-header";
+
+
+    let titleElement =
+      document.createElement("h3");
+
+    titleElement.textContent =
+      title;
+
+
+    let close =
+      document.createElement("button");
+
+    close.textContent =
+      "×";
+
+
+    close.onclick =
+      function () {
+
+        overlay.remove();
+
+      };
+
+
+    header.appendChild(
+      titleElement
+    );
+
+    header.appendChild(
+      close
+    );
+
+
+    box.appendChild(
+      header
+    );
+
+
+    overlay.appendChild(
+      box
+    );
+
+
+    document.body.appendChild(
+      overlay
+    );
+
+
+    return box;
+  }
+
+
+  function showMessageWindow(
+    title,
+    content
+  ) {
+
+    let box =
+      createWindow(title);
+
+    let contentBox =
+      document.createElement("div");
+
+    contentBox.innerHTML =
+      content;
+
+    box.appendChild(
+      contentBox
+    );
+  }
+
+
+  /* =========================================================
+     CSS
+     ========================================================= */
+
+  let style =
+    document.createElement("style");
+
+  style.textContent = `
+
+    #messages-area {
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .message-section {
+      padding: 14px;
+      margin: 8px 0;
+      border-radius: 12px;
+      background: #ffffff;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    }
+
+    .friend-count {
+      padding: 3px 8px;
+      border-radius: 10px;
+      background: #eeeeee;
+    }
+
+    .family-name {
+      font-size: 12px;
+      opacity: .7;
+    }
+
+    .app-message-window {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 99999;
+      padding: 15px;
+      box-sizing: border-box;
+    }
+
+    .app-message-window-box {
+      width: 100%;
+      max-width: 500px;
+      max-height: 85vh;
+      overflow-y: auto;
+      background: white;
+      border-radius: 16px;
+      padding: 16px;
+      box-sizing: border-box;
+    }
+
+    .app-message-window-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .app-message-window-header button {
+      border: 0;
+      background: transparent;
+      font-size: 28px;
+      cursor: pointer;
+    }
+
+    .app-message-window-box input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 12px;
+      margin: 8px 0;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+    }
+
+    .app-message-window-box > button {
+      padding: 10px 16px;
+      border: 0;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .family-chat-area {
+      min-height: 200px;
+      max-height: 400px;
+      overflow-y: auto;
+      padding: 10px;
+    }
+
+    .family-chat-message {
+      padding: 9px;
+      margin: 6px 0;
+      border-radius: 10px;
+      background: #f3f3f3;
+    }
+
+  `;
+
+  document.head.appendChild(
+    style
+  );
+
+
+  /* ---------- تشغيل الحفظ ---------- */
+
+  saveData();
+
+});
 </script>
 </body>
   </html>
