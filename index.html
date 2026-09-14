@@ -2514,5 +2514,232 @@ document.addEventListener(
 );
 
     </script>
+  <!-- ================= الإعدادات ================= -->
+
+<div class="extra-page" id="settingsPage">
+
+  <div class="extra-header">
+    <button class="back-btn" onclick="backToAccount()">‹</button>
+    <h2>الإعدادات</h2>
+  </div>
+
+  <div class="settings-container">
+
+    <div class="settings-group">
+
+      <div class="settings-item">
+        <span>👤</span>
+        <b>تعديل الملف الشخصي</b>
+        <i>‹</i>
+      </div>
+
+      <div class="settings-item">
+        <span>📱</span>
+        <b>رقم الهاتف</b>
+        <i>‹</i>
+      </div>
+
+      <div class="settings-item">
+        <span>🌍</span>
+        <b>الدولة</b>
+        <i>‹</i>
+      </div>
+
+      <div class="settings-item">
+        <span>🎂</span>
+        <b>العمر</b>
+        <i>‹</i>
+      </div>
+
+    </div>
+
+
+    <div class="settings-group">
+
+      <div class="settings-item">
+        <span>🔐</span>
+        <b>الخصوصية والأمان</b>
+        <i>‹</i>
+      </div>
+
+      <div class="settings-item" onclick="openBlockedPage()">
+        <span>🚫</span>
+        <b>قائمة الحظر</b>
+        <i>‹</i>
+      </div>
+
+      <div class="settings-item">
+        <span>🔔</span>
+        <b>الإشعارات</b>
+        <i>‹</i>
+      </div>
+
+    </div>
+
+
+    <div class="settings-group">
+
+      <div class="settings-item">
+        <span>🌐</span>
+        <b>اللغة</b>
+        <i>‹</i>
+      </div>
+
+      <div class="settings-item">
+        <span>ℹ️</span>
+        <b>عن البرنامج</b>
+        <i>‹</i>
+      </div>
+
+    </div>
+
+
+    <button class="logout-button" onclick="logoutUser()">
+      🚪 تسجيل الخروج
+    </button>
+
+  </div>
+
+</div>
+
+
+<style>
+
+.settings-container{
+  padding:15px;
+}
+
+.settings-group{
+  background:#fff;
+  border-radius:18px;
+  overflow:hidden;
+  margin-bottom:15px;
+  box-shadow:0 3px 12px rgba(0,0,0,.05);
+}
+
+.settings-item{
+  min-height:58px;
+  display:flex;
+  align-items:center;
+  gap:13px;
+  padding:0 16px;
+  border-bottom:1px solid #eee;
+  cursor:pointer;
+}
+
+.settings-item:last-child{
+  border-bottom:none;
+}
+
+.settings-item span{
+  font-size:22px;
+  width:30px;
+  text-align:center;
+}
+
+.settings-item b{
+  flex:1;
+  font-size:15px;
+}
+
+.settings-item i{
+  font-style:normal;
+  font-size:25px;
+  color:#999;
+}
+
+.logout-button{
+  width:100%;
+  border:none;
+  border-radius:16px;
+  background:#fff;
+  padding:17px;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:0 3px 12px rgba(0,0,0,.05);
+}
+
+</style>
+
+
+<script>
+
+function openSettingsPage(){
+
+  document.querySelectorAll(".page").forEach(function(page){
+    page.classList.remove("active");
+  });
+
+  document.querySelectorAll(".extra-page").forEach(function(page){
+    page.classList.remove("active");
+  });
+
+  const settings =
+    document.getElementById("settingsPage");
+
+  if(settings){
+    settings.classList.add("active");
+  }
+
+}
+
+
+/* تسجيل الخروج */
+
+function logoutUser(){
+
+  const confirmLogout =
+    confirm("هل تريد تسجيل الخروج؟");
+
+  if(confirmLogout){
+
+    document.querySelectorAll(".page").forEach(function(page){
+      page.classList.remove("active");
+    });
+
+    document.querySelectorAll(".extra-page").forEach(function(page){
+      page.classList.remove("active");
+    });
+
+    const login =
+      document.getElementById("loginPage");
+
+    if(login){
+      login.classList.add("active");
+    }
+
+  }
+
+}
+
+
+/* ربط زر الإعدادات الموجود في الحساب */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function(){
+
+    document
+      .querySelectorAll(".account-item")
+      .forEach(function(item){
+
+        if(item.innerText.includes("الإعدادات")){
+
+          item.onclick =
+            function(){
+
+              openSettingsPage();
+
+            };
+
+        }
+
+      });
+
+  }
+);
+
+</script>
 </body>
   </html>
