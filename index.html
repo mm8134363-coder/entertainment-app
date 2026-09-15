@@ -562,26 +562,9 @@ function openSetupPage(){
 
   document
     .getElementById("homePage")
-    .classList.remove("active");
-
-  document
-    .getElementById("setupPage")
     .classList.add("active");
 
-
-  const phone =
-    localStorage.getItem("familyStarPhone");
-
-  if(phone){
-
-    document
-      .getElementById("phoneNumber")
-      .value = phone;
-
   }
-
-}
-
 
 /* =====================================================
    اختيار النوع
