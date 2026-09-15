@@ -3312,8 +3312,563 @@ document.addEventListener(
   }
 );
 
-</script>
+/* =====================================================
+   الجزء 7 — الدردشة
+===================================================== */
 
-</body>
-</html>
-   
+function openChat(){
+
+  alert(
+    "قسم الدردشة سيتم تجهيزه بالكامل."
+  );
+
+}
+
+
+function openPrivateChat(username){
+
+  alert(
+    "فتح الدردشة الخاصة مع: " +
+    username
+  );
+
+}
+
+
+function openFamilyChat(){
+
+  if(!familyData){
+
+    alert(
+      "يجب أن تكون داخل عائلة أولاً."
+    );
+
+    return;
+  }
+
+  alert(
+    "تم فتح دردشة العائلة: " +
+    familyData.name
+  );
+
+}
+
+
+function openRoomChat(roomName){
+
+  alert(
+    "تم فتح دردشة الروم: " +
+    roomName
+  );
+
+}
+
+
+/* =====================================================
+   نظام الأصدقاء
+===================================================== */
+
+let familyStarFriends =
+  JSON.parse(
+    localStorage.getItem(
+      "familyStarFriends"
+    )
+  ) || [];
+
+
+function addFriend(username){
+
+  if(!username)
+    return;
+
+  if(
+    familyStarFriends.includes(
+      username
+    )
+  ){
+
+    alert(
+      "هذا المستخدم موجود بالفعل في الأصدقاء."
+    );
+
+    return;
+  }
+
+  familyStarFriends.push(
+    username
+  );
+
+  localStorage.setItem(
+    "familyStarFriends",
+    JSON.stringify(
+      familyStarFriends
+    )
+  );
+
+  alert(
+    "تمت إضافة " +
+    username +
+    " إلى الأصدقاء."
+  );
+
+}
+
+
+/* =====================================================
+   الرسائل
+===================================================== */
+
+let familyStarMessages =
+  JSON.parse(
+    localStorage.getItem(
+      "familyStarMessages"
+    )
+  ) || [];
+
+
+function sendMessage(
+  receiver,
+  message
+){
+
+  if(!message)
+    return;
+
+  const sender =
+    localStorage.getItem(
+      "familyStarUsername"
+    ) || "مستخدم";
+
+
+  const newMessage = {
+
+    sender:
+      sender,
+
+    receiver:
+      receiver,
+
+    message:
+      message,
+
+    time:
+      new Date().toISOString()
+
+  };
+
+
+  familyStarMessages.push(
+    newMessage
+  );
+
+
+  localStorage.setItem(
+    "familyStarMessages",
+    JSON.stringify(
+      familyStarMessages
+    )
+  );
+
+}
+
+
+/* =====================================================
+   CB SYSTEM
+===================================================== */
+
+let currentCB =
+  JSON.parse(
+    localStorage.getItem(
+      "familyStarCB"
+    )
+  ) || null;
+
+
+function sendCBRequest(username){
+
+  if(!username)
+    return;
+
+  currentCB = {
+
+    username:
+      username,
+
+    status:
+      "pending",
+
+    createdAt:
+      new Date().toISOString()
+
+  };
+
+
+  localStorage.setItem(
+    "familyStarCB",
+    JSON.stringify(
+      currentCB
+    )
+  );
+
+
+  alert(
+    "تم إرسال طلب CB إلى " +
+    username
+  );
+
+}
+
+
+function acceptCB(){
+
+  if(!currentCB)
+    return;
+
+  currentCB.status =
+    "active";
+
+
+  localStorage.setItem(
+    "familyStarCB",
+    JSON.stringify(
+      currentCB
+    )
+  );
+
+
+  alert(
+    "تم تفعيل علاقة CB بنجاح 💙"
+  );
+
+}
+
+
+function requestCBCancel(){
+
+  if(!currentCB){
+
+    alert(
+      "لا يوجد CB نشط."
+    );
+
+    return;
+  }
+
+
+  currentCB.status =
+    "cancel_requested";
+
+
+  localStorage.setItem(
+    "familyStarCB",
+    JSON.stringify(
+      currentCB
+    )
+  );
+
+
+  alert(
+    "تم إرسال طلب إلغاء CB."
+  );
+
+}
+
+
+function forceCancelCB(){
+
+  if(!currentCB){
+
+    alert(
+      "لا يوجد CB."
+    );
+
+    return;
+  }
+
+
+  const fee =
+    500000;
+
+
+  const coins =
+    Number(
+      localStorage.getItem(
+        "familyStarCoins"
+      )
+    ) || 0;
+
+
+  if(coins < fee){
+
+    alert(
+      "لا يوجد رصيد كافٍ لإلغاء CB."
+    );
+
+    return;
+  }
+
+
+  localStorage.setItem(
+    "familyStarCoins",
+    coins - fee
+  );
+
+
+  currentCB = null;
+
+
+  localStorage.removeItem(
+    "familyStarCB"
+  );
+
+
+  updateCoinsDisplay();
+
+
+  alert(
+    "تم إلغاء CB مقابل " +
+    fee.toLocaleString("en-US") +
+    " كوين."
+  );
+
+}
+
+
+/* =====================================================
+   الجزء 8 — الحالات
+===================================================== */
+
+let familyStarStatuses =
+  JSON.parse(
+    localStorage.getItem(
+      "familyStarStatuses"
+    )
+  ) || [];
+
+
+function addStatus(){
+
+  const text =
+    prompt(
+      "اكتب الحالة:"
+    );
+
+
+  if(!text)
+    return;
+
+
+  const username =
+    localStorage.getItem(
+      "familyStarUsername"
+    ) || "مستخدم";
+
+
+  const status = {
+
+    username:
+      username,
+
+    text:
+      text,
+
+    createdAt:
+      new Date().toISOString(),
+
+    views:
+      0
+
+  };
+
+
+  familyStarStatuses.unshift(
+    status
+  );
+
+
+  localStorage.setItem(
+    "familyStarStatuses",
+    JSON.stringify(
+      familyStarStatuses
+    )
+  );
+
+
+  alert(
+    "تم نشر الحالة بنجاح ✅"
+  );
+
+}
+
+
+function viewStatus(index){
+
+  const status =
+    familyStarStatuses[index];
+
+
+  if(!status)
+    return;
+
+
+  status.views =
+    Number(status.views || 0) + 1;
+
+
+  localStorage.setItem(
+    "familyStarStatuses",
+    JSON.stringify(
+      familyStarStatuses
+    )
+  );
+
+
+  alert(
+    status.username +
+    "\n\n" +
+    status.text +
+    "\n\nالمشاهدات: " +
+    status.views
+  );
+
+}
+
+
+/* =====================================================
+   الجزء 9 — الملف الشخصي
+===================================================== */
+
+function openProfile(){
+
+  const username =
+    localStorage.getItem(
+      "familyStarUsername"
+    ) || "مستخدم";
+
+
+  const age =
+    localStorage.getItem(
+      "familyStarAge"
+    ) || "-";
+
+
+  const country =
+    localStorage.getItem(
+      "familyStarCountry"
+    ) || "-";
+
+
+  const gender =
+    localStorage.getItem(
+      "familyStarGender"
+    ) || "-";
+
+
+  const level =
+    Number(
+      localStorage.getItem(
+        "familyStarLevel"
+      )
+    ) || 0;
+
+
+  const coins =
+    Number(
+      localStorage.getItem(
+        "familyStarCoins"
+      )
+    ) || 0;
+
+
+  const vip =
+    Number(
+      localStorage.getItem(
+        "familyStarVIP"
+      )
+    ) || 0;
+
+
+  alert(
+    "👤 الملف الشخصي\n\n" +
+
+    "الاسم: " +
+    username +
+
+    "\nالسن: " +
+    age +
+
+    "\nالدولة: " +
+    country +
+
+    "\nالنوع: " +
+    gender +
+
+    "\nالمستوى: " +
+    level +
+
+    "\n🪙 الكوينز: " +
+    coins.toLocaleString("en-US") +
+
+    "\n👑 VIP: " +
+    vip
+  );
+
+}
+/* =====================================================
+   معلومات الحساب
+===================================================== */
+
+function getProfileData(){
+
+  return {
+
+    username:
+      localStorage.getItem(
+        "familyStarUsername"
+      ) || "",
+
+    age:
+      localStorage.getItem(
+        "familyStarAge"
+      ) || "",
+
+    country:
+      localStorage.getItem(
+        "familyStarCountry"
+      ) || "",
+
+    phone:
+      localStorage.getItem(
+        "familyStarPhone"
+      ) || "",
+
+    gender:
+      localStorage.getItem(
+        "familyStarGender"
+      ) || "",
+
+    level:
+      Number(
+        localStorage.getItem(
+          "familyStarLevel"
+        )
+      ) || 0,
+
+    coins:
+      Number(
+        localStorage.getItem(
+          "familyStarCoins"
+        )
+      ) || 0,
+
+    diamonds:
+      Number(
+        localStorage.getItem(
+          "familyStarDiamonds"
+        )
+      ) || 0
+
+  };
+
+  }
+
