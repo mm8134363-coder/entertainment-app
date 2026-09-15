@@ -47,7 +47,7 @@ button{
 
 .login-page{
   min-height:100vh;
-  display:flex;
+  display:flex !important;
   align-items:center;
   justify-content:center;
   padding:20px;
@@ -135,6 +135,62 @@ button{
   line-height:1.7;
 }
 
+وبعده مباشرة في الـHTML:
+
+<!-- =====================================================
+     الجزء 1 — تسجيل الدخول
+===================================================== -->
+
+<section id="loginPage" class="page active login-page">
+
+  <div class="login-box">
+
+    <div class="logo">⭐</div>
+
+    <div class="login-title">
+      Family Star
+    </div>
+
+    <div class="login-subtitle">
+      برنامج ترفيه وتسلية فقط
+    </div>
+
+    <input
+      id="phoneLogin"
+      class="phone-input"
+      type="tel"
+      placeholder="اكتب رقم الهاتف"
+    >
+
+    <button
+      class="main-btn"
+      onclick="loginWithPhone()"
+    >
+      تسجيل الدخول
+    </button>
+
+    <button
+      class="social-btn"
+      onclick="socialLogin('Google')"
+    >
+      🔴 تسجيل الدخول باستخدام Google
+    </button>
+
+    <button
+      class="social-btn"
+      onclick="socialLogin('Facebook')"
+    >
+      🔵 تسجيل الدخول باستخدام Facebook
+    </button>
+
+    <div class="login-note">
+      بعد تسجيل الدخول سيتم فتح صفحة إعداد الحساب
+      قبل الدخول إلى الصفحة الرئيسية.
+    </div>
+
+  </div>
+
+</section>
 /* =========================
    إعداد الحساب
 ========================= */
