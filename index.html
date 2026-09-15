@@ -12,12 +12,7 @@
 
 <title>Family Star</title>
 
-
 <style>
-
-/* =========================
-   إعدادات عامة
-========================= */
 
 *{
   box-sizing:border-box;
@@ -27,26 +22,10 @@
 }
 
 body{
-  background:#070b20;
+  background:#05091b;
   color:#fff;
   min-height:100vh;
 }
-
-button,
-input,
-select{
-  font-family:inherit;
-}
-
-button{
-  cursor:pointer;
-  border:0;
-}
-
-
-/* =========================
-   الصفحات
-========================= */
 
 .page{
   display:none;
@@ -57,690 +36,187 @@ button{
   display:block;
 }
 
-
-/* =========================
-   تسجيل الدخول
-========================= */
-
 .login-page{
   min-height:100vh;
-  display:flex !important;
+
+  display:flex;
+
   align-items:center;
+
   justify-content:center;
+
   padding:20px;
 
   background:
     radial-gradient(
       circle at top,
-      #18245d 0,
-      #070b20 45%,
-      #030511 100%
+      #17245c 0%,
+      #080d29 45%,
+      #05091b 100%
     );
 }
 
 .login-box{
   width:100%;
-  max-width:430px;
+  max-width:420px;
 
-  background:#101633;
+  background:#0c1230;
 
-  border:1px solid #273469;
+  border:1px solid #26356d;
 
-  border-radius:25px;
+  border-radius:24px;
 
   padding:30px 22px;
 
-  box-shadow:
-    0 20px 60px rgba(0,0,0,.45);
-
   text-align:center;
+
+  box-shadow:
+    0 15px 50px rgba(0,0,0,.45);
 }
 
 .logo{
-  width:85px;
-  height:85px;
+  width:82px;
+  height:82px;
 
-  border-radius:25px;
-
-  margin:0 auto 15px;
+  margin:0 auto 18px;
 
   display:flex;
+
   align-items:center;
   justify-content:center;
 
-  background:
-    linear-gradient(
-      135deg,
-      #586dff,
-      #8c4dff
-    );
+  border-radius:50%;
 
-  font-size:38px;
+  background:#18245a;
+
+  border:2px solid #ffd34d;
+
+  font-size:42px;
 
   box-shadow:
-    0 10px 30px
-    rgba(84,91,255,.35);
+    0 0 25px rgba(255,211,77,.25);
 }
 
 .login-title{
-  font-size:27px;
+  font-size:30px;
+
   font-weight:bold;
+
   margin-bottom:8px;
 }
 
 .login-subtitle{
-  color:#aeb7dc;
+  font-size:15px;
+
+  color:#aeb8df;
+
   margin-bottom:25px;
 }
 
 .phone-input{
   width:100%;
+
   height:52px;
 
-  border-radius:15px;
-
-  border:1px solid #303b70;
-
-  background:#080d27;
-
-  color:#fff;
-
-  padding:0 16px;
+  border:none;
 
   outline:none;
 
+  border-radius:14px;
+
+  padding:0 16px;
+
+  background:#151d46;
+
+  color:#fff;
+
+  font-size:16px;
+
+  text-align:right;
+
   margin-bottom:12px;
+
+  border:1px solid #29386f;
 }
 
-.phone-input:focus{
-  border-color:#6474ff;
+.phone-input::placeholder{
+  color:#7f8bb8;
 }
 
 .main-btn{
   width:100%;
+
   height:52px;
 
-  border-radius:15px;
+  border:none;
 
-  color:#fff;
+  border-radius:14px;
+
+  background:#ffd34d;
+
+  color:#111;
+
+  font-size:17px;
 
   font-weight:bold;
 
-  font-size:16px;
+  cursor:pointer;
 
-  background:
-    linear-gradient(
-      135deg,
-      #5367ff,
-      #854bff
-    );
-
-  margin-bottom:15px;
+  margin-bottom:12px;
 }
 
 .social-btn{
   width:100%;
-  height:50px;
-
-  border-radius:14px;
-
-  background:#1a2244;
-
-  color:#fff;
-
-  margin-top:10px;
-
-  border:1px solid #303a68;
-
-  font-size:15px;
-}
-
-.login-note{
-  margin-top:20px;
-
-  font-size:12px;
-
-  color:#7f8ab4;
-
-  line-height:1.7;
-}
-
-
-/* =========================
-   إعداد الحساب
-========================= */
-
-.setup-page{
-  padding:20px;
-
-  background:
-    radial-gradient(
-      circle at top,
-      #17235a 0,
-      #070b20 50%,
-      #030511 100%
-    );
-}
-
-.setup-container{
-  max-width:550px;
-
-  margin:auto;
-
-  padding-bottom:40px;
-}
-
-.setup-header{
-  text-align:center;
-
-  margin:10px 0 20px;
-}
-
-.setup-header h1{
-  font-size:25px;
-
-  margin-bottom:8px;
-}
-
-.setup-header p{
-  color:#9fa9d1;
-
-  font-size:14px;
-}
-
-.cover-box{
-  height:170px;
-
-  border-radius:22px;
-
-  overflow:hidden;
-
-  position:relative;
-
-  background:
-    linear-gradient(
-      135deg,
-      #263779,
-      #6c48b8
-    );
-
-  border:1px solid #33417c;
-
-  margin-bottom:55px;
-}
-
-.cover-preview{
-  width:100%;
-  height:100%;
-
-  object-fit:cover;
-
-  display:none;
-}
-
-.cover-placeholder{
-  height:100%;
-
-  display:flex;
-
-  align-items:center;
-  justify-content:center;
-
-  color:#cbd1f1;
-
-  font-size:15px;
-}
-
-.cover-edit{
-  position:absolute;
-
-  left:15px;
-  bottom:15px;
-
-  background:rgba(0,0,0,.55);
-
-  color:#fff;
-
-  padding:9px 13px;
-
-  border-radius:12px;
-
-  font-size:13px;
-}
-
-.avatar-box{
-  position:absolute;
-
-  bottom:-45px;
-
-  right:50%;
-
-  transform:translateX(50%);
-
-  width:90px;
-  height:90px;
-
-  border-radius:50%;
-
-  background:#171f43;
-
-  border:4px solid #070b20;
-
-  overflow:hidden;
-}
-
-.avatar-preview{
-  width:100%;
-  height:100%;
-
-  object-fit:cover;
-
-  display:none;
-}
-
-.avatar-placeholder{
-  width:100%;
-  height:100%;
-
-  display:flex;
-
-  align-items:center;
-  justify-content:center;
-
-  font-size:30px;
-}
-
-.avatar-edit{
-  position:absolute;
-
-  bottom:3px;
-  left:3px;
-  right:3px;
-
-  background:rgba(0,0,0,.65);
-
-  color:#fff;
-
-  font-size:11px;
-
-  text-align:center;
-
-  padding:5px 0;
-}
-
-.form-card{
-  background:#101633;
-
-  border:1px solid #283568;
-
-  border-radius:22px;
-
-  padding:20px;
-}
-
-.field{
-  margin-bottom:16px;
-}
-
-.field label{
-  display:block;
-
-  margin-bottom:8px;
-
-  color:#c8ceea;
-
-  font-size:14px;
-}
-
-.field input,
-.field select{
-  width:100%;
 
   height:50px;
 
+  border:1px solid #2b396f;
+
   border-radius:14px;
 
-  border:1px solid #303b70;
-
-  background:#080d27;
+  background:#151d46;
 
   color:#fff;
 
-  padding:0 14px;
+  font-size:15px;
 
-  outline:none;
-}
+  font-weight:bold;
 
-.field input:focus,
-.field select:focus{
-  border-color:#6677ff;
-}
-
-
-/* =========================
-   النوع
-========================= */
-
-.gender-title{
-  color:#c8ceea;
-
-  font-size:14px;
+  cursor:pointer;
 
   margin-bottom:10px;
 }
 
-.gender-options{
-  display:flex;
+.login-note{
+  margin-top:18px;
 
-  gap:12px;
+  color:#7f8bb8;
+
+  font-size:12px;
+
+  line-height:1.7;
 }
 
-.gender-option{
-  flex:1;
-
-  border:1px solid #303b70;
-
-  background:#080d27;
-
-  border-radius:15px;
-
-  padding:15px 10px;
-
-  text-align:center;
-
-  transition:.2s;
-}
-
-.gender-option.selected{
-  border-color:#6878ff;
-
-  background:#151e46;
-}
-
-.gender-icon{
-  width:45px;
-  height:45px;
-
-  border-radius:50%;
-
-  display:flex;
-
-  align-items:center;
-  justify-content:center;
-
-  margin:0 auto 7px;
-
-  font-size:25px;
-
-  font-weight:bold;
-}
-
-.male-icon{
-  background:#123c82;
-
-  color:#4d9cff;
-}
-
-.female-icon{
-  background:#6b214e;
-
-  color:#ff75bd;
-}
-
-.gender-name{
-  font-size:13px;
-}
-
-.save-profile{
-  width:100%;
-
-  height:52px;
-
-  border-radius:15px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #5367ff,
-      #854bff
-    );
-
-  color:#fff;
-
-  font-size:16px;
-
-  font-weight:bold;
-
-  margin-top:5px;
-}
-
-
-/* =========================
-   الصفحة الرئيسية
-========================= */
-
-.home-page{
-  padding-bottom:80px;
-}
-
-.top-bar{
-  height:65px;
-
-  padding:0 16px;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:space-between;
-
-  background:#0c1230;
-
-  border-bottom:1px solid #202b57;
-
-  position:sticky;
-
-  top:0;
-
-  z-index:20;
-}
-
-.app-name{
-  font-size:21px;
-
-  font-weight:bold;
-}
-
-.coins-box{
-  background:#171f43;
-
-  border:1px solid #303b70;
-
-  border-radius:20px;
-
-  padding:8px 13px;
-
-  font-size:13px;
-}
-
-.home-content{
-  max-width:900px;
-
-  margin:auto;
-
-  padding:18px 15px;
-}
-
-.welcome{
-  background:
-    linear-gradient(
-      135deg,
-      #1b2861,
-      #30205b
-    );
-
-  border:1px solid #34437e;
-
-  border-radius:22px;
-
-  padding:18px;
-
-  margin-bottom:18px;
-}
-
-.welcome-name{
-  font-size:21px;
-
-  font-weight:bold;
-
-  margin-bottom:6px;
-}
-
-.user-name-line{
-  display:flex;
-
-  align-items:center;
-
-  gap:7px;
-}
-
-.gender-badge{
-  display:inline-flex;
-
-  align-items:center;
-  justify-content:center;
-
-  width:21px;
-  height:21px;
-
-  border-radius:50%;
-
-  font-size:14px;
-
-  font-weight:bold;
-}
-
-.gender-badge.male{
-  background:#103d86;
-
-  color:#4fa1ff;
-
-  border:1px solid #3d8cff;
-}
-
-.gender-badge.female{
-  background:#70224e;
-
-  color:#ff78c0;
-
-  border:1px solid #ff65b3;
-}
-
-.section-title{
-  font-size:18px;
-
-  font-weight:bold;
-  margin:20px 0 12px;
-}
-
-
-/* =========================
-   التنقل السفلي
-========================= */
-
-.bottom-nav{
-  position:fixed;
-
-  bottom:0;
-
-  right:0;
-
-  left:0;
-
-  height:68px;
-
-  background:#0c1230;
-
-  border-top:1px solid #242f5d;
-
-  display:flex;
-
-  justify-content:space-around;
-
-  align-items:center;
-
-  z-index:50;
-  }
- 
-/* =========================
-   التنقل السفلي
-========================= */
-
-.bottom-nav{
-  position:fixed;
-  bottom:0;
-  right:0;
-  left:0;
-  height:68px;
-  background:#0c1230;
-  border-top:1px solid #242f5d;
-  display:flex;
-  justify-content:space-around;
-  align-items:center;
-  z-index:50;
-}
-
-.nav-item{
-  color:#7f8ab5;
-  text-align:center;
-  font-size:11px;
-  min-width:55px;
-}
-
-.nav-item.active{
-  color:#7487ff;
-}
-
-.nav-icon{
-  display:block;
-  font-size:21px;
-  margin-bottom:3px;
-}
-
-/* =========================
-   الهاتف
-========================= */
-
-@media(max-width:500px){
-  .cards{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .home-card{
-    min-height:105px;
-    padding:13px;
-  }
-
-  .cover-box{
-    height:150px;
-  }
-}
 </style>
+
 </head>
 
 <body>
 
-<!-- =====================================================
-     الجزء 1 — تسجيل الدخول
-===================================================== -->
-
-<section id="loginPage" class="page active login-page">
+<section
+  id="loginPage"
+  class="page active login-page"
+>
 
   <div class="login-box">
 
-    <div class="logo">⭐</div>
+    <div class="logo">
+      ⭐
+    </div>
 
-    <div class="login-title">Family Star</div>
+    <div class="login-title">
+      Family Star
+    </div>
 
     <div class="login-subtitle">
       برنامج ترفيه وتسلية فقط
@@ -753,15 +229,27 @@ button{
       placeholder="اكتب رقم الهاتف"
     >
 
-    <button class="main-btn" onclick="loginWithPhone()">
+    <button
+      type="button"
+      class="main-btn"
+      onclick="loginWithPhone()"
+    >
       تسجيل الدخول
     </button>
 
-    <button class="social-btn" onclick="socialLogin('Google')">
+    <button
+      type="button"
+      class="social-btn"
+      onclick="socialLogin('Google')"
+    >
       🔴 تسجيل الدخول باستخدام Google
     </button>
 
-    <button class="social-btn" onclick="socialLogin('Facebook')">
+    <button
+      type="button"
+      class="social-btn"
+      onclick="socialLogin('Facebook')"
+    >
       🔵 تسجيل الدخول باستخدام Facebook
     </button>
 
@@ -772,225 +260,7 @@ button{
 
   </div>
 
-</section>
-
-
-<!-- =====================================================
-     الجزء 1 — إعداد الحساب
-===================================================== -->
-
-<section id="setupPage" class="page setup-page">
-
-  <div class="setup-container">
-
-    <div class="setup-header">
-      <h1>إعداد حسابك</h1>
-      <p>أكمل بيانات حسابك أولاً ثم ادخل إلى Family Star</p>
-    </div>
-
-    <div class="cover-box">
-
-      <div class="cover-placeholder" id="coverPlaceholder">
-        🖼️ صورة الغلاف
-      </div>
-
-      <img
-        id="coverPreview"
-        class="cover-preview"
-        alt="cover"
-      >
-
-      <label class="cover-edit">
-        تغيير الغلاف
-        <input
-          id="coverInput"
-          type="file"
-          accept="image/*"
-          hidden
-        >
-      </label>
-
-      <div class="avatar-box">
-
-        <div class="avatar-placeholder" id="avatarPlaceholder">
-          👤
-        </div>
-
-        <img
-          id="avatarPreview"
-          class="avatar-preview"
-          alt="avatar"
-        >
-
-        <label class="avatar-edit">
-          صورة
-          <input
-            id="avatarInput"
-            type="file"
-            accept="image/*"
-            hidden
-          >
-        </label>
-
-      </div>
-
-    </div>
-
-
-    <div class="form-card">
-
-      <div class="field">
-        <label>اسم المستخدم</label>
-        <input
-          id="username"
-          type="text"
-          placeholder="اكتب اسم المستخدم"
-        >
-      </div>
-
-
-      <div class="field">
-        <label>السن</label>
-        <input
-          id="age"
-          type="number"
-          min="13"
-          max="100"
-          placeholder="اكتب السن"
-        >
-      </div>
-
-
-      <div class="field">
-        <label>الدولة</label>
-
-        <select id="country">
-
-          <option value="">
-            اختر الدولة
-          </option>
-
-          <option value="مصر">
-            🇪🇬 مصر
-          </option>
-
-          <option value="السعودية">
-            🇸🇦 السعودية
-          </option>
-
-          <option value="الإمارات">
-            🇦🇪 الإمارات
-          </option>
-
-          <option value="الكويت">
-            🇰🇼 الكويت
-          </option>
-
-          <option value="قطر">
-            🇶🇦 قطر
-          </option>
-
-          <option value="الأردن">
-            🇯🇴 الأردن
-          </option>
-
-          <option value="العراق">
-            🇮🇶 العراق
-          </option>
-
-          <option value="المغرب">
-            🇲🇦 المغرب
-          </option>
-
-          <option value="الجزائر">
-            🇩🇿 الجزائر
-          </option>
-
-          <option value="تونس">
-            🇹🇳 تونس
-          </option>
-
-          <option value="أخرى">
-            🌍 أخرى
-          </option>
-
-        </select>
-      </div>
-
-
-      <div class="field">
-
-        <label>رقم الهاتف</label>
-
-        <input
-          id="phoneNumber"
-          type="tel"
-          placeholder="رقم الهاتف"
-        >
-
-      </div>
-
-
-      <div class="field">
-
-        <div class="gender-title">
-          النوع
-        </div>
-
-        <div class="gender-options">
-
-          <div
-            id="maleOption"
-            class="gender-option"
-            onclick="selectGender('male')"
-          >
-
-            <div class="gender-icon male-icon">
-              ♂
-            </div>
-
-            <div class="gender-name">
-              ذكر
-            </div>
-
-          </div>
-
-
-          <div
-            id="femaleOption"
-            class="gender-option"
-            onclick="selectGender('female')"
-          >
-
-            <div class="gender-icon female-icon">
-              ♀
-            </div>
-
-            <div class="gender-name">
-              أنثى
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <button
-        class="save-profile"
-        onclick="saveProfile()"
-      >
-        حفظ الحساب والدخول للبرنامج
-      </button>
-
-    </div>
-
-  </div>
-
-</section>
-
-
+  </section>
 <!-- =====================================================
      الجزء 2 — الصفحة الرئيسية
 ===================================================== -->
