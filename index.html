@@ -3871,4 +3871,299 @@ function getProfileData(){
   };
 
   }
+/* =====================================================
+   الجزء 10
+   نظام المكافآت والأنشطة
+===================================================== */
 
+function getRewardsData(){
+
+  return {
+
+    dailyReward:
+      Number(
+        localStorage.getItem(
+          "familyStarDailyReward"
+        )
+      ) || 0,
+
+    weeklyReward:
+      Number(
+        localStorage.getItem(
+          "familyStarWeeklyReward"
+        )
+      ) || 0,
+
+    activityPoints:
+      Number(
+        localStorage.getItem(
+          "familyStarActivityPoints"
+        )
+      ) || 0,
+
+    roomReward:
+      Number(
+        localStorage.getItem(
+          "familyStarRoomReward"
+        )
+      ) || 0
+
+  };
+
+}
+
+
+function addActivityPoints(points){
+
+  let current =
+    Number(
+      localStorage.getItem(
+        "familyStarActivityPoints"
+      )
+    ) || 0;
+
+  current += Number(points) || 0;
+
+  localStorage.setItem(
+    "familyStarActivityPoints",
+    current
+  );
+
+}
+
+
+function addReward(type, amount){
+
+  amount = Number(amount) || 0;
+
+  if(type === "daily"){
+
+    let reward =
+      Number(
+        localStorage.getItem(
+          "familyStarDailyReward"
+        )
+      ) || 0;
+
+    localStorage.setItem(
+      "familyStarDailyReward",
+      reward + amount
+    );
+
+  }
+
+  if(type === "weekly"){
+
+    let reward =
+      Number(
+        localStorage.getItem(
+          "familyStarWeeklyReward"
+        )
+      ) || 0;
+
+    localStorage.setItem(
+      "familyStarWeeklyReward",
+      reward + amount
+    );
+
+  }
+
+  if(type === "room"){
+
+    let reward =
+      Number(
+        localStorage.getItem(
+          "familyStarRoomReward"
+        )
+      ) || 0;
+
+    localStorage.setItem(
+      "familyStarRoomReward",
+      reward + amount
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   الجزء 11
+   الإشعارات والأمان والإعدادات
+===================================================== */
+
+function getSettingsData(){
+
+  return {
+
+    notifications:
+      localStorage.getItem(
+        "familyStarNotifications"
+      ) !== "false",
+
+    sound:
+      localStorage.getItem(
+        "familyStarSound"
+      ) !== "false",
+
+    vibration:
+      localStorage.getItem(
+        "familyStarVibration"
+      ) !== "false",
+
+    privacy:
+      localStorage.getItem(
+        "familyStarPrivacy"
+      ) || "public",
+
+    phoneLinked:
+      localStorage.getItem(
+        "familyStarPhone"
+      ) || ""
+
+  };
+
+}
+
+
+function saveSetting(name, value){
+
+  localStorage.setItem(
+    name,
+    value
+  );
+
+}
+
+
+function addNotification(message){
+
+  let notifications =
+    JSON.parse(
+      localStorage.getItem(
+        "familyStarNotificationsList"
+      ) || "[]"
+    );
+
+  notifications.unshift({
+
+    message: message,
+
+    time:
+      new Date().toLocaleString(
+        "ar-EG"
+      ),
+
+    read: false
+
+  });
+
+  localStorage.setItem(
+    "familyStarNotificationsList",
+    JSON.stringify(notifications)
+  );
+
+}
+
+
+function getNotifications(){
+
+  return JSON.parse(
+    localStorage.getItem(
+      "familyStarNotificationsList"
+    ) || "[]"
+  );
+
+}
+
+
+/* =====================================================
+   الجزء 12
+   لوحة التحكم والإدارة
+===================================================== */
+
+function getAdminData(){
+
+  return {
+
+    users:
+      Number(
+        localStorage.getItem(
+          "familyStarUsersCount"
+        )
+      ) || 0,
+
+    rooms:
+      Number(
+        localStorage.getItem(
+          "familyStarRoomsCount"
+        )
+      ) || 0,
+
+    families:
+      Number(
+        localStorage.getItem(
+          "familyStarFamiliesCount"
+        )
+      ) || 0,
+
+    gifts:
+      Number(
+        localStorage.getItem(
+          "familyStarGiftsCount"
+        )
+      ) || 0,
+
+    reports:
+      Number(
+        localStorage.getItem(
+          "familyStarReportsCount"
+        )
+      ) || 0
+
+  };
+
+}
+
+
+function isAdmin(){
+
+  return (
+    localStorage.getItem(
+      "familyStarAdmin"
+    ) === "true"
+  );
+
+}
+
+
+function setAdminStatus(status){
+
+  localStorage.setItem(
+    "familyStarAdmin",
+    status ? "true" : "false"
+  );
+
+}
+
+
+function updateAdminCounter(type, amount){
+
+  let current =
+    Number(
+      localStorage.getItem(type)
+    ) || 0;
+
+  current += Number(amount) || 0;
+
+  localStorage.setItem(
+    type,
+    current
+  );
+
+}
+
+
+/* =====================================================
+   نهاية المشروع
+===================================================== */
