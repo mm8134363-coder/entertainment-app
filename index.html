@@ -1457,3 +1457,1337 @@ button:active{
 
 
 </section>
+<!-- ================= الدردشة ================= -->
+
+<section id="chat" class="screen">
+
+  <div class="topbar">
+    <div class="title">💬 الدردشة</div>
+
+    <button class="iconbtn"
+      onclick="showAlert('لا توجد إشعارات جديدة')">
+      🔔
+    </button>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active">الرسائل</button>
+    <button class="tab">الأصدقاء</button>
+    <button class="tab">العائلة</button>
+  </div>
+
+  <div class="list">
+
+    <div class="chat-item"
+      onclick="openChat('أحمد')">
+
+      <img class="avatar"
+        src="https://i.pravatar.cc/100?img=11">
+
+      <div class="grow">
+        <b>أحمد</b>
+        <div class="small">أهلاً يا نجم 👋</div>
+      </div>
+
+      <div class="small">5 د</div>
+
+    </div>
+
+
+    <div class="chat-item"
+      onclick="openChat('سارة')">
+
+      <img class="avatar"
+        src="https://i.pravatar.cc/100?img=32">
+
+      <div class="grow">
+        <b>سارة</b>
+        <div class="small">نشوفك في الروم ❤️</div>
+      </div>
+
+      <div class="small">10 د</div>
+
+    </div>
+
+
+    <div class="chat-item"
+      onclick="openChat('محمد')">
+
+      <img class="avatar"
+        src="https://i.pravatar.cc/100?img=13">
+
+      <div class="grow">
+        <b>محمد</b>
+        <div class="small">نورت التطبيق ⭐</div>
+      </div>
+
+      <div class="small">20 د</div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= الحالات ================= -->
+
+<section id="status" class="screen">
+
+  <div class="topbar">
+
+    <div class="title">📸 الحالات</div>
+
+    <button class="iconbtn"
+      onclick="showAlert('إضافة حالة جديدة')">
+      ＋
+    </button>
+
+  </div>
+
+  <div class="status-create"
+    onclick="showAlert('يمكنك إضافة حالة جديدة')">
+
+    <img class="avatar"
+      src="https://i.pravatar.cc/100?img=12">
+
+    <div class="grow">
+      <b>أضف حالة</b>
+      <div class="small">
+        شارك لحظتك مع أصدقائك
+      </div>
+    </div>
+
+    <span>＋</span>
+
+  </div>
+
+
+  <div class="status-list">
+
+    <div class="status-card">
+
+      <img
+        src="https://i.pravatar.cc/100?img=11">
+
+      <div>
+        <b>أحمد</b>
+        <div class="small">
+          منذ 10 دقائق
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="status-card">
+
+      <img
+        src="https://i.pravatar.cc/100?img=32">
+
+      <div>
+        <b>سارة</b>
+        <div class="small">
+          منذ ساعة
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="status-card">
+
+      <img
+        src="https://i.pravatar.cc/100?img=47">
+
+      <div>
+        <b>نور</b>
+        <div class="small">
+          منذ ساعتين
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= الرومات ================= -->
+
+<section id="rooms" class="screen">
+
+  <div class="topbar">
+
+    <div class="title">🎤 الرومات</div>
+
+    <button class="iconbtn"
+      onclick="showAlert('إنشاء روم جديد')">
+      ＋
+    </button>
+
+  </div>
+
+
+  <div class="search">
+
+    <input
+      class="input"
+      placeholder="🔍 ابحث عن روم..."
+      oninput="searchRooms(this.value)"
+    >
+
+  </div>
+
+
+  <div class="section">
+
+    <div class="section-head">
+      <h3>🔥 الرومات الترند</h3>
+    </div>
+
+
+    <div id="roomsContainer"
+      class="room-list">
+
+
+      <div class="room-card"
+        data-name="روم الفن"
+        onclick="openRoom('روم الفن')">
+
+        <div class="room-cover">
+          🎵
+        </div>
+
+        <div class="room-info">
+
+          <h3>روم الفن</h3>
+
+          <p>🎤 12 ميك</p>
+
+          <div class="room-bottom">
+            <span>👥 276</span>
+            <span>⭐ ترند</span>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="room-card"
+        data-name="روم النجوم"
+        onclick="openRoom('روم النجوم')">
+
+        <div class="room-cover">
+          🌟
+        </div>
+
+        <div class="room-info">
+
+          <h3>روم النجوم</h3>
+
+          <p>🎤 8 ميك</p>
+
+          <div class="room-bottom">
+            <span>👥 189</span>
+            <span>🔥 نشط</span>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="room-card"
+        data-name="روم السهرة"
+        onclick="openRoom('روم السهرة')">
+
+        <div class="room-cover">
+          🌙
+        </div>
+
+        <div class="room-info">
+
+          <h3>روم السهرة</h3>
+
+          <p>🎤 10 ميك</p>
+
+          <div class="room-bottom">
+            <span>👥 154</span>
+            <span>❤️ مميز</span>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="room-card"
+        data-name="روم الأصدقاء"
+        onclick="openRoom('روم الأصدقاء')">
+
+        <div class="room-cover">
+          👥
+        </div>
+
+        <div class="room-info">
+
+          <h3>روم الأصدقاء</h3>
+
+          <p>🎤 6 ميك</p>
+
+          <div class="room-bottom">
+            <span>👥 98</span>
+            <span>💙 جديد</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= الملف الشخصي ================= -->
+
+<section id="profile" class="screen">
+
+  <div class="topbar">
+
+    <div class="title">الملف الشخصي</div>
+
+    <button class="iconbtn"
+      onclick="showScreen('settings')">
+      ⚙️
+    </button>
+
+  </div>
+
+
+  <div id="profileCover"
+    class="cover">
+
+    <img
+      id="profileAvatar"
+      class="profilepic"
+      src="https://i.pravatar.cc/200?img=12">
+
+  </div>
+
+
+  <div class="profilebody">
+
+    <h2 id="profileName">
+      Star
+    </h2>
+
+    <div class="small">
+      👑 <span id="profileStatus">
+        متصل الآن
+      </span>
+    </div>
+
+
+    <div class="stats">
+
+      <div class="stat">
+        <b>4.8</b>
+        <span>التقييم</span>
+      </div>
+
+      <div class="stat">
+        <b>856</b>
+        <span>المتابعون</span>
+      </div>
+
+      <div class="stat">
+        <b>1.2K</b>
+        <span>الإعجابات</span>
+      </div>
+
+    </div>
+
+
+    <div class="profile-actions">
+
+      <button onclick="showScreen('wallet')">
+        🪙 الكوينز والهدايا
+        <span style="float:left">›</span>
+      </button>
+
+      <button onclick="showScreen('level')">
+        ⭐ مستوى الثروة
+        <span style="float:left">›</span>
+      </button>
+
+      <button onclick="showScreen('friends')">
+        👥 الأصدقاء
+        <span style="float:left">›</span>
+      </button>
+
+      <button onclick="showScreen('family')">
+        👑 عائلتي
+        <span style="float:left">›</span>
+      </button>
+
+      <button onclick="changeAvatar()">
+        🖼️ تغيير الصورة الشخصية
+      </button>
+
+      <button onclick="changeCover()">
+        🎨 تغيير الغلاف
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= الكوينز والهدايا ================= -->
+
+<section id="wallet" class="screen">
+
+  <div class="topbar">
+
+    <button class="iconbtn"
+      onclick="goBack()">
+      ←
+    </button>
+
+    <div class="title">
+      الكوينز والهدايا
+    </div>
+
+    <div style="width:39px"></div>
+
+  </div>
+
+
+  <div class="section">
+
+    <div class="card"
+      style="text-align:center">
+
+      <div class="small">
+        رصيدك من الكوينز
+      </div>
+
+      <div
+        style="font-size:32px;color:#ffd52e;font-weight:900;margin:7px">
+
+        🪙
+        <span id="walletCoins">
+          2560
+        </span>
+
+      </div>
+
+      <button class="btn"
+        onclick="addCoins()">
+        شراء كوينز
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div class="section">
+
+    <div class="section-head">
+      <h3>باقات الكوينز</h3>
+    </div>
+
+
+    <div class="coin-grid">
+
+      <div class="coin-pack">
+        🪙
+        <b>100K</b>
+        <small>10 ج.م</small>
+        <button onclick="buyCoins(100000)">
+          شراء
+        </button>
+      </div>
+
+      <div class="coin-pack">
+        🪙
+        <b>500K</b>
+        <small>45 ج.م</small>
+        <button onclick="buyCoins(500000)">
+          شراء
+        </button>
+      </div>
+
+      <div class="coin-pack">
+        🪙
+        <b>1M</b>
+        <small>80 ج.م</small>
+        <button onclick="buyCoins(1000000)">
+          شراء
+        </button>
+      </div>
+
+      <div class="coin-pack">
+        🪙
+        <b>3M</b>
+        <small>150 ج.م</small>
+        <button onclick="buyCoins(3000000)">
+          شراء
+        </button>
+      </div>
+
+      <div class="coin-pack">
+        🪙
+        <b>5M</b>
+        <small>250 ج.م</small>
+        <button onclick="buyCoins(5000000)">
+          شراء
+        </button>
+      </div>
+
+      <div class="coin-pack">
+        🪙
+        <b>10M</b>
+        <small>450 ج.م</small>
+        <button onclick="buyCoins(10000000)">
+          شراء
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="section">
+
+    <div class="section-head">
+      <h3>الهدايا</h3>
+    </div>
+
+
+    <div class="gift-grid">
+
+      <div class="gift"
+        onclick="sendGift('🌹',10)">
+
+        <div class="gicon">🌹</div>
+        <b>10</b>
+        <small>وردة حمراء</small>
+
+      </div>
+
+
+      <div class="gift"
+        onclick="sendGift('👑',50)">
+
+        <div class="gicon">👑</div>
+        <b>50</b>
+        <small>تاج</small>
+
+      </div>
+
+
+      <div class="gift"
+        onclick="sendGift('🚗',100)">
+
+        <div class="gicon">🚗</div>
+        <b>100</b>
+        <small>سيارة</small>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= مستوى الثروة ================= -->
+
+<section id="level" class="screen">
+
+  <div class="topbar">
+
+    <button class="iconbtn"
+      onclick="goBack()">
+      ←
+    </button>
+
+    <div class="title">
+      مستوى الثروة
+    </div>
+
+    <div style="width:39px"></div>
+
+  </div>
+
+
+  <div class="levelbox">
+
+    <div class="small">
+      المستوى الحالي
+    </div>
+
+    <div class="biglevel">
+      25
+    </div>
+
+    <div class="progress">
+      <span></span>
+    </div>
+
+    <div>
+      4500 / 5000
+    </div>
+
+    <div style="margin-top:16px;font-size:14px">
+      👑 الثروة
+      <b style="color:#ffd52e">
+        12,560
+      </b>
+    </div>
+
+    <div class="small"
+      style="margin-top:10px">
+
+      الوصول إلى مستوى 30 يفتح
+      إنشاء عائلة مجانًا
+
+    </div>
+
+  </div>
+
+
+  <div class="section">
+
+    <div class="card">
+
+      <b>
+        كيف يرتفع المستوى؟
+      </b>
+
+      <p class="small"
+        style="line-height:2;margin-top:8px">
+
+        استقبل الهدايا، أرسل الهدايا،
+        شارك في الرومات، وتفاعل مع
+        المجتمع لتحصل على نقاط الثروة.
+
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= الأصدقاء ================= -->
+
+<section id="friends" class="screen">
+
+  <div class="topbar">
+
+    <button class="iconbtn"
+      onclick="goBack()">
+      ←
+    </button>
+
+    <div class="title">
+      الأصدقاء
+    </div>
+
+    <div style="width:39px"></div>
+
+  </div>
+
+
+  <div class="tabs">
+
+    <button class="tab active">
+      إضافة أصدقاء
+    </button>
+
+    <button class="tab">
+      طلبات الصداقة
+    </button>
+
+  </div>
+
+
+  <div class="list">
+
+    <div class="frienditem">
+
+      <img class="avatar"
+        src="https://i.pravatar.cc/100?img=11">
+
+      <div class="grow">
+
+        <b>أحمد</b>
+
+        <div class="small">
+          متصل الآن
+        </div>
+
+      </div>
+
+      <button class="join"
+        onclick="showAlert('تم إرسال طلب الصداقة')">
+
+        إضافة
+
+      </button>
+
+    </div>
+
+
+    <div class="frienditem">
+
+      <img class="avatar"
+        src="https://i.pravatar.cc/100?img=32">
+
+      <div class="grow">
+
+        <b>سارة</b>
+
+        <div class="small">
+          متصلة الآن
+        </div>
+
+      </div>
+
+      <button class="join"
+        onclick="showAlert('تم إرسال طلب الصداقة')">
+
+        إضافة
+
+      </button>
+
+    </div>
+
+
+    <div class="frienditem">
+
+      <img class="avatar"
+        src="https://i.pravatar.cc/100?img=13">
+
+      <div class="grow">
+
+        <b>محمد</b>
+
+        <div class="small">
+          منذ 5 دقائق
+        </div>
+
+      </div>
+
+      <button class="join"
+        onclick="showAlert('تم إرسال طلب الصداقة')">
+
+        إضافة
+
+      </button>
+
+    </div>
+
+
+    <div class="frienditem">
+
+      <img class="avatar"
+        src="https://i.pravatar.cc/100?img=47">
+
+      <div class="grow">
+
+        <b>نور</b>
+
+        <div class="small">
+          متصل الآن
+        </div>
+
+      </div>
+
+      <button class="join"
+        onclick="showAlert('تم إرسال طلب الصداقة')">
+
+        إضافة
+
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= الإشعارات ================= -->
+
+<section id="notifications" class="screen">
+
+  <div class="topbar">
+
+    <button class="iconbtn"
+      onclick="showScreen('home')">
+      ←
+    </button>
+
+    <div class="title">
+      الإشعارات
+    </div>
+
+    <div style="width:39px"></div>
+
+  </div>
+
+
+  <div class="list">
+
+    <div class="noticeitem">
+      🔵
+      <div class="grow">
+        <b>تمت إضافة صديق جديد</b>
+        <div class="small">منذ 5 دقائق</div>
+      </div>
+    </div>
+
+
+    <div class="noticeitem">
+      🎁
+      <div class="grow">
+        <b>محمد أرسل لك هدية</b>
+        <div class="small">منذ 10 دقائق</div>
+      </div>
+    </div>
+
+
+    <div class="noticeitem">
+      👑
+      <div class="grow">
+        <b>تمت مكافأتك لكسر الروم</b>
+        <div class="small">منذ ساعة</div>
+      </div>
+    </div>
+
+
+    <div class="noticeitem">
+      💬
+      <div class="grow">
+        <b>رسالة جديدة من سارة</b>
+        <div class="small">منذ ساعتين</div>
+      </div>
+    </div>
+
+
+    <div class="noticeitem">
+      ⭐
+      <div class="grow">
+        <b>تم تحديث مستواك إلى 25</b>
+        <div class="small">اليوم</div>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= العائلة ================= -->
+
+<section id="family" class="screen">
+
+  <div class="topbar">
+
+    <button class="iconbtn"
+      onclick="showScreen('profile')">
+      ←
+    </button>
+
+    <div class="title">
+      عائلتي
+    </div>
+
+    <button class="iconbtn"
+      onclick="openFamilyModal()">
+      ＋
+    </button>
+
+  </div>
+
+
+  <div class="family-cover">
+    👑
+  </div>
+
+
+  <div class="section">
+
+    <div class="card">
+
+      <div class="row">
+
+        <img class="avatar"
+          src="https://i.pravatar.cc/100?img=12">
+
+        <div class="grow">
+
+          <h3>
+            عائلة النجوم
+          </h3>
+
+          <div class="small">
+            👥 32 عضو • ⭐ المستوى 8
+          </div>
+
+        </div>
+
+        <button class="join"
+          onclick="openFamilyChat()">
+
+          الدردشة
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="section">
+
+    <div class="section-head">
+      <h3>المشرفين</h3>
+      <span>3</span>
+    </div>
+
+
+    <div class="frienditem">
+
+      <img class="avatar"
+        src="https://i.pravatar.cc/100?img=11">
+
+      <div class="grow">
+
+        <b>أحمد</b>
+
+        <div class="small">
+          مشرف رئيسي
+        </div>
+
+      </div>
+
+      👑
+
+    </div>
+
+
+    <div class="frienditem">
+
+      <img class="avatar"
+        src="https://i.pravatar.cc/100?img=32">
+
+      <div class="grow">
+
+        <b>سارة</b>
+
+        <div class="small">
+          مشرف
+        </div>
+
+      </div>
+
+      ⭐
+
+    </div>
+
+
+    <div class="frienditem">
+
+      <img class="avatar"
+        src="https://i.pravatar.cc/100?img=13">
+
+      <div class="grow">
+
+        <b>محمد</b>
+
+        <div class="small">
+          مشرف
+        </div>
+
+      </div>
+
+      ⭐
+
+    </div>
+
+  </div>
+
+
+  <div class="section">
+
+    <button class="btn"
+      onclick="openFamilyChat()">
+
+      💬 محادثة العائلة
+
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- ================= محادثة العائلة ================= -->
+
+<section id="familyChat" class="screen">
+
+  <div class="topbar">
+
+    <button class="iconbtn"
+      onclick="showScreen('family')">
+      ←
+    </button>
+
+    <div class="title">
+      محادثة العائلة
+    </div>
+
+    <button class="iconbtn"
+      onclick="showScreen('family')">
+      👥
+    </button>
+
+  </div>
+
+
+  <div class="family-head">
+
+    <img class="avatar"
+      src="https://i.pravatar.cc/100?img=12">
+
+    <div>
+
+      <b>
+        عائلة النجوم 👑
+      </b>
+
+      <div class="small">
+        32 عضو
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="list"
+    id="familyMessages">
+
+    <div class="bubble">
+      <b>أحمد</b>
+      <br>
+      مرحبًا بكم في عائلتنا 👋
+    </div>
+
+    <div class="bubble">
+      <b>سارة</b>
+      <br>
+      يسعدنا انضمام الجميع ❤️
+    </div>
+
+    <div class="bubble">
+      <b>محمد</b>
+      <br>
+      نورتوا العائلة يا نجوم ⭐
+    </div>
+
+    <div class="bubble me">
+      <b>أنا</b>
+      <br>
+      منورين جميعًا 🙌
+    </div>
+
+  </div>
+
+
+  <div class="family-msg">
+
+    <input
+      id="familyInput"
+      class="input"
+      placeholder="اكتب رسالة..."
+    >
+
+    <button class="send"
+      onclick="sendFamilyMessage()">
+
+      ➤
+
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- ================= تفاصيل الروم ================= -->
+
+<section id="roomDetails" class="screen">
+
+  <div class="topbar">
+
+    <button class="iconbtn"
+      onclick="showScreen('rooms')">
+      ←
+    </button>
+
+    <div id="roomTitle"
+      class="title">
+      تفاصيل الروم
+    </div>
+
+    <button class="iconbtn"
+      onclick="showAlert('المزيد')">
+      ⋮
+    </button>
+
+  </div>
+
+
+  <div class="room-big">
+
+    <div class="cover"
+      id="roomEmoji">
+      🎵
+    </div>
+
+    <div class="body">
+
+      <h3 id="roomName">
+        روم الفن
+      </h3>
+
+      <p>
+        متصل <b>276</b>
+        • صاحب الروم Star
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <div class="section">
+
+    <div class="row"
+      style="justify-content:center;gap:14px">
+
+      <img class="avatar"
+        src="https://i.pravatar.cc/100?img=12">
+
+      <img class="avatar"
+        src="https://i.pravatar.cc/100?img=11">
+
+      <img class="avatar"
+        src="https://i.pravatar.cc/100?img=32">
+
+      <img class="avatar"
+        src="https://i.pravatar.cc/100?img=13">
+
+      <img class="avatar"
+        src="https://i.pravatar.cc/100?img=47">
+
+    </div>
+
+  </div>
+
+
+  <div class="section">
+
+    <div class="card">
+
+      <div class="row">
+
+        <button class="iconbtn"
+          onclick="showAlert('الميكروفون مغلق')">
+          🎙️
+        </button>
+
+        <div class="grow"></div>
+
+        <button class="iconbtn"
+          onclick="showAlert('تم تشغيل الميكروفون')">
+          🎤
+        </button>
+
+        <button class="iconbtn"
+          onclick="showGiftModal()">
+          🎁
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="section">
+
+    <button class="btn"
+      onclick="showGiftModal()">
+
+      🎁 إرسال هدية
+
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- ================= الإعدادات ================= -->
+
+<section id="settings" class="screen">
+
+  <div class="topbar">
+
+    <button class="iconbtn"
+      onclick="showScreen('profile')">
+      ←
+    </button>
+
+    <div class="title">
+      الإعدادات
+    </div>
+
+    <div style="width:39px"></div>
+
+  </div>
+
+
+  <div class="list">
+
+
+    <div class="setting">
+
+      <div class="ico">👤</div>
+
+      <div class="grow">
+
+        <b>تعديل الحساب</b>
+
+        <br>
+
+        <span>
+          الاسم والصورة والبيانات
+        </span>
+
+      </div>
+
+      <button onclick="editName()">
+        ›
+      </button>
+
+    </div>
+
+
+    <div class="setting">
+
+      <div class="ico">🎂</div>
+
+      <div class="grow">
+
+        <b>السن</b>
+
+        <br>
+
+        <span id="ageText">
+          غير محدد
+        </span>
+
+      </div>
+
+      <button onclick="editAge()">
+        ›
+      </button>
+
+    </div>
+
+
+    <div class="setting">
+
+      <div class="ico">🌍</div>
+
+      <div class="grow">
+
+        <b>الدولة</b>
+
+        <br>
+
+        <span id="countryText">
+          مصر
+        </span>
+
+      </div>
+
+      <button onclick="editCountry()">
+        ›
+      </button>
+
+    </div>
+
+
+    <div class="setting">
+
+      <div class="ico">📱</div>
+
+      <div class="grow">
+
+        <b>رقم الهاتف</b>
+
+        <br>
+
+        <span id="phoneText">
+          غير مربوط
+        </span>
+
+      </div>
+
+      <button onclick="editPhone()">
+        ›
+      </button>
+
+    </div>
+
+
+    <div class="setting">
+
+      <div class="ico">🔐</div>
+
+      <div class="grow">
+
+        <b>الأمان والخصوصية</b>
+
+        <br>
+
+        <span>
+          الحساب والخصوصية
+        </span>
+
+      </div>
+
+   
