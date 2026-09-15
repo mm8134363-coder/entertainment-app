@@ -505,6 +505,7 @@ let selectedGender = "";
 /* =====================================================
    تسجيل الدخول
 ===================================================== */
+  
 function loginWithPhone(){
 
   const phone =
@@ -527,13 +528,7 @@ function loginWithPhone(){
     phone
   );
 
-  document
-    .getElementById("loginPage")
-    .classList.remove("active");
-
-  document
-    .getElementById("homePage")
-    .classList.add("active");
+  openSetupPage();
 
 }
 
