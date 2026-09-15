@@ -1,11 +1,24 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
 <title>Family Star</title>
 
+
 <style>
+
+/* =========================
+   إعدادات عامة
+========================= */
+
 *{
   box-sizing:border-box;
   margin:0;
@@ -19,7 +32,9 @@ body{
   min-height:100vh;
 }
 
-button,input,select{
+button,
+input,
+select{
   font-family:inherit;
 }
 
@@ -27,6 +42,7 @@ button{
   cursor:pointer;
   border:0;
 }
+
 
 /* =========================
    الصفحات
@@ -41,6 +57,7 @@ button{
   display:block;
 }
 
+
 /* =========================
    تسجيل الدخول
 ========================= */
@@ -51,32 +68,58 @@ button{
   align-items:center;
   justify-content:center;
   padding:20px;
+
   background:
-    radial-gradient(circle at top,#18245d 0,#070b20 45%,#030511 100%);
+    radial-gradient(
+      circle at top,
+      #18245d 0,
+      #070b20 45%,
+      #030511 100%
+    );
 }
 
 .login-box{
   width:100%;
   max-width:430px;
+
   background:#101633;
+
   border:1px solid #273469;
+
   border-radius:25px;
+
   padding:30px 22px;
-  box-shadow:0 20px 60px rgba(0,0,0,.45);
+
+  box-shadow:
+    0 20px 60px rgba(0,0,0,.45);
+
   text-align:center;
 }
 
 .logo{
   width:85px;
   height:85px;
+
   border-radius:25px;
+
   margin:0 auto 15px;
+
   display:flex;
   align-items:center;
   justify-content:center;
-  background:linear-gradient(135deg,#586dff,#8c4dff);
+
+  background:
+    linear-gradient(
+      135deg,
+      #586dff,
+      #8c4dff
+    );
+
   font-size:38px;
-  box-shadow:0 10px 30px rgba(84,91,255,.35);
+
+  box-shadow:
+    0 10px 30px
+    rgba(84,91,255,.35);
 }
 
 .login-title{
@@ -93,12 +136,19 @@ button{
 .phone-input{
   width:100%;
   height:52px;
+
   border-radius:15px;
+
   border:1px solid #303b70;
+
   background:#080d27;
+
   color:#fff;
+
   padding:0 16px;
+
   outline:none;
+
   margin-bottom:12px;
 }
 
@@ -109,202 +159,222 @@ button{
 .main-btn{
   width:100%;
   height:52px;
+
   border-radius:15px;
+
   color:#fff;
+
   font-weight:bold;
+
   font-size:16px;
-  background:linear-gradient(135deg,#5367ff,#854bff);
+
+  background:
+    linear-gradient(
+      135deg,
+      #5367ff,
+      #854bff
+    );
+
   margin-bottom:15px;
 }
 
 .social-btn{
   width:100%;
   height:50px;
+
   border-radius:14px;
+
   background:#1a2244;
+
   color:#fff;
+
   margin-top:10px;
+
   border:1px solid #303a68;
+
   font-size:15px;
 }
 
 .login-note{
   margin-top:20px;
+
   font-size:12px;
+
   color:#7f8ab4;
+
   line-height:1.7;
 }
 
-وبعده مباشرة في الـHTML:
 
-<!-- =====================================================
-     الجزء 1 — تسجيل الدخول
-===================================================== -->
-
-<section id="loginPage" class="page active login-page">
-
-  <div class="login-box">
-
-    <div class="logo">⭐</div>
-
-    <div class="login-title">
-      Family Star
-    </div>
-
-    <div class="login-subtitle">
-      برنامج ترفيه وتسلية فقط
-    </div>
-
-    <input
-      id="phoneLogin"
-      class="phone-input"
-      type="tel"
-      placeholder="اكتب رقم الهاتف"
-    >
-
-    <button
-      class="main-btn"
-      onclick="loginWithPhone()"
-    >
-      تسجيل الدخول
-    </button>
-
-    <button
-      class="social-btn"
-      onclick="socialLogin('Google')"
-    >
-      🔴 تسجيل الدخول باستخدام Google
-    </button>
-
-    <button
-      class="social-btn"
-      onclick="socialLogin('Facebook')"
-    >
-      🔵 تسجيل الدخول باستخدام Facebook
-    </button>
-
-    <div class="login-note">
-      بعد تسجيل الدخول سيتم فتح صفحة إعداد الحساب
-      قبل الدخول إلى الصفحة الرئيسية.
-    </div>
-
-  </div>
-
-</section>
 /* =========================
    إعداد الحساب
 ========================= */
 
 .setup-page{
   padding:20px;
+
   background:
-    radial-gradient(circle at top,#17235a 0,#070b20 50%,#030511 100%);
+    radial-gradient(
+      circle at top,
+      #17235a 0,
+      #070b20 50%,
+      #030511 100%
+    );
 }
 
 .setup-container{
   max-width:550px;
+
   margin:auto;
+
   padding-bottom:40px;
 }
 
 .setup-header{
   text-align:center;
+
   margin:10px 0 20px;
 }
 
 .setup-header h1{
   font-size:25px;
+
   margin-bottom:8px;
 }
 
 .setup-header p{
   color:#9fa9d1;
+
   font-size:14px;
 }
 
 .cover-box{
   height:170px;
+
   border-radius:22px;
+
   overflow:hidden;
+
   position:relative;
+
   background:
-    linear-gradient(135deg,#263779,#6c48b8);
+    linear-gradient(
+      135deg,
+      #263779,
+      #6c48b8
+    );
+
   border:1px solid #33417c;
+
   margin-bottom:55px;
 }
 
 .cover-preview{
   width:100%;
   height:100%;
+
   object-fit:cover;
+
   display:none;
 }
 
 .cover-placeholder{
   height:100%;
+
   display:flex;
+
   align-items:center;
   justify-content:center;
+
   color:#cbd1f1;
+
   font-size:15px;
 }
 
 .cover-edit{
   position:absolute;
+
   left:15px;
   bottom:15px;
+
   background:rgba(0,0,0,.55);
+
   color:#fff;
+
   padding:9px 13px;
+
   border-radius:12px;
+
   font-size:13px;
 }
 
 .avatar-box{
   position:absolute;
+
   bottom:-45px;
+
   right:50%;
+
   transform:translateX(50%);
+
   width:90px;
   height:90px;
+
   border-radius:50%;
+
   background:#171f43;
+
   border:4px solid #070b20;
+
   overflow:hidden;
 }
 
 .avatar-preview{
   width:100%;
   height:100%;
+
   object-fit:cover;
+
   display:none;
 }
 
 .avatar-placeholder{
   width:100%;
   height:100%;
+
   display:flex;
+
   align-items:center;
   justify-content:center;
+
   font-size:30px;
 }
 
 .avatar-edit{
   position:absolute;
+
   bottom:3px;
   left:3px;
   right:3px;
+
   background:rgba(0,0,0,.65);
+
   color:#fff;
+
   font-size:11px;
+
   text-align:center;
+
   padding:5px 0;
 }
 
 .form-card{
   background:#101633;
+
   border:1px solid #283568;
+
   border-radius:22px;
+
   padding:20px;
 }
 
@@ -314,20 +384,30 @@ button{
 
 .field label{
   display:block;
+
   margin-bottom:8px;
+
   color:#c8ceea;
+
   font-size:14px;
 }
 
 .field input,
 .field select{
   width:100%;
+
   height:50px;
+
   border-radius:14px;
+
   border:1px solid #303b70;
+
   background:#080d27;
+
   color:#fff;
+
   padding:0 14px;
+
   outline:none;
 }
 
@@ -336,53 +416,74 @@ button{
   border-color:#6677ff;
 }
 
-/* النوع */
+
+/* =========================
+   النوع
+========================= */
 
 .gender-title{
   color:#c8ceea;
+
   font-size:14px;
+
   margin-bottom:10px;
 }
 
 .gender-options{
   display:flex;
+
   gap:12px;
 }
 
 .gender-option{
   flex:1;
+
   border:1px solid #303b70;
+
   background:#080d27;
+
   border-radius:15px;
+
   padding:15px 10px;
+
   text-align:center;
+
   transition:.2s;
 }
 
 .gender-option.selected{
   border-color:#6878ff;
+
   background:#151e46;
 }
 
 .gender-icon{
   width:45px;
   height:45px;
+
   border-radius:50%;
+
   display:flex;
+
   align-items:center;
   justify-content:center;
+
   margin:0 auto 7px;
+
   font-size:25px;
+
   font-weight:bold;
 }
 
 .male-icon{
   background:#123c82;
+
   color:#4d9cff;
 }
 
 .female-icon{
   background:#6b214e;
+
   color:#ff75bd;
 }
 
@@ -392,14 +493,27 @@ button{
 
 .save-profile{
   width:100%;
+
   height:52px;
+
   border-radius:15px;
-  background:linear-gradient(135deg,#5367ff,#854bff);
+
+  background:
+    linear-gradient(
+      135deg,
+      #5367ff,
+      #854bff
+    );
+
   color:#fff;
+
   font-size:16px;
+
   font-weight:bold;
+
   margin-top:5px;
 }
+
 
 /* =========================
    الصفحة الرئيسية
@@ -411,186 +525,153 @@ button{
 
 .top-bar{
   height:65px;
+
   padding:0 16px;
+
   display:flex;
+
   align-items:center;
+
   justify-content:space-between;
+
   background:#0c1230;
+
   border-bottom:1px solid #202b57;
+
   position:sticky;
+
   top:0;
+
   z-index:20;
 }
 
 .app-name{
   font-size:21px;
+
   font-weight:bold;
 }
 
 .coins-box{
   background:#171f43;
+
   border:1px solid #303b70;
+
   border-radius:20px;
+
   padding:8px 13px;
+
   font-size:13px;
 }
 
 .home-content{
   max-width:900px;
+
   margin:auto;
+
   padding:18px 15px;
 }
 
 .welcome{
-  background:linear-gradient(135deg,#1b2861,#30205b);
+  background:
+    linear-gradient(
+      135deg,
+      #1b2861,
+      #30205b
+    );
+
   border:1px solid #34437e;
+
   border-radius:22px;
+
   padding:18px;
+
   margin-bottom:18px;
 }
 
 .welcome-name{
   font-size:21px;
+
   font-weight:bold;
+
   margin-bottom:6px;
 }
 
 .user-name-line{
   display:flex;
+
   align-items:center;
+
   gap:7px;
 }
 
-/* علامات النوع بجانب الاسم */
-
 .gender-badge{
   display:inline-flex;
+
   align-items:center;
   justify-content:center;
+
   width:21px;
   height:21px;
+
   border-radius:50%;
+
   font-size:14px;
+
   font-weight:bold;
 }
 
 .gender-badge.male{
   background:#103d86;
+
   color:#4fa1ff;
+
   border:1px solid #3d8cff;
 }
 
 .gender-badge.female{
   background:#70224e;
+
   color:#ff78c0;
+
   border:1px solid #ff65b3;
 }
 
 .section-title{
   font-size:18px;
+
   font-weight:bold;
   margin:20px 0 12px;
 }
 
-.cards{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
-}
 
-.home-card{
-  min-height:115px;
-  border-radius:19px;
-  padding:16px;
-  background:#101633;
-  border:1px solid #283568;
-}
+/* =========================
+   التنقل السفلي
+========================= */
 
-.home-card-icon{
-  font-size:28px;
-  margin-bottom:12px;
-}
+.bottom-nav{
+  position:fixed;
 
-.home-card-title{
-  font-weight:bold;
-  margin-bottom:5px;
-}
+  bottom:0;
 
-.home-card-text{
-  color:#929dc6;
-  font-size:12px;
-}
+  right:0;
 
-.banner{
-  margin-top:15px;
-  min-height:90px;
-  border-radius:20px;
-  padding:18px;
-  background:linear-gradient(135deg,#563a9e,#1e5a91);
-  border:1px solid #4d5c9d;
-}
+  left:0;
 
-.banner-title{
-  font-size:18px;
-  font-weight:bold;
-  margin-bottom:6px;
-}
+  height:68px;
 
-.banner-text{
-  font-size:13px;
-  color:#d6daf2;
-}
+  background:#0c1230;
 
-/* الرومات */
+  border-top:1px solid #242f5d;
 
-.rooms-list{
-  display:grid;
-  gap:12px;
-}
-
-.room-card{
-  background:#101633;
-  border:1px solid #283568;
-  border-radius:18px;
-  padding:15px;
   display:flex;
+
+  justify-content:space-around;
+
   align-items:center;
-  gap:12px;
-}
 
-.room-avatar{
-  width:55px;
-  height:55px;
-  border-radius:16px;
-  background:linear-gradient(135deg,#5367ff,#884cff);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:25px;
-}
-
-.room-info{
-  flex:1;
-}
-
-.room-name{
-  font-weight:bold;
-  margin-bottom:5px;
-}
-
-.room-meta{
-  color:#8f99c0;
-  font-size:12px;
-}
-
-.enter-room{
-  background:#1c2860;
-  color:#8ca0ff;
-  padding:9px 12px;
-  border-radius:11px;
-  font-size:12px;
-}
-
+  z-index:50;
+  }
+ 
 /* =========================
    التنقل السفلي
 ========================= */
