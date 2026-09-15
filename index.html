@@ -1487,6 +1487,603 @@ document.addEventListener("click",function(e){
 document.getElementById("bottomNav").style.display="none";
 
 </script>
+<!-- =========================
+     إنشاء روم
+========================= -->
 
+<style>
+.create-room-btn{
+  width:calc(100% - 30px);
+  margin:0 15px 15px;
+  padding:15px;
+  border-radius:16px;
+  background:linear-gradient(135deg,#6c3df5,#9b59ff);
+  color:#fff;
+  font-size:17px;
+  font-weight:bold;
+}
+
+.create-room-page{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:80;
+  background:#f5f5f8;
+  overflow:auto;
+}
+
+.create-room-page.active{
+  display:block;
+}
+
+.create-room-head{
+  height:60px;
+  background:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 15px;
+  border-bottom:1px solid #eee;
+  position:sticky;
+  top:0;
+  z-index:2;
+}
+
+.create-room-head h2{
+  font-size:19px;
+}
+
+.create-room-content{
+  padding:15px;
+  padding-bottom:30px;
+}
+
+.room-form-card{
+  background:#fff;
+  border-radius:18px;
+  padding:18px;
+  margin-bottom:14px;
+  box-shadow:0 2px 10px rgba(0,0,0,.05);
+}
+
+.room-label{
+  display:block;
+  font-weight:bold;
+  margin-bottom:9px;
+}
+
+.room-input,
+.room-textarea{
+  width:100%;
+  border:1px solid #ddd;
+  border-radius:13px;
+  padding:13px;
+  outline:none;
+  font-size:15px;
+  background:#fafafa;
+}
+
+.room-textarea{
+  min-height:100px;
+  resize:none;
+}
+
+.image-upload{
+  text-align:center;
+}
+
+.image-preview{
+  width:110px;
+  height:110px;
+  border-radius:20px;
+  margin:0 auto 12px;
+  background:#f0eef8;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:42px;
+  overflow:hidden;
+}
+
+.image-preview img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.upload-btn{
+  background:#f0eef8;
+  color:#6c3df5;
+  padding:10px 18px;
+  border-radius:13px;
+  font-weight:bold;
+}
+
+.mic-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+}
+
+.mic-option{
+  padding:12px 5px;
+  border-radius:12px;
+  background:#f1f1f4;
+  text-align:center;
+  cursor:pointer;
+  border:2px solid transparent;
+}
+
+.mic-option.selected{
+  background:#eee8ff;
+  border-color:#6c3df5;
+  color:#6c3df5;
+  font-weight:bold;
+}
+
+.save-room-btn{
+  width:100%;
+  padding:15px;
+  border-radius:16px;
+  background:#6c3df5;
+  color:#fff;
+  font-size:17px;
+  font-weight:bold;
+  margin-top:5px;
+}
+
+.cancel-room-btn{
+  width:100%;
+  padding:13px;
+  border-radius:16px;
+  background:#eee;
+  color:#333;
+  font-size:16px;
+  margin-top:10px;
+}
+</style>
+
+
+<!-- صفحة إنشاء الروم -->
+
+<section id="createRoomPage" class="create-room-page">
+
+  <div class="create-room-head">
+    <button class="icon-btn" onclick="closeCreateRoom()">‹</button>
+    <h2>إنشاء روم</h2>
+    <div style="width:38px;"></div>
+  </div>
+
+  <div class="create-room-content">
+
+    <!-- صورة الروم -->
+    <div class="room-form-card image-upload">
+
+      <span class="room-label">🖼️ صورة الروم</span>
+
+      <div class="image-preview" id="roomImagePreview">
+        🎤
+      </div>
+
+      <input
+        type="file"
+        id="roomImageInput"
+        accept="image/*"
+        hidden
+        onchange="previewRoomImage(event)"
+      >
+
+      <button
+        class="upload-btn"
+        onclick="document.getElementById('roomImageInput').click()"
+      >
+        اختيار صورة
+      </button>
+
+    </div>
+
+
+    <!-- اسم الروم -->
+    <div class="room-form-card">
+
+      <label class="room-label">✏️ اسم الروم</label>
+
+      <input
+        id="roomNameInput"
+        class="room-input"
+        type="text"
+        maxlength="40"
+        placeholder="اكتب اسم الروم"
+      >
+
+    </div>
+
+
+    <!-- إعلان الروم -->
+    <div class="room-form-card">
+
+      <label class="room-label">📢 إعلان الروم</label>
+
+      <textarea
+        id="roomAnnouncementInput"
+        class="room-textarea"
+        maxlength="200"
+        placeholder="اكتب إعلان الروم"
+      ></textarea>
+
+    </div>
+
+
+    <!-- عدد الميكات -->
+    <div class="room-form-card">
+
+      <span class="room-label">
+        🎤 عدد الميكات
+      </span>
+
+      <div class="mic-grid" id="micGrid">
+
+        <div class="mic-option selected" onclick="selectMics(1,this)">1 ميك</div>
+        <div class="mic-option" onclick="selectMics(2,this)">2 ميك</div>
+        <div class="mic-option" onclick="selectMics(3,this)">3 ميك</div>
+        <div class="mic-option" onclick="selectMics(4,this)">4 ميك</div>
+
+        <div class="mic-option" onclick="selectMics(5,this)">5 ميك</div>
+        <div class="mic-option" onclick="selectMics(6,this)">6 ميك</div>
+        <div class="mic-option" onclick="selectMics(7,this)">7 ميك</div>
+        <div class="mic-option" onclick="selectMics(8,this)">8 ميك</div>
+
+        <div class="mic-option" onclick="selectMics(9,this)">9 ميك</div>
+        <div class="mic-option" onclick="selectMics(10,this)">10 ميك</div>
+        <div class="mic-option" onclick="selectMics(11,this)">11 ميك</div>
+        <div class="mic-option" onclick="selectMics(12,this)">12 ميك</div>
+
+        <div class="mic-option" onclick="selectMics(13,this)">13 ميك</div>
+        <div class="mic-option" onclick="selectMics(14,this)">14 ميك</div>
+        <div class="mic-option" onclick="selectMics(15,this)">15 ميك</div>
+        <div class="mic-option" onclick="selectMics(16,this)">16 ميك</div>
+
+        <div class="mic-option" onclick="selectMics(17,this)">17 ميك</div>
+        <div class="mic-option" onclick="selectMics(18,this)">18 ميك</div>
+        <div class="mic-option" onclick="selectMics(19,this)">19 ميك</div>
+        <div class="mic-option" onclick="selectMics(20,this)">20 ميك</div>
+
+      </div>
+
+    </div>
+
+
+    <!-- صورة الغلاف -->
+    <div class="room-form-card image-upload">
+
+      <span class="room-label">🖼️ صورة غلاف الروم</span>
+
+      <div class="image-preview" id="roomCoverPreview">
+        🖼️
+      </div>
+
+      <input
+        type="file"
+        id="roomCoverInput"
+        accept="image/*"
+        hidden
+        onchange="previewRoomCover(event)"
+      >
+
+      <button
+        class="upload-btn"
+        onclick="document.getElementById('roomCoverInput').click()"
+      >
+        اختيار صورة الغلاف
+      </button>
+
+    </div>
+
+
+    <!-- الحفظ -->
+    <button
+      class="save-room-btn"
+      onclick="saveNewRoom()"
+    >
+      💾 حفظ وإنشاء الروم
+    </button>
+
+    <button
+      class="cancel-room-btn"
+      onclick="closeCreateRoom()"
+    >
+      إلغاء
+    </button>
+
+  </div>
+
+</section>
+
+
+<script>
+
+let selectedMics = 1;
+let newRoomImage = "";
+let newRoomCover = "";
+
+
+/* فتح صفحة إنشاء الروم */
+function openCreateRoom(){
+
+  const page = document.getElementById("createRoomPage");
+
+  if(page){
+    page.classList.add("active");
+  }
+
+}
+
+
+/* إغلاق صفحة إنشاء الروم */
+function closeCreateRoom(){
+
+  const page = document.getElementById("createRoomPage");
+
+  if(page){
+    page.classList.remove("active");
+  }
+
+}
+
+
+/* اختيار عدد الميكات */
+function selectMics(number, element){
+
+  selectedMics = number;
+
+  document
+    .querySelectorAll(".mic-option")
+    .forEach(function(item){
+      item.classList.remove("selected");
+    });
+
+  element.classList.add("selected");
+
+}
+
+
+/* صورة الروم */
+function previewRoomImage(event){
+
+  const file = event.target.files[0];
+
+  if(!file) return;
+
+  const reader = new FileReader();
+
+  reader.onload = function(e){
+
+    newRoomImage = e.target.result;
+
+    document.getElementById("roomImagePreview").innerHTML =
+      '<img src="' + newRoomImage + '">';
+
+  };
+
+  reader.readAsDataURL(file);
+
+}
+
+
+/* صورة الغلاف */
+function previewRoomCover(event){
+
+  const file = event.target.files[0];
+
+  if(!file) return;
+
+  const reader = new FileReader();
+
+  reader.onload = function(e){
+
+    newRoomCover = e.target.result;
+
+    document.getElementById("roomCoverPreview").innerHTML =
+      '<img src="' + newRoomCover + '">';
+
+  };
+
+  reader.readAsDataURL(file);
+
+}
+
+
+/* حفظ الروم */
+function saveNewRoom(){
+
+  const name =
+    document.getElementById("roomNameInput").value.trim();
+
+  const announcement =
+    document.getElementById("roomAnnouncementInput").value.trim();
+
+
+  if(!name){
+
+    alert("من فضلك اكتب اسم الروم");
+
+    return;
+  }
+
+
+  if(!newRoomImage){
+
+    alert("من فضلك اختر صورة الروم");
+
+    return;
+  }
+
+
+  if(!announcement){
+
+    alert("من فضلك اكتب إعلان الروم");
+
+    return;
+  }
+
+
+  if(!newRoomCover){
+
+    alert("من فضلك اختر صورة الغلاف");
+
+    return;
+  }
+
+
+  const room = {
+
+    id:Date.now(),
+
+    name:name,
+
+    announcement:announcement,
+
+    mics:selectedMics,
+
+    image:newRoomImage,
+
+    cover:newRoomCover
+
+  };
+
+
+  let rooms =
+    JSON.parse(localStorage.getItem("familyStarRooms") || "[]");
+
+
+  rooms.push(room);
+
+
+  localStorage.setItem(
+    "familyStarRooms",
+    JSON.stringify(rooms)
+  );
+
+
+  closeCreateRoom();
+
+  alert("تم إنشاء الروم بنجاح 🎉");
+
+
+  addRoomToHome(room);
+
+  addRoomToRooms(room);
+
+}
+
+
+/* إضافة الروم في الرئيسية */
+function addRoomToHome(room){
+
+  const home = document.getElementById("home");
+
+  if(!home) return;
+
+
+  const roomCard = document.createElement("div");
+
+  roomCard.className = "room-card";
+
+  roomCard.innerHTML = `
+
+    <div class="room-img"
+         style="background-image:url('${room.image}');
+                background-size:cover;
+                background-position:center;">
+    </div>
+
+    <div class="room-info">
+
+      <h3>${escapeHtml(room.name)}</h3>
+
+      <small>${escapeHtml(room.announcement)}</small>
+
+    </div>
+
+    <b>👥 0</b>
+
+  `;
+
+
+  const roomsTitle =
+    Array.from(home.querySelectorAll(".section-title"))
+      .find(function(el){
+        return el.textContent.includes("الرومات");
+      });
+
+
+  if(roomsTitle){
+
+    roomsTitle.after(roomCard);
+
+  }
+
+}
+
+
+/* إضافة الروم في صفحة الرومات */
+function addRoomToRooms(room){
+
+  const roomsPage = document.getElementById("rooms");
+
+  if(!roomsPage) return;
+
+
+  const roomCard = document.createElement("div");
+
+  roomCard.className = "room-card";
+
+  roomCard.innerHTML = `
+
+    <div class="room-img"
+         style="background-image:url('${room.image}');
+                background-size:cover;
+                background-position:center;">
+    </div>
+
+    <div class="room-info">
+
+      <h3>${escapeHtml(room.name)}</h3>
+
+      <small>${escapeHtml(room.announcement)}</small>
+
+    </div>
+
+    <b>👥 0</b>
+
+  `;
+
+
+  const firstRoomCard =
+    roomsPage.querySelector(".room-card");
+
+
+  if(firstRoomCard){
+
+    firstRoomCard.before(roomCard);
+
+  }
+
+}
+
+
+/* حماية النص */
+function escapeHtml(text){
+
+  return String(text)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+  </script>
 </body>
 </html>
