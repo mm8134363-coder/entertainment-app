@@ -2,689 +2,1019 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Family Star</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Star Voice</title>
 
 <style>
+:root{
+  --bg:#05091c;
+  --panel:#0c1534;
+  --panel2:#111d45;
+  --line:#27366d;
+  --purple:#7d2cff;
+  --purple2:#b12cff;
+  --pink:#f126d6;
+  --gold:#ffd52e;
+  --text:#fff;
+  --muted:#9da9d2;
+  --green:#16c784;
+  --danger:#ff3970;
+}
+
 *{
   box-sizing:border-box;
   margin:0;
   padding:0;
-  font-family:Arial,Tahoma,sans-serif;
+  font-family:Arial,Tahoma,sans-serif
+}
+
+html,body{
+  min-height:100%;
+  background:#020617;
+  color:var(--text)
 }
 
 body{
-  background:#f5f5f8;
-  color:#222;
+  overflow-x:hidden
+}
+
+button,input,select,textarea{
+  font:inherit
 }
 
 button{
   border:0;
-  cursor:pointer;
+  cursor:pointer
+}
+
+button:active{
+  transform:scale(.98)
 }
 
 .app{
-  max-width:480px;
+  width:100%;
+  max-width:500px;
   min-height:100vh;
   margin:auto;
-  background:#fff;
-  position:relative;
-  overflow:hidden;
+  background:
+  radial-gradient(circle at 50% -10%,#22105d 0,#080d29 38%,#05091c 72%);
+  position:relative
 }
 
 .screen{
   display:none;
   min-height:100vh;
-  padding-bottom:75px;
+  padding-bottom:78px
 }
 
 .screen.active{
-  display:block;
+  display:block
 }
 
-/* تسجيل الدخول */
-.login{
-  min-height:100vh;
+.hide{
+  display:none!important
+}
+
+.topbar{
+  height:62px;
+  padding:9px 13px;
   display:flex;
   align-items:center;
-  justify-content:center;
-  padding:25px;
-  background:linear-gradient(145deg,#16122d,#5b247a,#c33764);
+  gap:10px;
+  position:sticky;
+  top:0;
+  z-index:20;
+  background:rgba(5,9,28,.94);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid #18234a
 }
 
-.login-box{
-  width:100%;
-  background:#fff;
-  border-radius:25px;
-  padding:30px 22px;
-  text-align:center;
-  box-shadow:0 15px 40px rgba(0,0,0,.25);
+.topbar .title{
+  font-weight:800;
+  font-size:20px;
+  flex:1;
+  text-align:center
+}
+
+.iconbtn{
+  width:39px;
+  height:39px;
+  border-radius:13px;
+  background:#17234b;
+  color:#fff;
+  font-size:19px
 }
 
 .logo{
-  width:90px;
-  height:90px;
-  border-radius:50%;
-  margin:0 auto 15px;
-  background:linear-gradient(135deg,#ffd700,#ff7b00);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:35px;
-  font-weight:bold;
-  color:#fff;
+  font-weight:900;
+  background:linear-gradient(90deg,#fff,#d64dff,#ffd52e);
+  -webkit-background-clip:text;
+  color:transparent
 }
 
-.login-box h1{
-  margin-bottom:8px;
-}
-
-.login-box p{
-  color:#777;
-  margin-bottom:25px;
-}
-
-.login-btn{
+.btn{
   width:100%;
-  padding:14px;
-  margin:7px 0;
-  border-radius:14px;
-  color:#fff;
-  font-size:16px;
-}
-
-.google{background:#4285f4}
-.facebook{background:#1877f2}
-.phone{background:#333}
-
-.phone-form{
-  display:none;
-  margin-top:15px;
-}
-
-.phone-form input{
-  width:100%;
-  padding:13px;
-  border:1px solid #ddd;
-  border-radius:12px;
-  margin-bottom:10px;
-}
-
-/* الهيدر */
-.header{
-  height:60px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 15px;
-  border-bottom:1px solid #eee;
-  background:#fff;
-  position:sticky;
-  top:0;
-  z-index:10;
-}
-
-.header-title{
-  font-size:20px;
-  font-weight:bold;
-}
-
-.icon-btn{
-  background:#f2f2f5;
-  width:38px;
-  height:38px;
-  border-radius:50%;
-  font-size:18px;
-}
-
-/* الرئيسية */
-.banner{
-  margin:15px;
-  height:130px;
-  border-radius:18px;
-  background:linear-gradient(135deg,#3023ae,#c86dd7);
-  color:#fff;
-  padding:20px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-}
-
-.banner h2{
-  margin-bottom:8px;
-}
-
-.section-title{
-  padding:15px;
-  font-size:18px;
-  font-weight:bold;
-}
-
-.activity-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:10px;
-  padding:0 15px;
-}
-
-.activity{
-  background:#fafafa;
+  padding:13px 16px;
   border-radius:15px;
-  padding:15px 5px;
-  text-align:center;
-  border:1px solid #eee;
-}
-
-.activity .emoji{
-  font-size:28px;
-  margin-bottom:7px;
-}
-
-/* الرومات */
-.room-tabs{
-  display:flex;
-  overflow:auto;
-  padding:10px 15px;
-  gap:8px;
-}
-
-.room-tab{
-  white-space:nowrap;
-  padding:10px 15px;
-  border-radius:20px;
-  background:#f1f1f4;
-}
-
-.room-tab.active{
-  background:#6c3df5;
   color:#fff;
+  font-weight:800;
+  background:linear-gradient(90deg,#6424ff,#b321f2);
+  box-shadow:0 7px 20px #661eff33
 }
 
-.room-card{
-  margin:10px 15px;
-  padding:15px;
-  border-radius:16px;
-  background:#fff;
-  box-shadow:0 2px 10px rgba(0,0,0,.08);
+.btn.gold{
+  background:linear-gradient(90deg,#ffd52e,#ff9d18);
+  color:#201600
+}
+
+.btn.green{
+  background:linear-gradient(90deg,#16c784,#08a76a)
+}
+
+.card{
+  background:linear-gradient(145deg,#101a3e,#0b1330);
+  border:1px solid #253364;
+  border-radius:19px;
+  padding:14px
+}
+
+.row{
   display:flex;
   align-items:center;
-  gap:12px;
+  gap:10px
 }
 
-.room-img{
-  width:65px;
-  height:65px;
-  border-radius:15px;
-  background:linear-gradient(135deg,#ff9966,#ff5e62);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:28px;
-}
-
-.room-info{
-  flex:1;
-}
-
-.room-info h3{
-  margin-bottom:7px;
-}
-
-.room-info small{
-  color:#888;
-}
-
-/* الرسائل */
-.search{
-  margin:15px;
-  background:#f1f1f4;
-  border-radius:15px;
-  padding:12px 15px;
-  border:0;
-  width:calc(100% - 30px);
-  outline:none;
-}
-
-.message-tabs{
-  display:flex;
-  overflow:auto;
-  gap:8px;
-  padding:0 15px 12px;
-}
-
-.message-tab{
-  white-space:nowrap;
-  padding:9px 14px;
-  border-radius:18px;
-  background:#f1f1f4;
-}
-
-.message-tab.active{
-  background:#6c3df5;
-  color:#fff;
-}
-
-.message-item{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  padding:14px 15px;
-  border-bottom:1px solid #eee;
+.grow{
+  flex:1
 }
 
 .avatar{
-  width:50px;
-  height:50px;
+  width:45px;
+  height:45px;
   border-radius:50%;
-  background:linear-gradient(135deg,#667eea,#764ba2);
+  object-fit:cover;
+  border:2px solid #713cff;
+  background:#1d2852
+}
+
+.small{
+  font-size:12px;
+  color:var(--muted)
+}
+
+.muted{
+  color:var(--muted)
+}
+
+.section{
+  padding:0 13px;
+  margin-top:17px
+}
+
+.section-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:10px
+}
+
+.section-head h3{
+  font-size:17px
+}
+
+.section-head span{
+  font-size:12px;
+  color:#ae8cff
+}
+
+/* splash */
+
+#splash{
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  background:
+  radial-gradient(circle at 50% 45%,#6b13d8 0,#24105b 30%,#05091c 68%)
+}
+
+#splash.active{
+  display:flex
+}
+
+.splash-inner{
+  padding:30px
+}
+
+.splash-star{
+  font-size:105px;
+  filter:drop-shadow(0 0 25px #d629ff);
+  animation:pulse 1.5s infinite
+}
+
+.splash-name{
+  font-size:46px;
+  font-weight:900;
+  color:#fff;
+  text-shadow:0 0 18px #c528ff
+}
+
+.splash-name b{
+  color:#ffd52e
+}
+
+.splash-sub{
+  margin-top:10px;
+  color:#e5d9ff
+}
+
+.waves{
+  margin-top:25px;
+  font-size:30px;
+  color:#e938ff;
+  letter-spacing:6px
+}
+
+@keyframes pulse{
+  50%{
+    transform:scale(1.08)
+  }
+}
+
+/* login */
+
+.auth{
+  min-height:100vh;
+  padding:25px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:center
+}
+
+.authbox{
+  width:100%;
+  padding:25px 18px;
+  border-radius:27px;
+  background:#0d1534;
+  border:1px solid #344179;
+  box-shadow:0 20px 70px #0008
+}
+
+.auth-logo{
+  text-align:center;
+  font-size:63px;
+  filter:drop-shadow(0 0 18px #a626ff)
+}
+
+.auth h1{
+  text-align:center;
+  font-size:30px;
+  margin:4px 0 7px
+}
+
+.auth h1 span{
+  color:#ffd52e
+}
+
+.auth p{
+  text-align:center;
+  color:#aab5db;
+  margin-bottom:22px
+}
+
+.input{
+  width:100%;
+  padding:14px;
+  border-radius:13px;
+  background:#080f29;
+  color:#fff;
+  border:1px solid #29396d;
+  outline:none;
+  margin-bottom:10px
+}
+
+.input:focus{
+  border-color:#a02cff
+}
+
+.social{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+  margin-top:10px
+}
+
+.social button{
+  padding:12px;
+  border-radius:13px;
+  background:#17244d;
+  color:#fff;
+  font-weight:700
+}
+
+.terms{
+  text-align:center;
+  color:#7480a9;
+  font-size:10px;
+  margin-top:15px
+}
+
+/* home */
+
+.home-head{
+  padding:12px 13px;
+  display:flex;
+  align-items:center;
+  gap:10px
+}
+
+.coin{
+  background:#1a254e;
+  color:#ffd52e;
+  border:1px solid #5b4b1c;
+  border-radius:22px;
+  padding:8px 11px;
+  font-weight:800
+}
+
+.level-pill{
+  font-size:11px;
+  color:#ffd52e;
+  background:#27204e;
+  padding:4px 8px;
+  border-radius:12px;
+  display:inline-block;
+  margin-top:3px
+}
+
+.banner{
+  margin:3px 13px 0;
+  border-radius:20px;
+  padding:18px;
+  min-height:122px;
+  overflow:hidden;
+  position:relative;
+  background:linear-gradient(120deg,#ad16d5,#5724e7 55%,#ff37a6)
+}
+
+.banner:after{
+  content:"👑";
+  position:absolute;
+  left:14px;
+  top:15px;
+  font-size:70px;
+  opacity:.35
+}
+
+.banner h2{
+  font-size:22px;
+  margin-bottom:8px
+}
+
+.banner p{
+  font-size:12px;
+  line-height:1.7;
+  max-width:78%
+}
+
+.quick{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:9px
+}
+
+.quick button{
+  padding:14px 4px;
+  border-radius:17px;
+  background:#111d43;
+  color:#fff;
+  border:1px solid #283566
+}
+
+.quick i{
+  display:block;
+  font-style:normal;
+  font-size:25px;
+  margin-bottom:5px
+}
+
+.create-family{
+  margin-top:12px;
+  padding:15px;
+  border-radius:18px;
+  background:linear-gradient(100deg,#d62bf3,#6e27ff);
+  display:flex;
+  align-items:center;
+  gap:12px
+}
+
+.create-family strong{
+  font-size:17px
+}
+
+.create-family small{
+  display:block;
+  color:#f2d9ff;
+  margin-top:3px
+}
+
+.room-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px
+}
+
+.room-card{
+  padding:11px;
+  border-radius:17px;
+  background:#101a3b;
+  border:1px solid #263464
+}
+
+.room-cover{
+  height:78px;
+  border-radius:13px;
   display:flex;
   align-items:center;
   justify-content:center;
+  font-size:38px;
+  margin-bottom:8px;
+  background:linear-gradient(135deg,#24105f,#8b1bcf)
+}
+
+.room-card h4{
+  font-size:14px
+}
+
+.room-card p{
+  font-size:11px;
+  color:#8995be;
+  margin:4px 0 8px
+}
+
+.join{
+  padding:7px 13px;
+  border-radius:12px;
+  background:#7b28f5;
   color:#fff;
-  font-weight:bold;
+  font-size:11px;
+  font-weight:bold
 }
 
-.message-info{
-  flex:1;
-}
-
-.message-info h4{
-  margin-bottom:5px;
-}
-
-.message-info p{
-  color:#888;
-  font-size:13px;
-}
-
-.chat{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:#fff;
-  z-index:50;
-  max-width:480px;
-  margin:auto;
-}
-
-.chat.active{
+.favorite{
   display:flex;
-  flex-direction:column;
+  gap:10px;
+  align-items:center;
+  padding:11px;
+  border-radius:16px;
+  background:#101a3b;
+  border:1px solid #263464
 }
 
-.chat-head{
+.favorite .pic{
+  width:55px;
+  height:55px;
+  border-radius:13px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+  background:#32127a
+}
+
+/* list pages */
+
+.list{
+  padding:12px 13px
+}
+
+.chatitem,
+.frienditem,
+.noticeitem{
   display:flex;
   align-items:center;
   gap:10px;
-  padding:10px;
-  border-bottom:1px solid #eee;
+  padding:13px 4px;
+  border-bottom:1px solid #1c2851
 }
 
-.chat-user{
-  flex:1;
+.chatitem:last-child,
+.frienditem:last-child,
+.noticeitem:last-child{
+  border-bottom:0
 }
 
-.chat-menu{
-  position:absolute;
-  left:10px;
-  top:58px;
-  display:none;
-  background:#fff;
-  box-shadow:0 5px 20px rgba(0,0,0,.15);
-  border-radius:12px;
-  overflow:hidden;
-  width:170px;
-}
-
-.chat-menu button{
-  width:100%;
-  padding:13px;
-  background:#fff;
-  text-align:right;
-}
-
-.chat-body{
-  flex:1;
-  padding:15px;
-  background:#f5f5f8;
-}
-
-.chat-msg{
-  background:#fff;
-  padding:10px 14px;
-  border-radius:15px;
-  margin-bottom:10px;
-  width:max-content;
-  max-width:80%;
-}
-
-.chat-input{
-  display:flex;
-  gap:7px;
-  padding:10px;
-  border-top:1px solid #ddd;
-}
-
-.chat-input input{
-  flex:1;
-  border:0;
-  background:#f1f1f4;
-  border-radius:20px;
-  padding:11px;
-  outline:none;
-}
-
-.chat-action{
-  width:42px;
-  height:42px;
+.status-ring{
+  padding:2px;
   border-radius:50%;
-  background:#6c3df5;
-  color:#fff;
+  background:linear-gradient(45deg,#f928cf,#ffd52e)
 }
 
-/* أنا */
-.me-top{
-  padding:20px 15px;
-  background:linear-gradient(135deg,#1b1535,#5c2c83);
-  color:#fff;
+.status-ring img{
+  display:block
 }
 
-.me-profile{
+.tabs{
   display:flex;
-  align-items:center;
-  gap:15px;
+  gap:8px;
+  padding:9px 13px
 }
 
-.big-avatar{
-  width:75px;
-  height:75px;
-  border-radius:50%;
-  background:linear-gradient(135deg,#ff9966,#ff5e62);
+.tab{
+  flex:1;
+  padding:9px;
+  border-radius:14px;
+  background:#121e43;
+  color:#9da9d2
+}
+
+.tab.active{
+  background:#7929f7;
+  color:#fff
+}
+
+.status-card{
+  margin-bottom:11px
+}
+
+.status-text{
+  line-height:1.8;
+  margin:10px 0;
+  color:#e2e6ff
+}
+
+.actions{
+  display:flex;
+  gap:7px
+}
+
+.actions button{
+  background:#18244b;
+  color:#c9d0ee;
+  padding:7px 11px;
+  border-radius:13px;
+  font-size:12px
+}
+
+.room-big{
+  margin-bottom:11px;
+  overflow:hidden
+}
+
+.room-big .cover{
+  height:120px;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:30px;
+  font-size:55px;
+  background:linear-gradient(135deg,#30106e,#c12cd7)
+}
+
+.room-big .body{
+  padding:12px;
+  background:#101a3b
+}
+
+.room-big h3{
+  margin-bottom:5px
+}
+
+.room-big p{
+  font-size:12px;
+  color:#8e99c0;
+  margin-bottom:10px
+}
+
+/* profile */
+
+.cover{
+  height:205px;
+  background:linear-gradient(135deg,#2d155e,#101c43);
+  background-size:cover;
+  background-position:center;
+  position:relative
+}
+
+.cover:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(transparent 45%,#05091c)
+}
+
+.profilepic{
+  width:98px;
+  height:98px;
+  border-radius:50%;
+  border:4px solid #080d25;
+  position:absolute;
+  bottom:-47px;
+  right:18px;
+  z-index:2;
+  object-fit:cover
+}
+
+.profilebody{
+  padding:57px 13px 15px
 }
 
 .stats{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:8px;
-  margin-top:18px;
+  margin:15px 0
 }
 
 .stat{
+  padding:12px 4px;
   text-align:center;
+  background:#101a3b;
+  border-radius:15px
 }
 
 .stat b{
   display:block;
-  font-size:18px;
+  font-size:18px
 }
 
-.me-menu{
-  padding:10px 15px;
+.stat span{
+  font-size:11px;
+  color:#8995be
 }
 
-.menu-row{
+.profile-actions{
+  display:grid;
+  gap:9px
+}
+
+.profile-actions button{
+  padding:14px;
+  text-align:right;
+  background:#111d43;
+  color:#fff;
+  border-radius:15px
+}
+  /* settings */
+
+.settings-list{
+  padding:12px 13px
+}
+
+.setting-item{
   display:flex;
   align-items:center;
-  padding:17px 5px;
-  border-bottom:1px solid #eee;
   gap:12px;
+  padding:14px;
+  margin-bottom:9px;
+  background:#101a3b;
+  border:1px solid #253364;
+  border-radius:16px
 }
 
-.menu-icon{
+.setting-icon{
   width:40px;
   height:40px;
-  border-radius:12px;
-  background:#f1efff;
+  border-radius:13px;
+  background:#202c59;
   display:flex;
   align-items:center;
   justify-content:center;
+  font-size:20px
 }
 
-.menu-row span:nth-child(2){
-  flex:1;
+.setting-item .grow strong{
+  display:block;
+  font-size:14px;
+  margin-bottom:4px
 }
 
-/* البروفايل */
-.cover{
-  height:190px;
-  background:linear-gradient(135deg,#3023ae,#c86dd7);
-  position:relative;
+.setting-item .grow span{
+  font-size:11px;
+  color:#8995be
 }
 
-.cover-change{
-  position:absolute;
-  bottom:12px;
-  left:12px;
-  background:rgba(0,0,0,.45);
+.arrow{
+  color:#8d99c2;
+  font-size:18px
+}
+
+/* family */
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:100;
+  background:rgba(0,0,0,.78);
+  align-items:flex-end;
+  justify-content:center
+}
+
+.modal.active{
+  display:flex
+}
+
+.modal-box{
+  width:100%;
+  max-width:500px;
+  max-height:92vh;
+  overflow-y:auto;
+  background:#0b1330;
+  border:1px solid #29376c;
+  border-radius:25px 25px 0 0;
+  padding:18px
+}
+
+.modal-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:16px
+}
+
+.modal-head h2{
+  font-size:20px
+}
+
+.close{
+  width:37px;
+  height:37px;
+  border-radius:12px;
+  background:#202c59;
   color:#fff;
-  padding:8px 12px;
-  border-radius:12px;
+  font-size:20px
 }
 
-.profile-box{
-  padding:0 15px;
-}
-
-.profile-avatar{
-  width:85px;
-  height:85px;
-  border-radius:50%;
-  background:linear-gradient(135deg,#ff9966,#ff5e62);
-  border:4px solid #fff;
-  margin-top:-42px;
+.upload{
+  height:120px;
+  border:1px dashed #5d6da8;
+  border-radius:17px;
+  background:#101a3b;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:32px;
-  position:relative;
+  flex-direction:column;
+  gap:7px;
+  color:#aab5db;
+  margin-bottom:12px;
+  overflow:hidden;
+  position:relative
 }
 
-.profile-stats{
+.upload img{
+  width:100%;
+  height:100%;
+  object-fit:cover
+}
+
+.upload input{
+  position:absolute;
+  inset:0;
+  opacity:0;
+  cursor:pointer
+}
+
+.field-title{
+  display:block;
+  font-size:13px;
+  margin:13px 0 7px;
+  color:#dce2ff
+}
+
+.mic-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:7px
+}
+
+.mic{
+  padding:10px 2px;
+  border-radius:11px;
+  background:#16234a;
+  color:#9da9d2;
+  border:1px solid #293766
+}
+
+.mic.selected{
+  background:#7829f7;
+  color:#fff;
+  border-color:#9b5bff
+}
+
+.cost{
+  margin:14px 0;
+  padding:12px;
+  border-radius:14px;
+  background:#251b3c;
+  border:1px solid #5d4525;
+  color:#ffd52e;
+  text-align:center;
+  font-weight:bold
+}
+
+/* room */
+
+.room-screen{
+  min-height:100vh;
+  background:
+  radial-gradient(circle at 50% 20%,#32106d,#080d26 55%,#030617);
+  padding-bottom:20px
+}
+
+.room-head{
+  height:62px;
+  padding:9px 12px;
+  display:flex;
+  align-items:center;
+  gap:9px
+}
+
+.room-title{
+  flex:1
+}
+
+.room-title strong{
+  display:block;
+  font-size:15px
+}
+
+.room-title span{
+  font-size:10px;
+  color:#909bc2
+}
+
+.seats{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  margin:20px 0;
-  text-align:center;
-}
-
-.family-card{
-  display:flex;
-  align-items:center;
   gap:12px;
-  padding:15px;
-  background:#fafafa;
-  border-radius:15px;
-  margin-bottom:15px;
+  padding:18px 14px
 }
 
-.family-logo{
-  width:55px;
-  height:55px;
-  border-radius:15px;
-  background:linear-gradient(135deg,#ffd700,#ff8c00);
+.seat{
+  text-align:center
+}
+
+.seat-pic{
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  margin:auto;
+  border:2px solid #6936df;
+  background:#18244a;
   display:flex;
   align-items:center;
   justify-content:center;
+  font-size:25px;
+  position:relative
 }
 
-.gifts-bar{
-  height:70px;
-  background:#f7f7f9;
-  border-radius:15px;
+.seat.moderator .seat-pic{
+  border-color:#ffd52e;
+  box-shadow:0 0 12px #ffd52e55
+}
+
+.mic-off{
+  position:absolute;
+  bottom:-3px;
+  left:-3px;
+  width:21px;
+  height:21px;
+  border-radius:50%;
+  background:#ef2f66;
+  font-size:11px;
   display:flex;
   align-items:center;
-  padding:15px;
-  margin-bottom:20px;
+  justify-content:center
 }
 
-/* صفحات القوائم */
-.page-padding{
-  padding:15px;
-}
-
-.card{
-  background:#fff;
-  border:1px solid #eee;
-  border-radius:16px;
-  padding:16px;
-  margin-bottom:12px;
-}
-
-.balance{
-  background:linear-gradient(135deg,#2b1c57,#7545c7);
-  color:#fff;
-  border-radius:20px;
-  padding:25px;
-  margin-bottom:15px;
-}
-
-.balance h2{
-  font-size:30px;
-  margin-top:10px;
-}
-
-.three-cols{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
-}
-
-.box{
-  background:#fafafa;
-  border:1px solid #eee;
-  border-radius:15px;
-  padding:20px 8px;
-  text-align:center;
-}
-
-.box b{
-  display:block;
-  margin-top:8px;
-}
-
-/* المتجر */
-.shop-tabs{
-  display:flex;
-  gap:8px;
-  overflow:auto;
-  padding:12px 15px;
-}
-
-.shop-tab{
+.seat-name{
+  font-size:10px;
+  margin-top:5px;
   white-space:nowrap;
-  padding:10px 15px;
-  border-radius:18px;
-  background:#f1f1f4;
+  overflow:hidden;
+  text-overflow:ellipsis
 }
 
-.shop-tab.active{
-  background:#6c3df5;
-  color:#fff;
+.room-chat{
+  margin:5px 13px;
+  min-height:180px;
+  max-height:260px;
+  overflow-y:auto;
+  padding:10px;
+  background:#070c20aa;
+  border:1px solid #202c54;
+  border-radius:18px
 }
 
-.product-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
-  padding:15px;
+.room-msg{
+  margin-bottom:9px;
+  font-size:12px;
+  line-height:1.6
 }
 
-.product{
-  border:1px solid #eee;
-  border-radius:17px;
-  padding:18px 10px;
-  text-align:center;
-  background:#fff;
+.room-msg b{
+  color:#d48cff
 }
 
-.product-img{
-  height:85px;
+.room-bottom{
+  position:fixed;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:100%;
+  max-width:500px;
+  padding:9px 10px;
+  background:#080e25f2;
+  border-top:1px solid #202c54;
   display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:45px;
+  gap:7px
 }
 
-.buy{
-  background:#6c3df5;
-  color:#fff;
-  padding:9px 18px;
+.room-input{
+  flex:1;
+  padding:11px;
   border-radius:15px;
-  margin-top:10px;
+  border:1px solid #29376b;
+  background:#121d40;
+  color:#fff;
+  outline:none
 }
 
-/* الإعدادات */
-.setting-section{
-  padding:15px;
+.room-action{
+  width:43px;
+  border-radius:14px;
+  background:#7b29f6;
+  color:#fff;
+  font-size:18px
 }
 
-.setting-title{
-  color:#888;
-  margin:12px 0;
-  font-size:14px;
-}
+/* bottom nav */
 
-.setting-row{
-  display:flex;
-  justify-content:space-between;
-  padding:16px 5px;
-  border-bottom:1px solid #eee;
-}
-
-.setting-row button{
-  background:none;
-}
-
-/* شريط التنقل */
 .bottom-nav{
   position:fixed;
   bottom:0;
   left:50%;
   transform:translateX(-50%);
-  width:min(480px,100%);
-  height:70px;
-  background:#fff;
-  border-top:1px solid #ddd;
+  width:100%;
+  max-width:500px;
+  height:68px;
+  z-index:50;
   display:flex;
-  z-index:30;
+  background:#090f27f7;
+  border-top:1px solid #202d58;
+  backdrop-filter:blur(12px)
 }
 
 .nav-btn{
   flex:1;
-  background:#fff;
-  color:#777;
+  background:none;
+  color:#737fa9;
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  gap:5px;
-  font-size:12px;
+  gap:4px;
+  font-size:10px
+}
+
+.nav-btn span{
+  font-size:23px
 }
 
 .nav-btn.active{
-  color:#6c3df5;
-  font-weight:bold;
+  color:#c34aff
 }
 
-.nav-icon{
-  font-size:21px;
-}
+/* alert */
 
-/* تنبيهات */
-.toast{
+.alert{
   position:fixed;
-  bottom:85px;
+  top:18px;
   left:50%;
-  transform:translateX(-50%);
-  background:#222;
-  color:#fff;
-  padding:12px 18px;
-  border-radius:20px;
-  display:none;
-  z-index:100;
+  transform:translateX(-50%) translateY(-130px);
+  width:calc(100% - 28px);
+  max-width:470px;
+  z-index:300;
+  padding:13px 15px;
+  border-radius:15px;
+  background:#18244d;
+  border:1px solid #5367aa;
+  box-shadow:0 15px 40px #0009;
+  text-align:center;
+  transition:.3s
+}
+
+.alert.show{
+  transform:translateX(-50%) translateY(0)
+}
+
+@media(max-width:360px){
+  .seats{
+    grid-template-columns:repeat(3,1fr)
+  }
+
+  .splash-name{
+    font-size:38px
+  }
 }
 </style>
 </head>
@@ -693,1397 +1023,437 @@ button{
 
 <div class="app">
 
-<!-- تسجيل الدخول -->
-<section id="login" class="login">
-  <div class="login-box">
-    <div class="logo">FS</div>
-    <h1>Family Star</h1>
-    <p>ترفيه وتسلية فقط</p>
+<!-- شاشة البداية -->
 
-    <button class="login-btn google" onclick="login()">تسجيل الدخول بجوجل</button>
-    <button class="login-btn facebook" onclick="login()">تسجيل الدخول بفيسبوك</button>
-    <button class="login-btn phone" onclick="showPhone()">الدخول برقم الهاتف</button>
+<section id="splash" class="screen active">
 
-    <div id="phoneForm" class="phone-form">
-      <input id="phoneNumber" type="tel" placeholder="رقم الهاتف">
-      <button class="login-btn phone" onclick="login()">متابعة</button>
+  <div class="splash-inner">
+
+    <div class="splash-star">⭐</div>
+
+    <div class="splash-name">
+      Star <b>Voice</b>
     </div>
+
+    <div class="splash-sub">
+      ترفيه وتسلية وصوت ومجتمع
+    </div>
+
+    <div class="waves">
+      ♪ ♫ ♪ ♫ ♪
+    </div>
+
   </div>
+
 </section>
 
+<!-- تسجيل الدخول -->
 
-<!-- الرئيسية -->
+<section id="login" class="screen">
+
+  <div class="auth">
+
+    <div class="authbox">
+
+      <div class="auth-logo">⭐</div>
+
+      <h1>
+        Star <span>Voice</span>
+      </h1>
+
+      <p>
+        أهلاً بك في عالم الترفيه والتسلية
+      </p>
+
+      <input
+        id="loginName"
+        class="input"
+        type="text"
+        placeholder="اسم المستخدم"
+      >
+
+      <input
+        id="loginPhone"
+        class="input"
+        type="tel"
+        placeholder="رقم الهاتف"
+      >
+
+      <button
+        class="btn"
+        onclick="loginUser()"
+      >
+        تسجيل الدخول
+      </button>
+
+      <div class="social">
+
+        <button onclick="socialLogin('Facebook')">
+          🔵 Facebook
+        </button>
+
+        <button onclick="socialLogin('Google')">
+          🔴 Google
+        </button>
+
+      </div>
+
+      <button
+        class="btn green"
+        style="margin-top:9px"
+        onclick="phoneLogin()"
+      >
+        📱 الدخول برقم الهاتف
+      </button>
+
+      <div class="terms">
+        باستخدامك للتطبيق أنت توافق على شروط الاستخدام وسياسة الخصوصية.
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+<!-- ================= الصفحة الرئيسية ================= -->
+
 <section id="home" class="screen">
 
-  <div class="header">
-    <div class="header-title">Family Star</div>
-    <button class="icon-btn">🔔</button>
-  </div>
+  <div class="topbar">
 
-  <div class="banner">
-    <h2>أهلاً بك في Family Star</h2>
-    <p>استمتع بالدردشة والرومات والأنشطة</p>
-  </div>
+    <div class="row">
 
-  <div class="section-title">الأنشطة</div>
+      <img
+        id="homeAvatar"
+        class="avatar"
+        src="https://i.pravatar.cc/100?img=12"
+      >
 
-  <div class="activity-grid">
-    <div class="activity"><div class="emoji">🎁</div>الهدايا</div>
-    <div class="activity"><div class="emoji">🎉</div>الحفلات</div>
-    <div class="activity"><div class="emoji">👑</div>العائلات</div>
-    <div class="activity"><div class="emoji">⭐</div>المميز</div>
-  </div>
-
-  <div class="section-title">الرومات</div>
-
-  <div class="room-card">
-    <div class="room-img">🎤</div>
-    <div class="room-info">
-      <h3>روم التريند</h3>
-      <small>دردشة وترفيه</small>
-    </div>
-    <b>👥 128</b>
-  </div>
-
-  <div class="room-card">
-    <div class="room-img">🔥</div>
-    <div class="room-info">
-      <h3>روم المستخدمين الجدد</h3>
-      <small>مرحباً بالمستخدمين الجدد</small>
-    </div>
-    <b>👥 64</b>
-  </div>
-
-</section>
-
-
-<!-- الرومات -->
-<section id="rooms" class="screen">
-
-  <div class="header">
-    <div class="header-title">الرومات</div>
-    <button class="icon-btn">🔍</button>
-  </div>
-
-  <div class="banner">
-    <h2>الإعلانات</h2>
-    <p>وكيل شحن • نشاط • مسابقات • عروض</p>
-  </div>
-
-  <div class="room-tabs">
-    <button class="room-tab active">أنا</button>
-    <button class="room-tab">الحفلات</button>
-    <button class="room-tab">المستخدمون الجدد</button>
-  </div>
-
-  <div class="room-card">
-    <div class="room-img">❤️</div>
-    <div class="room-info">
-      <h3>الرومات التي أعجبتني</h3>
-      <small>الرومات التي أتابعها</small>
-    </div>
-  </div>
-
-  <div class="room-card">
-    <div class="room-img">🛡️</div>
-    <div class="room-info">
-      <h3>الرومات التي أنا مشرف فيها</h3>
-      <small>إدارة ومتابعة الروم</small>
-    </div>
-  </div>
-
-  <div class="room-card">
-    <div class="room-img">🔥</div>
-    <div class="room-info">
-      <h3>روم تريند</h3>
-      <small>الروم الأكثر نشاطاً</small>
-    </div>
-  </div>
-
-</section>
-
-
-<!-- الرسائل -->
-<section id="messages" class="screen">
-
-  <div class="header">
-    <div class="header-title">الرسائل</div>
-    <button class="icon-btn">✏️</button>
-  </div>
-
-  <input class="search" placeholder="🔍 البحث في الرسائل">
-
-  <div class="message-tabs">
-    <button class="message-tab active">الرسائل</button>
-    <button class="message-tab">الأصدقاء</button>
-    <button class="message-tab">النظام</button>
-    <button class="message-tab">العائلة</button>
-  </div>
-
-  <div class="message-item" onclick="openChat('أحمد')">
-    <div class="avatar">أ</div>
-    <div class="message-info">
-      <h4>أحمد</h4>
-      <p>أهلاً، كيف حالك؟</p>
-    </div>
-    <small>9:20</small>
-  </div>
-
-  <div class="message-item" onclick="openChat('محمد')">
-    <div class="avatar">م</div>
-    <div class="message-info">
-      <h4>محمد</h4>
-      <p>شوف الرسالة الجديدة</p>
-    </div>
-    <small>8:45</small>
-  </div>
-
-  <div class="message-item" onclick="openChat('رسائل النظام')">
-    <div class="avatar">⚙️</div>
-    <div class="message-info">
-      <h4>رسائل النظام</h4>
-      <p>مرحباً بك في Family Star</p>
-    </div>
-  </div>
-
-  <div class="message-item" onclick="openChat('العائلة')">
-    <div class="avatar">👑</div>
-    <div class="message-info">
-      <h4>رسائل العائلة</h4>
-      <p>رسائل أعضاء العائلة فقط</p>
-    </div>
-  </div>
-
-</section>
-
-
-<!-- أنا -->
-<section id="me" class="screen">
-
-  <div class="me-top">
-
-    <div class="me-profile">
-      <div class="big-avatar">👤</div>
       <div>
-        <h2>مستخدم Family Star</h2>
-        <p>ID: 1000001</p>
-      </div>
-    </div>
 
-    <div class="stats">
-      <div class="stat">
-        <b>0</b>
-        الثروة
-      </div>
-      <div class="stat">
-        <b>0</b>
-        الكريزما
-      </div>
-      <div class="stat">
-        <b>VIP 0</b>
-        المستوى
-      </div>
-    </div>
-
-  </div>
-
-  <div class="me-menu">
-
-    <div class="menu-row" onclick="showPage('wallet')">
-      <div class="menu-icon">💰</div>
-      <span>المحفظة</span>
-      <span>›</span>
-    </div>
-
-    <div class="menu-row" onclick="showPage('family')">
-      <div class="menu-icon">👑</div>
-      <span>العائلة</span>
-      <span>›</span>
-    </div>
-
-    <div class="menu-row" onclick="showPage('shop')">
-      <div class="menu-icon">🛍️</div>
-      <span>المتجر</span>
-      <span>›</span>
-    </div>
-
-    <div class="menu-row" onclick="showPage('cp')">
-      <div class="menu-icon">⭐</div>
-      <span>CP</span>
-      <span>›</span>
-    </div>
-
-    <div class="menu-row" onclick="showPage('profile')">
-      <div class="menu-icon">👤</div>
-      <span>الصفحة الشخصية</span>
-      <span>›</span>
-    </div>
-
-    <div class="menu-row" onclick="showPage('settings')">
-      <div class="menu-icon">⚙️</div>
-      <span>الإعدادات</span>
-      <span>›</span>
-    </div>
-
-  </div>
-</section>
-
-
-<!-- البروفايل -->
-<section id="profile" class="screen">
-
-  <div class="header">
-    <button class="icon-btn" onclick="showPage('me')">‹</button>
-    <div class="header-title">الصفحة الشخصية</div>
-    <div></div>
-  </div>
-
-  <div class="cover">
-    <button class="cover-change" onclick="toast('تغيير صورة الغلاف')">
-      📷 تغيير الغلاف
-    </button>
-  </div>
-
-  <div class="profile-box">
-
-    <div class="profile-avatar">👤</div>
-
-    <h2 style="margin-top:10px;">مستخدم Family Star</h2>
-    <p style="color:#888;">ID: 1000001</p>
-
-    <div class="profile-stats">
-      <div>0<br><small>يتابع</small></div>
-      <div>0<br><small>متابع</small></div>
-      <div>0<br><small>الثروة</small></div>
-      <div>0<br><small>الكريزما</small></div>
-    </div>
-
-    <div class="family-card">
-      <div class="family-logo">👑</div>
-      <div>
-        <b>عائلتي</b>
-        <p style="color:#888;">اسم العائلة</p>
-      </div>
-    </div>
-
-    <div class="card">
-      <b>✨ شارات الدخوليات والإطارات</b>
-    </div>
-
-    <div class="gifts-bar">
-      🎁 شريط الهدايا
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- المحفظة -->
-<section id="wallet" class="screen">
-
-  <div class="header">
-    <button class="icon-btn" onclick="showPage('me')">‹</button>
-    <div class="header-title">المحفظة</div>
-    <div></div>
-  </div>
-
-  <div class="page-padding">
-
-    <div class="balance">
-      <p>الرصيد الإجمالي</p>
-      <h2>0</h2>
-    </div>
-
-    <div class="three-cols">
-
-      <div class="box">
-        🪙
-        <b>0</b>
-        كوينز
-      </div>
-
-      <div class="box">
-        💎
-        <b>0</b>
-        ماس
-      </div>
-
-      <div class="box">
-        💵
-        <b>0</b>
-        نقدي
-      </div>
-
-    </div>
-
-  </div>
-</section>
-
-
-<!-- العائلة -->
-<section id="family" class="screen">
-
-  <div class="header">
-    <button class="icon-btn" onclick="showPage('me')">‹</button>
-    <div class="header-title">العائلة</div>
-    <div></div>
-  </div>
-
-  <div class="page-padding">
-
-    <div class="card">
-      <h3>👑 إنشاء عائلة</h3>
-      <p style="margin:10px 0;color:#777;">
-        تكلفة إنشاء العائلة: 5,000,000
-      </p>
-      <p style="color:#777;">
-        الإنشاء المجاني متاح عند المستوى 30.
-      </p>
-      <button class="buy" onclick="toast('سيتم فحص شروط إنشاء العائلة')">
-        إنشاء عائلة
-      </button>
-    </div>
-
-    <div class="family-card">
-      <div class="family-logo">👑</div>
-      <div>
-        <b>عائلتي</b>
-        <p style="color:#888;">المشرفون وأعضاء العائلة</p>
-      </div>
-    </div>
-
-    <div class="card">
-      <b>👥 المشرفون</b>
-      <p style="margin-top:8px;color:#888;">إدارة العائلة</p>
-    </div>
-
-  </div>
-</section>
-
-
-<!-- المتجر -->
-<section id="shop" class="screen">
-
-  <div class="header">
-    <button class="icon-btn" onclick="showPage('me')">‹</button>
-    <div class="header-title">المتجر</div>
-    <div></div>
-  </div>
-
-  <div class="shop-tabs">
-    <button class="shop-tab active">الإطارات</button>
-    <button class="shop-tab">الدخوليات</button>
-    <button class="shop-tab">الخواتم</button>
-    <button class="shop-tab">ID مميز</button>
-    <button class="shop-tab">الغلاف</button>
-  </div>
-
-  <div class="product-grid">
-
-    <div class="product">
-      <div class="product-img">⭕</div>
-      <h3>إطار نجوم</h3>
-      <p>1000 🪙</p>
-      <button class="buy" onclick="toast('تم اختيار الإطار')">شراء</button>
-    </div>
-
-    <div class="product">
-      <div class="product-img">✨</div>
-      <h3>دخولية مميزة</h3>
-      <p>2000 🪙</p>
-      <button class="buy" onclick="toast('تم اختيار الدخولية')">شراء</button>
-    </div>
-
-    <div class="product">
-      <div class="product-img">💍</div>
-      <h3>خاتم CP</h3>
-      <p>3000 🪙</p>
-      <button class="buy" onclick="toast('تم اختيار الخاتم')">شراء</button>
-    </div>
-
-    <div class="product">
-      <div class="product-img">🆔</div>
-      <h3>ID مميز</h3>
-      <p>5000 🪙</p>
-      <button class="buy" onclick="toast('تم اختيار ID')">شراء</button>
-    </div>
-
-    <div class="product">
-      <div class="product-img">🖼️</div>
-      <h3>غلاف شخصي</h3>
-      <p>2500 🪙</p>
-      <button class="buy" onclick="toast('تم اختيار الغلاف')">شراء</button>
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- CP -->
-<section id="cp" class="screen">
-
-  <div class="header">
-    <button class="icon-btn" onclick="showPage('me')">‹</button>
-    <div class="header-title">CP</div>
-    <div></div>
-  </div>
-
-  <div class="page-padding">
-
-    <div class="balance">
-      <p>مستوى CP</p>
-      <h2>المستوى 1</h2>
-      <p style="margin-top:8px;">0 / 1000 نقطة</p>
-    </div>
-
-    <div class="card">
-      <h3>⭐ النقاط</h3>
-      <p style="margin-top:10px;">0 نقطة CP</p>
+        <div class="small">
+          مرحبًا بك
         </div>
 
-    <div class="card">
-      <h3>🎁 الهدايا</h3>
-      <p style="margin-top:10px;">لا توجد هدايا حالياً</p>
-    </div>
+        <h3 id="homeName">
+          Star
+        </h3>
 
-  </div>
-</section>
-
-
-<!-- الإعدادات -->
-<section id="settings" class="screen">
-
-  <div class="header">
-    <button class="icon-btn" onclick="showPage('me')">‹</button>
-    <div class="header-title">الإعدادات</div>
-    <div></div>
-  </div>
-
-  <div class="setting-section">
-
-    <div class="setting-title">الحساب والملف</div>
-
-    <div class="setting-row">
-      <span>تعديل الملف الشخصي</span>
-      <button>›</button>
-    </div>
-
-    <div class="setting-row">
-      <span>رقم الهاتف</span>
-      <button>›</button>
-    </div>
-
-    <div class="setting-row">
-      <span>ربط الحساب بفيسبوك</span>
-      <button>›</button>
-    </div>
-
-    <div class="setting-row">
-      <span>الصورة الشخصية</span>
-      <button>›</button>
-    </div>
-
-    <div class="setting-row">
-      <span>الدولة</span>
-      <button>مصر ›</button>
-    </div>
-
-    <div class="setting-row">
-      <span>السن</span>
-      <button>›</button>
-    </div>
-
-    <div class="setting-row">
-      <span>النوع</span>
-      <button>ذكر / أنثى ›</button>
-    </div>
-
-    <div class="setting-title">الأمان</div>
-
-    <div class="setting-row">
-      <span>قائمة الحظر</span>
-      <button>›</button>
-    </div>
-
-    <div class="setting-row">
-      <span>الإبلاغ</span>
-      <button>›</button>
-    </div>
-
-    <div class="setting-title">الحساب</div>
-
-    <div class="setting-row">
-      <span>تسجيل الخروج</span>
-      <button onclick="logout()">›</button>
-    </div>
-
-  </div>
-</section>
-
-
-<!-- شريط التنقل -->
-<nav id="bottomNav" class="bottom-nav">
-
-  <button class="nav-btn active" onclick="showPage('home',this)">
-    <span class="nav-icon">🏠</span>
-    الرئيسية
-  </button>
-
-  <button class="nav-btn" onclick="showPage('rooms',this)">
-    <span class="nav-icon">🎤</span>
-    الرومات
-  </button>
-
-  <button class="nav-btn" onclick="showPage('messages',this)">
-    <span class="nav-icon">💬</span>
-    الرسائل
-  </button>
-
-  <button class="nav-btn" onclick="showPage('me',this)">
-    <span class="nav-icon">👤</span>
-    أنا
-  </button>
-
-</nav>
-
-
-<!-- المحادثة -->
-<div id="chat" class="chat">
-
-  <div class="chat-head">
-
-    <button class="icon-btn" onclick="closeChat()">‹</button>
-
-    <div class="avatar">👤</div>
-
-    <div class="chat-user">
-      <b id="chatName">المستخدم</b>
-    </div>
-
-    <button class="icon-btn" onclick="toggleChatMenu()">⋮</button>
-
-    <div id="chatMenu" class="chat-menu">
-      <button onclick="toast('فتح الصفحة الشخصية')">
-        👤 الصفحة الشخصية
-      </button>
-
-      <button onclick="toast('تم حظر المستخدم')">
-        🚫 حظر
-      </button>
-    </div>
-
-  </div>
-
-  <div id="chatBody" class="chat-body">
-    <div class="chat-msg">أهلاً بك 👋</div>
-  </div>
-
-  <div class="chat-input">
-
-    <button class="chat-action" onclick="sendImage()">🖼️</button>
-
-    <input id="chatText" placeholder="اكتب رسالة...">
-
-    <button class="chat-action" onclick="sendGift()">🎁</button>
-
-    <button class="chat-action" onclick="sendText()">➤</button>
-
-  </div>
-
-</div>
-
-
-<div id="toast" class="toast"></div>
-
-</div>
-
-
-<script>
-
-/* تسجيل الدخول */
-function showPhone(){
-
-  document.getElementById("phoneForm").style.display="block";
-
-}
-
-function login(){
-
-  document.getElementById("login").style.display="none";
-
-  document.getElementById("home").classList.add("active");
-
-  document.getElementById("bottomNav").style.display="flex";
-
-  toast("تم الدخول بنجاح");
-
-}
-
-
-/* التنقل */
-function showPage(page,button){
-
-  document.querySelectorAll(".screen").forEach(function(screen){
-
-    screen.classList.remove("active");
-
-  });
-
-  const target=document.getElementById(page);
-
-  if(target){
-
-    target.classList.add("active");
-
-  }
-
-  if(button){
-
-    document.querySelectorAll(".nav-btn").forEach(function(btn){
-
-      btn.classList.remove("active");
-
-    });
-
-    button.classList.add("active");
-
-  }
-
-  window.scrollTo(0,0);
-
-}
-
-
-/* المحادثة */
-function openChat(name){
-
-  document.getElementById("chatName").innerText=name;
-
-  document.getElementById("chat").classList.add("active");
-
-  document.getElementById("chatMenu").style.display="none";
-
-}
-
-function closeChat(){
-
-  document.getElementById("chat").classList.remove("active");
-
-}
-
-function toggleChatMenu(){
-
-  const menu=document.getElementById("chatMenu");
-
-  if(menu.style.display==="block"){
-
-    menu.style.display="none";
-
-  }else{
-
-    menu.style.display="block";
-
-  }
-
-}
-
-function sendText(){
-
-  const input=document.getElementById("chatText");
-
-  const text=input.value.trim();
-
-  if(!text){
-
-    return;
-
-  }
-
-  const msg=document.createElement("div");
-
-  msg.className="chat-msg";
-
-  msg.innerText=text;
-
-  document.getElementById("chatBody").appendChild(msg);
-
-  input.value="";
-
-  document.getElementById("chatBody").scrollTop=
-    document.getElementById("chatBody").scrollHeight;
-
-}
-
-function sendImage(){
-
-  toast("إرسال صورة - سيتم ربطه بالتخزين لاحقاً");
-
-}
-
-function sendGift(){
-
-  toast("علبة الهدايا - سيتم ربطها بالكوينز لاحقاً");
-
-}
-
-
-/* تسجيل الخروج */
-function logout(){
-
-  document.querySelectorAll(".screen").forEach(function(screen){
-
-    screen.classList.remove("active");
-
-  });
-
-  document.getElementById("bottomNav").style.display="none";
-
-  document.getElementById("login").style.display="flex";
-
-  toast("تم تسجيل الخروج");
-
-}
-
-
-/* التنبيه */
-function toast(message){
-
-  const box=document.getElementById("toast");
-
-  box.innerText=message;
-
-  box.style.display="block";
-
-  setTimeout(function(){
-
-    box.style.display="none";
-
-  },2200);
-
-}
-
-
-/* إغلاق قائمة المحادثة */
-document.addEventListener("click",function(e){
-
-  const menu=document.getElementById("chatMenu");
-
-  if(
-    menu &&
-    !e.target.closest(".chat-menu") &&
-    !e.target.closest(".chat-head button")
-  ){
-
-    menu.style.display="none";
-
-  }
-
-});
-
-
-/* البداية */
-document.getElementById("bottomNav").style.display="none";
-
-</script>
-<!-- =========================
-     إنشاء روم
-========================= -->
-
-<style>
-.create-room-btn{
-  width:calc(100% - 30px);
-  margin:0 15px 15px;
-  padding:15px;
-  border-radius:16px;
-  background:linear-gradient(135deg,#6c3df5,#9b59ff);
-  color:#fff;
-  font-size:17px;
-  font-weight:bold;
-}
-
-.create-room-page{
-  display:none;
-  position:fixed;
-  inset:0;
-  z-index:80;
-  background:#f5f5f8;
-  overflow:auto;
-}
-
-.create-room-page.active{
-  display:block;
-}
-
-.create-room-head{
-  height:60px;
-  background:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 15px;
-  border-bottom:1px solid #eee;
-  position:sticky;
-  top:0;
-  z-index:2;
-}
-
-.create-room-head h2{
-  font-size:19px;
-}
-
-.create-room-content{
-  padding:15px;
-  padding-bottom:30px;
-}
-
-.room-form-card{
-  background:#fff;
-  border-radius:18px;
-  padding:18px;
-  margin-bottom:14px;
-  box-shadow:0 2px 10px rgba(0,0,0,.05);
-}
-
-.room-label{
-  display:block;
-  font-weight:bold;
-  margin-bottom:9px;
-}
-
-.room-input,
-.room-textarea{
-  width:100%;
-  border:1px solid #ddd;
-  border-radius:13px;
-  padding:13px;
-  outline:none;
-  font-size:15px;
-  background:#fafafa;
-}
-
-.room-textarea{
-  min-height:100px;
-  resize:none;
-}
-
-.image-upload{
-  text-align:center;
-}
-
-.image-preview{
-  width:110px;
-  height:110px;
-  border-radius:20px;
-  margin:0 auto 12px;
-  background:#f0eef8;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:42px;
-  overflow:hidden;
-}
-
-.image-preview img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.upload-btn{
-  background:#f0eef8;
-  color:#6c3df5;
-  padding:10px 18px;
-  border-radius:13px;
-  font-weight:bold;
-}
-
-.mic-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:8px;
-}
-
-.mic-option{
-  padding:12px 5px;
-  border-radius:12px;
-  background:#f1f1f4;
-  text-align:center;
-  cursor:pointer;
-  border:2px solid transparent;
-}
-
-.mic-option.selected{
-  background:#eee8ff;
-  border-color:#6c3df5;
-  color:#6c3df5;
-  font-weight:bold;
-}
-
-.save-room-btn{
-  width:100%;
-  padding:15px;
-  border-radius:16px;
-  background:#6c3df5;
-  color:#fff;
-  font-size:17px;
-  font-weight:bold;
-  margin-top:5px;
-}
-
-.cancel-room-btn{
-  width:100%;
-  padding:13px;
-  border-radius:16px;
-  background:#eee;
-  color:#333;
-  font-size:16px;
-  margin-top:10px;
-}
-</style>
-
-
-<!-- صفحة إنشاء الروم -->
-
-<section id="createRoomPage" class="create-room-page">
-
-  <div class="create-room-head">
-    <button class="icon-btn" onclick="closeCreateRoom()">‹</button>
-    <h2>إنشاء روم</h2>
-    <div style="width:38px;"></div>
-  </div>
-
-  <div class="create-room-content">
-
-    <!-- صورة الروم -->
-    <div class="room-form-card image-upload">
-
-      <span class="room-label">🖼️ صورة الروم</span>
-
-      <div class="image-preview" id="roomImagePreview">
-        🎤
       </div>
 
-      <input
-        type="file"
-        id="roomImageInput"
-        accept="image/*"
-        hidden
-        onchange="previewRoomImage(event)"
-      >
+    </div>
+
+    <div class="row">
+
+      <div class="coin-box">
+        🪙 <span id="homeCoins">2,560</span>
+      </div>
 
       <button
-        class="upload-btn"
-        onclick="document.getElementById('roomImageInput').click()"
+        class="iconbtn"
+        onclick="showScreen('notifications')"
       >
-        اختيار صورة
+        🔔
       </button>
 
     </div>
 
-
-    <!-- اسم الروم -->
-    <div class="room-form-card">
-
-      <label class="room-label">✏️ اسم الروم</label>
-
-      <input
-        id="roomNameInput"
-        class="room-input"
-        type="text"
-        maxlength="40"
-        placeholder="اكتب اسم الروم"
-      >
-
-    </div>
+  </div>
 
 
-    <!-- إعلان الروم -->
-    <div class="room-form-card">
+  <!-- البنر -->
 
-      <label class="room-label">📢 إعلان الروم</label>
+  <div class="hero">
 
-      <textarea
-        id="roomAnnouncementInput"
-        class="room-textarea"
-        maxlength="200"
-        placeholder="اكتب إعلان الروم"
-      ></textarea>
+    <div>
 
-    </div>
-
-
-    <!-- عدد الميكات -->
-    <div class="room-form-card">
-
-      <span class="room-label">
-        🎤 عدد الميكات
-      </span>
-
-      <div class="mic-grid" id="micGrid">
-
-        <div class="mic-option selected" onclick="selectMics(1,this)">1 ميك</div>
-        <div class="mic-option" onclick="selectMics(2,this)">2 ميك</div>
-        <div class="mic-option" onclick="selectMics(3,this)">3 ميك</div>
-        <div class="mic-option" onclick="selectMics(4,this)">4 ميك</div>
-
-        <div class="mic-option" onclick="selectMics(5,this)">5 ميك</div>
-        <div class="mic-option" onclick="selectMics(6,this)">6 ميك</div>
-        <div class="mic-option" onclick="selectMics(7,this)">7 ميك</div>
-        <div class="mic-option" onclick="selectMics(8,this)">8 ميك</div>
-
-        <div class="mic-option" onclick="selectMics(9,this)">9 ميك</div>
-        <div class="mic-option" onclick="selectMics(10,this)">10 ميك</div>
-        <div class="mic-option" onclick="selectMics(11,this)">11 ميك</div>
-        <div class="mic-option" onclick="selectMics(12,this)">12 ميك</div>
-
-        <div class="mic-option" onclick="selectMics(13,this)">13 ميك</div>
-        <div class="mic-option" onclick="selectMics(14,this)">14 ميك</div>
-        <div class="mic-option" onclick="selectMics(15,this)">15 ميك</div>
-        <div class="mic-option" onclick="selectMics(16,this)">16 ميك</div>
-
-        <div class="mic-option" onclick="selectMics(17,this)">17 ميك</div>
-        <div class="mic-option" onclick="selectMics(18,this)">18 ميك</div>
-        <div class="mic-option" onclick="selectMics(19,this)">19 ميك</div>
-        <div class="mic-option" onclick="selectMics(20,this)">20 ميك</div>
-
+      <div class="small">
+        ⭐ Star Voice
       </div>
 
-    </div>
+      <h2>
+        عالم من الترفيه والتسلية
+      </h2>
 
-
-    <!-- صورة الغلاف -->
-    <div class="room-form-card image-upload">
-
-      <span class="room-label">🖼️ صورة غلاف الروم</span>
-
-      <div class="image-preview" id="roomCoverPreview">
-        🖼️
-      </div>
-
-      <input
-        type="file"
-        id="roomCoverInput"
-        accept="image/*"
-        hidden
-        onchange="previewRoomCover(event)"
-      >
-
-      <button
-        class="upload-btn"
-        onclick="document.getElementById('roomCoverInput').click()"
-      >
-        اختيار صورة الغلاف
-      </button>
+      <p>
+        دردشة • حالات • رومات • أصدقاء
+      </p>
 
     </div>
 
+    <div class="hero-icon">
+      🎤
+    </div>
 
-    <!-- الحفظ -->
-    <button
-      class="save-room-btn"
-      onclick="saveNewRoom()"
-    >
-      💾 حفظ وإنشاء الروم
+  </div>
+
+
+  <!-- الاختصارات -->
+
+  <div class="quick-grid">
+
+    <button onclick="showScreen('chat')">
+      💬
+      <span>الدردشة</span>
     </button>
 
-    <button
-      class="cancel-room-btn"
-      onclick="closeCreateRoom()"
-    >
-      إلغاء
+    <button onclick="showScreen('status')">
+      📸
+      <span>الحالات</span>
+    </button>
+
+    <button onclick="showScreen('rooms')">
+      🎤
+      <span>الرومات</span>
+    </button>
+
+    <button onclick="showScreen('profile')">
+      👤
+      <span>حسابي</span>
     </button>
 
   </div>
 
+
+  <!-- الرومات -->
+
+  <div class="section">
+
+    <div class="section-head">
+
+      <h3>
+        🔥 الرومات الترند
+      </h3>
+
+      <button
+        class="more"
+        onclick="showScreen('rooms')"
+      >
+        عرض الكل
+      </button>
+
+    </div>
+
+
+    <div class="room-list">
+
+
+      <div
+        class="room-card"
+        onclick="openRoom('روم الفن')"
+      >
+
+        <div class="room-cover">
+          🎵
+        </div>
+
+        <div class="room-info">
+
+          <h3>
+            روم الفن
+          </h3>
+
+          <p>
+            🎤 12 ميك
+          </p>
+
+          <div class="room-bottom">
+
+            <span>
+              👥 276
+            </span>
+
+            <span>
+              ⭐ ترند
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="room-card"
+        onclick="openRoom('روم النجوم')"
+      >
+
+        <div class="room-cover">
+          🌟
+        </div>
+
+        <div class="room-info">
+
+          <h3>
+            روم النجوم
+          </h3>
+
+          <p>
+            🎤 8 ميك
+          </p>
+
+          <div class="room-bottom">
+
+            <span>
+              👥 189
+            </span>
+
+            <span>
+              🔥 نشط
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="room-card"
+        onclick="openRoom('روم السهرة')"
+      >
+
+        <div class="room-cover">
+          🌙
+        </div>
+
+        <div class="room-info">
+
+          <h3>
+            روم السهرة
+          </h3>
+
+          <p>
+            🎤 10 ميك
+          </p>
+
+          <div class="room-bottom">
+
+            <span>
+              👥 154
+            </span>
+
+            <span>
+              ❤️ مميز
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+  <!-- إنشاء عائلة -->
+
+  <div class="section">
+
+    <button
+      class="family-create"
+      onclick="openFamilyModal()"
+    >
+
+      <div class="family-create-icon">
+        👑
+      </div>
+
+      <div class="grow">
+
+        <h3>
+          إنشاء عائلة
+        </h3>
+
+        <p>
+          أنشئ عائلتك وابدأ بتكوين فريقك
+        </p>
+
+      </div>
+
+      <div class="arrow">
+        ←
+      </div>
+
+    </button>
+
+  </div>
+
+
+  <!-- الرومات التي أعجبتني -->
+
+  <div class="section">
+
+    <div class="section-head">
+
+      <h3>
+        ❤️ الرومات التي أعجبتني
+      </h3>
+
+      <button
+        class="more"
+        onclick="showScreen('rooms')"
+      >
+        عرض الكل
+      </button>
+
+    </div>
+
+    <div class="empty">
+
+      <div>
+        ❤️
+      </div>
+
+      <p>
+        لم تقم بإضافة أي روم للمفضلة بعد
+      </p>
+
+      <button
+        class="btn"
+        onclick="showScreen('rooms')"
+      >
+        اكتشف الرومات
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- مستوى المستخدم -->
+
+  <div class="section">
+
+    <div class="level-card">
+
+      <div>
+
+        <div class="small">
+          مستوى الثروة
+        </div>
+
+        <div class="level-number">
+          ⭐ <span id="homeLevel">25</span>
+        </div>
+
+      </div>
+
+      <button
+        class="join"
+        onclick="showScreen('level')"
+      >
+        التفاصيل
+      </button>
+
+    </div>
+
+  </div>
+
+
 </section>
-
-
-<script>
-
-let selectedMics = 1;
-let newRoomImage = "";
-let newRoomCover = "";
-
-
-/* فتح صفحة إنشاء الروم */
-function openCreateRoom(){
-
-  const page = document.getElementById("createRoomPage");
-
-  if(page){
-    page.classList.add("active");
-  }
-
-}
-
-
-/* إغلاق صفحة إنشاء الروم */
-function closeCreateRoom(){
-
-  const page = document.getElementById("createRoomPage");
-
-  if(page){
-    page.classList.remove("active");
-  }
-
-}
-
-
-/* اختيار عدد الميكات */
-function selectMics(number, element){
-
-  selectedMics = number;
-
-  document
-    .querySelectorAll(".mic-option")
-    .forEach(function(item){
-      item.classList.remove("selected");
-    });
-
-  element.classList.add("selected");
-
-}
-
-
-/* صورة الروم */
-function previewRoomImage(event){
-
-  const file = event.target.files[0];
-
-  if(!file) return;
-
-  const reader = new FileReader();
-
-  reader.onload = function(e){
-
-    newRoomImage = e.target.result;
-
-    document.getElementById("roomImagePreview").innerHTML =
-      '<img src="' + newRoomImage + '">';
-
-  };
-
-  reader.readAsDataURL(file);
-
-}
-
-
-/* صورة الغلاف */
-function previewRoomCover(event){
-
-  const file = event.target.files[0];
-
-  if(!file) return;
-
-  const reader = new FileReader();
-
-  reader.onload = function(e){
-
-    newRoomCover = e.target.result;
-
-    document.getElementById("roomCoverPreview").innerHTML =
-      '<img src="' + newRoomCover + '">';
-
-  };
-
-  reader.readAsDataURL(file);
-
-}
-
-
-/* حفظ الروم */
-function saveNewRoom(){
-
-  const name =
-    document.getElementById("roomNameInput").value.trim();
-
-  const announcement =
-    document.getElementById("roomAnnouncementInput").value.trim();
-
-
-  if(!name){
-
-    alert("من فضلك اكتب اسم الروم");
-
-    return;
-  }
-
-
-  if(!newRoomImage){
-
-    alert("من فضلك اختر صورة الروم");
-
-    return;
-  }
-
-
-  if(!announcement){
-
-    alert("من فضلك اكتب إعلان الروم");
-
-    return;
-  }
-
-
-  if(!newRoomCover){
-
-    alert("من فضلك اختر صورة الغلاف");
-
-    return;
-  }
-
-
-  const room = {
-
-    id:Date.now(),
-
-    name:name,
-
-    announcement:announcement,
-
-    mics:selectedMics,
-
-    image:newRoomImage,
-
-    cover:newRoomCover
-
-  };
-
-
-  let rooms =
-    JSON.parse(localStorage.getItem("familyStarRooms") || "[]");
-
-
-  rooms.push(room);
-
-
-  localStorage.setItem(
-    "familyStarRooms",
-    JSON.stringify(rooms)
-  );
-
-
-  closeCreateRoom();
-
-  alert("تم إنشاء الروم بنجاح 🎉");
-
-
-  addRoomToHome(room);
-
-  addRoomToRooms(room);
-
-}
-
-
-/* إضافة الروم في الرئيسية */
-function addRoomToHome(room){
-
-  const home = document.getElementById("home");
-
-  if(!home) return;
-
-
-  const roomCard = document.createElement("div");
-
-  roomCard.className = "room-card";
-
-  roomCard.innerHTML = `
-
-    <div class="room-img"
-         style="background-image:url('${room.image}');
-                background-size:cover;
-                background-position:center;">
-    </div>
-
-    <div class="room-info">
-
-      <h3>${escapeHtml(room.name)}</h3>
-
-      <small>${escapeHtml(room.announcement)}</small>
-
-    </div>
-
-    <b>👥 0</b>
-
-  `;
-
-
-  const roomsTitle =
-    Array.from(home.querySelectorAll(".section-title"))
-      .find(function(el){
-        return el.textContent.includes("الرومات");
-      });
-
-
-  if(roomsTitle){
-
-    roomsTitle.after(roomCard);
-
-  }
-
-}
-
-
-/* إضافة الروم في صفحة الرومات */
-function addRoomToRooms(room){
-
-  const roomsPage = document.getElementById("rooms");
-
-  if(!roomsPage) return;
-
-
-  const roomCard = document.createElement("div");
-
-  roomCard.className = "room-card";
-
-  roomCard.innerHTML = `
-
-    <div class="room-img"
-         style="background-image:url('${room.image}');
-                background-size:cover;
-                background-position:center;">
-    </div>
-
-    <div class="room-info">
-
-      <h3>${escapeHtml(room.name)}</h3>
-
-      <small>${escapeHtml(room.announcement)}</small>
-
-    </div>
-
-    <b>👥 0</b>
-
-  `;
-
-
-  const firstRoomCard =
-    roomsPage.querySelector(".room-card");
-
-
-  if(firstRoomCard){
-
-    firstRoomCard.before(roomCard);
-
-  }
-
-}
-
-
-/* حماية النص */
-function escapeHtml(text){
-
-  return String(text)
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
-
-}
-
-  </script>
-</body>
-</html>
