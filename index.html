@@ -4510,6 +4510,1287 @@ function updateUserCoins(
   return true;
 
   }
+  /* =====================================================
+   الجزء 19
+   البلاغات والإشراف الإداري
+===================================================== */
+
+function getReportsData(){
+
+  return JSON.parse(
+    localStorage.getItem(
+      "familyStarReports"
+    )
+  ) || [];
+
+}
+
+
+function saveReportsData(reports){
+
+  localStorage.setItem(
+    "familyStarReports",
+    JSON.stringify(reports)
+  );
+
+}
+
+
+function addReport(report){
+
+  const reports =
+    getReportsData();
+
+  reports.push({
+
+    id:
+      report.id ||
+      Date.now(),
+
+    userId:
+      report.userId ||
+      "",
+
+    reporterId:
+      report.reporterId ||
+      "",
+
+    reason:
+      report.reason ||
+      "بلاغ جديد",
+
+    details:
+      report.details ||
+      "",
+
+    status:
+      "pending",
+
+    createdAt:
+      new Date().toISOString()
+
+  });
+
+  saveReportsData(reports);
+
+  localStorage.setItem(
+    "familyStarReportsCount",
+    reports.length
+  );
+
+  refreshAdminData();
+
+}
+
+
+function findReport(reportId){
+
+  const reports =
+    getReportsData();
+
+  return reports.find(
+    function(report){
+
+      return String(report.id) ===
+        String(reportId);
+
+    }
+  );
+
+}
+
+
+function updateReportStatus(
+  reportId,
+  status
+){
+
+  const reports =
+    getReportsData();
+
+  const report =
+    reports.find(
+      function(item){
+
+        return String(item.id) ===
+          String(reportId);
+
+      }
+    );
+
+  if(!report){
+
+    return false;
+
+  }
+
+  report.status =
+    status;
+
+  saveReportsData(reports);
+
+  return true;
+
+}
+
+
+function deleteReport(reportId){
+
+  const reports =
+    getReportsData();
+
+  const newReports =
+    reports.filter(
+      function(report){
+
+        return String(report.id) !==
+          String(reportId);
+
+      }
+    );
+
+  saveReportsData(newReports);
+
+  localStorage.setItem(
+    "familyStarReportsCount",
+    newReports.length
+  );
+
+  refreshAdminData();
+
+  }
+  /* =====================================================
+   الجزء 20
+   إدارة المشرفين والصلاحيات
+===================================================== */
+
+function getAdminsData(){
+
+  return JSON.parse(
+    localStorage.getItem(
+      "familyStarAdmins"
+    )
+  ) || [];
+
+}
+
+
+function saveAdminsData(admins){
+
+  localStorage.setItem(
+    "familyStarAdmins",
+    JSON.stringify(admins)
+  );
+
+}
+
+
+function addAdmin(admin){
+
+  const admins =
+    getAdminsData();
+
+  admins.push({
+
+    id:
+      admin.id ||
+      Date.now(),
+
+    userId:
+      admin.userId ||
+      "",
+
+    name:
+      admin.name ||
+      "مشرف",
+
+    role:
+      admin.role ||
+      "moderator",
+
+    status:
+      "active",
+
+    createdAt:
+      new Date().toISOString()
+
+  });
+
+  saveAdminsData(admins);
+
+}
+
+
+function findAdmin(adminId){
+
+  const admins =
+    getAdminsData();
+
+  return admins.find(
+    function(admin){
+
+      return String(admin.id) ===
+        String(adminId);
+
+    }
+  );
+
+}
+
+
+function updateAdminRole(
+  adminId,
+  role
+){
+
+  const admins =
+    getAdminsData();
+
+  const admin =
+    admins.find(
+      function(item){
+
+        return String(item.id) ===
+          String(adminId);
+
+      }
+    );
+
+  if(!admin){
+
+    return false;
+
+  }
+
+  admin.role =
+    role;
+
+  saveAdminsData(admins);
+
+  return true;
+
+}
+
+
+function updateAdminStatus(
+  adminId,
+  status
+){
+
+  const admins =
+    getAdminsData();
+
+  const admin =
+    admins.find(
+      function(item){
+
+        return String(item.id) ===
+          String(adminId);
+
+      }
+    );
+
+  if(!admin){
+
+    return false;
+
+  }
+
+  admin.status =
+    status;
+
+  saveAdminsData(admins);
+
+  return true;
+
+}
+
+
+function deleteAdmin(adminId){
+
+  const admins =
+    getAdminsData();
+
+  const newAdmins =
+    admins.filter(
+      function(admin){
+
+        return String(admin.id) !==
+          String(adminId);
+
+      }
+    );
+
+  saveAdminsData(newAdmins);
+
+  }
+  /* =====================================================
+   الجزء 21
+   نظام مستويات المستخدمين
+===================================================== */
+
+function getUserLevel(userId){
+
+  const user =
+    findUser(userId);
+
+  if(!user){
+
+    return 0;
+
+  }
+
+  return Number(
+    user.level
+  ) || 0;
+
+}
+
+
+function setUserLevel(
+  userId,
+  level
+){
+
+  const users =
+    getUsersData();
+
+  const user =
+    users.find(
+      function(item){
+
+        return String(item.id) ===
+          String(userId);
+
+      }
+    );
+
+  if(!user){
+
+    return false;
+
+  }
+
+  user.level =
+    Math.max(
+      0,
+      Number(level) || 0
+    );
+
+  saveUsersData(users);
+
+  return true;
+
+}
+
+
+function increaseUserLevel(
+  userId,
+  amount
+){
+
+  const value =
+    Number(amount) || 0;
+
+  if(value <= 0){
+
+    return false;
+
+  }
+
+  return setUserLevel(
+    userId,
+    getUserLevel(userId) + value
+  );
+
+}
+
+
+function decreaseUserLevel(
+  userId,
+  amount
+){
+
+  const value =
+    Number(amount) || 0;
+
+  if(value <= 0){
+
+    return false;
+
+  }
+
+  return setUserLevel(
+    userId,
+    Math.max(
+      0,
+      getUserLevel(userId) - value
+    )
+  );
+
+}
+
+
+/* =====================================================
+   التحقق من مستوى إنشاء العائلة
+===================================================== */
+
+function canCreateFreeFamily(userId){
+
+  return (
+    getUserLevel(userId) >= 30
+  );
+
+  }
+  /* =====================================================
+   الجزء 22
+   نظام إنشاء العائلة
+===================================================== */
+
+function createFamilyAccount(data){
+
+  if(!data){
+
+    return {
+      success: false,
+      message: "بيانات العائلة غير موجودة"
+    };
+
+  }
+
+  const ownerId =
+    data.ownerId || "";
+
+  const familyName =
+    String(
+      data.name || ""
+    ).trim();
+
+  if(!ownerId){
+
+    return {
+      success: false,
+      message: "يجب تحديد صاحب العائلة"
+    };
+
+  }
+
+  if(!familyName){
+
+    return {
+      success: false,
+      message: "اكتب اسم العائلة"
+    };
+
+  }
+
+  const families =
+    getFamiliesData();
+
+  const alreadyExists =
+    families.some(
+      function(family){
+
+        return String(family.owner) ===
+          String(ownerId);
+
+      }
+    );
+
+  if(alreadyExists){
+
+    return {
+      success: false,
+      message: "هذا المستخدم لديه عائلة بالفعل"
+    };
+
+  }
+
+  const freeCreation =
+    canCreateFreeFamily(ownerId);
+
+  const creationCost =
+    freeCreation ? 0 : 5000000;
+
+  const family = {
+
+    id:
+      Date.now(),
+
+    name:
+      familyName,
+
+    owner:
+      ownerId,
+
+    announcement:
+      data.announcement || "",
+
+    members:
+      1,
+
+    moderators:
+      Array.isArray(data.moderators)
+        ? data.moderators
+        : [],
+
+    status:
+      "active",
+
+    creationCost:
+      creationCost,
+
+    freeCreation:
+      freeCreation,
+
+    createdAt:
+      new Date().toISOString()
+
+  };
+
+  families.push(family);
+
+  saveFamiliesData(families);
+
+  localStorage.setItem(
+    "familyStarFamiliesCount",
+    families.length
+  );
+
+  refreshAdminData();
+
+  return {
+    success: true,
+    family: family
+  };
+
+  }
+  /* =====================================================
+   الجزء 23
+   أعضاء العائلة والمشرفون
+===================================================== */
+
+function getFamilyMembers(familyId){
+
+  const family =
+    findFamily(familyId);
+
+  if(!family){
+
+    return [];
+
+  }
+
+  if(!Array.isArray(family.membersList)){
+
+    family.membersList = [];
+
+  }
+
+  return family.membersList;
+
+}
+
+
+function addFamilyMember(
+  familyId,
+  userId
+){
+
+  const families =
+    getFamiliesData();
+
+  const family =
+    families.find(
+      function(item){
+
+        return String(item.id) ===
+          String(familyId);
+
+      }
+    );
+
+  if(!family){
+
+    return false;
+
+  }
+
+  if(!Array.isArray(family.membersList)){
+
+    family.membersList = [];
+
+  }
+
+  const exists =
+    family.membersList.some(
+      function(member){
+
+        return String(member.userId) ===
+          String(userId);
+
+      }
+    );
+
+  if(exists){
+
+    return false;
+
+  }
+
+  family.membersList.push({
+
+    userId:
+      userId,
+
+    role:
+      "member",
+
+    joinedAt:
+      new Date().toISOString()
+
+  });
+
+  family.members =
+    family.membersList.length;
+
+  saveFamiliesData(families);
+
+  return true;
+
+}
+
+
+function removeFamilyMember(
+  familyId,
+  userId
+){
+
+  const families =
+    getFamiliesData();
+
+  const family =
+    families.find(
+      function(item){
+
+        return String(item.id) ===
+          String(familyId);
+
+      }
+    );
+
+  if(!family){
+
+    return false;
+
+  }
+
+  if(!Array.isArray(family.membersList)){
+
+    return false;
+
+  }
+
+  family.membersList =
+    family.membersList.filter(
+      function(member){
+
+        return String(member.userId) !==
+          String(userId);
+
+      }
+    );
+
+  family.members =
+    family.membersList.length;
+
+  saveFamiliesData(families);
+
+  return true;
+
+}
+
+
+function addFamilyModerator(
+  familyId,
+  userId
+){
+
+  const families =
+    getFamiliesData();
+
+  const family =
+    families.find(
+      function(item){
+
+        return String(item.id) ===
+          String(familyId);
+
+      }
+    );
+
+  if(!family){
+
+    return false;
+
+  }
+
+  if(!Array.isArray(family.moderators)){
+
+    family.moderators = [];
+
+  }
+
+  const exists =
+    family.moderators.some(
+      function(id){
+
+        return String(id) ===
+          String(userId);
+
+      }
+    );
+
+  if(exists){
+
+    return false;
+
+  }
+
+  family.moderators.push(
+    userId
+  );
+
+  saveFamiliesData(families);
+
+  return true;
+
+}
+
+
+function removeFamilyModerator(
+  familyId,
+  userId
+){
+
+  const families =
+    getFamiliesData();
+
+  const family =
+    families.find(
+      function(item){
+
+        return String(item.id) ===
+          String(familyId);
+
+      }
+    );
+
+  if(!family){
+
+    return false;
+
+  }
+
+  if(!Array.isArray(family.moderators)){
+
+    return false;
+
+  }
+
+  family.moderators =
+    family.moderators.filter(
+      function(id){
+
+        return String(id) !==
+          String(userId);
+
+      }
+    );
+
+  saveFamiliesData(families);
+
+  return true;
+
+  }
+  /* =====================================================
+   الجزء 24
+   نظام الصلاحيات داخل العائلة
+===================================================== */
+
+function getFamilyMemberRole(
+  familyId,
+  userId
+){
+
+  const family =
+    findFamily(familyId);
+
+  if(!family){
+
+    return null;
+
+  }
+
+  if(String(family.owner) ===
+     String(userId)){
+
+    return "owner";
+
+  }
+
+  if(
+    Array.isArray(family.moderators) &&
+    family.moderators.some(
+      function(id){
+
+        return String(id) ===
+          String(userId);
+
+      }
+    )
+  ){
+
+    return "moderator";
+
+  }
+
+  if(
+    Array.isArray(family.membersList) &&
+    family.membersList.some(
+      function(member){
+
+        return String(member.userId) ===
+          String(userId);
+
+      }
+    )
+  ){
+
+    return "member";
+
+  }
+
+  return null;
+
+}
+
+
+function hasFamilyPermission(
+  familyId,
+  userId,
+  permission
+){
+
+  const role =
+    getFamilyMemberRole(
+      familyId,
+      userId
+    );
+
+  if(!role){
+
+    return false;
+
+  }
+
+  if(role === "owner"){
+
+    return true;
+
+  }
+
+  const moderatorPermissions = [
+
+    "manage_members",
+    "manage_moderators",
+    "edit_family",
+    "remove_members"
+
+  ];
+
+  if(role === "moderator"){
+
+    return moderatorPermissions.includes(
+      permission
+    );
+
+  }
+
+  return false;
+
+}
+
+
+/* =====================================================
+   تعديل بيانات العائلة
+===================================================== */
+
+function updateFamilyData(
+  familyId,
+  userId,
+  changes
+){
+
+  if(
+    !hasFamilyPermission(
+      familyId,
+      userId,
+      "edit_family"
+    )
+  ){
+
+    return false;
+
+  }
+
+  const families =
+    getFamiliesData();
+
+  const family =
+    families.find(
+      function(item){
+
+        return String(item.id) ===
+          String(familyId);
+
+      }
+    );
+
+  if(!family){
+
+    return false;
+
+  }
+
+  if(
+    changes.name !== undefined
+  ){
+
+    family.name =
+      String(changes.name).trim();
+
+  }
+
+  if(
+    changes.announcement !== undefined
+  ){
+
+    family.announcement =
+      String(changes.announcement);
+
+  }
+
+  saveFamiliesData(families);
+
+  return true;
+
+  }
+  /* =====================================================
+   الجزء 25
+   نظام الدردشة والرسائل
+===================================================== */
+
+function getMessagesData(){
+
+  return JSON.parse(
+    localStorage.getItem(
+      "familyStarMessages"
+    )
+  ) || [];
+
+}
+
+
+function saveMessagesData(messages){
+
+  localStorage.setItem(
+    "familyStarMessages",
+    JSON.stringify(messages)
+  );
+
+}
+
+
+function sendMessage(data){
+
+  if(!data){
+
+    return false;
+
+  }
+
+  const text =
+    String(
+      data.text || ""
+    ).trim();
+
+  if(!text){
+
+    return false;
+
+  }
+
+  const messages =
+    getMessagesData();
+
+  messages.push({
+
+    id:
+      Date.now(),
+
+    senderId:
+      data.senderId || "",
+
+    senderName:
+      data.senderName || "مستخدم",
+
+    receiverId:
+      data.receiverId || "",
+
+    familyId:
+      data.familyId || "",
+
+    roomId:
+      data.roomId || "",
+
+    text:
+      text,
+
+    createdAt:
+      new Date().toISOString()
+
+  });
+
+  saveMessagesData(messages);
+
+  return true;
+
+}
+
+
+function getUserMessages(userId){
+
+  const messages =
+    getMessagesData();
+
+  return messages.filter(
+    function(message){
+
+      return (
+        String(message.senderId) ===
+          String(userId) ||
+
+        String(message.receiverId) ===
+          String(userId)
+      );
+
+    }
+  );
+
+}
+
+
+function getFamilyMessages(familyId){
+
+  const messages =
+    getMessagesData();
+
+  return messages.filter(
+    function(message){
+
+      return String(message.familyId) ===
+        String(familyId);
+
+    }
+  );
+
+}
+
+
+function getRoomMessages(roomId){
+
+  const messages =
+    getMessagesData();
+
+  return messages.filter(
+    function(message){
+
+      return String(message.roomId) ===
+        String(roomId);
+
+    }
+  );
+
+}
+
+
+function deleteMessage(messageId){
+
+  const messages =
+    getMessagesData();
+
+  const newMessages =
+    messages.filter(
+      function(message){
+
+        return String(message.id) !==
+          String(messageId);
+
+      }
+    );
+
+  saveMessagesData(
+    newMessages
+  );
+
+  return true;
+
+  }
+/* =====================================================
+   الجزء 26
+   الحالات والمنشورات
+===================================================== */
+
+function getStatusesData(){
+
+  return JSON.parse(
+    localStorage.getItem(
+      "familyStarStatuses"
+    )
+  ) || [];
+
+}
+
+
+function saveStatusesData(statuses){
+
+  localStorage.setItem(
+    "familyStarStatuses",
+    JSON.stringify(statuses)
+  );
+
+}
+
+
+function addStatus(data){
+
+  if(!data){
+
+    return false;
+
+  }
+
+  const text =
+    String(
+      data.text || ""
+    ).trim();
+
+  if(!text){
+
+    return false;
+
+  }
+
+  const statuses =
+    getStatusesData();
+
+  statuses.push({
+
+    id:
+      Date.now(),
+
+    userId:
+      data.userId || "",
+
+    userName:
+      data.userName || "مستخدم",
+
+    text:
+      text,
+
+    image:
+      data.image || "",
+
+    likes:
+      0,
+
+    createdAt:
+      new Date().toISOString()
+
+  });
+
+  saveStatusesData(
+    statuses
+  );
+
+  return true;
+
+}
+
+
+function getStatuses(){
+
+  return getStatusesData();
+
+}
+
+
+function likeStatus(statusId){
+
+  const statuses =
+    getStatusesData();
+
+  const status =
+    statuses.find(
+      function(item){
+
+        return String(item.id) ===
+          String(statusId);
+
+      }
+    );
+
+  if(!status){
+
+    return false;
+
+  }
+
+  status.likes =
+    (Number(status.likes) || 0) + 1;
+
+  saveStatusesData(
+    statuses
+  );
+
+  return true;
+
+}
+
+
+function deleteStatus(statusId){
+
+  const statuses =
+    getStatusesData();
+
+  const newStatuses =
+    statuses.filter(
+      function(status){
+
+        return String(status.id) !==
+          String(statusId);
+
+      }
+    );
+
+  saveStatusesData(
+    newStatuses
+  );
+
+  return true;
+
+  }
 /* =====================================================
    نهاية المشروع
 ===================================================== */
