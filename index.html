@@ -3570,7 +3570,946 @@ function updateAdminCounter(type, amount){
 
 }
 
+/* =====================================================
+   الجزء 13
+   بيانات لوحة التحكم
+===================================================== */
 
+function getAdminCounter(type){
+
+  return Number(
+    localStorage.getItem(type)
+  ) || 0;
+
+}
+
+
+function setAdminCounter(type, amount){
+
+  localStorage.setItem(
+    type,
+    Number(amount) || 0
+  );
+
+}
+
+
+function resetAdminCounter(type){
+
+  localStorage.setItem(
+    type,
+    0
+  );
+
+}
+
+
+/* =====================================================
+   تحديث بيانات لوحة التحكم
+===================================================== */
+
+function refreshAdminData(){
+
+  const data = getAdminData();
+
+
+  const usersElement =
+    document.getElementById(
+      "adminUsers"
+    );
+
+  const roomsElement =
+    document.getElementById(
+      "adminRooms"
+    );
+
+  const familiesElement =
+    document.getElementById(
+      "adminFamilies"
+    );
+
+  const giftsElement =
+    document.getElementById(
+      "adminGifts"
+    );
+
+  const reportsElement =
+    document.getElementById(
+      "adminReports"
+    );
+
+
+  if(usersElement){
+
+    usersElement.textContent =
+      data.users;
+
+  }
+
+
+  if(roomsElement){
+
+    roomsElement.textContent =
+      data.rooms;
+
+  }
+
+
+  if(familiesElement){
+
+    familiesElement.textContent =
+      data.families;
+
+  }
+
+
+  if(giftsElement){
+
+    giftsElement.textContent =
+      data.gifts;
+
+  }
+
+
+  if(reportsElement){
+
+    reportsElement.textContent =
+      data.reports;
+
+  }
+
+}
+
+
+/* =====================================================
+   تشغيل لوحة التحكم
+===================================================== */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function(){
+
+    refreshAdminData();
+
+  }
+);
+  /* =====================================================
+   الجزء 14
+   أدوات إدارة لوحة التحكم
+===================================================== */
+
+function adminAddUsers(amount){
+
+  updateAdminCounter(
+    "familyStarUsersCount",
+    amount
+  );
+
+  refreshAdminData();
+
+}
+
+
+function adminAddRooms(amount){
+
+  updateAdminCounter(
+    "familyStarRoomsCount",
+    amount
+  );
+
+  refreshAdminData();
+
+}
+
+
+function adminAddFamilies(amount){
+
+  updateAdminCounter(
+    "familyStarFamiliesCount",
+    amount
+  );
+
+}
+
+
+function adminAddGifts(amount){
+
+  updateAdminCounter(
+    "familyStarGiftsCount",
+    amount
+  );
+
+  refreshAdminData();
+
+}
+
+
+function adminAddReports(amount){
+
+  updateAdminCounter(
+    "familyStarReportsCount",
+    amount
+  );
+
+  refreshAdminData();
+
+}
+
+
+/* =====================================================
+   تصفير بيانات الإدارة
+===================================================== */
+
+function resetAdminData(){
+
+  localStorage.setItem(
+    "familyStarUsersCount",
+    0
+  );
+
+  localStorage.setItem(
+    "familyStarRoomsCount",
+    0
+  );
+
+  localStorage.setItem(
+    "familyStarFamiliesCount",
+    0
+  );
+
+  localStorage.setItem(
+    "familyStarGiftsCount",
+    0
+  );
+
+  localStorage.setItem(
+    "familyStarReportsCount",
+    0
+  );
+
+  refreshAdminData();
+
+}
+
+
+/* =====================================================
+   التحقق من صلاحية الإدارة
+===================================================== */
+
+function requireAdmin(){
+
+  if(!isAdmin()){
+
+    alert(
+      "ليس لديك صلاحية الدخول إلى لوحة الإدارة"
+    );
+
+    return false;
+
+  }
+
+  return true;
+
+}
+
+
+/* =====================================================
+   فتح لوحة الإدارة
+===================================================== */
+
+function openAdminPanel(){
+
+  if(!requireAdmin()){
+
+    return;
+
+  }
+
+  const panel =
+    document.getElementById(
+      "adminPanel"
+    );
+
+  if(panel){
+
+    panel.style.display =
+      "block";
+
+    refreshAdminData();
+
+  }
+
+}
+
+
+/* =====================================================
+   إغلاق لوحة الإدارة
+===================================================== */
+
+function closeAdminPanel(){
+
+  const panel =
+    document.getElementById(
+      "adminPanel"
+    );
+
+  if(panel){
+
+    panel.style.display =
+      "none";
+
+  }
+
+  }
+   /* =====================================================
+    الجزء 15
+    إدارة المستخدمين
+ ===================================================== */
+
+function getUsersData(){
+
+  const users =
+    JSON.parse(
+      localStorage.getItem(
+        "familyStarUsers"
+      )
+    ) || [];
+
+  return users;
+
+}
+
+
+function saveUsersData(users){
+
+  localStorage.setItem(
+    "familyStarUsers",
+    JSON.stringify(users)
+  );
+
+}
+
+
+function addUser(user){
+
+  const users =
+    getUsersData();
+
+  users.push({
+
+    id:
+      user.id ||
+      Date.now(),
+
+    name:
+      user.name ||
+      "مستخدم جديد",
+
+    phone:
+      user.phone ||
+      "",
+
+    country:
+      user.country ||
+      "",
+
+    level:
+      Number(user.level) || 0,
+
+    coins:
+      Number(user.coins) || 0,
+
+    status:
+      user.status ||
+      "active",
+
+    createdAt:
+      new Date().toISOString()
+
+  });
+
+  saveUsersData(users);
+
+  localStorage.setItem(
+    "familyStarUsersCount",
+    users.length
+  );
+
+  refreshAdminData();
+
+}
+
+
+function findUser(userId){
+
+  const users =
+    getUsersData();
+
+  return users.find(
+    function(user){
+
+      return String(user.id) ===
+        String(userId);
+
+    }
+  );
+
+}
+
+
+function updateUserStatus(
+  userId,
+  status
+){
+
+  const users =
+    getUsersData();
+
+  const user =
+    users.find(
+      function(item){
+
+        return String(item.id) ===
+          String(userId);
+
+      }
+    );
+
+  if(!user){
+
+    return false;
+
+  }
+
+  user.status =
+    status;
+
+  saveUsersData(users);
+
+  return true;
+
+}
+
+
+function deleteUser(userId){
+
+  const users =
+    getUsersData();
+
+  const newUsers =
+    users.filter(
+      function(user){
+
+        return String(user.id) !==
+          String(userId);
+
+      }
+    );
+
+  saveUsersData(newUsers);
+
+  localStorage.setItem(
+    "familyStarUsersCount",
+    newUsers.length
+  );
+
+  refreshAdminData();
+
+}
+/* =====================================================
+   الجزء 16
+   إدارة الرومات
+===================================================== */
+
+function getRoomsData(){
+
+  const rooms =
+    JSON.parse(
+      localStorage.getItem(
+        "familyStarRooms"
+      )
+    ) || [];
+
+  return rooms;
+
+}
+
+
+function saveRoomsData(rooms){
+
+  localStorage.setItem(
+    "familyStarRooms",
+    JSON.stringify(rooms)
+  );
+
+}
+
+
+function addRoom(room){
+
+  const rooms =
+    getRoomsData();
+
+  rooms.push({
+
+    id:
+      room.id ||
+      Date.now(),
+
+    name:
+      room.name ||
+      "روم جديد",
+
+    owner:
+      room.owner ||
+      "",
+
+    micCount:
+      Number(room.micCount) || 1,
+
+    announcement:
+      room.announcement ||
+      "",
+
+    status:
+      room.status ||
+      "active",
+
+    createdAt:
+      new Date().toISOString()
+
+  });
+
+  saveRoomsData(rooms);
+
+  localStorage.setItem(
+    "familyStarRoomsCount",
+    rooms.length
+  );
+
+  refreshAdminData();
+
+}
+
+
+function findRoom(roomId){
+
+  const rooms =
+    getRoomsData();
+
+  return rooms.find(
+    function(room){
+
+      return String(room.id) ===
+        String(roomId);
+
+    }
+  );
+
+}
+
+
+function updateRoomStatus(
+  roomId,
+  status
+){
+
+  const rooms =
+    getRoomsData();
+
+  const room =
+    rooms.find(
+      function(item){
+
+        return String(item.id) ===
+          String(roomId);
+
+      }
+    );
+
+  if(!room){
+
+    return false;
+
+  }
+
+  room.status =
+    status;
+
+  saveRoomsData(rooms);
+
+  return true;
+
+}
+
+
+function deleteRoom(roomId){
+
+  const rooms =
+    getRoomsData();
+
+  const newRooms =
+    rooms.filter(
+      function(room){
+
+        return String(room.id) !==
+          String(roomId);
+
+      }
+    );
+
+  saveRoomsData(newRooms);
+
+  localStorage.setItem(
+    "familyStarRoomsCount",
+    newRooms.length
+  );
+
+  refreshAdminData();
+
+  }
+   /* =====================================================
+    الجزء 17
+    إدارة العائلات
+ ===================================================== */
+
+function getFamiliesData(){
+
+  const families =
+    JSON.parse(
+      localStorage.getItem(
+        "familyStarFamilies"
+      )
+    ) || [];
+
+  return families;
+
+}
+
+
+function saveFamiliesData(families){
+
+  localStorage.setItem(
+    "familyStarFamilies",
+    JSON.stringify(families)
+  );
+
+}
+
+
+function addFamily(family){
+
+  const families =
+    getFamiliesData();
+
+  families.push({
+
+    id:
+      family.id ||
+      Date.now(),
+
+    name:
+      family.name ||
+      "عائلة جديدة",
+
+    owner:
+      family.owner ||
+      "",
+
+    announcement:
+      family.announcement ||
+      "",
+
+    level:
+      Number(family.level) || 0,
+
+    members:
+      Number(family.members) || 0,
+
+    status:
+      family.status ||
+      "active",
+
+    createdAt:
+      new Date().toISOString()
+
+  });
+
+  saveFamiliesData(families);
+
+  localStorage.setItem(
+    "familyStarFamiliesCount",
+    families.length
+  );
+
+  refreshAdminData();
+
+}
+
+
+function findFamily(familyId){
+
+  const families =
+    getFamiliesData();
+
+  return families.find(
+    function(family){
+
+      return String(family.id) ===
+        String(familyId);
+
+    }
+  );
+
+}
+
+
+function updateFamilyStatus(
+  familyId,
+  status
+){
+
+  const families =
+    getFamiliesData();
+
+  const family =
+    families.find(
+      function(item){
+
+        return String(item.id) ===
+          String(familyId);
+
+      }
+    );
+
+  if(!family){
+
+    return false;
+
+  }
+
+  family.status =
+    status;
+
+  saveFamiliesData(families);
+
+  return true;
+
+}
+
+
+function deleteFamily(familyId){
+
+  const families =
+    getFamiliesData();
+
+  const newFamilies =
+    families.filter(
+      function(family){
+
+        return String(family.id) !==
+          String(familyId);
+
+      }
+    );
+
+  saveFamiliesData(newFamilies);
+
+  localStorage.setItem(
+    "familyStarFamiliesCount",
+    newFamilies.length
+  );
+
+  refreshAdminData();
+
+  }
+  /* =====================================================
+   الجزء 18
+   إدارة الهدايا والكوينز
+===================================================== */
+
+function getGiftData(){
+
+  return {
+
+    gifts:
+      Number(
+        localStorage.getItem(
+          "familyStarGiftsCount"
+        )
+      ) || 0,
+
+    coins:
+      Number(
+        localStorage.getItem(
+          "familyStarCoins"
+        )
+      ) || 0
+
+  };
+
+}
+
+
+function addCoins(amount){
+
+  const value =
+    Number(amount) || 0;
+
+  if(value <= 0){
+
+    return false;
+
+  }
+
+  const current =
+    Number(
+      localStorage.getItem(
+        "familyStarCoins"
+      )
+    ) || 0;
+
+  localStorage.setItem(
+    "familyStarCoins",
+    current + value
+  );
+
+  return true;
+
+}
+
+
+function removeCoins(amount){
+
+  const value =
+    Number(amount) || 0;
+
+  if(value <= 0){
+
+    return false;
+
+  }
+
+  const current =
+    Number(
+      localStorage.getItem(
+        "familyStarCoins"
+      )
+    ) || 0;
+
+  if(value > current){
+
+    return false;
+
+  }
+
+  localStorage.setItem(
+    "familyStarCoins",
+    current - value
+  );
+
+  return true;
+
+}
+
+
+function addGift(){
+
+  updateAdminCounter(
+    "familyStarGiftsCount",
+    1
+  );
+
+  refreshAdminData();
+
+}
+
+
+function removeGift(){
+
+  const current =
+    Number(
+      localStorage.getItem(
+        "familyStarGiftsCount"
+      )
+    ) || 0;
+
+  if(current <= 0){
+
+    return false;
+
+  }
+
+  localStorage.setItem(
+    "familyStarGiftsCount",
+    current - 1
+  );
+
+  refreshAdminData();
+
+  return true;
+
+}
+
+
+/* =====================================================
+   رصيد المستخدم
+===================================================== */
+
+function getUserCoins(userId){
+
+  const user =
+    findUser(userId);
+
+  if(!user){
+
+    return 0;
+
+  }
+
+  return Number(
+    user.coins
+  ) || 0;
+
+}
+
+
+function updateUserCoins(
+  userId,
+  amount
+){
+
+  const users =
+    getUsersData();
+
+  const user =
+    users.find(
+      function(item){
+
+        return String(item.id) ===
+          String(userId);
+
+      }
+    );
+
+  if(!user){
+
+    return false;
+
+  }
+
+  user.coins =
+    Math.max(
+      0,
+      (Number(user.coins) || 0) +
+      (Number(amount) || 0)
+    );
+
+  saveUsersData(users);
+
+  return true;
+
+  }
 /* =====================================================
    نهاية المشروع
 ===================================================== */
