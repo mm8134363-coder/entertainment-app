@@ -4478,5 +4478,43 @@ function openChat(name){
 }
 
 
-/* ================= تشغيل البرنام
+/* ================= تشغيل البرنامالبرنامج ================= */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function(){
+
+    load();
+
+    buildMics();
+
+    updateUI();
+
+    setTimeout(
+      function(){
+
+        if(
+          localStorage.getItem(KEY)
+        ){
+
+          showScreen("home");
+
+        }else{
+
+          showScreen("login");
+
+        }
+
+      },
+      1800
+    );
+
+  }
+);
+
+</script>
+
+</body>
+
+</html>
    
