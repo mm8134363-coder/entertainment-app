@@ -2789,5 +2789,1694 @@ button:active{
         </span>
 
       </div>
+      <div>›</div>
 
+    </div>
+
+
+    <div class="setting">
+
+      <div class="ico">🔔</div>
+
+      <div class="grow">
+
+        <b>الإشعارات</b>
+
+        <br>
+
+        <span>
+          إعدادات الإشعارات والتنبيهات
+        </span>
+
+      </div>
+
+      <div>›</div>
+
+    </div>
+
+
+    <div class="setting">
+
+      <div class="ico">🌐</div>
+
+      <div class="grow">
+
+        <b>اللغة</b>
+
+        <br>
+
+        <span>
+          العربية
+        </span>
+
+      </div>
+
+      <div>›</div>
+
+    </div>
+
+
+    <div class="setting">
+
+      <div class="ico">🛡️</div>
+
+      <div class="grow">
+
+        <b>الحماية</b>
+
+        <br>
+
+        <span>
+          حماية الحساب وتسجيل الدخول
+        </span>
+
+      </div>
+
+      <div>›</div>
+
+    </div>
+
+
+    <div class="setting">
+
+      <div class="ico">ℹ️</div>
+
+      <div class="grow">
+
+        <b>عن Star Voice</b>
+
+        <br>
+
+        <span>
+          معلومات عن التطبيق
+        </span>
+
+      </div>
+
+      <div>›</div>
+
+    </div>
+
+
+    <button
+      class="logout-btn"
+      onclick="logout()"
+    >
+      🚪 تسجيل الخروج
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- ================= العائلة ================= -->
+
+<section id="family" class="screen">
+
+  <div class="topbar">
+
+    <button
+      class="iconbtn"
+      onclick="goBack()"
+    >
+      ↩️
+    </button>
+
+    <div class="title">
+      👨‍👩‍👧‍👦 العائلة
+    </div>
+
+    <div></div>
+
+  </div>
+
+
+  <div class="family-head">
+
+    <div class="family-logo">
+      ⭐
+    </div>
+
+    <h2>
+      Star Family
+    </h2>
+
+    <p>
+      عائلة ترفيهية تجمع الأصدقاء
+    </p>
+
+  </div>
+
+
+  <button
+    class="primary-btn"
+    onclick="openFamilyModal()"
+  >
+    ➕ إنشاء عائلة
+  </button>
+
+
+  <div class="card">
+
+    <h3>
+      👥 أعضاء العائلة
+    </h3>
+
+    <div class="member">
+
+      <img
+        src="https://i.pravatar.cc/100?img=12"
+      >
+
+      <div class="grow">
+
+        <b>
+          Star
+        </b>
+
+        <div class="small">
+          صاحب العائلة
+        </div>
+
+      </div>
+
+      <span class="badge">
+        👑 المالك
+      </span>
+
+    </div>
+
+
+    <div class="member">
+
+      <img
+        src="https://i.pravatar.cc/100?img=20"
+      >
+
+      <div class="grow">
+
+        <b>
+          أحمد
+        </b>
+
+        <div class="small">
+          مشرف
+        </div>
+
+      </div>
+
+      <span class="badge">
+        🛡️ مشرف
+      </span>
+
+    </div>
+
+
+    <div class="member">
+
+      <img
+        src="https://i.pravatar.cc/100?img=32"
+      >
+
+      <div class="grow">
+
+        <b>
+          محمد
+        </b>
+
+        <div class="small">
+          عضو
+        </div>
+
+      </div>
+
+      <span class="badge">
+        عضو
+      </span>
+
+    </div>
+
+  </div>
+
+
+  <button
+    class="secondary-btn"
+    onclick="openFamilyChat()"
+  >
+    💬 محادثة العائلة
+  </button>
+
+</section>
+
+
+<!-- ================= محادثة العائلة ================= -->
+
+<section id="familyChat" class="screen">
+
+  <div class="topbar">
+
+    <button
+      class="iconbtn"
+      onclick="goBack()"
+    >
+      ↩️
+    </button>
+
+    <div class="title">
+      💬 محادثة العائلة
+    </div>
+
+    <div></div>
+
+  </div>
+
+
+  <div
+    id="familyMessages"
+    class="messages"
+  >
+
+    <div class="message">
+
+      <b>
+        أحمد
+      </b>
+
+      <p>
+        أهلاً بكل أعضاء العائلة ❤️
+      </p>
+
+    </div>
+
+
+    <div class="message">
+
+      <b>
+        محمد
+      </b>
+
+      <p>
+        نورتوا العائلة يا نجوم ⭐
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <div class="message-input">
+
+    <input
+      id="familyMessageInput"
+      type="text"
+      placeholder="اكتب رسالة..."
+      onkeydown="if(event.key==='Enter')sendFamilyMessage()"
+    >
+
+    <button
+      onclick="sendFamilyMessage()"
+    >
+      إرسال
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- ================= تفاصيل الروم ================= -->
+
+<section id="roomDetails" class="screen">
+
+  <div class="topbar">
+
+    <button
+      class="iconbtn"
+      onclick="goBack()"
+    >
+      ↩️
+    </button>
+
+    <div
+      id="roomTitle"
+      class="title"
+    >
+      الروم
+    </div>
+
+    <button
+      class="iconbtn"
+      onclick="showGiftModal()"
+    >
+      🎁
+    </button>
+
+  </div>
+
+
+  <div class="room-cover">
+
+    <div class="room-avatar">
+      🎤
+    </div>
+
+    <h2 id="roomName">
+      روم النجوم
+    </h2>
+
+    <p>
+      أهلاً بكل الأصدقاء ❤️
+    </p>
+
+  </div>
+
+
+  <div class="mic-grid">
+
+    <button class="mic active">
+      🎙️
+      <span>
+        صاحب الروم
+      </span>
+    </button>
+
+    <button class="mic">
+      🎤
+      <span>
+        ميك 2
+      </span>
+    </button>
+
+    <button class="mic">
+      🎤
+      <span>
+        ميك 3
+      </span>
+    </button>
+
+    <button class="mic">
+      🎤
+      <span>
+        ميك 4
+      </span>
+    </button>
+
+    <button class="mic">
+      🎤
+      <span>
+        ميك 5
+      </span>
+    </button>
+
+    <button class="mic">
+      🎤
+      <span>
+        ميك 6
+      </span>
+    </button>
+
+    <button class="mic">
+      🎤
+      <span>
+        ميك 7
+      </span>
+    </button>
+
+    <button class="mic">
+      🎤
+      <span>
+        ميك 8
+      </span>
+    </button>
+
+  </div>
+
+
+  <div class="room-actions">
+
+    <button
+      onclick="showAlert('تم تشغيل الميكروفون')"
+    >
+      🎙️ الميك
+    </button>
+
+    <button
+      onclick="showGiftModal()"
+    >
+      🎁 هدية
+    </button>
+
+    <button
+      onclick="showAlert('تم كتم الصوت')"
+    >
+      🔇 كتم
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- ================= نافذة إنشاء العائلة ================= -->
+
+<div
+  id="familyModal"
+  class="modal"
+>
+
+  <div class="modal-box">
+
+    <button
+      class="modal-close"
+      onclick="closeFamilyModal()"
+    >
+      ✕
+    </button>
+
+    <h2>
+      👨‍👩‍👧‍👦 إنشاء عائلة
+    </h2>
+
+    <p class="small">
+      تكلفة إنشاء العائلة 5,000,000 كوينز
+      <br>
+      ويمكن الإنشاء مجاناً عند الوصول إلى المستوى 30.
+    </p>
+
+
+    <label>
+      صورة العائلة
+    </label>
+
+    <input
+      type="file"
+      accept="image/*"
+      onchange="preview(this,'familyImagePreview')"
+    >
+
+    <img
+      id="familyImagePreview"
+      class="upload-preview"
+      style="display:none"
+    >
+
+
+    <label>
+      اسم العائلة
+    </label>
+
+    <input
+      id="familyNameInput"
+      type="text"
+      placeholder="اكتب اسم العائلة"
+    >
+
+
+    <label>
+      إعلان العائلة
+    </label>
+
+    <textarea
+      id="familyAnnouncementInput"
+      placeholder="اكتب إعلان العائلة"
+    ></textarea>
+
+
+    <label>
+      عدد الميكات
+    </label>
+
+    <select id="familyMics">
+    </select>
+
+
+    <label>
+      صورة الغلاف
+    </label>
+
+    <input
+      type="file"
+      accept="image/*"
+      onchange="preview(this,'familyCoverPreview')"
+    >
+
+    <img
+      id="familyCoverPreview"
+      class="upload-preview"
+      style="display:none"
+    >
+
+
+    <button
+      class="primary-btn"
+      onclick="createFamily()"
+    >
+      إنشاء العائلة
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- ================= نافذة الهدايا ================= -->
+
+<div
+  id="giftModal"
+  class="modal"
+>
+
+  <div class="modal-box">
+
+    <button
+      class="modal-close"
+      onclick="closeGiftModal()"
+    >
+      ✕
+    </button>
+
+    <h2>
+      🎁 إرسال هدية
+    </h2>
+
+
+    <div class="gift-grid">
+
+      <button onclick="sendGift('🌹',100)">
+        🌹
+        <small>100</small>
+      </button>
+
+      <button onclick="sendGift('❤️',500)">
+        ❤️
+        <small>500</small>
+      </button>
+
+      <button onclick="sendGift('💎',1000)">
+        💎
+        <small>1,000</small>
+      </button>
+
+      <button onclick="sendGift('👑',5000)">
+        👑
+        <small>5,000</small>
+      </button>
+
+      <button onclick="sendGift('🚗',10000)">
+        🚗
+        <small>10,000</small>
+      </button>
+
+      <button onclick="sendGift('🏆',50000)">
+        🏆
+        <small>50,000</small>
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- ================= رسالة التنبيه ================= -->
+
+<div
+  id="toast"
+  class="toast"
+>
+</div>
+
+
+<!-- ================= شريط التنقل ================= -->
+
+<nav
+  id="nav"
+  class="nav"
+>
+
+  <button
+    data-s="home"
+    onclick="showScreen('home')"
+  >
+    🏠
+    <span>الرئيسية</span>
+  </button>
+
+
+  <button
+    data-s="chat"
+    onclick="showScreen('chat')"
+  >
+    💬
+    <span>الدردشة</span>
+  </button>
+
+
+  <button
+    data-s="status"
+    onclick="showScreen('status')"
+  >
+    🟢
+    <span>الحالات</span>
+  </button>
+
+
+  <button
+    data-s="rooms"
+    onclick="showScreen('rooms')"
+  >
+    🎤
+    <span>الرومات</span>
+  </button>
+
+
+  <button
+    data-s="profile"
+    onclick="showScreen('profile')"
+  >
+    👤
+    <span>حسابي</span>
+  </button>
+
+</nav>
+
+
+<script>
+
+/* ================= بيانات المستخدم ================= */
+
+const KEY = "starVoiceData";
+
+
+let user = {
+
+  name: "Star",
+
+  phone: "+20 123 456 7890",
+
+  age: "25",
+
+  country: "مصر",
+
+  coins: 2560,
+
+  level: 25,
+
+  avatar:
+    "https://i.pravatar.cc/200?img=12",
+
+  cover: ""
+
+};
+
+
+let previous = "home";
+
+let selectedMics = 1;
+
+
+/* ================= الحفظ ================= */
+
+function save(){
+
+  localStorage.setItem(
+    KEY,
+    JSON.stringify(user)
+  );
+
+}
+
+
+/* ================= التحميل ================= */
+
+function load(){
+
+  try{
+
+    const data =
+      localStorage.getItem(KEY);
+
+    if(data){
+
+      user = {
+        ...user,
+        ...JSON.parse(data)
+      };
+
+    }
+
+  }catch(e){}
+
+}
+
+
+/* ================= تنسيق الأرقام ================= */
+
+function fmt(n){
+
+  return Number(n)
+    .toLocaleString("en-US");
+
+}
+
+
+/* ================= فتح الصفحات ================= */
+
+function showScreen(id){
+
+  previous =
+    document.querySelector(
+      ".screen.active"
+    )?.id || "home";
+
+
+  document
+    .querySelectorAll(".screen")
+    .forEach(
+      x => x.classList.remove("active")
+    );
+
+
+  const page =
+    document.getElementById(id);
+
+
+  if(page){
+
+    page.classList.add("active");
+
+  }
+
+
+  const hiddenPages = [
+
+    "splash",
+
+    "login",
+
+    "signup",
+
+    "settings",
+
+    "wallet",
+
+    "level",
+
+    "friends",
+
+    "notifications",
+
+    "family",
+
+    "familyChat",
+
+    "roomDetails"
+
+  ];
+
+
+  const nav =
+    document.getElementById("nav");
+
+
+  if(nav){
+
+    nav.style.display =
+      hiddenPages.includes(id)
+      ? "none"
+      : "flex";
+
+  }
+
+
+  document
+    .querySelectorAll(".nav button")
+    .forEach(btn => {
+
+      btn.classList.toggle(
+        "active",
+        btn.dataset.s === id
+      );
+
+    });
+
+
+  updateUI();
+
+}
+
+
+/* ================= رجوع ================= */
+
+function goBack(){
+
+  showScreen(
+    previous || "home"
+  );
+
+}
+
+
+/* ================= التنبيه ================= */
+
+function showAlert(msg){
+
+  const toast =
+    document.getElementById("toast");
+
+  if(!toast)return;
+
+
+  toast.textContent = msg;
+
+  toast.classList.add("show");
+
+
+  clearTimeout(
+    window.toastTimer
+  );
+
+
+  window.toastTimer =
+    setTimeout(() => {
+
+      toast.classList.remove("show");
+
+    },2600);
+
+}
+
+
+/* ================= تحديث الواجهة ================= */
+
+function updateUI(){
+
+  const homeName =
+    document.getElementById("homeName");
+
+  if(homeName)
+    homeName.textContent =
+      user.name || "Star";
+
+
+  const profileName =
+    document.getElementById("profileName");
+
+  if(profileName)
+    profileName.textContent =
+      user.name || "Star";
+
+
+  const homeLevel =
+    document.getElementById("homeLevel");
+
+  if(homeLevel)
+    homeLevel.textContent =
+      user.level;
+
+
+  const homeCoins =
+    document.getElementById("homeCoins");
+
+  if(homeCoins)
+    homeCoins.textContent =
+      fmt(user.coins);
+
+
+  const walletCoins =
+    document.getElementById("walletCoins");
+
+  if(walletCoins)
+    walletCoins.textContent =
+      fmt(user.coins);
+
+
+  const homeAvatar =
+    document.getElementById("homeAvatar");
+
+  if(homeAvatar)
+    homeAvatar.src =
+      user.avatar;
+
+
+  const profileAvatar =
+    document.getElementById("profileAvatar");
+
+  if(profileAvatar)
+    profileAvatar.src =
+      user.avatar;
+
+
+  const profileCover =
+    document.getElementById("profileCover");
+
+
+  if(
+    profileCover &&
+    user.cover
+  ){
+
+    profileCover.style.backgroundImage =
+      `url("${user.cover}")`;
+
+  }
+
+
+  const age =
+    document.getElementById("ageText");
+
+  if(age)
+    age.textContent =
+      user.age || "غير محدد";
+
+
+  const country =
+    document.getElementById("countryText");
+
+  if(country)
+    country.textContent =
+      user.country || "مصر";
+
+
+  const phone =
+    document.getElementById("phoneText");
+
+  if(phone)
+    phone.textContent =
+      user.phone || "غير مربوط";
+
+}
+
+
+/* ================= إنشاء الحساب ================= */
+
+function createAccount(){
+
+  const name =
+    prompt("اكتب اسم المستخدم");
+
+
+  if(!name){
+
+    showAlert(
+      "اكتب اسم المستخدم أولاً"
+    );
+
+    return;
+
+  }
+
+
+  user.name =
+    name.trim();
+
+
+  save();
+
+  showAlert(
+    "تم إنشاء الحساب بنجاح"
+  );
+
+
+  setTimeout(
+    () => showScreen("home"),
+    500
+  );
+
+}
+
+
+/* ================= تسجيل الدخول الاجتماعي ================= */
+
+function socialLogin(provider){
+
+  user.name =
+    provider === "Google"
+    ? "Google Star"
+    : "Facebook Star";
+
+
+  save();
+
+
+  showAlert(
+    "تم تسجيل الدخول بواسطة " +
+    provider
+  );
+
+
+  setTimeout(
+    () => showScreen("home"),
+    500
+  );
+
+}
+
+
+/* ================= تسجيل الدخول بالهاتف ================= */
+
+function phoneLogin(){
+
+  const phone =
+    prompt(
+      "اكتب رقم الهاتف"
+    );
+
+
+  if(!phone){
+
+    showAlert(
+      "اكتب رقم الهاتف"
+    );
+
+    return;
+
+  }
+
+
+  user.phone =
+    phone.trim();
+
+
+  save();
+
+
+  showAlert(
+    "تم تسجيل الدخول برقم الهاتف"
+  );
+
+
+  setTimeout(
+    () => showScreen("home"),
+    500
+  );
+
+}
+
+
+/* ================= تعديل الاسم ================= */
+
+function editName(){
+
+  const value =
+    prompt(
+      "اكتب الاسم الجديد",
+      user.name
+    );
+
+
+  if(!value)return;
+
+
+  user.name =
+    value.trim();
+
+
+  save();
+
+  updateUI();
+
+}
+
+
+/* ================= تعديل العمر ================= */
+
+function editAge(){
+
+  const value =
+    prompt(
+      "اكتب العمر",
+      user.age
+    );
+
+
+  if(!value)return;
+
+
+  user.age =
+    value.trim();
+
+
+  save();
+
+  updateUI();
+
+}
+
+
+/* ================= تعديل الدولة ================= */
+
+function editCountry(){
+
+  const value =
+    prompt(
+      "اكتب الدولة",
+      user.country
+    );
+
+
+  if(!value)return;
+
+
+  user.country =
+    value.trim();
+
+
+  save();
+
+  updateUI();
+
+}
+
+
+/* ================= ربط الهاتف ================= */
+
+function editPhone(){
+
+  const value =
+    prompt(
+      "اكتب رقم الهاتف",
+      user.phone
+    );
+
+
+  if(!value)return;
+
+
+  user.phone =
+    value.trim();
+
+
+  save();
+
+  updateUI();
+
+}
+
+
+/* ================= تغيير الصورة ================= */
+
+function changeAvatar(){
+
+  const url =
+    prompt(
+      "ضع رابط صورة البروفايل"
+    );
+
+
+  if(!url)return;
+
+
+  user.avatar =
+    url.trim();
+
+
+  save();
+
+  updateUI();
+
+}
+
+
+/* ================= تغيير الغلاف ================= */
+
+function changeCover(){
+
+  const url =
+    prompt(
+      "ضع رابط صورة الغلاف"
+    );
+
+
+  if(!url)return;
+
+
+  user.cover =
+    url.trim();
+
+
+  save();
+
+  updateUI();
+
+}
+
+
+/* ================= تسجيل الخروج ================= */
+
+function logout(){
+
+  if(
+    confirm(
+      "هل تريد تسجيل الخروج؟"
+    )
+  ){
+
+    localStorage.removeItem(KEY);
+
+    location.reload();
+
+  }
+
+}
+
+
+/* ================= نافذة العائلة ================= */
+
+function openFamilyModal(){
+
+  const modal =
+    document.getElementById(
+      "familyModal"
+    );
+
+
+  if(modal)
+    modal.classList.add("show");
+
+}
+
+
+function closeFamilyModal(){
+
+  const modal =
+    document.getElementById(
+      "familyModal"
+    );
+
+
+  if(modal)
+    modal.classList.remove("show");
+
+}
+
+
+/* ================= الميكات ================= */
+
+function buildMics(){
+
+  const select =
+    document.getElementById(
+      "familyMics"
+    );
+
+
+  if(!select)return;
+
+
+  select.innerHTML = "";
+
+
+  for(
+    let i = 1;
+    i <= 20;
+    i++
+  ){
+
+    const option =
+      document.createElement(
+        "option"
+      );
+
+
+    option.value = i;
+
+    option.textContent =
+      i + " ميك";
+
+
+    select.appendChild(
+      option
+    );
+
+  }
+
+}
+
+
+/* ================= معاينة الصور ================= */
+
+function preview(
+  input,
+  id
+){
+
+  const file =
+    input.files &&
+    input.files[0];
+
+
+  if(!file)return;
+
+
+  const reader =
+    new FileReader();
+
+
+  reader.onload =
+    function(e){
+
+      const img =
+        document.getElementById(id);
+
+
+      if(img){
+
+        img.src =
+          e.target.result;
+
+        img.style.display =
+          "block";
+
+      }
+
+    };
+
+
+  reader.readAsDataURL(file);
+
+}
+
+
+/* ================= إنشاء العائلة ================= */
+
+function createFamily(){
+
+  const name =
+    document.getElementById(
+      "familyNameInput"
+    )?.value.trim();
+
+
+  const announcement =
+    document.getElementById(
+      "familyAnnouncementInput"
+    )?.value.trim();
+
+
+  const mics =
+    document.getElementById(
+      "familyMics"
+    )?.value;
+
+
+  if(!name){
+
+    showAlert(
+      "اكتب اسم العائلة"
+    );
+
+    return;
+
+  }
+
+
+  const free =
+    Number(user.level) >= 30;
+
+
+  if(
+    !free &&
+    Number(user.coins) < 5000000
+  ){
+
+    showAlert(
+      "تحتاج إلى 5,000,000 كوينز لإنشاء العائلة"
+    );
+
+    return;
+
+  }
+
+
+  if(!free){
+
+    user.coins -=
+      5000000;
+
+  }
+
+
+  save();
+
+  closeFamilyModal();
+
+  updateUI();
+
+
+  showAlert(
+    "تم إنشاء العائلة بنجاح 🎉"
+  );
+
+
+  setTimeout(
+    () => showScreen("family"),
+    500
+  );
+
+}
+
+
+/* ================= محادثة العائلة ================= */
+
+function openFamilyChat(){
+
+  showScreen(
+    "familyChat"
+  );
+
+}
+
+
+function sendFamilyMessage(){
+
+  const input =
+    document.getElementById(
+      "familyMessageInput"
+    );
+
+
+  const text =
+    input?.value.trim();
+
+
+  if(!text)return;
+
+
+  const box =
+    document.getElementById(
+      "familyMessages"
+    );
+
+
+  const div =
+    document.createElement(
+      "div"
+    );
+
+
+  div.className =
+    "message";
+
+
+  div.innerHTML =
+    "<b>" +
+    escapeHtml(user.name) +
+    "</b>" +
+    "<p>" +
+    escapeHtml(text) +
+    "</p>";
+
+
+  box.appendChild(div);
+
+
+  input.value = "";
+
+
+  box.scrollTop =
+    box.scrollHeight;
+
+}
+
+
+/* ================= حماية النص ================= */
+
+function escapeHtml(text){
+
+  return String(text)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+}
+
+
+/* ================= فتح روم ================= */
+
+function openRoom(name){
+
+  const title =
+    document.getElementById(
+      "roomTitle"
+    );
+
+
+  const room =
+    document.getElementById(
+      "roomName"
+    );
+
+
+  if(title)
+    title.textContent =
+      name;
+
+
+  if(room)
+    room.textContent =
+      name;
+
+
+  showScreen(
+    "roomDetails"
+  );
+
+}
+
+
+/* ================= الهدايا ================= */
+
+function showGiftModal(){
+
+  const modal =
+    document.getElementById(
+      "giftModal"
+    );
+
+
+  if(modal)
+    modal.classList.add("show");
+
+}
+
+
+function closeGiftModal(){
+
+  const modal =
+    document.getElementById(
+      "giftModal"
+    );
+
+
+  if(modal)
+    modal.classList.remove("show");
+
+}
+
+
+function sendGift(
+  icon,
+  cost
+){
+
+  if(
+    Number(user.coins) < cost
+  ){
+
+    showAlert(
+      "رصيدك لا يكفي لإرسال الهدية"
+    );
+
+    return;
+
+  }
+
+
+  user.coins -= cost;
+
+  save();
+
+  updateUI();
+
+  closeGiftModal();
+
+
+  showAlert(
+    "تم إرسال " +
+    icon +
+    " بنجاح 🎉"
+  );
+
+}
+
+
+/* ================= شراء الكوينز ================= */
+
+function buyCoins(amount){
+
+  showAlert(
+    "هذا نموذج تجريبي لشحن " +
+    fmt(amount) +
+    " كوينز"
+  );
+
+}
+
+
+function addCoins(){
+
+  buyCoins(
+    100000
+  );
+
+}
+
+
+/* ================= البحث في الرومات ================= */
+
+function searchRooms(value){
+
+  const cards =
+    document.querySelectorAll(
+      ".room-card"
+    );
+
+
+  cards.forEach(card => {
+
+    const text =
+      card.textContent
+        .toLowerCase();
+
+
+    card.style.display =
+      text.includes(
+        value.toLowerCase()
+      )
+      ? ""
+      : "none";
+
+  });
+
+}
+
+
+/* ================= فتح محادثة ================= */
+
+function openChat(name){
+
+  showAlert(
+    "تم فتح محادثة " +
+    name
+  );
+
+}
+
+
+/* ================= تشغيل البرنام
    
