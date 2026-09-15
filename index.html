@@ -1515,6 +1515,1805 @@ window.addEventListener("load", function(){
 });
 
 </script>
+<!-- =====================================================
+     FAMILY STAR
+     PART 4 + PART 5 + PART 6
+     العملات + الهدايا + الشحن
+     المستوى + الثروة + VIP
+     العائلات
+===================================================== -->
+
+<style>
+
+/* =========================
+   GENERAL EXTRA PAGES
+========================= */
+
+.extra-page{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:1000;
+  background:#05091b;
+  color:#fff;
+  overflow-y:auto;
+  padding-bottom:90px;
+}
+
+.extra-page.active{
+  display:block;
+}
+
+.page-header{
+  height:65px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:0 15px;
+  background:#0b1230;
+  border-bottom:1px solid #202a55;
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+
+.page-header button{
+  width:40px;
+  height:40px;
+  border:0;
+  border-radius:50%;
+  background:#182452;
+  color:#fff;
+  font-size:25px;
+}
+
+.page-header h2{
+  font-size:20px;
+}
+
+.section-title{
+  margin:20px 15px 12px;
+  font-size:18px;
+  font-weight:bold;
+}
+
+/* =========================
+   PART 4
+   COINS
+========================= */
+
+.wallet-card{
+  margin:18px 15px;
+  padding:25px;
+  border-radius:18px;
+  background:linear-gradient(135deg,#18265d,#0c1638);
+  text-align:center;
+  border:1px solid #2d3c79;
+}
+
+.wallet-title{
+  font-size:15px;
+  opacity:.8;
+}
+
+.wallet-coins{
+  margin-top:10px;
+  font-size:30px;
+  font-weight:bold;
+}
+
+.recharge-banner{
+  margin:15px;
+  padding:18px;
+  border-radius:17px;
+  background:linear-gradient(135deg,#5d2bb8,#b32f8e);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  cursor:pointer;
+}
+
+.recharge-banner b{
+  display:block;
+  font-size:19px;
+}
+
+.recharge-banner span{
+  display:block;
+  margin-top:5px;
+  font-size:13px;
+  opacity:.85;
+}
+
+.recharge-banner strong{
+  font-size:32px;
+}
+
+.gift-categories{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  padding:0 15px;
+}
+
+.gift-categories button{
+  border:1px solid #29366c;
+  background:#101a3d;
+  color:#fff;
+  border-radius:13px;
+  padding:13px 5px;
+  font-size:13px;
+}
+
+.gift-list{
+  padding:12px 15px;
+}
+
+.gift-item{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  background:#0d1635;
+  border:1px solid #202d5b;
+  border-radius:15px;
+  padding:12px;
+  margin-bottom:9px;
+}
+
+.gift-icon{
+  width:48px;
+  height:48px;
+  border-radius:12px;
+  background:#182453;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:25px;
+}
+
+.gift-info{
+  flex:1;
+}
+
+.gift-info b,
+.gift-info span{
+  display:block;
+}
+
+.gift-info span{
+  margin-top:5px;
+  color:#ffd86b;
+  font-size:13px;
+}
+
+.gift-item button{
+  border:0;
+  border-radius:10px;
+  padding:9px 13px;
+  background:#6c42ff;
+  color:#fff;
+}
+
+.transaction-list{
+  padding:0 15px;
+}
+
+.transaction-item{
+  display:flex;
+  justify-content:space-between;
+  padding:14px;
+  background:#0d1635;
+  border-radius:12px;
+  margin-bottom:8px;
+}
+
+.transaction-item b{
+  color:#ff8585;
+}
+
+.empty-box{
+  text-align:center;
+  padding:25px;
+  background:#0d1635;
+  border-radius:14px;
+  color:#8893b7;
+}
+
+/* Recharge */
+
+.first-recharge{
+  margin:18px 15px;
+  padding:18px;
+  border-radius:16px;
+  background:#16224c;
+  border:1px solid #394b88;
+}
+
+.first-recharge b,
+.first-recharge span{
+  display:block;
+}
+
+.first-recharge span{
+  margin-top:7px;
+  font-size:13px;
+  color:#b8c3e8;
+}
+
+.recharge-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+  padding:0 15px;
+}
+
+.recharge-grid button{
+  border:1px solid #2d3d77;
+  background:#101a3c;
+  color:#fff;
+  border-radius:15px;
+  padding:16px 8px;
+}
+
+.recharge-grid b,
+.recharge-grid span,
+.recharge-grid small{
+  display:block;
+}
+
+.recharge-grid b{
+  font-size:18px;
+}
+
+.recharge-grid span{
+  color:#ffd86b;
+  margin-top:7px;
+}
+
+.recharge-grid small{
+  margin-top:6px;
+  color:#77e6a5;
+  font-size:11px;
+}
+
+.reward-box{
+  margin:20px 15px;
+  padding:18px;
+  background:#101a3c;
+  border-radius:16px;
+}
+
+.reward-box p{
+  padding:10px 0;
+  border-bottom:1px solid #26335f;
+}
+
+/* =========================
+   PART 5
+   LEVEL / VIP
+========================= */
+
+.level-card,
+.wealth-card{
+  margin:18px 15px;
+  padding:20px;
+  background:#101a3c;
+  border-radius:18px;
+  border:1px solid #27366d;
+}
+
+.level-number{
+  font-size:22px;
+  font-weight:bold;
+}
+
+.level-progress{
+  height:12px;
+  background:#202c55;
+  border-radius:20px;
+  overflow:hidden;
+  margin:18px 0 10px;
+}
+
+.level-progress-fill{
+  width:0%;
+  height:100%;
+  background:linear-gradient(90deg,#48b8ff,#9b5cff);
+  border-radius:20px;
+}
+
+.level-points{
+  color:#aeb9df;
+  font-size:13px;
+}
+
+.wealth-card h3{
+  margin-bottom:10px;
+}
+
+#wealthPoints{
+  font-size:27px;
+  font-weight:bold;
+  color:#ffd86b;
+}
+
+.wealth-card small{
+  display:block;
+  margin-top:7px;
+  color:#98a5cb;
+}
+
+.vip-title{
+  margin:20px 15px 12px;
+  font-size:19px;
+  font-weight:bold;
+}
+
+.vip-list{
+  padding:0 15px;
+}
+
+.vip-card{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:10px;
+  padding:14px;
+  border-radius:15px;
+  background:#101a3c;
+  border:1px solid #29386e;
+}
+
+.vip-badge{
+  min-width:60px;
+  padding:8px 5px;
+  text-align:center;
+  border-radius:10px;
+  background:#5b3cc4;
+  font-weight:bold;
+}
+
+.vip-price{
+  flex:1;
+  color:#ffd86b;
+  font-size:12px;
+}
+
+.vip-multiplier{
+  font-size:11px;
+  color:#8ce7b0;
+}
+
+.vip-card button{
+  border:0;
+  border-radius:9px;
+  padding:8px 12px;
+  background:#6848e8;
+  color:#fff;
+}
+
+.vip-card button:disabled{
+  background:#344064;
+  color:#aeb8d3;
+}
+
+/* =========================
+   PART 6
+   FAMILIES
+========================= */
+
+.family-search{
+  margin:18px 15px;
+  display:flex;
+  gap:8px;
+}
+
+.family-search input{
+  flex:1;
+  min-width:0;
+  padding:13px;
+  border-radius:12px;
+  border:1px solid #29376c;
+  background:#0d1635;
+  color:#fff;
+}
+
+.family-search button{
+  border:0;
+  border-radius:12px;
+  padding:0 13px;
+  background:#6544df;
+  color:#fff;
+}
+
+.family-actions{
+  padding:0 15px;
+}
+
+.family-actions button{
+  width:100%;
+  padding:15px;
+  border:0;
+  border-radius:14px;
+  background:linear-gradient(135deg,#7549ef,#b238a5);
+  color:#fff;
+  font-size:16px;
+  font-weight:bold;
+}
+
+.family-top-list{
+  padding:0 15px;
+}
+
+.family-rank{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  background:#0e1736;
+  border:1px solid #202e5c;
+  border-radius:14px;
+  padding:11px;
+  margin-bottom:8px;
+}
+
+.family-position{
+  width:30px;
+  text-align:center;
+  font-weight:bold;
+}
+
+.family-avatar{
+  width:44px;
+  height:44px;
+  border-radius:12px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:#1c2a58;
+  font-size:22px;
+}
+
+.family-info{
+  flex:1;
+  min-width:0;
+}
+
+.family-info b,
+.family-info small{
+  display:block;
+}
+
+.family-info b{
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.family-info small{
+  margin-top:4px;
+  color:#8f9bc1;
+}
+
+.family-rank button{
+  border:0;
+  border-radius:9px;
+  padding:8px 10px;
+  background:#6544df;
+  color:#fff;
+}
+
+.family-form{
+  padding:18px 15px;
+}
+
+.family-form label{
+  display:block;
+  margin:13px 0 7px;
+  color:#c1c9e6;
+}
+
+.family-form input,
+.family-form textarea,
+.family-form select{
+  width:100%;
+  padding:13px;
+  border-radius:12px;
+  border:1px solid #29386c;
+  background:#0d1635;
+  color:#fff;
+}
+
+.family-form textarea{
+  min-height:100px;
+  resize:vertical;
+}
+
+.family-cost{
+  margin-top:18px;
+  padding:15px;
+  background:#111d42;
+  border-radius:13px;
+  text-align:center;
+}
+
+.family-cost b{
+  display:block;
+  color:#ffd86b;
+  font-size:19px;
+  margin:8px 0;
+}
+
+.family-cost span{
+  display:block;
+  color:#77e6a5;
+  font-size:12px;
+}
+
+.create-family-final{
+  width:100%;
+  margin-top:18px;
+  padding:15px;
+  border:0;
+  border-radius:14px;
+  background:linear-gradient(135deg,#6848e8,#c13d9c);
+  color:#fff;
+  font-size:17px;
+  font-weight:bold;
+}
+
+</style>
+
+
+<!-- =====================================================
+     PART 4
+     COINS / GIFTS / RECHARGE
+===================================================== -->
+
+<section id="coinsPage" class="extra-page">
+
+  <div class="page-header">
+    <button onclick="closeExtraPage('coinsPage')">‹</button>
+    <h2>العملات والهدايا</h2>
+  </div>
+
+  <div class="wallet-card">
+    <div class="wallet-title">رصيد العملات</div>
+    <div id="coinsBalance" class="wallet-coins">
+      0 🪙
+    </div>
+  </div>
+
+  <div
+    class="recharge-banner"
+    onclick="openExtraPage('rechargePage')">
+
+    <div>
+      <b>قائمة الشحن</b>
+      <span>
+        اشحن العملات واحصل على عروض الشحن
+      </span>
+    </div>
+
+    <strong>›</strong>
+
+  </div>
+
+  <div class="section-title">
+    🎁 الهدايا
+  </div>
+
+  <div class="gift-categories">
+
+    <button onclick="showGiftCategory('normal')">
+      🎁 عادية
+    </button>
+
+    <button onclick="showGiftCategory('luck')">
+      🍀 حظ
+    </button>
+
+    <button onclick="showGiftCategory('level')">
+      ⭐ مستوى
+    </button>
+
+    <button onclick="showGiftCategory('cb')">
+      💙 CB
+    </button>
+
+    <button onclick="showGiftCategory('vip')">
+      👑 VIP
+    </button>
+
+    <button onclick="showGiftCategory('bag')">
+      🎒 حقيبة
+    </button>
+
+  </div>
+
+  <div id="giftList" class="gift-list"></div>
+
+  <div class="section-title">
+    آخر العمليات
+  </div>
+
+  <div
+    id="transactionList"
+    class="transaction-list">
+
+    <div class="empty-box">
+      لا توجد عمليات حتى الآن
+    </div>
+
+  </div>
+
+</section>
+
+
+<section id="rechargePage" class="extra-page">
+
+  <div class="page-header">
+
+    <button onclick="closeExtraPage('rechargePage')">
+      ‹
+    </button>
+
+    <h2>قائمة الشحن</h2>
+
+  </div>
+
+  <div class="first-recharge">
+
+    <b>🎁 أول شحنة ×2</b>
+
+    <span>
+      أول عملية شحن لأي باقة تحصل فيها على ضعف العملات
+    </span>
+
+  </div>
+
+  <div class="recharge-grid">
+
+    <button onclick="buyRecharge(3000000,60)">
+      <b>3 مليون</b>
+      <span>60 جنيه</span>
+      <small>أول مرة = 6 مليون</small>
+    </button>
+
+    <button onclick="buyRecharge(15000000,300)">
+      <b>15 مليون</b>
+      <span>300 جنيه</span>
+      <small>أول مرة = 30 مليون</small>
+    </button>
+
+    <button onclick="buyRecharge(30000000,600)">
+      <b>30 مليون</b>
+      <span>600 جنيه</span>
+      <small>أول مرة = 60 مليون</small>
+    </button>
+
+    <button onclick="buyRecharge(60000000,1200)">
+      <b>60 مليون</b>
+      <span>1200 جنيه</span>
+      <small>أول مرة = 120 مليون</small>
+    </button>
+
+    <button onclick="buyRecharge(150000000,3000)">
+      <b>150 مليون</b>
+      <span>3000 جنيه</span>
+      <small>أول مرة = 300 مليون</small>
+    </button>
+
+    <button onclick="buyRecharge(300000000,6000)">
+      <b>300 مليون</b>
+      <span>6000 جنيه</span>
+      <small>أول مرة = 600 مليون</small>
+    </button>
+
+  </div>
+
+  <div class="reward-box">
+
+    <h3>🎁 مكافآت الشحن</h3>
+
+    <p>📅 المكافآت اليومية</p>
+    <p>📆 المكافآت الأسبوعية</p>
+    <p>🗓️ المكافآت الشهرية</p>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     PART 5
+     LEVEL / WEALTH / VIP
+===================================================== -->
+
+<section id="vipPage" class="extra-page">
+
+  <div class="page-header">
+
+    <button onclick="closeExtraPage('vipPage')">
+      ‹
+    </button>
+
+    <h2>المستوى والثروة و VIP</h2>
+
+  </div>
+
+  <div class="level-card">
+
+    <div class="level-number">
+      المستوى
+      <span id="userLevel">0</span>
+    </div>
+
+    <div class="level-progress">
+
+      <div
+        id="levelProgress"
+        class="level-progress-fill">
+      </div>
+
+    </div>
+
+    <div class="level-points">
+      نقاط المستوى:
+      <span id="levelPoints">0</span>
+    </div>
+
+  </div>
+
+  <div class="wealth-card">
+
+    <h3>💰 الثروة</h3>
+
+    <div id="wealthPoints">
+      0
+    </div>
+
+    <small>
+      الثروة تُحسب من العملات التي ينفقها المستخدم
+      داخل البرنامج.
+    </small>
+
+  </div>
+
+  <div class="vip-title">
+    👑 مستويات VIP
+  </div>
+
+  <div id="vipList" class="vip-list"></div>
+
+</section>
+
+
+<!-- =====================================================
+     PART 6
+     FAMILIES
+===================================================== -->
+
+<section id="familyPage" class="extra-page">
+
+  <div class="page-header">
+
+    <button onclick="closeExtraPage('familyPage')">
+      ‹
+    </button>
+
+    <h2>العائلات</h2>
+
+  </div>
+
+  <div class="family-search">
+
+    <input
+      id="familyCodeInput"
+      type="text"
+      placeholder="اكتب كود العائلة">
+
+    <button onclick="findFamily()">
+      بحث
+    </button>
+
+  </div>
+
+  <div class="family-actions">
+
+    <button onclick="openCreateFamily()">
+      ➕ إنشاء عيلة
+    </button>
+
+  </div>
+
+  <div class="section-title">
+    🏆 أفضل 100 عائلة
+  </div>
+
+  <div
+    id="familyTop100"
+    class="family-top-list">
+  </div>
+
+</section>
+
+
+<section id="createFamilyPage" class="extra-page">
+
+  <div class="page-header">
+
+    <button onclick="closeExtraPage('createFamilyPage')">
+      ‹
+    </button>
+
+    <h2>إنشاء عيلة</h2>
+
+  </div>
+
+  <div class="family-form">
+
+    <label>
+      صورة العائلة
+    </label>
+
+    <input
+      id="familyImage"
+      type="file"
+      accept="image/*">
+
+    <label>
+      اسم العائلة
+    </label>
+
+    <input
+      id="familyName"
+      type="text"
+      placeholder="اكتب اسم العائلة">
+
+    <label>
+      إعلان العائلة
+    </label>
+
+    <textarea
+      id="familyAnnouncement"
+      placeholder="اكتب إعلان العائلة">
+    </textarea>
+
+    <label>
+      عدد الميكات
+    </label>
+
+    <select id="familyMics">
+
+      <option value="1">
+        1 ميك
+      </option>
+
+      <option value="2">
+        2 ميك
+      </option>
+
+      <option value="3">
+        3 ميكات
+      </option>
+
+      <option value="4">
+        4 ميكات
+      </option>
+
+      <option value="5">
+        5 ميكات
+      </option>
+
+      <option value="10">
+        10 ميكات
+      </option>
+
+      <option value="15">
+        15 ميك
+      </option>
+
+      <option value="20">
+        20 ميك
+      </option>
+
+    </select>
+
+    <label>
+      صورة الغلاف
+    </label>
+
+    <input
+      id="familyCover"
+      type="file"
+      accept="image/*">
+
+    <div class="family-cost">
+
+      تكلفة إنشاء العائلة:
+
+      <b>
+        5,000,000 🪙
+      </b>
+
+      <span>
+        إنشاء مجاني عند الوصول للمستوى 30
+      </span>
+
+    </div>
+
+    <button
+      class="create-family-final"
+      onclick="createFamily()">
+
+      إنشاء العائلة
+
+    </button>
+
+  </div>
+
+</section>
+
+
+<script>
+
+/* =====================================================
+   GENERAL PAGE CONTROL
+===================================================== */
+
+function openExtraPage(id){
+
+  document
+    .querySelectorAll(".extra-page")
+    .forEach(function(page){
+
+      page.classList.remove("active");
+
+    });
+
+  const page =
+    document.getElementById(id);
+
+  if(page){
+
+    page.classList.add("active");
+
+  }
+
+}
+
+function closeExtraPage(id){
+
+  const page =
+    document.getElementById(id);
+
+  if(page){
+
+    page.classList.remove("active");
+
+  }
+
+}
+
+
+/* =====================================================
+   PART 4
+   COINS
+===================================================== */
+
+let userCoins =
+  Number(
+    localStorage.getItem(
+      "familyStarCoins"
+    ) || 0
+  );
+
+let firstRechargeDone =
+  localStorage.getItem(
+    "familyStarFirstRecharge"
+  ) === "true";
+
+
+function updateCoins(){
+
+  document
+    .querySelectorAll(
+      "#coinsBalance"
+    )
+    .forEach(function(el){
+
+      el.textContent =
+        userCoins.toLocaleString("en-US")
+        + " 🪙";
+
+    });
+
+  localStorage.setItem(
+    "familyStarCoins",
+    userCoins
+  );
+
+}
+
+
+function buyRecharge(coins,price){
+
+  let received = coins;
+
+  if(!firstRechargeDone){
+
+    received =
+      coins * 2;
+
+    firstRechargeDone =
+      true;
+
+    localStorage.setItem(
+      "familyStarFirstRecharge",
+      "true"
+    );
+
+  }
+
+  userCoins += received;
+
+  updateCoins();
+
+  addTransaction(
+    "شحن عملات",
+    received
+  );
+
+  alert(
+    "تمت إضافة " +
+    received.toLocaleString("en-US") +
+    " عملة"
+  );
+
+}
+
+
+const giftData = {
+
+  normal:[
+
+    ["🎁 هدية",1000],
+
+    ["🌹 وردة",5000],
+
+    ["💎 ألماسة",50000],
+
+    ["👑 تاج",100000]
+
+  ],
+
+  luck:[
+
+    ["🍀 هدية حظ",10000],
+
+    ["🌟 نجمة حظ",50000]
+
+  ],
+
+  level:[
+
+    ["⭐ هدية مستوى",25000],
+
+    ["🏆 كأس المستوى",100000]
+
+  ],
+
+  cb:[
+
+    ["💙 قلب CB",50000],
+
+    ["💙 تاج CB",250000]
+
+  ],
+
+  vip:[
+
+    ["👑 هدية VIP",100000],
+
+    ["👑 تاج VIP",500000],
+
+    ["💎 VIP Diamond",1000000]
+
+  ],
+
+  bag:[
+
+    ["🎒 حقيبة هدايا",500000],
+
+    ["🎒 حقيبة هدايا",1000000]
+
+  ]
+
+};
+
+
+function showGiftCategory(category){
+
+  const list =
+    document.getElementById(
+      "giftList"
+    );
+
+  if(!list) return;
+
+  list.innerHTML = "";
+
+  giftData[category]
+    .forEach(function(gift){
+
+      const item =
+        document.createElement(
+          "div"
+        );
+
+      item.className =
+        "gift-item";
+
+      item.innerHTML =
+
+        "<div class='gift-icon'>" +
+        gift[0] +
+        "</div>" +
+
+        "<div class='gift-info'>" +
+
+        "<b>" +
+        gift[0] +
+        "</b>" +
+
+        "<span>" +
+        gift[1]
+          .toLocaleString("en-US") +
+        " 🪙</span>" +
+
+        "</div>" +
+
+        "<button onclick=\"sendGift(" +
+        gift[1] +
+        ")\">إرسال</button>";
+
+      list.appendChild(item);
+
+    });
+
+}
+
+
+function sendGift(price){
+
+  if(userCoins < price){
+
+    alert(
+      "رصيدك غير كافي"
+    );
+
+    return;
+
+  }
+
+  userCoins -= price;
+
+  updateCoins();
+
+  addTransaction(
+    "إرسال هدية",
+    price
+  );
+
+  alert(
+    "تم إرسال الهدية 🎁"
+  );
+
+}
+
+
+function addTransaction(
+  title,
+  amount
+){
+
+  const list =
+    document.getElementById(
+      "transactionList"
+    );
+
+  if(!list) return;
+
+  const empty =
+    list.querySelector(
+      ".empty-box"
+    );
+
+  if(empty){
+
+    empty.remove();
+
+  }
+
+  const item =
+    document.createElement(
+      "div"
+    );
+
+  item.className =
+    "transaction-item";
+
+  item.innerHTML =
+
+    "<span>" +
+    title +
+    "</span>" +
+
+    "<b>-" +
+    amount.toLocaleString("en-US") +
+    " 🪙</b>";
+
+  list.prepend(item);
+
+}
+
+
+/* =====================================================
+   PART 5
+   LEVEL / WEALTH / VIP
+===================================================== */
+
+let wealthPoints =
+  Number(
+    localStorage.getItem(
+      "familyStarWealth"
+    ) || 0
+  );
+
+let levelPoints =
+  Number(
+    localStorage.getItem(
+      "familyStarLevelPoints"
+    ) || 0
+  );
+
+let currentVip =
+  Number(
+    localStorage.getItem(
+      "familyStarVIP"
+    ) || 0
+  );
+
+
+const vipData = [
+
+  {
+    level:1,
+    price:5000000,
+    multiplier:1
+  },
+
+  {
+    level:2,
+    price:15000000,
+    multiplier:1.25
+  },
+
+  {
+    level:3,
+    price:30000000,
+    multiplier:1.5
+  },
+
+  {
+    level:4,
+    price:60000000,
+    multiplier:1.75
+  },
+
+  {
+    level:5,
+    price:120000000,
+    multiplier:2
+  },
+
+  {
+    level:6,
+    price:250000000,
+    multiplier:2.5
+  },
+
+  {
+    level:7,
+    price:500000000,
+    multiplier:3
+  },
+
+  {
+    level:8,
+    price:1000000000,
+    multiplier:4
+  },
+
+  {
+    level:9,
+    price:2500000000,
+    multiplier:5
+  },
+
+  {
+    level:10,
+    price:5000000000,
+    multiplier:7
+  }
+
+];
+
+
+function calculateLevel(){
+
+  let level =
+    Math.floor(
+      Math.sqrt(
+        levelPoints / 100000
+      )
+    );
+
+  if(level < 0)
+    level = 0;
+
+  if(level > 100)
+    level = 100;
+
+  return level;
+
+}
+
+
+function updateLevel(){
+
+  const level =
+    calculateLevel();
+
+  const levelEl =
+    document.getElementById(
+      "userLevel"
+    );
+
+  const pointsEl =
+    document.getElementById(
+      "levelPoints"
+    );
+
+  const wealthEl =
+    document.getElementById(
+      "wealthPoints"
+    );
+
+  if(levelEl){
+
+    levelEl.textContent =
+      level;
+
+  }
+
+  if(pointsEl){
+
+    pointsEl.textContent =
+      levelPoints
+        .toLocaleString("en-US");
+
+  }
+
+  if(wealthEl){
+
+    wealthEl.textContent =
+      wealthPoints
+        .toLocaleString("en-US");
+
+  }
+
+  const progress =
+    document.getElementById(
+      "levelProgress"
+    );
+
+  if(progress){
+
+    const next =
+      (level + 1) *
+      (level + 1) *
+      100000;
+
+    const previous =
+      level *
+      level *
+      100000;
+
+let percent = 0;
+
+if(next > previous){
+
+  percent =
+    (
+      (levelPoints - previous) /
+      (next - previous)
+    ) * 100;
+
+}
+
+if(percent < 0)
+  percent = 0;
+
+if(percent > 100)
+  percent = 100;
+
+progress.style.width =
+  percent + "%";
+
+}
+
+localStorage.setItem(
+  "familyStarLevelPoints",
+  levelPoints
+);
+
+localStorage.setItem(
+  "familyStarWealth",
+  wealthPoints
+);
+
+}
+
+/* =========================
+   VIP SYSTEM
+========================= */
+
+const vipPrices = {
+  1: 5000000,
+  2: 15000000,
+  3: 30000000,
+  4: 60000000,
+  5: 120000000,
+  6: 250000000,
+  7: 500000000,
+  8: 1000000000,
+  9: 2500000000,
+  10: 5000000000
+};
+
+const vipMultipliers = {
+  1: 1,
+  2: 1.25,
+  3: 1.5,
+  4: 1.75,
+  5: 2,
+  6: 2.5,
+  7: 3,
+  8: 4,
+  9: 5,
+  10: 7
+};
+
+let currentVIP =
+  Number(
+    localStorage.getItem("familyStarVIP")
+  ) || 0;
+
+function buyVIP(vip){
+
+  const price =
+    vipPrices[vip];
+
+  const coins =
+    Number(
+      localStorage.getItem(
+        "familyStarCoins"
+      )
+    ) || 0;
+
+  if(currentVIP >= vip){
+
+    alert(
+      "أنت بالفعل على هذا المستوى أو أعلى."
+    );
+
+    return;
+  }
+
+  if(coins < price){
+
+    alert(
+      "رصيد الكوينز غير كافي لشراء VIP " +
+      vip
+    );
+
+    return;
+  }
+
+  const confirmBuy =
+    confirm(
+      "شراء VIP " +
+      vip +
+      " مقابل " +
+      price.toLocaleString("en-US") +
+      " كوين؟"
+    );
+
+  if(!confirmBuy)
+    return;
+
+  const newCoins =
+    coins - price;
+
+  currentVIP = vip;
+
+  localStorage.setItem(
+    "familyStarCoins",
+    newCoins
+  );
+
+  localStorage.setItem(
+    "familyStarVIP",
+    currentVIP
+  );
+
+  alert(
+    "تم تفعيل VIP " +
+    vip +
+    " بنجاح"
+  );
+
+  updateVIPDisplay();
+  updateCoinsDisplay();
+
+}
+
+function updateVIPDisplay(){
+
+  const vipElements =
+    document.querySelectorAll(
+      ".vip-level"
+    );
+
+  vipElements.forEach(function(el){
+
+    el.textContent =
+      "VIP " + currentVIP;
+
+  });
+
+}
+
+function getVIPMultiplier(){
+
+  return (
+    vipMultipliers[currentVIP] || 1
+  );
+
+}
+
+/* =========================
+   FAMILY SYSTEM
+========================= */
+
+let familyData =
+  JSON.parse(
+    localStorage.getItem(
+      "familyStarFamily"
+    )
+  ) || null;
+
+function createFamily(){
+
+  const coins =
+    Number(
+      localStorage.getItem(
+        "familyStarCoins"
+      )
+    ) || 0;
+
+  const level =
+    Number(
+      localStorage.getItem(
+        "familyStarLevel"
+      )
+    ) || 0;
+
+  if(familyData){
+
+    alert(
+      "أنت بالفعل داخل عائلة."
+    );
+
+    return;
+  }
+
+  if(level < 30 && coins < 5000000){
+
+    alert(
+      "إنشاء العائلة يحتاج 5,000,000 كوينز أو الوصول إلى المستوى 30."
+    );
+
+    return;
+  }
+
+  let familyName =
+    prompt(
+      "اكتب اسم العائلة:"
+    );
+
+  if(!familyName)
+    return;
+
+  let familyAnnouncement =
+    prompt(
+      "اكتب إعلان العائلة:"
+    ) || "";
+
+  familyData = {
+
+    name:
+      familyName,
+
+    announcement:
+      familyAnnouncement,
+
+    owner:
+      localStorage.getItem(
+        "familyStarUsername"
+      ) || "المستخدم",
+
+    moderators: [],
+
+    members: [],
+
+    mics: 1,
+
+    code:
+      "FS" +
+      Math.floor(
+        100000 +
+        Math.random() * 900000
+      ),
+
+    createdAt:
+      new Date().toISOString()
+
+  };
+
+  if(level < 30){
+
+    localStorage.setItem(
+      "familyStarCoins",
+      coins - 5000000
+    );
+
+  }
+
+  localStorage.setItem(
+    "familyStarFamily",
+    JSON.stringify(
+      familyData
+    )
+  );
+
+  alert(
+    "تم إنشاء العائلة بنجاح 🎉\n" +
+        "كود العائلة: " +
+    familyData.code
+  );
+
+  showFamily();
+
+}
+
+function showFamily(){
+
+  if(!familyData){
+
+    showTopFamilies();
+
+    return;
+  }
+
+  const familyName =
+    document.getElementById(
+      "familyName"
+    );
+
+  if(familyName){
+
+    familyName.textContent =
+      familyData.name;
+
+  }
+
+  const familyCode =
+    document.getElementById(
+      "familyCode"
+    );
+
+  if(familyCode){
+
+    familyCode.textContent =
+      familyData.code;
+
+  }
+
+}
+
+function showTopFamilies(){
+
+  const list =
+    document.getElementById(
+      "topFamiliesList"
+    );
+
+  if(!list)
+    return;
+
+  list.innerHTML = "";
+
+  for(
+    let i = 1;
+    i <= 100;
+    i++
+  ){
+
+    const item =
+      document.createElement(
+        "div"
+      );
+
+    item.className =
+      "top-family-item";
+
+    item.innerHTML =
+      "<span>#" +
+      i +
+      "</span>" +
+      "<span>عائلة Family Star " +
+      i +
+      "</span>";
+
+    list.appendChild(
+      item
+    );
+
+  }
+
+}
+
+function joinFamilyByCode(){
+
+  const code =
+    prompt(
+      "اكتب كود العائلة:"
+    );
+
+  if(!code)
+    return;
+
+  alert(
+    "تم إرسال طلب الانضمام للعائلة بالكود: " +
+    code
+  );
+
+}
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function(){
+
+    updateVIPDisplay();
+    showFamily();
+
+  }
+);
+
+</script>
 
 </body>
 </html>
+   
