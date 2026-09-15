@@ -5791,6 +5791,1846 @@ function deleteStatus(statusId){
   return true;
 
   }
+  /* =====================================================
+   الجزء 27
+   نظام الأصدقاء والمتابعين
+===================================================== */
+
+function getFriendsData(){
+
+  return JSON.parse(
+    localStorage.getItem(
+      "familyStarFriends"
+    )
+  ) || [];
+
+}
+
+
+function saveFriendsData(friends){
+
+  localStorage.setItem(
+    "familyStarFriends",
+    JSON.stringify(friends)
+  );
+
+}
+
+
+/* =====================================================
+   إرسال طلب صداقة
+===================================================== */
+
+function sendFriendRequest(
+  senderId,
+  receiverId
+){
+
+  if(!senderId || !receiverId){
+
+    return false;
+
+  }
+
+  if(
+    String(senderId) ===
+    String(receiverId)
+  ){
+
+    return false;
+
+  }
+
+  const friends =
+    getFriendsData();
+
+  const exists =
+    friends.some(
+      function(item){
+
+        return (
+          String(item.senderId) ===
+            String(senderId) &&
+          String(item.receiverId) ===
+            String(receiverId)
+        ) ||
+        (
+          String(item.senderId) ===
+            String(receiverId) &&
+          String(item.receiverId) ===
+            String(senderId)
+        );
+
+      }
+    );
+
+  if(exists){
+
+    return false;
+
+  }
+
+  friends.push({
+
+    id:
+      Date.now(),
+
+    senderId:
+      senderId,
+
+    receiverId:
+      receiverId,
+
+    status:
+      "pending",
+
+    createdAt:
+      new Date().toISOString()
+
+  });
+
+  saveFriendsData(
+    friends
+  );
+
+  return true;
+
+}
+
+
+/* =====================================================
+   قبول طلب الصداقة
+===================================================== */
+
+function acceptFriendRequest(
+  requestId
+){
+
+  const friends =
+    getFriendsData();
+
+  const request =
+    friends.find(
+      function(item){
+
+        return String(item.id) ===
+          String(requestId);
+
+      }
+    );
+
+  if(!request){
+
+    return false;
+
+  }
+
+  request.status =
+    "accepted";
+
+  saveFriendsData(
+    friends
+  );
+
+  return true;
+
+}
+
+
+/* =====================================================
+   رفض طلب الصداقة
+===================================================== */
+
+function rejectFriendRequest(
+  requestId
+){
+
+  const friends =
+    getFriendsData();
+
+  const newFriends =
+    friends.filter(
+      function(item){
+
+        return String(item.id) !==
+          String(requestId);
+
+      }
+    );
+
+  saveFriendsData(
+    newFriends
+  );
+
+  return true;
+
+}
+
+
+/* =====================================================
+   جلب أصدقاء المستخدم
+===================================================== */
+
+function getUserFriends(
+  userId
+){
+
+  const friends =
+    getFriendsData();
+
+  return friends.filter(
+    function(item){
+
+      return (
+        item.status ===
+          "accepted" &&
+
+        (
+          String(item.senderId) ===
+            String(userId) ||
+
+          String(item.receiverId) ===
+            String(userId)
+        )
+      );
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   التحقق من وجود صداقة
+===================================================== */
+
+function areUsersFriends(
+  userId,
+  otherUserId
+){
+
+  const friends =
+    getFriendsData();
+
+  return friends.some(
+    function(item){
+
+      return (
+        item.status ===
+          "accepted" &&
+
+        (
+          (
+            String(item.senderId) ===
+              String(userId) &&
+
+            String(item.receiverId) ===
+              String(otherUserId)
+          ) ||
+
+          (
+            String(item.senderId) ===
+              String(otherUserId) &&
+
+            String(item.receiverId) ===
+              String(userId)
+          )
+        )
+      );
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   طلبات الصداقة الواردة
+===================================================== */
+
+function getPendingFriendRequests(
+  userId
+){
+
+  const friends =
+    getFriendsData();
+
+  return friends.filter(
+    function(item){
+
+      return (
+        item.status ===
+          "pending" &&
+
+        String(item.receiverId) ===
+          String(userId)
+      );
+
+    }
+  );
+
+  }
+  /* =====================================================
+   الجزء 28
+   نظام المتابعة والإلغاء
+===================================================== */
+
+function getFollowersData(){
+
+  return JSON.parse(
+    localStorage.getItem(
+      "familyStarFollowers"
+    )
+  ) || [];
+
+}
+
+
+function saveFollowersData(
+  followers
+){
+
+  localStorage.setItem(
+    "familyStarFollowers",
+    JSON.stringify(followers)
+  );
+
+}
+
+
+/* =====================================================
+   متابعة مستخدم
+===================================================== */
+
+function followUser(
+  followerId,
+  followingId
+){
+
+  if(
+    !followerId ||
+    !followingId
+  ){
+
+    return false;
+
+  }
+
+  if(
+    String(followerId) ===
+    String(followingId)
+  ){
+
+    return false;
+
+  }
+
+  const followers =
+    getFollowersData();
+
+  const exists =
+    followers.some(
+      function(item){
+
+        return (
+          String(item.followerId) ===
+            String(followerId) &&
+
+          String(item.followingId) ===
+            String(followingId)
+        );
+
+      }
+    );
+
+  if(exists){
+
+    return false;
+
+  }
+
+  followers.push({
+
+    id:
+      Date.now(),
+
+    followerId:
+      followerId,
+
+    followingId:
+      followingId,
+
+    createdAt:
+      new Date().toISOString()
+
+  });
+
+  saveFollowersData(
+    followers
+  );
+
+  return true;
+
+}
+
+
+/* =====================================================
+   إلغاء المتابعة
+===================================================== */
+
+function unfollowUser(
+  followerId,
+  followingId
+){
+
+  const followers =
+    getFollowersData();
+
+  const newFollowers =
+    followers.filter(
+      function(item){
+
+        return !(
+          String(item.followerId) ===
+            String(followerId) &&
+
+          String(item.followingId) ===
+            String(followingId)
+        );
+
+      }
+    );
+
+  saveFollowersData(
+    newFollowers
+  );
+
+  return true;
+
+}
+
+
+/* =====================================================
+   التحقق من المتابعة
+===================================================== */
+
+function isFollowing(
+  followerId,
+  followingId
+){
+
+  const followers =
+    getFollowersData();
+
+  return followers.some(
+    function(item){
+
+      return (
+        String(item.followerId) ===
+          String(followerId) &&
+
+        String(item.followingId) ===
+          String(followingId)
+      );
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   جلب المتابعين
+===================================================== */
+
+function getUserFollowers(
+  userId
+){
+
+  const followers =
+    getFollowersData();
+
+  return followers.filter(
+    function(item){
+
+      return String(
+        item.followingId
+      ) === String(userId);
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   جلب الأشخاص الذين يتابعهم المستخدم
+===================================================== */
+
+function getUserFollowing(
+  userId
+){
+
+  const followers =
+    getFollowersData();
+
+  return followers.filter(
+    function(item){
+
+      return String(
+        item.followerId
+      ) === String(userId);
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   عدد المتابعين
+===================================================== */
+
+function getFollowersCount(
+  userId
+){
+
+  return getUserFollowers(
+    userId
+  ).length;
+
+}
+
+
+/* =====================================================
+   عدد المتابَعين
+===================================================== */
+
+function getFollowingCount(
+  userId
+){
+
+  return getUserFollowing(
+    userId
+  ).length;
+
+  }
+  /* =====================================================
+   الجزء 29
+   نظام الإشعارات
+===================================================== */
+
+function getNotificationsData(){
+
+  return JSON.parse(
+    localStorage.getItem(
+      "familyStarNotifications"
+    )
+  ) || [];
+
+}
+
+
+function saveNotificationsData(
+  notifications
+){
+
+  localStorage.setItem(
+    "familyStarNotifications",
+    JSON.stringify(
+      notifications
+    )
+  );
+
+}
+
+
+/* =====================================================
+   إضافة إشعار
+===================================================== */
+
+function addNotification(data){
+
+  if(!data){
+
+    return false;
+
+  }
+
+  if(!data.userId){
+
+    return false;
+
+  }
+
+  const notifications =
+    getNotificationsData();
+
+  notifications.push({
+
+    id:
+      Date.now(),
+
+    userId:
+      data.userId,
+
+    title:
+      data.title ||
+      "إشعار جديد",
+
+    message:
+      data.message ||
+      "",
+
+    type:
+      data.type ||
+      "general",
+
+    read:
+      false,
+
+    createdAt:
+      new Date().toISOString()
+
+  });
+
+  saveNotificationsData(
+    notifications
+  );
+
+  return true;
+
+}
+
+
+/* =====================================================
+   جلب إشعارات المستخدم
+===================================================== */
+
+function getUserNotifications(
+  userId
+){
+
+  const notifications =
+    getNotificationsData();
+
+  return notifications.filter(
+    function(notification){
+
+      return String(
+        notification.userId
+      ) === String(userId);
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   عدد الإشعارات غير المقروءة
+===================================================== */
+
+function getUnreadNotificationsCount(
+  userId
+){
+
+  const notifications =
+    getUserNotifications(
+      userId
+    );
+
+  return notifications.filter(
+    function(notification){
+
+      return notification.read ===
+        false;
+
+    }
+  ).length;
+
+}
+
+
+/* =====================================================
+   تحديد الإشعار كمقروء
+===================================================== */
+
+function markNotificationAsRead(
+  notificationId
+){
+
+  const notifications =
+    getNotificationsData();
+
+  const notification =
+    notifications.find(
+      function(item){
+
+        return String(item.id) ===
+          String(notificationId);
+
+      }
+    );
+
+  if(!notification){
+
+    return false;
+
+  }
+
+  notification.read =
+    true;
+
+  saveNotificationsData(
+    notifications
+  );
+
+  return true;
+
+}
+
+
+/* =====================================================
+   تحديد كل إشعارات المستخدم كمقروءة
+===================================================== */
+
+function markAllNotificationsAsRead(
+  userId
+){
+
+  const notifications =
+    getNotificationsData();
+
+  notifications.forEach(
+    function(notification){
+
+      if(
+        String(notification.userId) ===
+        String(userId)
+      ){
+
+        notification.read =
+          true;
+
+      }
+
+    }
+  );
+
+  saveNotificationsData(
+    notifications
+  );
+
+  return true;
+
+}
+
+
+/* =====================================================
+   حذف إشعار
+===================================================== */
+
+function deleteNotification(
+  notificationId
+){
+
+  const notifications =
+    getNotificationsData();
+
+  const newNotifications =
+    notifications.filter(
+      function(notification){
+
+        return String(
+          notification.id
+        ) !== String(
+          notificationId
+        );
+
+      }
+    );
+
+  saveNotificationsData(
+    newNotifications
+  );
+
+  return true;
+
+  }
+  /* =====================================================
+   الجزء 30
+   نظام التوبات والترتيب
+===================================================== */
+
+function getTopData(){
+
+  return JSON.parse(
+    localStorage.getItem(
+      "familyStarTopData"
+    )
+  ) || [];
+
+}
+
+
+function saveTopData(
+  data
+){
+
+  localStorage.setItem(
+    "familyStarTopData",
+    JSON.stringify(data)
+  );
+
+}
+
+
+/* =====================================================
+   إضافة نشاط للمستخدم
+===================================================== */
+
+function addTopActivity(
+  userId,
+  type,
+  amount
+){
+
+  if(!userId){
+
+    return false;
+
+  }
+
+  const value =
+    Number(amount) || 0;
+
+  if(value <= 0){
+
+    return false;
+
+  }
+
+  const topData =
+    getTopData();
+
+  let user =
+    topData.find(
+      function(item){
+
+        return String(item.userId) ===
+          String(userId);
+
+      }
+    );
+
+  if(!user){
+
+    user = {
+
+      userId:
+        userId,
+
+      cb:
+        0,
+
+      wealth:
+        0,
+
+      charisma:
+        0
+
+    };
+
+    topData.push(
+      user
+    );
+
+  }
+
+  if(
+    type === "cb"
+  ){
+
+    user.cb += value;
+
+  }
+
+  if(
+    type === "wealth"
+  ){
+
+    user.wealth += value;
+
+  }
+
+  if(
+    type === "charisma"
+  ){
+
+    user.charisma += value;
+
+  }
+
+  saveTopData(
+    topData
+  );
+
+  return true;
+
+}
+
+
+/* =====================================================
+   ترتيب المستخدمين
+===================================================== */
+
+function getTopRanking(
+  type
+){
+
+  const topData =
+    getTopData();
+
+  return topData
+    .filter(
+      function(item){
+
+        return (
+          Number(item[type]) || 0
+        ) > 0;
+
+      }
+    )
+    .sort(
+      function(a,b){
+
+        return (
+          (Number(b[type]) || 0) -
+          (Number(a[type]) || 0)
+        );
+
+      }
+    )
+    .slice(
+      0,
+      100
+    );
+
+}
+
+
+/* =====================================================
+   التوب اليومي
+===================================================== */
+
+function getDailyTop(
+  type
+){
+
+  return getTopRanking(
+    type
+  );
+
+}
+
+
+/* =====================================================
+   التوب الأسبوعي
+===================================================== */
+
+function getWeeklyTop(
+  type
+){
+
+  return getTopRanking(
+    type
+  );
+
+}
+
+
+/* =====================================================
+   التوب الشهري
+===================================================== */
+
+function getMonthlyTop(
+  type
+){
+
+  return getTopRanking(
+    type
+  );
+
+  }
+  /* =====================================================
+   الجزء 31
+   نظام الهدايا داخل الرومات
+===================================================== */
+
+function getRoomGiftsData(){
+
+  return JSON.parse(
+    localStorage.getItem(
+      "familyStarRoomGifts"
+    )
+  ) || [];
+
+}
+
+
+function saveRoomGiftsData(
+  gifts
+){
+
+  localStorage.setItem(
+    "familyStarRoomGifts",
+    JSON.stringify(gifts)
+  );
+
+}
+
+
+/* =====================================================
+   إرسال هدية داخل روم
+===================================================== */
+
+function sendRoomGift(data){
+
+  if(!data){
+
+    return false;
+
+  }
+
+  if(
+    !data.roomId ||
+    !data.senderId ||
+    !data.receiverId
+  ){
+
+    return false;
+
+  }
+
+  const giftName =
+    String(
+      data.giftName || "هدية"
+    ).trim();
+
+  const giftCost =
+    Number(
+      data.cost
+    ) || 0;
+
+  if(
+    !giftName ||
+    giftCost <= 0
+  ){
+
+    return false;
+
+  }
+
+  const senderCoins =
+    getUserCoins(
+      data.senderId
+    );
+
+  if(
+    senderCoins < giftCost
+  ){
+
+    return false;
+
+  }
+
+  const removed =
+    updateUserCoins(
+      data.senderId,
+      -giftCost
+    );
+
+  if(!removed){
+
+    return false;
+
+  }
+
+  const added =
+    updateUserCoins(
+      data.receiverId,
+      giftCost
+    );
+
+  if(!added){
+
+    updateUserCoins(
+      data.senderId,
+      giftCost
+    );
+
+    return false;
+
+  }
+
+  const gifts =
+    getRoomGiftsData();
+
+  gifts.push({
+
+    id:
+      Date.now(),
+
+    roomId:
+      data.roomId,
+
+    senderId:
+      data.senderId,
+
+    receiverId:
+      data.receiverId,
+
+    giftName:
+      giftName,
+
+    cost:
+      giftCost,
+
+    createdAt:
+      new Date().toISOString()
+
+  });
+
+  saveRoomGiftsData(
+    gifts
+  );
+
+  updateAdminCounter(
+    "familyStarGiftsCount",
+    1
+  );
+
+  refreshAdminData();
+
+  return true;
+
+}
+
+
+/* =====================================================
+   جلب هدايا روم
+===================================================== */
+
+function getRoomGifts(
+  roomId
+){
+
+  const gifts =
+    getRoomGiftsData();
+
+  return gifts.filter(
+    function(gift){
+
+      return String(
+        gift.roomId
+      ) === String(roomId);
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   إجمالي قيمة الهدايا
+===================================================== */
+
+function getRoomGiftsValue(
+  roomId
+){
+
+  const gifts =
+    getRoomGifts(
+      roomId
+    );
+
+  return gifts.reduce(
+    function(total,gift){
+
+      return total +
+        (Number(gift.cost) || 0);
+
+    },
+    0
+  );
+
+  }
+  /* =====================================================
+   الجزء 32
+   نظام رصيد المستخدم والتحويل بين المستخدمين
+===================================================== */
+
+function transferCoins(
+  senderId,
+  receiverId,
+  amount
+){
+
+  if(
+    !senderId ||
+    !receiverId
+  ){
+
+    return false;
+
+  }
+
+  if(
+    String(senderId) ===
+    String(receiverId)
+  ){
+
+    return false;
+
+  }
+
+  const value =
+    Number(amount) || 0;
+
+  if(value <= 0){
+
+    return false;
+
+  }
+
+  const sender =
+    findUser(senderId);
+
+  const receiver =
+    findUser(receiverId);
+
+  if(
+    !sender ||
+    !receiver
+  ){
+
+    return false;
+
+  }
+
+  const senderCoins =
+    Number(sender.coins) || 0;
+
+  if(
+    senderCoins < value
+  ){
+
+    return false;
+
+  }
+
+  const users =
+    getUsersData();
+
+  const senderUser =
+    users.find(
+      function(user){
+
+        return String(user.id) ===
+          String(senderId);
+
+      }
+    );
+
+  const receiverUser =
+    users.find(
+      function(user){
+
+        return String(user.id) ===
+          String(receiverId);
+
+      }
+    );
+
+  if(
+    !senderUser ||
+    !receiverUser
+  ){
+
+    return false;
+
+  }
+
+  senderUser.coins =
+    senderCoins - value;
+
+  receiverUser.coins =
+    (Number(receiverUser.coins) || 0) +
+    value;
+
+  saveUsersData(
+    users
+  );
+
+  return true;
+
+}
+
+
+/* =====================================================
+   رصيد المستخدم الحالي
+===================================================== */
+
+function getCurrentUserBalance(
+  userId
+){
+
+  const user =
+    findUser(userId);
+
+  if(!user){
+
+    return 0;
+
+  }
+
+  return Number(
+    user.coins
+  ) || 0;
+
+}
+
+
+/* =====================================================
+   إضافة كوينز للمستخدم
+===================================================== */
+
+function giveCoinsToUser(
+  userId,
+  amount
+){
+
+  const value =
+    Number(amount) || 0;
+
+  if(value <= 0){
+
+    return false;
+
+  }
+
+  return updateUserCoins(
+    userId,
+    value
+  );
+
+}
+
+
+/* =====================================================
+   خصم كوينز من المستخدم
+===================================================== */
+
+function takeCoinsFromUser(
+  userId,
+  amount
+){
+
+  const value =
+    Number(amount) || 0;
+
+  if(value <= 0){
+
+    return false;
+
+  }
+
+  const balance =
+    getCurrentUserBalance(
+      userId
+    );
+
+  if(balance < value){
+
+    return false;
+
+  }
+
+  return updateUserCoins(
+    userId,
+    -value
+  );
+
+  }
+  /* =====================================================
+   الجزء 33
+   سجل عمليات الكوينز
+===================================================== */
+
+function getCoinsTransactionsData(){
+
+  return JSON.parse(
+    localStorage.getItem(
+      "familyStarCoinsTransactions"
+    )
+  ) || [];
+
+}
+
+
+function saveCoinsTransactionsData(
+  transactions
+){
+
+  localStorage.setItem(
+    "familyStarCoinsTransactions",
+    JSON.stringify(
+      transactions
+    )
+  );
+
+}
+
+
+/* =====================================================
+   إضافة عملية كوينز
+===================================================== */
+
+function addCoinsTransaction(data){
+
+  if(!data){
+
+    return false;
+
+  }
+
+  if(!data.userId){
+
+    return false;
+
+  }
+
+  const amount =
+    Number(data.amount) || 0;
+
+  if(amount === 0){
+
+    return false;
+
+  }
+
+  const transactions =
+    getCoinsTransactionsData();
+
+  transactions.push({
+
+    id:
+      Date.now(),
+
+    userId:
+      data.userId,
+
+    type:
+      data.type ||
+      "general",
+
+    amount:
+      amount,
+
+    description:
+      data.description ||
+      "",
+
+    createdAt:
+      new Date().toISOString()
+
+  });
+
+  saveCoinsTransactionsData(
+    transactions
+  );
+
+  return true;
+
+}
+
+
+/* =====================================================
+   جلب عمليات المستخدم
+===================================================== */
+
+function getUserCoinsTransactions(
+  userId
+){
+
+  const transactions =
+    getCoinsTransactionsData();
+
+  return transactions.filter(
+    function(transaction){
+
+      return String(
+        transaction.userId
+      ) === String(userId);
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   تسجيل تحويل كوينز
+===================================================== */
+
+function recordCoinsTransfer(
+  senderId,
+  receiverId,
+  amount
+){
+
+  const value =
+    Number(amount) || 0;
+
+  if(value <= 0){
+
+    return false;
+
+  }
+
+  addCoinsTransaction({
+
+    userId:
+      senderId,
+
+    type:
+      "transfer_out",
+
+    amount:
+      -value,
+
+    description:
+      "تحويل كوينز إلى مستخدم آخر"
+
+  });
+
+  addCoinsTransaction({
+
+    userId:
+      receiverId,
+
+    type:
+      "transfer_in",
+
+    amount:
+      value,
+
+    description:
+      "استلام كوينز من مستخدم آخر"
+
+  });
+
+  return true;
+
+}
+
+
+/* =====================================================
+   إجمالي حركة الكوينز
+===================================================== */
+
+function getUserCoinsTotal(
+  userId
+){
+
+  const transactions =
+    getUserCoinsTransactions(
+      userId
+    );
+
+  return transactions.reduce(
+    function(total,transaction){
+
+      return total +
+        (Number(transaction.amount) || 0);
+
+    },
+    0
+  );
+
+  }
+  /* =====================================================
+   الجزء 34
+   نظام حظر المستخدمين
+===================================================== */
+
+function getBlockedUsersData(){
+
+  return JSON.parse(
+    localStorage.getItem(
+      "familyStarBlockedUsers"
+    )
+  ) || [];
+
+}
+
+
+function saveBlockedUsersData(
+  blockedUsers
+){
+
+  localStorage.setItem(
+    "familyStarBlockedUsers",
+    JSON.stringify(
+      blockedUsers
+    )
+  );
+
+}
+
+
+/* =====================================================
+   حظر مستخدم
+===================================================== */
+
+function blockUser(
+  userId,
+  blockedUserId
+){
+
+  if(
+    !userId ||
+    !blockedUserId
+  ){
+
+    return false;
+
+  }
+
+  if(
+    String(userId) ===
+    String(blockedUserId)
+  ){
+
+    return false;
+
+  }
+
+  const blockedUsers =
+    getBlockedUsersData();
+
+  const exists =
+    blockedUsers.some(
+      function(item){
+
+        return (
+          String(item.userId) ===
+            String(userId) &&
+
+          String(item.blockedUserId) ===
+            String(blockedUserId)
+        );
+
+      }
+    );
+
+  if(exists){
+
+    return false;
+
+  }
+
+  blockedUsers.push({
+
+    id:
+      Date.now(),
+
+    userId:
+      userId,
+
+    blockedUserId:
+      blockedUserId,
+
+    createdAt:
+      new Date().toISOString()
+
+  });
+
+  saveBlockedUsersData(
+    blockedUsers
+  );
+
+  return true;
+
+}
+
+
+/* =====================================================
+   إلغاء حظر مستخدم
+===================================================== */
+
+function unblockUser(
+  userId,
+  blockedUserId
+){
+
+  const blockedUsers =
+    getBlockedUsersData();
+
+  const newBlockedUsers =
+    blockedUsers.filter(
+      function(item){
+
+        return !(
+          String(item.userId) ===
+            String(userId) &&
+
+          String(item.blockedUserId) ===
+            String(blockedUserId)
+        );
+
+      }
+    );
+
+  saveBlockedUsersData(
+    newBlockedUsers
+  );
+
+  return true;
+
+}
+
+
+/* =====================================================
+   التحقق من الحظر
+===================================================== */
+
+function isUserBlocked(
+  userId,
+  blockedUserId
+){
+
+  const blockedUsers =
+    getBlockedUsersData();
+
+  return blockedUsers.some(
+    function(item){
+
+      return (
+        String(item.userId) ===
+          String(userId) &&
+
+        String(item.blockedUserId) ===
+          String(blockedUserId)
+      );
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   جلب قائمة المحظورين
+===================================================== */
+
+function getUserBlockedList(
+  userId
+){
+
+  const blockedUsers =
+    getBlockedUsersData();
+
+  return blockedUsers.filter(
+    function(item){
+
+      return String(
+        item.userId
+      ) === String(userId);
+
+    }
+  );
+
+  }
+  /* =====================================================
+   الجزء 35
+   حفظ بيانات المستخدم الحالي
+===================================================== */
+
+function setCurrentUser(
+  userId
+){
+
+  if(!userId){
+
+    return false;
+
+  }
+
+  localStorage.setItem(
+    "familyStarCurrentUser",
+    String(userId)
+  );
+
+  return true;
+
+}
+
+
+/* =====================================================
+   جلب المستخدم الحالي
+===================================================== */
+
+function getCurrentUser(){
+
+  return localStorage.getItem(
+    "familyStarCurrentUser"
+  ) || "";
+
+}
+
+
+/* =====================================================
+   تسجيل خروج المستخدم
+===================================================== */
+
+function logoutUser(){
+
+  localStorage.removeItem(
+    "familyStarCurrentUser"
+  );
+
+  return true;
+
+}
+
+
+/* =====================================================
+   التحقق من تسجيل الدخول
+===================================================== */
+
+function isUserLoggedIn(){
+
+  return Boolean(
+    getCurrentUser()
+  );
+
+}
+
+
+/* =====================================================
+   تشغيل النظام عند فتح الصفحة
+===================================================== */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function(){
+
+    refreshAdminData();
+
+  }
+);
 /* =====================================================
    نهاية المشروع
 ===================================================== */
