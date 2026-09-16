@@ -8008,6 +8008,1167 @@ setInterval(
   },
   30000
 );
+  /* =====================================================
+   الجزء 46 - نظام التنقل بين صفحات البرنامج
+===================================================== */
+
+function showPage(pageId){
+
+  const pages = document.querySelectorAll(".app-page");
+
+  pages.forEach(function(page){
+
+    page.style.display = "none";
+
+  });
+
+  const selectedPage =
+    document.getElementById(pageId);
+
+  if(selectedPage){
+
+    selectedPage.style.display = "block";
+
+  }
+
+}
+
+function openHome(){
+
+  showPage("homePage");
+
+  if(typeof refreshUserInterface === "function"){
+
+    refreshUserInterface();
+
+  }
+
+}
+
+function openProfile(){
+
+  if(!isUserLoggedIn()){
+
+    return;
+
+  }
+
+  showPage("profilePage");
+
+}
+
+function openSettings(){
+
+  if(!isUserLoggedIn()){
+
+    return;
+
+  }
+
+  showPage("settingsPage");
+
+}
+
+function openChat(){
+
+  if(!isUserLoggedIn()){
+
+    return;
+
+  }
+
+  showPage("chatPage");
+
+}
+
+function openRooms(){
+
+  if(!isUserLoggedIn()){
+
+    return;
+
+  }
+
+  showPage("roomsPage");
+
+}
+
+
+/* =====================================================
+   الجزء 47 - بيانات الملف الشخصي
+===================================================== */
+
+function loadProfileData(){
+
+  if(!isUserLoggedIn()){
+
+    return;
+
+  }
+
+  const userName =
+    localStorage.getItem("userName") || "مستخدم";
+
+  const userPhoto =
+    localStorage.getItem("userPhoto") || "";
+
+  const profileName =
+    document.getElementById("profileName");
+
+  const profilePhoto =
+    document.getElementById("profilePhoto");
+
+  if(profileName){
+
+    profileName.textContent = userName;
+
+  }
+
+  if(profilePhoto && userPhoto){
+
+    profilePhoto.src = userPhoto;
+
+  }
+
+}
+
+function updateProfileName(){
+
+  const input =
+    document.getElementById("profileNameInput");
+
+  if(!input){
+
+    return;
+
+  }
+
+  const name =
+    input.value.trim();
+
+  if(!name){
+
+    return;
+
+  }
+
+  localStorage.setItem(
+    "userName",
+    name
+  );
+
+  loadProfileData();
+
+  refreshUserInterface();
+
+}
+
+
+/* =====================================================
+   الجزء 48 - إعدادات المستخدم
+===================================================== */
+
+function saveUserSettings(){
+
+  if(!isUserLoggedIn()){
+
+    return;
+
+  }
+
+  const ageInput =
+    document.getElementById("userAge");
+
+  const countryInput =
+    document.getElementById("userCountry");
+
+  const phoneInput =
+    document.getElementById("userPhone");
+
+  if(ageInput){
+
+    localStorage.setItem(
+      "userAge",
+      ageInput.value
+    );
+
+  }
+
+  if(countryInput){
+
+    localStorage.setItem(
+      "userCountry",
+      countryInput.value
+    );
+
+  }
+
+  if(phoneInput){
+
+    localStorage.setItem(
+      "userPhone",
+      phoneInput.value
+    );
+
+  }
+
+  alert("تم حفظ الإعدادات");
+
+}
+
+function loadUserSettings(){
+
+  const ageInput =
+    document.getElementById("userAge");
+
+  const countryInput =
+    document.getElementById("userCountry");
+
+  const phoneInput =
+    document.getElementById("userPhone");
+
+  if(ageInput){
+
+    ageInput.value =
+      localStorage.getItem("userAge") || "";
+
+  }
+
+  if(countryInput){
+
+    countryInput.value =
+      localStorage.getItem("userCountry") || "";
+
+  }
+
+  if(phoneInput){
+
+    phoneInput.value =
+      localStorage.getItem("userPhone") || "";
+
+  }
+
+}
+
+
+/* =====================================================
+   الجزء 49 - نظام الدردشة
+===================================================== */
+
+function sendChatMessage(){
+
+  if(!isUserLoggedIn()){
+
+    return;
+
+  }
+
+  const input =
+    document.getElementById("chatInput");
+
+  const messages =
+    document.getElementById("chatMessages");
+
+  if(!input || !messages){
+
+    return;
+
+  }
+
+  const text =
+    input.value.trim();
+
+  if(!text){
+
+    return;
+
+  }
+
+  const message =
+    document.createElement("div");
+
+  message.className =
+    "chat-message";
+
+  message.textContent =
+    text;
+
+  messages.appendChild(message);
+
+  input.value = "";
+
+  messages.scrollTop =
+    messages.scrollHeight;
+
+}
+
+function openUserChat(){
+
+  if(!isUserLoggedIn()){
+
+    return;
+
+  }
+
+  openChat();
+
+}
+
+
+/* =====================================================
+   الجزء 50 - نظام الرومات
+===================================================== */
+
+function openRoom(roomId){
+
+  if(!isUserLoggedIn()){
+
+    return;
+
+  }
+
+  localStorage.setItem(
+    "currentRoomId",
+    roomId
+  );
+
+  showPage("roomPage");
+
+}
+
+function joinRoom(roomId){
+
+  if(!isUserLoggedIn()){
+
+    alert("يجب تسجيل الدخول أولاً");
+
+    return;
+
+  }
+
+  localStorage.setItem(
+    "currentRoomId",
+    roomId
+  );
+
+  openRoom(roomId);
+
+}
+
+function leaveRoom(){
+
+  localStorage.removeItem(
+    "currentRoomId"
+  );
+
+  openRooms();
+
+  }
+  /* =====================================================
+   الجزء 51 - نظام الميكات داخل الروم
+===================================================== */
+
+function joinMic(micNumber){
+
+  if(!isUserLoggedIn()){
+
+    alert("يجب تسجيل الدخول أولاً");
+
+    return;
+
+  }
+
+  const roomId =
+    localStorage.getItem("currentRoomId");
+
+  if(!roomId){
+
+    alert("لم يتم تحديد الروم");
+
+    return;
+
+  }
+
+  localStorage.setItem(
+    "currentMic",
+    micNumber
+  );
+
+  alert("تم الانضمام إلى الميك رقم " + micNumber);
+
+}
+
+
+function leaveMic(){
+
+  localStorage.removeItem(
+    "currentMic"
+  );
+
+  alert("تم النزول من الميك");
+
+}
+
+
+/* =====================================================
+   الجزء 52 - نظام الكوينز
+===================================================== */
+
+function getUserCoins(){
+
+  return Number(
+    localStorage.getItem("userCoins")
+  ) || 0;
+
+}
+
+
+function setUserCoins(amount){
+
+  amount =
+    Math.max(0, Number(amount) || 0);
+
+  localStorage.setItem(
+    "userCoins",
+    amount
+  );
+
+  refreshCoinsInterface();
+
+}
+
+
+function addUserCoins(amount){
+
+  const current =
+    getUserCoins();
+
+  setUserCoins(
+    current + (Number(amount) || 0)
+  );
+
+}
+
+
+function spendUserCoins(amount){
+
+  amount =
+    Number(amount) || 0;
+
+  const current =
+    getUserCoins();
+
+  if(amount <= 0){
+
+    return false;
+
+  }
+
+  if(current < amount){
+
+    alert("رصيد الكوينز غير كافٍ");
+
+    return false;
+
+  }
+
+  setUserCoins(
+    current - amount
+  );
+
+  return true;
+
+}
+
+
+function refreshCoinsInterface(){
+
+  const coins =
+    getUserCoins();
+
+  const elements =
+    document.querySelectorAll(".user-coins");
+
+  elements.forEach(function(element){
+
+    element.textContent =
+      coins.toLocaleString();
+
+  });
+
+}
+
+
+/* =====================================================
+   الجزء 53 - نظام الهدايا
+===================================================== */
+
+function sendGift(giftName, giftPrice){
+
+  if(!isUserLoggedIn()){
+
+    alert("يجب تسجيل الدخول أولاً");
+
+    return;
+
+  }
+
+  const price =
+    Number(giftPrice) || 0;
+
+  if(price <= 0){
+
+    return;
+
+  }
+
+  if(!spendUserCoins(price)){
+
+    return;
+
+  }
+
+  const giftsSent =
+    Number(
+      localStorage.getItem("giftsSent")
+    ) || 0;
+
+  localStorage.setItem(
+    "giftsSent",
+    giftsSent + 1
+  );
+
+  alert(
+    "تم إرسال هدية " +
+    giftName
+  );
+
+  refreshUserInterface();
+
+}
+
+
+/* =====================================================
+   الجزء 54 - نظام المستوى
+===================================================== */
+
+function getUserLevel(){
+
+  return Number(
+    localStorage.getItem("userLevel")
+  ) || 0;
+
+}
+
+
+function setUserLevel(level){
+
+  level =
+    Math.max(0, Number(level) || 0);
+
+  localStorage.setItem(
+    "userLevel",
+    level
+  );
+
+  refreshLevelInterface();
+
+}
+
+
+function addUserLevel(amount){
+
+  const current =
+    getUserLevel();
+
+  setUserLevel(
+    current + (Number(amount) || 0)
+  );
+
+}
+
+
+function refreshLevelInterface(){
+
+  const level =
+    getUserLevel();
+
+  const elements =
+    document.querySelectorAll(".user-level");
+
+  elements.forEach(function(element){
+
+    element.textContent =
+      level;
+
+  });
+
+}
+
+
+/* =====================================================
+   الجزء 55 - إنشاء العائلة
+===================================================== */
+
+function createFamily(familyName){
+
+  if(!isUserLoggedIn()){
+
+    alert("يجب تسجيل الدخول أولاً");
+
+    return;
+
+  }
+
+  const name =
+    String(familyName || "").trim();
+
+  if(!name){
+
+    alert("اكتب اسم العائلة");
+
+    return;
+
+  }
+
+  const existingFamily =
+    localStorage.getItem("userFamily");
+
+  if(existingFamily){
+
+    alert("أنت بالفعل داخل عائلة");
+
+    return;
+
+  }
+
+  const level =
+    getUserLevel();
+
+  const familyCreationPrice =
+    5000000;
+
+
+/* =====================================================
+   مستوى 30 فأعلى = إنشاء مجاني
+===================================================== */
+
+  if(level < 30){
+
+    const coins =
+      getUserCoins();
+
+    if(coins < familyCreationPrice){
+
+      alert(
+        "إنشاء العائلة يحتاج 5,000,000 كوين"
+      );
+
+      return;
+
+    }
+
+    if(!spendUserCoins(
+      familyCreationPrice
+    )){
+
+      return;
+
+    }
+
+  }
+
+
+/* =====================================================
+   إنشاء بيانات العائلة
+===================================================== */
+
+  const familyData = {
+
+    name: name,
+
+    owner:
+      localStorage.getItem("userName")
+      || "مستخدم",
+
+    ownerLevel: level,
+
+    createdAt: Date.now(),
+
+    moderators: [],
+
+    members: []
+
+  };
+
+
+  localStorage.setItem(
+    "userFamily",
+    JSON.stringify(familyData)
+  );
+
+
+  alert(
+    "تم إنشاء العائلة بنجاح"
+  );
+
+
+  refreshUserInterface();
+
+  }
+  /* =====================================================
+   الجزء 56 - إدارة أعضاء العائلة والمشرفين
+===================================================== */
+
+function getUserFamily(){
+
+  const data =
+    localStorage.getItem("userFamily");
+
+  if(!data){
+
+    return null;
+
+  }
+
+  try{
+
+    return JSON.parse(data);
+
+  }catch(error){
+
+    return null;
+
+  }
+
+}
+
+
+function saveUserFamily(family){
+
+  localStorage.setItem(
+    "userFamily",
+    JSON.stringify(family)
+  );
+
+}
+
+
+function addFamilyModerator(userName){
+
+  const family =
+    getUserFamily();
+
+  if(!family){
+
+    alert("لا توجد عائلة");
+
+    return;
+
+  }
+
+  if(!family.moderators){
+
+    family.moderators = [];
+
+  }
+
+  if(
+    family.moderators.includes(userName)
+  ){
+
+    alert("المستخدم مشرف بالفعل");
+
+    return;
+
+  }
+
+  family.moderators.push(userName);
+
+  saveUserFamily(family);
+
+  alert("تم إضافة المشرف");
+
+}
+
+
+function removeFamilyModerator(userName){
+
+  const family =
+    getUserFamily();
+
+  if(!family){
+
+    return;
+
+  }
+
+  family.moderators =
+    (family.moderators || [])
+      .filter(function(name){
+
+        return name !== userName;
+
+      });
+
+  saveUserFamily(family);
+
+}
+
+
+/* =====================================================
+   الجزء 57 - الإشعارات
+===================================================== */
+
+function addNotification(message){
+
+  if(!isUserLoggedIn()){
+
+    return;
+
+  }
+
+  let notifications = [];
+
+  try{
+
+    notifications =
+      JSON.parse(
+        localStorage.getItem("notifications")
+      ) || [];
+
+  }catch(error){
+
+    notifications = [];
+
+  }
+
+  notifications.unshift({
+
+    message: message,
+
+    read: false,
+
+    createdAt: Date.now()
+
+  });
+
+  notifications =
+    notifications.slice(0, 50);
+
+  localStorage.setItem(
+    "notifications",
+    JSON.stringify(notifications)
+  );
+
+}
+
+
+function getNotifications(){
+
+  try{
+
+    return JSON.parse(
+      localStorage.getItem("notifications")
+    ) || [];
+
+  }catch(error){
+
+    return [];
+
+  }
+
+}
+
+
+function markNotificationsRead(){
+
+  const notifications =
+    getNotifications();
+
+  notifications.forEach(function(notification){
+
+    notification.read = true;
+
+  });
+
+  localStorage.setItem(
+    "notifications",
+    JSON.stringify(notifications)
+  );
+
+}
+
+
+function getUnreadNotificationsCount(){
+
+  const notifications =
+    getNotifications();
+
+  return notifications.filter(
+    function(notification){
+
+      return !notification.read;
+
+    }
+  ).length;
+
+}
+
+
+/* =====================================================
+   الجزء 58 - نظام الإدارة
+===================================================== */
+
+function isAdmin(){
+
+  return (
+    localStorage.getItem("userRole")
+    === "admin"
+  );
+
+}
+
+
+function requireAdmin(){
+
+  if(!isAdmin()){
+
+    alert("هذه الصفحة للإدارة فقط");
+
+    return false;
+
+  }
+
+  return true;
+
+}
+
+
+function updateAdminCounter(type, amount){
+
+  if(!requireAdmin()){
+
+    return;
+
+  }
+
+  let current =
+    Number(
+      localStorage.getItem(type)
+    ) || 0;
+
+  current +=
+    Number(amount) || 0;
+
+  localStorage.setItem(
+    type,
+    current
+  );
+
+}
+
+
+/* =====================================================
+   الجزء 59 - فحص حالة المستخدم والبرنامج
+===================================================== */
+
+function checkApplicationState(){
+
+  if(
+    typeof isUserLoggedIn !== "function"
+  ){
+
+    return;
+
+  }
+
+  if(!isUserLoggedIn()){
+
+    showPageIfExists("loginPage");
+
+    return;
+
+  }
+
+  showPageIfExists("homePage");
+
+  if(
+    typeof loadProfileData === "function"
+  ){
+
+    loadProfileData();
+
+  }
+
+  if(
+    typeof loadUserSettings === "function"
+  ){
+
+    loadUserSettings();
+
+  }
+
+  if(
+    typeof refreshCoinsInterface === "function"
+  ){
+
+    refreshCoinsInterface();
+
+  }
+
+  if(
+    typeof refreshLevelInterface === "function"
+  ){
+
+    refreshLevelInterface();
+
+  }
+
+}
+
+
+function showPageIfExists(pageId){
+
+  const page =
+    document.getElementById(pageId);
+
+  if(!page){
+
+    return;
+
+  }
+
+  const pages =
+    document.querySelectorAll(".app-page");
+
+  pages.forEach(function(item){
+
+    item.style.display = "none";
+
+  });
+
+  page.style.display = "block";
+
+}
+
+
+/* =====================================================
+   الجزء 60 - التشغيل النهائي والتحديث
+===================================================== */
+
+function initializeStarVoice(){
+
+  checkApplicationState();
+
+  if(
+    typeof refreshUserInterface === "function"
+  ){
+
+    refreshUserInterface();
+
+  }
+
+  if(
+    typeof loadProfileData === "function"
+  ){
+
+    loadProfileData();
+
+  }
+
+  if(
+    typeof loadUserSettings === "function"
+  ){
+
+    loadUserSettings();
+
+  }
+
+  if(
+    typeof refreshCoinsInterface === "function"
+  ){
+
+    refreshCoinsInterface();
+
+  }
+
+  if(
+    typeof refreshLevelInterface === "function"
+  ){
+
+    refreshLevelInterface();
+
+  }
+
+}
+
+
+/* =====================================================
+   تشغيل البرنامج بعد تحميل الصفحة
+===================================================== */
+
+if(
+  document.readyState === "loading"
+){
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+      initializeStarVoice();
+
+    }
+  );
+
+}else{
+
+  initializeStarVoice();
+
+}
+
+
+/* =====================================================
+   تحديث واجهة المستخدم دوريًا
+===================================================== */
+
+setInterval(
+  function(){
+
+    if(
+      typeof isUserLoggedIn === "function" &&
+      isUserLoggedIn()
+    ){
+
+      if(
+        typeof refreshUserInterface === "function"
+      ){
+
+        refreshUserInterface();
+
+      }
+
+      if(
+        typeof refreshCoinsInterface === "function"
+      ){
+
+        refreshCoinsInterface();
+
+      }
+
+      if(
+        typeof refreshLevelInterface === "function"
+      ){
+
+        refreshLevelInterface();
+
+      }
+
+    }
+
+  },
+  30000
+);
 /* =====================================================
    نهاية المشروع
 ===================================================== */
