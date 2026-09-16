@@ -654,10 +654,11 @@ if(avatarInput){
 /* =====================================================
    حفظ صورة الغلاف
 ===================================================== */
+const coverInput = document.getElementById("coverInput");
 
-document
-  .getElementById("coverInput")
-  .addEventListener("change", function(){
+if(coverInput){
+
+  coverInput.addEventListener("change", function(){
 
     const file = this.files[0];
 
@@ -691,6 +692,7 @@ document
 
   });
 
+}
 
 /* =====================================================
    حفظ الحساب
