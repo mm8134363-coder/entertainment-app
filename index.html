@@ -544,15 +544,7 @@ function loginWithPhone(){
     "مستخدم"
   );
 
-  alert("تم تسجيل الدخول بنجاح");
-
-  if(
-    typeof showPageIfExists === "function"
-  ){
-
-    showPageIfExists("homePage");
-
-  }
+  showPage("homePage");
 
   if(
     typeof refreshUserInterface === "function"
