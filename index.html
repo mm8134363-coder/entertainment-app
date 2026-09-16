@@ -1,11 +1,19 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
   <title>Family Star</title>
 
   <style>
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -23,16 +31,23 @@
       min-height: 100vh;
     }
 
-    /* ==============================
+
+    /* =========================
        تسجيل الدخول
-    ============================== */
+    ========================= */
 
     .login-page {
+
       min-height: 100vh;
+
       display: flex;
+
       align-items: center;
+
       justify-content: center;
+
       padding: 20px;
+
       background:
         radial-gradient(
           circle at top,
@@ -40,84 +55,359 @@
           #0b1235 45%,
           #05091b 100%
         );
+
     }
+
 
     .login-box {
+
       width: 100%;
+
       max-width: 420px;
+
       padding: 30px 22px;
+
       text-align: center;
+
       background: #0d1433;
+
       border-radius: 24px;
+
       border: 1px solid rgba(255,255,255,.08);
-      box-shadow: 0 15px 40px rgba(0,0,0,.45);
+
+      box-shadow:
+        0 15px 40px rgba(0,0,0,.45);
+
     }
+
 
     .logo {
+
       font-size: 58px;
+
       margin-bottom: 10px;
+
     }
+
 
     .login-box h1 {
+
       font-size: 30px;
+
       margin-bottom: 8px;
+
     }
+
 
     .welcome {
+
       color: #aeb8df;
+
       margin-bottom: 25px;
+
     }
+
 
     .phone-input {
+
       width: 100%;
+
       height: 52px;
+
       padding: 0 16px;
+
       border: none;
+
       outline: none;
+
       border-radius: 14px;
+
       background: #182047;
+
       color: #ffffff;
+
       font-size: 16px;
+
       margin-bottom: 14px;
+
       text-align: right;
+
     }
+
 
     .phone-input::placeholder {
+
       color: #8993bd;
+
     }
+
 
     .main-btn {
+
       width: 100%;
+
       height: 52px;
+
       border: none;
+
       border-radius: 14px;
+
       background: #6c5ce7;
+
       color: #ffffff;
+
       font-size: 17px;
+
       font-weight: bold;
+
       cursor: pointer;
+
     }
+
 
     .main-btn:active {
+
       transform: scale(.98);
+
     }
 
+
     .login-note {
+
       margin-top: 20px;
+
       color: #8e98bf;
+
       font-size: 13px;
+
     }
+
+
+    /* =========================
+       الصفحة الرئيسية
+    ========================= */
+
+    .home-page {
+
+      min-height: 100vh;
+
+      background:
+        linear-gradient(
+          180deg,
+          #0d1433 0%,
+          #05091b 100%
+        );
+
+      padding-bottom: 80px;
+
+    }
+
+
+    .home-header {
+
+      height: 70px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      padding: 0 18px;
+
+      border-bottom:
+        1px solid rgba(255,255,255,.08);
+
+      background: #0d1433;
+
+    }
+
+
+    .home-title {
+
+      font-size: 24px;
+
+      font-weight: bold;
+
+    }
+
+
+    .home-star {
+
+      font-size: 30px;
+
+    }
+
+
+    .welcome-user {
+
+      margin: 20px;
+
+      padding: 20px;
+
+      border-radius: 20px;
+
+      background: #151e47;
+
+    }
+
+
+    .welcome-user h2 {
+
+      font-size: 21px;
+
+      margin-bottom: 8px;
+
+    }
+
+
+    .welcome-user p {
+
+      color: #aeb8df;
+
+      font-size: 14px;
+
+    }
+
+
+    .sections {
+
+      display: grid;
+
+      grid-template-columns: repeat(2, 1fr);
+
+      gap: 14px;
+
+      padding: 0 20px;
+
+    }
+
+
+    .section-card {
+
+      min-height: 130px;
+
+      border-radius: 20px;
+
+      background: #111a3d;
+
+      border:
+        1px solid rgba(255,255,255,.06);
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 10px;
+
+      cursor: pointer;
+
+    }
+
+
+    .section-icon {
+
+      font-size: 38px;
+
+    }
+
+
+    .section-name {
+
+      font-size: 16px;
+
+      font-weight: bold;
+
+    }
+
+
+    /* =========================
+       القائمة السفلية
+    ========================= */
+
+    .bottom-nav {
+
+      position: fixed;
+
+      bottom: 0;
+
+      right: 0;
+
+      left: 0;
+
+      height: 70px;
+
+      background: #0d1433;
+
+      border-top:
+        1px solid rgba(255,255,255,.08);
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-around;
+
+    }
+
+
+    .nav-item {
+
+      color: #aeb8df;
+
+      text-align: center;
+
+      font-size: 12px;
+
+      cursor: pointer;
+
+    }
+
+
+    .nav-icon {
+
+      display: block;
+
+      font-size: 25px;
+
+      margin-bottom: 4px;
+
+    }
+
+
+    .nav-item.active {
+
+      color: #ffffff;
+
+    }
+
+
+    .hidden {
+
+      display: none !important;
+
+    }
+
   </style>
+
 </head>
+
 
 <body>
 
-  <!-- ==============================
-       Family Star
-       تسجيل الدخول
-  ============================== -->
 
-  <main id="loginPage" class="page login-page">
+  <!-- =========================
+       تسجيل الدخول
+  ========================= -->
+
+  <main
+    id="loginPage"
+    class="page login-page"
+  >
 
     <div class="login-box">
 
@@ -129,6 +419,7 @@
         أهلاً بك في Family Star
       </p>
 
+
       <input
         id="phoneInput"
         class="phone-input"
@@ -137,6 +428,7 @@
         placeholder="اكتب رقم الهاتف"
       >
 
+
       <button
         id="loginButton"
         class="main-btn"
@@ -144,6 +436,7 @@
       >
         تسجيل الدخول
       </button>
+
 
       <p class="login-note">
         برنامج ترفيه وتسلية
@@ -154,49 +447,319 @@
   </main>
 
 
+
+  <!-- =========================
+       الصفحة الرئيسية
+  ========================= -->
+
+  <main
+    id="homePage"
+    class="page home-page hidden"
+  >
+
+
+    <header class="home-header">
+
+      <div class="home-title">
+        Family Star
+      </div>
+
+      <div class="home-star">
+        ⭐
+      </div>
+
+    </header>
+
+
+
+    <section class="welcome-user">
+
+      <h2>
+        أهلاً بك 👋
+      </h2>
+
+      <p id="userPhoneText">
+        مرحباً بك في Family Star
+      </p>
+
+    </section>
+
+
+
+    <section class="sections">
+
+
+      <div
+        class="section-card"
+        id="chatCard"
+      >
+
+        <div class="section-icon">
+          💬
+        </div>
+
+        <div class="section-name">
+          الدردشة
+        </div>
+
+      </div>
+
+
+
+      <div
+        class="section-card"
+        id="statusCard"
+      >
+
+        <div class="section-icon">
+          🟢
+        </div>
+
+        <div class="section-name">
+          الحالات
+        </div>
+
+      </div>
+
+
+
+      <div
+        class="section-card"
+        id="roomsCard"
+      >
+
+        <div class="section-icon">
+          🎤
+        </div>
+
+        <div class="section-name">
+          الرومات
+        </div>
+
+      </div>
+
+
+
+      <div
+        class="section-card"
+        id="profileCard"
+      >
+
+        <div class="section-icon">
+          👤
+        </div>
+
+        <div class="section-name">
+          الملف الشخصي
+        </div>
+
+      </div>
+
+
+    </section>
+
+
+
+    <!-- القائمة السفلية -->
+
+    <nav class="bottom-nav">
+
+
+      <div
+        class="nav-item active"
+        id="homeNav"
+      >
+
+        <span class="nav-icon">
+          🏠
+        </span>
+
+        الرئيسية
+
+      </div>
+
+
+
+      <div
+        class="nav-item"
+        id="chatNav"
+      >
+
+        <span class="nav-icon">
+          💬
+        </span>
+
+        الدردشة
+
+      </div>
+
+
+
+      <div
+        class="nav-item"
+        id="roomsNav"
+      >
+
+        <span class="nav-icon">
+          🎤
+        </span>
+
+        الرومات
+
+      </div>
+
+
+
+      <div
+        class="nav-item"
+        id="profileNav"
+      >
+
+        <span class="nav-icon">
+          👤
+        </span>
+
+        حسابي
+
+      </div>
+
+
+    </nav>
+
+
+  </main>
+
+
+
   <script>
 
-    /* ==============================
-       تسجيل الدخول
-    ============================== */
+
+    /* =========================
+       عناصر تسجيل الدخول
+    ========================= */
 
     const phoneInput =
-      document.getElementById("phoneInput");
-
-    const loginButton =
-      document.getElementById("loginButton");
-
-
-    loginButton.addEventListener("click", function () {
-
-      const phone =
-        phoneInput.value.trim();
-
-
-      if (!phone) {
-
-        alert("اكتب رقم الهاتف أولاً");
-
-        return;
-      }
-
-
-      /*
-        حفظ الرقم محليًا مؤقتًا.
-        لاحقًا سنربطه بنظام حسابات حقيقي.
-      */
-
-      localStorage.setItem(
-        "familyStarPhone",
-        phone
+      document.getElementById(
+        "phoneInput"
       );
 
 
-      alert("تم تسجيل الدخول بنجاح");
+    const loginButton =
+      document.getElementById(
+        "loginButton"
+      );
 
-    });
+
+    const loginPage =
+      document.getElementById(
+        "loginPage"
+      );
+
+
+    const homePage =
+      document.getElementById(
+        "homePage"
+      );
+
+
+    const userPhoneText =
+      document.getElementById(
+        "userPhoneText"
+      );
+
+
+
+    /* =========================
+       تسجيل الدخول
+    ========================= */
+
+    loginButton.addEventListener(
+      "click",
+      function () {
+
+
+        const phone =
+          phoneInput.value.trim();
+
+
+        if (!phone) {
+
+          alert(
+            "اكتب رقم الهاتف أولاً"
+          );
+
+          return;
+
+        }
+
+
+        localStorage.setItem(
+          "familyStarPhone",
+          phone
+        );
+
+
+        showHomePage();
+
+      }
+    );
+
+
+
+    /* =========================
+       فتح الرئيسية
+    ========================= */
+
+    function showHomePage() {
+
+
+      const phone =
+        localStorage.getItem(
+          "familyStarPhone"
+        );
+
+
+      loginPage.classList.add(
+        "hidden"
+      );
+
+
+      homePage.classList.remove(
+        "hidden"
+      );
+
+
+      if (phone) {
+
+        userPhoneText.textContent =
+          "رقم الحساب: " + phone;
+
+      }
+
+    }
+
+
+
+    /* =========================
+       فحص الدخول عند فتح الموقع
+    ========================= */
+
+    const savedPhone =
+      localStorage.getItem(
+        "familyStarPhone"
+      );
+
+
+    if (savedPhone) {
+
+      showHomePage();
+
+    }
+
 
   </script>
 
+
 </body>
-</html>
+
+  </html>
