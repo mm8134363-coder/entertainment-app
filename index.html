@@ -612,9 +612,11 @@ function selectGender(gender){
    حفظ صورة البروفايل
 ===================================================== */
 
-document
-  .getElementById("avatarInput")
-  .addEventListener("change", function(){
+const avatarInput = document.getElementById("avatarInput");
+
+if(avatarInput){
+
+  avatarInput.addEventListener("change", function(){
 
     const file = this.files[0];
 
