@@ -14,6 +14,10 @@
 
 <style>
 
+/* =====================================================
+   الإعدادات الأساسية
+===================================================== */
+
 *{
   box-sizing:border-box;
   margin:0;
@@ -36,7 +40,13 @@ body{
   display:block;
 }
 
+
+/* =====================================================
+   صفحة تسجيل الدخول
+===================================================== */
+
 .login-page{
+
   min-height:100vh;
 
   display:flex;
@@ -54,69 +64,78 @@ body{
       #080d29 45%,
       #05091b 100%
     );
+
 }
 
+
+/* =====================================================
+   صندوق تسجيل الدخول
+===================================================== */
+
 .login-box{
+
   width:100%;
+
   max-width:420px;
-
-  background:#0c1230;
-
-  border:1px solid #26356d;
-
-  border-radius:24px;
 
   padding:30px 22px;
 
   text-align:center;
 
+  background:#0d1433;
+
+  border:1px solid rgba(255,255,255,.08);
+
+  border-radius:24px;
+
   box-shadow:
-    0 15px 50px rgba(0,0,0,.45);
+    0 15px 40px rgba(0,0,0,.45);
+
 }
 
-.logo{
-  width:82px;
-  height:82px;
 
-  margin:0 auto 18px;
+/* =====================================================
+   شعار التطبيق
+===================================================== */
 
-  display:flex;
+.login-logo{
 
-  align-items:center;
-  justify-content:center;
+  font-size:55px;
 
-  border-radius:50%;
+  margin-bottom:10px;
 
-  background:#18245a;
+}
 
-  border:2px solid #ffd34d;
+.login-box h1{
 
-  font-size:42px;
+  font-size:30px;
 
-  box-shadow:
-    0 0 25px rgba(255,211,77,.25);
+  margin-bottom:8px;
+
 }
 
 .login-title{
-  font-size:30px;
 
-  font-weight:bold;
-
-  margin-bottom:8px;
-}
-
-.login-subtitle{
-  font-size:15px;
-
-  color:#aeb8df;
+  color:#b8c1e8;
 
   margin-bottom:25px;
+
 }
 
+
+/* =====================================================
+   خانة الهاتف
+===================================================== */
+
 .phone-input{
+
   width:100%;
 
   height:52px;
+
+  padding:0 16px;
+
+  margin-bottom:14px;
 
   border:none;
 
@@ -124,9 +143,7 @@ body{
 
   border-radius:14px;
 
-  padding:0 16px;
-
-  background:#151d46;
+  background:#182047;
 
   color:#fff;
 
@@ -134,74 +151,78 @@ body{
 
   text-align:right;
 
-  margin-bottom:12px;
-
-  border:1px solid #29386f;
 }
 
 .phone-input::placeholder{
-  color:#7f8bb8;
+
+  color:#8993bd;
+
 }
 
-.main-btn{
+
+/* =====================================================
+   الأزرار
+===================================================== */
+
+.main-btn,
+.social-btn{
+
   width:100%;
 
-  height:52px;
+  height:50px;
 
   border:none;
 
   border-radius:14px;
 
-  background:#ffd34d;
+  margin-top:10px;
 
-  color:#111;
-
-  font-size:17px;
+  font-size:16px;
 
   font-weight:bold;
 
   cursor:pointer;
 
-  margin-bottom:12px;
 }
 
-.social-btn{
-  width:100%;
+.main-btn{
 
-  height:50px;
-
-  border:1px solid #2b396f;
-
-  border-radius:14px;
-
-  background:#151d46;
+  background:#6c5ce7;
 
   color:#fff;
 
-  font-size:15px;
-
-  font-weight:bold;
-
-  cursor:pointer;
-
-  margin-bottom:10px;
 }
 
+.social-btn{
+
+  background:#1a2348;
+
+  color:#fff;
+
+}
+
+
 .login-note{
-  margin-top:18px;
 
-  color:#7f8bb8;
+  margin-top:20px;
 
-  font-size:12px;
+  color:#8e98bf;
 
-  line-height:1.7;
+  font-size:13px;
+
 }
 
 </style>
 
 </head>
 
+
 <body>
+
+
+<!-- =====================================================
+     الجزء الأول: تسجيل الدخول والحسابات
+===================================================== -->
 
 <section
   id="loginPage"
@@ -210,17 +231,18 @@ body{
 
   <div class="login-box">
 
-    <div class="logo">
+    <div class="login-logo">
       ⭐
     </div>
 
-    <div class="login-title">
+    <h1>
       Family Star
-    </div>
+    </h1>
 
-    <div class="login-subtitle">
-      برنامج ترفيه وتسلية فقط
-    </div>
+    <p class="login-title">
+      مرحباً بك في Family Star
+    </p>
+
 
     <input
       id="phoneLogin"
@@ -229,13 +251,15 @@ body{
       placeholder="اكتب رقم الهاتف"
     >
 
+
     <button
-  type="button"
-  class="main-btn"
-  onclick="loginWithPhone()"
->
+      type="button"
+      class="main-btn"
+      onclick="loginWithPhone()"
+    >
       تسجيل الدخول
     </button>
+
 
     <button
       type="button"
@@ -245,6 +269,7 @@ body{
       🔴 تسجيل الدخول باستخدام Google
     </button>
 
+
     <button
       type="button"
       class="social-btn"
@@ -253,239 +278,9 @@ body{
       🔵 تسجيل الدخول باستخدام Facebook
     </button>
 
+
     <div class="login-note">
-      بعد تسجيل الدخول سيتم فتح صفحة إعداد الحساب
-      قبل الدخول إلى الصفحة الرئيسية.
-    </div>
-
-  </div>
-
-  </section>
-<!-- =====================================================
-     الجزء 2 — الصفحة الرئيسية
-===================================================== -->
-
-<section id="homePage" class="page home-page">
-
-  <div class="top-bar">
-
-    <div class="app-name">
-      ⭐ Family Star
-    </div>
-
-    <div class="coins-box">
-      🪙 <span id="coinBalance">0</span>
-    </div>
-
-  </div>
-
-
-  <div class="home-content">
-
-    <div class="welcome">
-
-      <div class="welcome-name user-name-line">
-
-        <span id="homeUsername">
-          مرحباً بك
-        </span>
-
-        <span
-          id="homeGenderBadge"
-          class="gender-badge"
-        ></span>
-
-      </div>
-
-      <div style="color:#aeb7dc;font-size:13px;">
-        أهلاً بك في Family Star ⭐
-      </div>
-
-    </div>
-
-
-    <div class="banner">
-
-      <div class="banner-title">
-        🔥 الرومات الترند
-      </div>
-
-      <div class="banner-text">
-        اكتشف أكثر الرومات نشاطاً الآن
-      </div>
-
-    </div>
-
-
-    <div class="section-title">
-      الأقسام الرئيسية
-    </div>
-
-
-    <div class="cards">
-
-      <div class="home-card">
-        <div class="home-card-icon">🎤</div>
-        <div class="home-card-title">الرومات</div>
-        <div class="home-card-text">
-          ادخل الرومات وتحدث مع الآخرين
-        </div>
-      </div>
-
-
-      <div class="home-card">
-        <div class="home-card-icon">👨‍👩‍👧‍👦</div>
-        <div class="home-card-title">العائلات</div>
-        <div class="home-card-text">
-          انضم إلى عائلة أو أنشئ عائلتك
-        </div>
-      </div>
-
-
-      <div class="home-card">
-        <div class="home-card-icon">💬</div>
-        <div class="home-card-title">الدردشة</div>
-        <div class="home-card-text">
-          تحدث مع أصدقائك
-        </div>
-      </div>
-
-
-      <div class="home-card">
-        <div class="home-card-icon">⭕</div>
-        <div class="home-card-title">الحالات</div>
-        <div class="home-card-text">
-          شاهد حالات المستخدمين
-        </div>
-      </div>
-
-
-      <div class="home-card">
-        <div class="home-card-icon">🎮</div>
-        <div class="home-card-title">الألعاب</div>
-        <div class="home-card-text">
-          ألعاب مجانية للترفيه
-        </div>
-      </div>
-
-
-      <div class="home-card">
-        <div class="home-card-icon">🏆</div>
-        <div class="home-card-title">التوب</div>
-        <div class="home-card-text">
-          أفضل المستخدمين والعائلات
-        </div>
-      </div>
-
-    </div>
-
-
-    <div class="section-title">
-      الرومات التي أعجبتني
-    </div>
-
-    <div class="rooms-list">
-
-      <div class="room-card">
-
-        <div class="room-avatar">
-          🎤
-        </div>
-
-        <div class="room-info">
-
-          <div class="room-name">
-            روم Family Star
-          </div>
-
-          <div class="room-meta">
-            👥 25 مستخدم • 🎙️ 10 ميكات
-          </div>
-
-        </div>
-
-        <button class="enter-room">
-          دخول
-        </button>
-
-      </div>
-
-
-      <div class="room-card">
-
-        <div class="room-avatar">
-          🔥
-        </div>
-
-        <div class="room-info">
-
-          <div class="room-name">
-            روم الترند
-          </div>
-
-          <div class="room-meta">
-            👥 48 مستخدم • 🎙️ 20 ميك
-          </div>
-
-        </div>
-
-        <button class="enter-room">
-          دخول
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <div class="section-title">
-      قائمة الشحن
-    </div>
-
-    <div
-      class="banner"
-      onclick="showRechargeMessage()"
-      style="cursor:pointer;"
-    >
-
-      <div class="banner-title">
-        🪙 قائمة الشحن
-      </div>
-
-      <div class="banner-text">
-        اشحن كوينز واستمتع بالهدايا والمزايا
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <div class="bottom-nav">
-
-    <div class="nav-item active">
-      <span class="nav-icon">🏠</span>
-      الرئيسية
-    </div>
-
-    <div class="nav-item">
-      <span class="nav-icon">💬</span>
-      الدردشة
-    </div>
-
-    <div class="nav-item">
-      <span class="nav-icon">⭕</span>
-      الحالات
-    </div>
-
-    <div class="nav-item">
-      <span class="nav-icon">🎤</span>
-      الرومات
-    </div>
-
-    <div class="nav-item">
-      <span class="nav-icon">👤</span>
-      حسابي
+      الترفيه والتسلية فقط
     </div>
 
   </div>
@@ -495,6 +290,140 @@ body{
 
 <script>
 
+/* =====================================================
+   تسجيل الدخول برقم الهاتف
+===================================================== */
+
+function loginWithPhone(){
+
+  const phoneInput =
+    document.getElementById("phoneLogin");
+
+
+  if(!phoneInput){
+
+    alert("خانة رقم الهاتف غير موجودة");
+
+    return;
+
+  }
+
+
+  const phone =
+    phoneInput.value.trim();
+
+
+  if(!phone){
+
+    alert("اكتب رقم الهاتف أولاً");
+
+    return;
+
+  }
+
+
+  localStorage.setItem(
+    "userPhone",
+    phone
+  );
+
+
+  localStorage.setItem(
+    "isLoggedIn",
+    "true"
+  );
+
+
+  localStorage.setItem(
+    "userName",
+    "مستخدم"
+  );
+
+
+  const loginPage =
+    document.getElementById("loginPage");
+
+
+  const homePage =
+    document.getElementById("homePage");
+
+
+  if(loginPage){
+
+    loginPage.style.display = "none";
+
+  }
+
+
+  if(homePage){
+
+    homePage.style.display = "block";
+
+  }
+
+}
+
+
+/* =====================================================
+   تسجيل الدخول بواسطة Google أو Facebook
+===================================================== */
+
+function socialLogin(provider){
+
+  alert(
+    "تسجيل الدخول بواسطة " +
+    provider +
+    " سيتم تفعيله لاحقاً."
+  );
+
+}
+
+
+/* =====================================================
+   فحص حالة تسجيل الدخول
+===================================================== */
+
+window.addEventListener(
+  "load",
+  function(){
+
+    const isLoggedIn =
+      localStorage.getItem("isLoggedIn");
+
+
+    if(isLoggedIn === "true"){
+
+      const loginPage =
+        document.getElementById("loginPage");
+
+
+      const homePage =
+        document.getElementById("homePage");
+
+
+      if(loginPage){
+
+        loginPage.style.display = "none";
+
+      }
+
+
+      if(homePage){
+
+        homePage.style.display = "block";
+
+      }
+
+    }
+
+  }
+);
+
+</script>
+
+</body>
+
+  </html>
 /* =====================================================
    بيانات الحساب
 ===================================================== */
