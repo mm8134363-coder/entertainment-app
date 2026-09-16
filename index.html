@@ -7615,6 +7615,399 @@ document.addEventListener(
 
   }
 );
+  /* =====================================================
+   الجزء 36 - تشغيل حالة تسجيل الدخول
+===================================================== */
+
+function startApp(){
+
+  const user = getCurrentUser();
+
+  if(user){
+
+    // المستخدم مسجل دخول
+    showPage("homePage");
+
+    if(typeof refreshAdminData === "function"){
+      refreshAdminData();
+    }
+
+  }else{
+
+    // المستخدم غير مسجل دخول
+    showPage("loginPage");
+
+  }
+
+}
+
+
+/* =====================================================
+   تشغيل التطبيق بعد تحميل الصفحة
+===================================================== */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function(){
+
+    startApp();
+
+  }
+);
+ /* =====================================================
+   الجزء 37 - حماية الصفحة الرئيسية
+===================================================== */
+
+function requireLogin(){
+
+  if(!isUserLoggedIn()){
+
+    showPage("loginPage");
+
+    return false;
+
+  }
+
+  return true;
+
+}
+
+
+/* =====================================================
+   التحقق قبل فتح الصفحات الخاصة
+===================================================== */
+
+function openProtectedPage(pageId){
+
+  if(!requireLogin()){
+
+    return;
+
+  }
+
+  showPage(pageId);
+
+  }
+  /* =====================================================
+   الجزء 38 - تسجيل الخروج
+===================================================== */
+
+function logoutUser(){
+
+  localStorage.removeItem("currentUser");
+
+  // الرجوع إلى صفحة تسجيل الدخول
+  showPage("loginPage");
+
+}
+
+
+/* =====================================================
+   تحديث حالة المستخدم بعد تسجيل الخروج
+===================================================== */
+
+function handleLogout(){
+
+  logoutUser();
+
+  }
+  /* =====================================================
+   الجزء 39 - التحقق من بيانات المستخدم
+===================================================== */
+
+function validateCurrentUser(){
+
+  const user = getCurrentUser();
+
+  if(!user){
+
+    return false;
+
+  }
+
+  if(
+    typeof user !== "object" ||
+    !user.id
+  ){
+
+    localStorage.removeItem("currentUser");
+
+    return false;
+
+  }
+
+  return true;
+
+}
+
+
+/* =====================================================
+   تشغيل التحقق عند فتح التطبيق
+===================================================== */
+
+function checkUserSession(){
+
+  if(validateCurrentUser()){
+
+    showPage("homePage");
+
+  }else{
+
+    showPage("loginPage");
+
+  }
+
+  }
+  /* =====================================================
+   الجزء 40 - تأمين الوصول إلى بيانات المستخدم
+===================================================== */
+
+function getSafeCurrentUser(){
+
+  const user = getCurrentUser();
+
+  if(!user){
+
+    return null;
+
+  }
+
+  if(
+    typeof user !== "object" ||
+    !user.id
+  ){
+
+    return null;
+
+  }
+
+  return user;
+
+}
+
+
+/* =====================================================
+   تحديث بيانات المستخدم الحالي
+===================================================== */
+
+function updateCurrentUser(data){
+
+  const user = getSafeCurrentUser();
+
+  if(!user || !data){
+
+    return false;
+
+  }
+
+  const updatedUser = {
+    ...user,
+    ...data
+  };
+
+  localStorage.setItem(
+    "currentUser",
+    JSON.stringify(updatedUser)
+  );
+
+  return true;
+
+}
+  /* =====================================================
+   الجزء 41 - بيانات المستخدم الأساسية
+===================================================== */
+
+function getUserBasicData(){
+
+  const user = getSafeCurrentUser();
+
+  if(!user){
+
+    return {
+      id: "",
+      name: "",
+      phone: "",
+      photo: "",
+      country: "",
+      age: 0,
+      level: 0,
+      coins: 0
+    };
+
+  }
+
+  return {
+
+    id: user.id || "",
+    name: user.name || "",
+    phone: user.phone || "",
+    photo: user.photo || "",
+    country: user.country || "",
+    age: Number(user.age) || 0,
+    level: Number(user.level) || 0,
+    coins: Number(user.coins) || 0
+
+  };
+
+}
+
+
+/* =====================================================
+   نهاية الجزء 41
+===================================================== */
+  /* =====================================================
+   الجزء 42 - عرض بيانات المستخدم
+===================================================== */
+
+function renderCurrentUser(){
+
+  const user = getUserBasicData();
+
+  const nameElement =
+    document.getElementById("currentUserName");
+
+  const photoElement =
+    document.getElementById("currentUserPhoto");
+
+  const coinsElement =
+    document.getElementById("currentUserCoins");
+
+  const levelElement =
+    document.getElementById("currentUserLevel");
+
+
+  if(nameElement){
+
+    nameElement.textContent =
+      user.name || "مستخدم جديد";
+
+  }
+
+
+  if(photoElement && user.photo){
+
+    photoElement.src = user.photo;
+
+  }
+
+
+  if(coinsElement){
+
+    coinsElement.textContent =
+      Number(user.coins).toLocaleString();
+
+  }
+
+
+  if(levelElement){
+
+    levelElement.textContent =
+      user.level;
+
+  }
+
+  }
+  /* =====================================================
+   الجزء 43 - تحديث واجهة المستخدم
+===================================================== */
+
+function refreshUserInterface(){
+
+  if(!isUserLoggedIn()){
+
+    return;
+
+  }
+
+  renderCurrentUser();
+
+
+  // تحديث بيانات الإدارة إذا كانت الدالة موجودة
+  if(
+    typeof refreshAdminData === "function"
+  ){
+
+    refreshAdminData();
+
+  }
+
+}
+
+/* =====================================================
+   الجزء 44 - تهيئة التطبيق
+===================================================== */
+
+function initializeApp(){
+
+  const loggedIn =
+    isUserLoggedIn();
+
+  if(loggedIn){
+
+    refreshUserInterface();
+
+    showPage("homePage");
+
+  }else{
+
+    showPage("loginPage");
+
+  }
+
+}
+
+
+/* =====================================================
+   تشغيل التهيئة بعد تحميل الصفحة
+===================================================== */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function(){
+
+    initializeApp();
+
+  }
+);
+  
+/* =====================================================
+   تشغيل تحديث الواجهة
+===================================================== */
+
+function initializeUserInterface(){
+
+  refreshUserInterface();
+
+  }
+  /* =====================================================
+   الجزء 45 - تحديث بيانات المستخدم تلقائيًا
+===================================================== */
+
+function autoRefreshUser(){
+
+  if(!isUserLoggedIn()){
+
+    return;
+
+  }
+
+  refreshUserInterface();
+
+}
+
+
+/* =====================================================
+   تحديث البيانات بشكل دوري
+===================================================== */
+
+setInterval(
+  function(){
+
+    autoRefreshUser();
+
+  },
+  30000
+);
 /* =====================================================
    نهاية المشروع
 ===================================================== */
