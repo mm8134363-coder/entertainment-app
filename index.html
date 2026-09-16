@@ -501,54 +501,66 @@ body{
 
 let selectedGender = "";
 
-
 /* =====================================================
-   تسجيل الدخول
+   تسجيل الدخول - نسخة أولية
 ===================================================== */
+
 function loginWithPhone(){
 
-  alert("اختبار");
+  const phoneInput =
+    document.getElementById("phoneLogin");
 
-}
+  if(!phoneInput){
+
+    alert("خانة رقم الهاتف غير موجودة");
+
+    return;
+
+  }
 
   const phone =
-    document.getElementById("phoneLogin").value.trim();
+    phoneInput.value.trim();
 
   if(!phone){
 
     alert("اكتب رقم الهاتف أولاً");
 
     return;
+
   }
 
   localStorage.setItem(
-    "familyStarLogin",
-    "true"
-  );
-
-  localStorage.setItem(
-    "familyStarPhone",
+    "userPhone",
     phone
   );
 
-  openSetupPage();
-
-}
-
-
-function socialLogin(provider){
-
   localStorage.setItem(
-    "familyStarLogin",
+    "isLoggedIn",
     "true"
   );
 
   localStorage.setItem(
-    "familyStarProvider",
-    provider
+    "userName",
+    "مستخدم"
   );
 
-  openSetupPage();
+  alert("تم تسجيل الدخول بنجاح");
+
+  if(
+    typeof showPageIfExists === "function"
+  ){
+
+    showPageIfExists("homePage");
+
+  }
+
+  if(
+    typeof refreshUserInterface === "function"
+  ){
+
+    refreshUserInterface();
+
+  }
 
 }
 /* =====================================================
