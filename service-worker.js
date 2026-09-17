@@ -1,11 +1,15 @@
-const CACHE_NAME = "noor-al-muslim-v1";
+const CACHE_NAME = "noor-muslim-v2";
 
 const FILES_TO_CACHE = [
   "./",
   "./index.html",
-  "./manifest.json"
+  "./manifest.json",
+  "./icon.svg",
+  "./icon-192-1.png",
+  "./icon-512-1.png"
 ];
 
+// تثبيت Service Worker
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
@@ -16,7 +20,7 @@ self.addEventListener("install", (event) => {
   self.skipWaiting();
 });
 
-
+// تفعيل النسخة الجديدة
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
@@ -31,45 +35,16 @@ self.addEventListener("activate", (event) => {
   self.clients.claim();
 });
 
-
+// تشغيل التطبيق من الكاش أولًا
 self.addEventListener("fetch", (event) => {
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
-
-      if (cachedResponse) {
-        return cachedResponse;
-      }
-
-      return fetch(event.request)
-        .then((networkResponse) => {
-
-          if (
-            !networkResponse ||
-            networkResponse.status !== 200 ||
-            networkResponse.type !== "basic"
-          ) {
-            return networkResponse;
-          }
-
-          const responseClone =
-            networkResponse.clone();
-
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(
-              event.request,
-              responseClone
-            );
-          });
-
-          return networkResponse;
-
-        })
-        .catch(() => {
-
+      return (
+        cachedResponse ||
+        fetch(event.request).catch(() => {
           return caches.match("./index.html");
-
-        });
-
+        })
+      );
     })
   );
 });
