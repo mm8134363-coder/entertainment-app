@@ -1,1 +1,518 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0f766e">
 
+<title>نور المسلم - الرئيسية</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,Tahoma,sans-serif;
+  background:#f4f7f6;
+  color:#17332f;
+}
+
+header{
+  background:linear-gradient(135deg,#075e54,#159a88);
+  color:white;
+  padding:25px 18px 30px;
+  border-radius:0 0 28px 28px;
+}
+
+.header-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.logo{
+  font-size:24px;
+  font-weight:bold;
+}
+
+.settings{
+  width:42px;
+  height:42px;
+  border:0;
+  border-radius:50%;
+  background:rgba(255,255,255,.18);
+  color:white;
+  font-size:20px;
+}
+
+.greeting{
+  margin-top:22px;
+  font-size:16px;
+  opacity:.9;
+}
+
+.date{
+  margin-top:7px;
+  font-size:14px;
+  opacity:.85;
+}
+
+.container{
+  padding:18px;
+  max-width:700px;
+  margin:auto;
+}
+
+.section-title{
+  font-size:19px;
+  font-weight:bold;
+  margin:22px 0 12px;
+}
+
+.next-prayer{
+  background:white;
+  border-radius:20px;
+  padding:20px;
+  box-shadow:0 4px 18px rgba(0,0,0,.07);
+}
+
+.next-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.next-name{
+  font-size:17px;
+  color:#087f6e;
+  font-weight:bold;
+}
+
+.next-time{
+  font-size:30px;
+  font-weight:bold;
+}
+
+.remaining{
+  margin-top:12px;
+  color:#687875;
+  font-size:14px;
+}
+
+.prayers{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:8px;
+}
+
+.prayer{
+  background:white;
+  padding:12px 5px;
+  text-align:center;
+  border-radius:15px;
+  box-shadow:0 3px 10px rgba(0,0,0,.05);
+}
+
+.prayer.active{
+  background:#087f6e;
+  color:white;
+}
+
+.prayer-name{
+  font-size:13px;
+  margin-bottom:7px;
+}
+
+.prayer-time{
+  font-size:14px;
+  font-weight:bold;
+}
+
+.quick-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.quick{
+  background:white;
+  border:0;
+  border-radius:18px;
+  padding:20px 12px;
+  font-size:16px;
+  color:#17332f;
+  box-shadow:0 3px 12px rgba(0,0,0,.06);
+  cursor:pointer;
+}
+
+.quick-icon{
+  display:block;
+  font-size:28px;
+  margin-bottom:8px;
+}
+
+.location{
+  background:#e3f3ef;
+  border-radius:17px;
+  padding:15px;
+  margin-top:20px;
+}
+
+.location-title{
+  font-weight:bold;
+  margin-bottom:6px;
+}
+
+.location-text{
+  font-size:14px;
+  color:#56706b;
+}
+
+footer{
+  text-align:center;
+  color:#82928f;
+  font-size:12px;
+  padding:25px 10px 35px;
+}
+
+@media(max-width:450px){
+  .prayers{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .prayer:last-child{
+    grid-column:span 1;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-top">
+    <div class="logo">☪ نور المسلم</div>
+    <button class="settings" onclick="openSettings()">⚙</button>
+  </div>
+
+  <div class="greeting">
+    السلام عليكم ورحمة الله وبركاته
+  </div>
+
+  <div class="date" id="gregorianDate">
+    جاري تحميل التاريخ...
+  </div>
+</header>
+
+<main class="container">
+
+  <div class="section-title">الصلاة القادمة</div>
+
+  <section class="next-prayer">
+    <div class="next-row">
+      <div>
+        <div class="next-name" id="nextPrayerName">
+          الفجر
+        </div>
+        <div class="remaining" id="remaining">
+          جاري الحساب...
+        </div>
+      </div>
+
+      <div class="next-time" id="nextPrayerTime">
+        --:--
+      </div>
+    </div>
+  </section>
+
+  <div class="section-title">مواقيت الصلاة</div>
+
+  <section class="prayers">
+
+    <div class="prayer" data-prayer="الفجر">
+      <div class="prayer-name">الفجر</div>
+      <div class="prayer-time" id="fajr">--:--</div>
+    </div>
+
+    <div class="prayer" data-prayer="الظهر">
+      <div class="prayer-name">الظهر</div>
+      <div class="prayer-time" id="dhuhr">--:--</div>
+    </div>
+
+    <div class="prayer" data-prayer="العصر">
+      <div class="prayer-name">العصر</div>
+      <div class="prayer-time" id="asr">--:--</div>
+    </div>
+
+    <div class="prayer" data-prayer="المغرب">
+      <div class="prayer-name">المغرب</div>
+      <div class="prayer-time" id="maghrib">--:--</div>
+    </div>
+
+    <div class="prayer" data-prayer="العشاء">
+      <div class="prayer-name">العشاء</div>
+      <div class="prayer-time" id="isha">--:--</div>
+    </div>
+
+  </section>
+
+  <div class="section-title">الوصول السريع</div>
+
+  <section class="quick-grid">
+
+    <button class="quick" onclick="openSection('quran')">
+      <span class="quick-icon">📖</span>
+      القرآن الكريم
+    </button>
+
+    <button class="quick" onclick="openSection('azkar')">
+      <span class="quick-icon">🤲</span>
+      الأذكار والأدعية
+    </button>
+
+    <button class="quick" onclick="openSection('tasbeeh')">
+      <span class="quick-icon">📿</span>
+      السبحة
+    </button>
+
+    <button class="quick" onclick="openSection('qibla')">
+      <span class="quick-icon">🕋</span>
+      القبلة
+    </button>
+
+  </section>
+
+  <section class="location">
+    <div class="location-title">📍 موقع مواقيت الصلاة</div>
+    <div class="location-text" id="locationText">
+      يتم تحديد الموقع...
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  نور المسلم © 2026
+</footer>
+
+<script>
+
+/* =========================
+   التاريخ
+========================= */
+
+function loadDate(){
+
+  const now = new Date();
+
+  const date = now.toLocaleDateString(
+    "ar-EG",
+    {
+      weekday:"long",
+      year:"numeric",
+      month:"long",
+      day:"numeric"
+    }
+  );
+
+  document.getElementById("gregorianDate").textContent = date;
+}
+
+
+/* =========================
+   مواقيت الصلاة
+========================= */
+
+const prayers = [
+  {name:"الفجر", id:"fajr", hour:4, minute:30},
+  {name:"الظهر", id:"dhuhr", hour:12, minute:0},
+  {name:"العصر", id:"asr", hour:15, minute:30},
+  {name:"المغرب", id:"maghrib", hour:18, minute:15},
+  {name:"العشاء", id:"isha", hour:19, minute:45}
+];
+
+function loadPrayerTimes(){
+
+  prayers.forEach(prayer => {
+
+    const h = String(prayer.hour).padStart(2,"0");
+    const m = String(prayer.minute).padStart(2,"0");
+
+    document.getElementById(prayer.id).textContent =
+      `${h}:${m}`;
+  });
+
+  updateNextPrayer();
+}
+
+
+/* =========================
+   الصلاة القادمة
+========================= */
+
+function updateNextPrayer(){
+
+  const now = new Date();
+
+  let next = null;
+
+  for(const prayer of prayers){
+
+    const prayerDate = new Date();
+
+    prayerDate.setHours(
+      prayer.hour,
+      prayer.minute,
+      0,
+      0
+    );
+
+    if(prayerDate > now){
+      next = {
+        ...prayer,
+        date:prayerDate
+      };
+      break;
+    }
+  }
+
+  if(!next){
+
+    next = {
+      ...prayers[0],
+      date:new Date()
+    };
+
+    next.date.setDate(
+      next.date.getDate()+1
+    );
+
+    next.date.setHours(
+      next.hour,
+      next.minute,
+      0,
+      0
+    );
+  }
+
+  document.getElementById("nextPrayerName").textContent =
+    next.name;
+
+  document.getElementById("nextPrayerTime").textContent =
+    `${String(next.hour).padStart(2,"0")}:${String(next.minute).padStart(2,"0")}`;
+
+  const difference =
+    next.date.getTime() - now.getTime();
+
+  const hours =
+    Math.floor(difference / 3600000);
+
+  const minutes =
+    Math.floor((difference % 3600000) / 60000);
+
+  document.getElementById("remaining").textContent =
+    `متبقي ${hours} ساعة و ${minutes} دقيقة`;
+
+  document.querySelectorAll(".prayer").forEach(el=>{
+    el.classList.remove("active");
+  });
+
+  const active =
+    document.querySelector(
+      `.prayer[data-prayer="${next.name}"]`
+    );
+
+  if(active){
+    active.classList.add("active");
+  }
+}
+
+
+/* =========================
+   الموقع
+========================= */
+
+function loadLocation(){
+
+  const locationText =
+    document.getElementById("locationText");
+
+  if(!navigator.geolocation){
+
+    locationText.textContent =
+      "المتصفح لا يدعم تحديد الموقع.";
+
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(
+
+    position => {
+
+      locationText.textContent =
+        "تم تحديد موقعك لاستخدامه في مواقيت الصلاة.";
+    },
+
+    () => {
+
+      locationText.textContent =
+        "لم يتم السماح بالموقع. يمكنك اختيار المدينة من الإعدادات.";
+    }
+  );
+}
+
+
+/* =========================
+   التنقل بين الأقسام
+========================= */
+
+function openSection(section){
+
+  const names = {
+
+    quran:"القرآن الكريم",
+
+    azkar:"الأذكار والأدعية",
+
+    tasbeeh:"السبحة الإلكترونية",
+
+    qibla:"القبلة"
+  };
+
+  alert(
+    `قسم ${names[section]} سيتم فتحه عند إضافة القسم.`
+  );
+}
+
+
+/* =========================
+   الإعدادات
+========================= */
+
+function openSettings(){
+
+  alert(
+    "الإعدادات ستكون في القسم العاشر من التطبيق."
+  );
+}
+
+
+/* =========================
+   تشغيل الصفحة
+========================= */
+
+loadDate();
+
+loadPrayerTimes();
+
+loadLocation();
+
+setInterval(updateNextPrayer,60000);
+
+</script>
+
+</body>
+  </html>
