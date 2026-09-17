@@ -1,4 +1,4 @@
-const CACHE_NAME = "noor-muslim-v2";
+const CACHE_NAME = "noor-muslim-v3";
 
 const FILES_TO_CACHE = [
   "./",
@@ -9,7 +9,6 @@ const FILES_TO_CACHE = [
   "./icon-512-1.png"
 ];
 
-// تثبيت Service Worker
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
@@ -20,7 +19,6 @@ self.addEventListener("install", (event) => {
   self.skipWaiting();
 });
 
-// تفعيل النسخة الجديدة
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
@@ -35,7 +33,6 @@ self.addEventListener("activate", (event) => {
   self.clients.claim();
 });
 
-// تشغيل التطبيق من الكاش أولًا
 self.addEventListener("fetch", (event) => {
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
