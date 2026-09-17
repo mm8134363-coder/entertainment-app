@@ -940,6 +940,110 @@
 
 <body>
 
+  <!-- =========================================================
+       شاشة البداية
+       ========================================================= -->
+
+  <div class="splash" id="splashScreen">
+
+    <div class="splash-content">
+
+      <div class="splash-logo">
+        <img src="./icon-512-1.png" alt="نور المسلم">
+      </div>
+
+      <h1>نور المسلم</h1>
+
+      <p>رفيقك في طريق الخير</p>
+
+      <div class="splash-loader"></div>
+
+    </div>
+
+  </div>
+
+  <style>
+    .splash {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #ffffff;
+      direction: rtl;
+    }
+
+    .splash-content {
+      width: min(90%, 430px);
+      text-align: center;
+    }
+
+    .splash-logo {
+      width: 145px;
+      height: 145px;
+      margin: 0 auto 20px;
+    }
+
+    .splash-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .splash h1 {
+      margin: 0;
+      font-size: 30px;
+      font-weight: 800;
+      color: #073b2a;
+    }
+
+    .splash p {
+      margin: 10px 0 25px;
+      font-size: 16px;
+      color: #666;
+    }
+
+    .splash-loader {
+      width: 42px;
+      height: 42px;
+      margin: 0 auto;
+      border: 4px solid #e5e5e5;
+      border-top-color: #073b2a;
+      border-radius: 50%;
+      animation: splashSpin 0.9s linear infinite;
+    }
+
+    @keyframes splashSpin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+
+  <script>
+    window.addEventListener("load", function () {
+      setTimeout(function () {
+        const splash = document.getElementById("splashScreen");
+
+        if (splash) {
+          splash.style.opacity = "0";
+          splash.style.transition = "opacity 0.4s ease";
+
+          setTimeout(function () {
+            splash.remove();
+          }, 400);
+        }
+      }, 1500);
+    });
+  </script>
+
+
+  <!-- =========================================================
+       التطبيق
+       ========================================================= -->
+
+  <div id="app">
 
   <!-- =========================================================
        التطبيق
