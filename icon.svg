@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="100" fill="#073b2a"/>
+  <circle cx="256" cy="256" r="170" fill="#e8bd5b"/>
+  <path d="M150 290 Q256 170 362 290 Q256 250 150 290Z" fill="#073b2a"/>
+  <path d="M180 310 Q256 250 332 310" fill="none" stroke="#073b2a" stroke-width="18" stroke-linecap="round"/>
+  <text x="256" y="385" text-anchor="middle" font-size="48" font-family="Arial" font-weight="bold" fill="#073b2a">نور</text>
+</svg>
