@@ -2,515 +2,610 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0f766e">
-
-<title>نور المسلم - الرئيسية</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#063c3b">
+<title>نور المسلم</title>
 
 <style>
+:root{
+  --bg:#032f31;
+  --bg2:#064b49;
+  --gold:#e9c45b;
+  --gold2:#f6dfa0;
+  --cream:#fff8e8;
+  --text:#173b38;
+  --muted:#8db4ae;
+}
+
 *{
   box-sizing:border-box;
-  margin:0;
-  padding:0;
 }
 
 body{
-  font-family:Arial,Tahoma,sans-serif;
-  background:#f4f7f6;
-  color:#17332f;
+  margin:0;
+  background:#021f21;
+  color:#fff;
+  font-family:Tahoma,Arial,sans-serif;
+}
+
+.app{
+  max-width:480px;
+  min-height:100vh;
+  margin:auto;
+  background:
+    radial-gradient(
+      circle at 50% 0,
+      #0c5a57 0,
+      #063c3b 32%,
+      #022c2e 75%
+    );
+  overflow:hidden;
 }
 
 header{
-  background:linear-gradient(135deg,#075e54,#159a88);
-  color:white;
-  padding:25px 18px 30px;
-  border-radius:0 0 28px 28px;
-}
-
-.header-top{
+  padding:18px 18px 12px;
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
 }
 
-.logo{
-  font-size:24px;
-  font-weight:bold;
-}
-
-.settings{
-  width:42px;
-  height:42px;
-  border:0;
-  border-radius:50%;
-  background:rgba(255,255,255,.18);
-  color:white;
+.icon{
+  width:40px;
+  height:40px;
+  border:1px solid #c9ad51;
+  border-radius:12px;
+  background:#063b3b;
+  color:var(--gold);
   font-size:20px;
 }
 
-.greeting{
-  margin-top:22px;
-  font-size:16px;
-  opacity:.9;
+.brand{
+  font-size:23px;
+  font-weight:700;
+  color:var(--gold2);
 }
 
-.date{
-  margin-top:7px;
-  font-size:14px;
-  opacity:.85;
-}
-
-.container{
-  padding:18px;
-  max-width:700px;
-  margin:auto;
-}
-
-.section-title{
-  font-size:19px;
-  font-weight:bold;
-  margin:22px 0 12px;
-}
-
-.next-prayer{
-  background:white;
-  border-radius:20px;
-  padding:20px;
-  box-shadow:0 4px 18px rgba(0,0,0,.07);
-}
-
-.next-row{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.next-name{
-  font-size:17px;
-  color:#087f6e;
-  font-weight:bold;
-}
-
-.next-time{
-  font-size:30px;
-  font-weight:bold;
-}
-
-.remaining{
-  margin-top:12px;
-  color:#687875;
-  font-size:14px;
-}
-
-.prayers{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:8px;
-}
-
-.prayer{
-  background:white;
-  padding:12px 5px;
+.hero{
+  margin:6px 14px 12px;
+  padding:24px 18px;
+  border:1px solid #b99b3e;
+  border-radius:24px;
   text-align:center;
-  border-radius:15px;
-  box-shadow:0 3px 10px rgba(0,0,0,.05);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(7,72,70,.9),
+      rgba(2,40,42,.95)
+    );
 }
 
-.prayer.active{
-  background:#087f6e;
-  color:white;
+.hero h1{
+  font-size:32px;
+  margin:4px 0;
+  color:var(--gold2);
 }
 
-.prayer-name{
+.hero p{
+  margin:4px 0;
+  color:#fff4d0;
   font-size:13px;
-  margin-bottom:7px;
 }
 
-.prayer-time{
-  font-size:14px;
+.cards{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  padding:0 14px;
+}
+
+.card{
+  background:
+    linear-gradient(
+      145deg,
+      #fdf6e6,
+      #eee3ca
+    );
+  color:var(--text);
+  border-radius:18px;
+  padding:14px;
+  border:1px solid #d5b95e;
+  min-height:105px;
+}
+
+.card small{
+  display:block;
+  color:#58716c;
+}
+
+.card strong{
+  display:block;
+  font-size:26px;
+  margin:8px 0;
+}
+
+.next{
+  background:
+    linear-gradient(
+      145deg,
+      #095955,
+      #063f3e
+    );
+  color:#fff;
+  border:1px solid #d5b95e;
+}
+
+.next small{
+  color:#f4e3aa;
+}
+
+.next strong{
+  color:#ffe29a;
+}
+
+.title{
+  padding:18px 16px 9px;
+  font-size:17px;
+  color:var(--gold2);
   font-weight:bold;
 }
 
-.quick-grid{
+.grid{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
+  grid-template-columns:repeat(3,1fr);
+  gap:9px;
+  padding:0 14px;
 }
 
 .quick{
-  background:white;
-  border:0;
-  border-radius:18px;
-  padding:20px 12px;
-  font-size:16px;
-  color:#17332f;
-  box-shadow:0 3px 12px rgba(0,0,0,.06);
-  cursor:pointer;
+  min-height:90px;
+  border:1px solid #a89046;
+  border-radius:16px;
+  background:#053d3c;
+  color:#fff;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  font-size:13px;
 }
 
-.quick-icon{
-  display:block;
-  font-size:28px;
-  margin-bottom:8px;
+.quick b{
+  font-size:27px;
+  color:var(--gold);
 }
 
 .location{
-  background:#e3f3ef;
-  border-radius:17px;
-  padding:15px;
-  margin-top:20px;
-}
-
-.location-title{
-  font-weight:bold;
-  margin-bottom:6px;
-}
-
-.location-text{
-  font-size:14px;
-  color:#56706b;
-}
-
-footer{
+  margin:14px;
+  background:#064946;
+  border:1px solid #8f7b39;
+  border-radius:16px;
+  padding:13px;
   text-align:center;
-  color:#82928f;
-  font-size:12px;
-  padding:25px 10px 35px;
+  color:#d9eee9;
+  font-size:13px;
 }
 
-@media(max-width:450px){
-  .prayers{
-    grid-template-columns:repeat(3,1fr);
-  }
+nav{
+  position:sticky;
+  bottom:0;
+  background:rgba(2,37,39,.97);
+  border-top:1px solid #75652f;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  padding:
+    8px
+    6px
+    calc(8px + env(safe-area-inset-bottom));
+}
 
-  .prayer:last-child{
-    grid-column:span 1;
-  }
+nav button{
+  background:none;
+  border:0;
+  color:#c7d8d3;
+  font-size:11px;
+}
+
+nav b{
+  display:block;
+  font-size:21px;
+  margin-bottom:3px;
+}
+
+nav .active{
+  color:var(--gold);
+}
+
+.toast{
+  position:fixed;
+  bottom:78px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#fff5df;
+  color:#173b38;
+  padding:11px 16px;
+  border-radius:14px;
+  display:none;
+  z-index:5;
+  box-shadow:0 8px 30px #0006;
 }
 </style>
 </head>
 
 <body>
 
+<div class="app">
+
 <header>
-  <div class="header-top">
-    <div class="logo">☪ نور المسلم</div>
-    <button class="settings" onclick="openSettings()">⚙</button>
-  </div>
 
-  <div class="greeting">
-    السلام عليكم ورحمة الله وبركاته
-  </div>
+<button
+  class="icon"
+  onclick="notify('الإعدادات ستُدار من لوحة التحكم')">
+  ⚙
+</button>
 
-  <div class="date" id="gregorianDate">
-    جاري تحميل التاريخ...
-  </div>
+<div class="brand">
+  نور المسلم
+</div>
+
+<button
+  class="icon"
+  onclick="notify('لا توجد إشعارات جديدة')">
+  ♧
+</button>
+
 </header>
 
-<main class="container">
 
-  <div class="section-title">الصلاة القادمة</div>
+<section class="hero">
 
-  <section class="next-prayer">
-    <div class="next-row">
-      <div>
-        <div class="next-name" id="nextPrayerName">
-          الفجر
-        </div>
-        <div class="remaining" id="remaining">
-          جاري الحساب...
-        </div>
-      </div>
+<div style="font-size:38px">
+  ☪
+</div>
 
-      <div class="next-time" id="nextPrayerTime">
-        --:--
-      </div>
-    </div>
-  </section>
+<h1>
+  نور المسلم
+</h1>
 
-  <div class="section-title">مواقيت الصلاة</div>
+<p>
+  طريقك إلى الراحة والطمأنينة
+</p>
 
-  <section class="prayers">
+</section>
 
-    <div class="prayer" data-prayer="الفجر">
-      <div class="prayer-name">الفجر</div>
-      <div class="prayer-time" id="fajr">--:--</div>
-    </div>
 
-    <div class="prayer" data-prayer="الظهر">
-      <div class="prayer-name">الظهر</div>
-      <div class="prayer-time" id="dhuhr">--:--</div>
-    </div>
+<section class="cards">
 
-    <div class="prayer" data-prayer="العصر">
-      <div class="prayer-name">العصر</div>
-      <div class="prayer-time" id="asr">--:--</div>
-    </div>
+<div class="card next">
 
-    <div class="prayer" data-prayer="المغرب">
-      <div class="prayer-name">المغرب</div>
-      <div class="prayer-time" id="maghrib">--:--</div>
-    </div>
+<small>
+  الصلاة القادمة
+</small>
 
-    <div class="prayer" data-prayer="العشاء">
-      <div class="prayer-name">العشاء</div>
-      <div class="prayer-time" id="isha">--:--</div>
-    </div>
+<strong id="nextName">
+  الظهر
+</strong>
 
-  </section>
+<div id="nextTime">
+  12:59
+</div>
 
-  <div class="section-title">الوصول السريع</div>
+</div>
 
-  <section class="quick-grid">
 
-    <button class="quick" onclick="openSection('quran')">
-      <span class="quick-icon">📖</span>
-      القرآن الكريم
-    </button>
+<div class="card">
 
-    <button class="quick" onclick="openSection('azkar')">
-      <span class="quick-icon">🤲</span>
-      الأذكار والأدعية
-    </button>
+<small>
+  الوقت الحالي
+</small>
 
-    <button class="quick" onclick="openSection('tasbeeh')">
-      <span class="quick-icon">📿</span>
-      السبحة
-    </button>
+<strong id="clock">
+  --:--
+</strong>
 
-    <button class="quick" onclick="openSection('qibla')">
-      <span class="quick-icon">🕋</span>
-      القبلة
-    </button>
+<div id="today">
+  --
+</div>
 
-  </section>
+</div>
 
-  <section class="location">
-    <div class="location-title">📍 موقع مواقيت الصلاة</div>
-    <div class="location-text" id="locationText">
-      يتم تحديد الموقع...
-    </div>
-  </section>
+</section>
 
-</main>
 
-<footer>
-  نور المسلم © 2026
-</footer>
+<div class="title">
+  الوصول السريع
+</div>
+
+
+<section class="grid">
+
+<button
+  class="quick"
+  onclick="notify('قسم مواقيت الصلاة')">
+
+  <b>🕌</b>
+
+  مواقيت الصلاة
+
+</button>
+
+
+<button
+  class="quick"
+  onclick="notify('قسم القرآن الكريم')">
+
+  <b>📖</b>
+
+  القرآن الكريم
+
+</button>
+
+
+<button
+  class="quick"
+  onclick="notify('قسم التسبيح')">
+
+  <b>📿</b>
+
+  التسبيح
+
+</button>
+
+
+<button
+  class="quick"
+  onclick="notify('قسم الأذكار')">
+
+  <b>🤲</b>
+
+  الأذكار
+
+</button>
+
+
+<button
+  class="quick"
+  onclick="notify('قسم القبلة')">
+
+  <b>🧭</b>
+
+  القبلة
+
+</button>
+
+
+<button
+  class="quick"
+  onclick="notify('المزيد من الأقسام')">
+
+  <b>▦</b>
+
+  المزيد
+
+</button>
+
+</section>
+
+
+<div
+  class="location"
+  id="location">
+
+  📍 جاري تحديد المدينة...
+
+</div>
+
+
+<nav>
+
+<button class="active">
+
+<b>⌂</b>
+
+الرئيسية
+
+</button>
+
+
+<button
+  onclick="notify('القرآن')">
+
+<b>▤</b>
+
+القرآن
+
+</button>
+
+
+<button
+  onclick="notify('الأذكار')">
+
+<b>♨</b>
+
+الأذكار
+
+</button>
+
+
+<button
+  onclick="notify('المزيد')">
+
+<b>⊞</b>
+
+المزيد
+
+</button>
+
+</nav>
+
+</div>
+
+
+<div
+  class="toast"
+  id="toast">
+</div>
+
 
 <script>
 
-/* =========================
-   التاريخ
-========================= */
-
-function loadDate(){
-
-  const now = new Date();
-
-  const date = now.toLocaleDateString(
-    "ar-EG",
-    {
-      weekday:"long",
-      year:"numeric",
-      month:"long",
-      day:"numeric"
-    }
-  );
-
-  document.getElementById("gregorianDate").textContent = date;
-}
-
-
-/* =========================
-   مواقيت الصلاة
-========================= */
-
 const prayers = [
-  {name:"الفجر", id:"fajr", hour:4, minute:30},
-  {name:"الظهر", id:"dhuhr", hour:12, minute:0},
-  {name:"العصر", id:"asr", hour:15, minute:30},
-  {name:"المغرب", id:"maghrib", hour:18, minute:15},
-  {name:"العشاء", id:"isha", hour:19, minute:45}
+
+  ['الفجر','04:48'],
+
+  ['الشروق','06:17'],
+
+  ['الظهر','12:59'],
+
+  ['العصر','16:36'],
+
+  ['المغرب','19:03'],
+
+  ['العشاء','20:27']
+
 ];
 
-function loadPrayerTimes(){
 
-  prayers.forEach(prayer => {
+function tick(){
 
-    const h = String(prayer.hour).padStart(2,"0");
-    const m = String(prayer.minute).padStart(2,"0");
+  const d = new Date();
 
-    document.getElementById(prayer.id).textContent =
-      `${h}:${m}`;
-  });
 
-  updateNextPrayer();
+  document
+    .getElementById('clock')
+    .textContent =
+      d.toLocaleTimeString(
+        'ar-EG',
+        {
+          hour:'2-digit',
+          minute:'2-digit'
+        }
+      );
+
+
+  document
+    .getElementById('today')
+    .textContent =
+      d.toLocaleDateString(
+        'ar-EG',
+        {
+          weekday:'long',
+          day:'numeric',
+          month:'long'
+        }
+      );
+
+
+  const currentMinutes =
+    d.getHours() * 60 +
+    d.getMinutes();
+
+
+  let found =
+    prayers.find(
+      p => {
+
+        const parts =
+          p[1].split(':')
+            .map(Number);
+
+        return (
+          parts[0] * 60 +
+          parts[1]
+        ) > currentMinutes;
+
+      }
+    );
+
+
+  if(!found){
+
+    found = prayers[0];
+
+  }
+
+
+  document
+    .getElementById('nextName')
+    .textContent = found[0];
+
+
+  document
+    .getElementById('nextTime')
+    .textContent = found[1];
+
 }
 
 
-/* =========================
-   الصلاة القادمة
-========================= */
+function notify(text){
 
-function updateNextPrayer(){
+  const toast =
+    document.getElementById('toast');
 
-  const now = new Date();
+  toast.textContent = text;
 
-  let next = null;
+  toast.style.display = 'block';
 
-  for(const prayer of prayers){
+  clearTimeout(window.toastTimer);
 
-    const prayerDate = new Date();
-
-    prayerDate.setHours(
-      prayer.hour,
-      prayer.minute,
-      0,
-      0
+  window.toastTimer =
+    setTimeout(
+      () => {
+        toast.style.display = 'none';
+      },
+      1800
     );
 
-    if(prayerDate > now){
-      next = {
-        ...prayer,
-        date:prayerDate
-      };
-      break;
-    }
-  }
-
-  if(!next){
-
-    next = {
-      ...prayers[0],
-      date:new Date()
-    };
-
-    next.date.setDate(
-      next.date.getDate()+1
-    );
-
-    next.date.setHours(
-      next.hour,
-      next.minute,
-      0,
-      0
-    );
-  }
-
-  document.getElementById("nextPrayerName").textContent =
-    next.name;
-
-  document.getElementById("nextPrayerTime").textContent =
-    `${String(next.hour).padStart(2,"0")}:${String(next.minute).padStart(2,"0")}`;
-
-  const difference =
-    next.date.getTime() - now.getTime();
-
-  const hours =
-    Math.floor(difference / 3600000);
-
-  const minutes =
-    Math.floor((difference % 3600000) / 60000);
-
-  document.getElementById("remaining").textContent =
-    `متبقي ${hours} ساعة و ${minutes} دقيقة`;
-
-  document.querySelectorAll(".prayer").forEach(el=>{
-    el.classList.remove("active");
-  });
-
-  const active =
-    document.querySelector(
-      `.prayer[data-prayer="${next.name}"]`
-    );
-
-  if(active){
-    active.classList.add("active");
-  }
 }
 
 
-/* =========================
-   الموقع
-========================= */
-
-function loadLocation(){
-
-  const locationText =
-    document.getElementById("locationText");
+function getLocation(){
 
   if(!navigator.geolocation){
 
-    locationText.textContent =
-      "المتصفح لا يدعم تحديد الموقع.";
+    document
+      .getElementById('location')
+      .textContent =
+        '📍 اختر المدينة من لوحة التحكم';
 
     return;
+
   }
+
 
   navigator.geolocation.getCurrentPosition(
 
-    position => {
+    () => {
 
-      locationText.textContent =
-        "تم تحديد موقعك لاستخدامه في مواقيت الصلاة.";
+      document
+        .getElementById('location')
+        .textContent =
+          '📍 تم تحديد موقعك لمواقيت الصلاة';
+
     },
 
     () => {
 
-      locationText.textContent =
-        "لم يتم السماح بالموقع. يمكنك اختيار المدينة من الإعدادات.";
+      document
+        .getElementById('location')
+        .textContent =
+          '📍 اختر المدينة من إعدادات التطبيق';
+
     }
+
   );
+
 }
 
 
-/* =========================
-   التنقل بين الأقسام
-========================= */
+tick();
 
-function openSection(section){
+setInterval(
+  tick,
+  1000
+);
 
-  const names = {
-
-    quran:"القرآن الكريم",
-
-    azkar:"الأذكار والأدعية",
-
-    tasbeeh:"السبحة الإلكترونية",
-
-    qibla:"القبلة"
-  };
-
-  alert(
-    `قسم ${names[section]} سيتم فتحه عند إضافة القسم.`
-  );
-}
-
-
-/* =========================
-   الإعدادات
-========================= */
-
-function openSettings(){
-
-  alert(
-    "الإعدادات ستكون في القسم العاشر من التطبيق."
-  );
-}
-
-
-/* =========================
-   تشغيل الصفحة
-========================= */
-
-loadDate();
-
-loadPrayerTimes();
-
-loadLocation();
-
-setInterval(updateNextPrayer,60000);
+getLocation();
 
 </script>
 
