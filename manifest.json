@@ -1,0 +1,12 @@
+{
+  "name": "نور المسلم",
+  "short_name": "نور المسلم",
+  "description": "تطبيق إسلامي للقرآن الكريم والأذكار ومواقيت الصلاة والقبلة والتسبيح",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#073b2a",
+  "theme_color": "#073b2a",
+  "orientation": "portrait",
+  "lang": "ar",
+  "dir": "rtl"
+}
