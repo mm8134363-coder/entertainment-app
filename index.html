@@ -1,765 +1,634 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
-
-  <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <title>Family Star</title>
-
-  <style>
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, Tahoma, sans-serif;
-    }
-
-    body {
-      min-height: 100vh;
-      background: #05091b;
-      color: #ffffff;
-    }
-
-    .page {
-      min-height: 100vh;
-    }
-
-
-    /* =========================
-       تسجيل الدخول
-    ========================= */
-
-    .login-page {
-
-      min-height: 100vh;
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-      padding: 20px;
-
-      background:
-        radial-gradient(
-          circle at top,
-          #1b2b68 0%,
-          #0b1235 45%,
-          #05091b 100%
-        );
-
-    }
-
-
-    .login-box {
-
-      width: 100%;
-
-      max-width: 420px;
-
-      padding: 30px 22px;
-
-      text-align: center;
-
-      background: #0d1433;
-
-      border-radius: 24px;
-
-      border: 1px solid rgba(255,255,255,.08);
-
-      box-shadow:
-        0 15px 40px rgba(0,0,0,.45);
-
-    }
-
-
-    .logo {
-
-      font-size: 58px;
-
-      margin-bottom: 10px;
-
-    }
-
-
-    .login-box h1 {
-
-      font-size: 30px;
-
-      margin-bottom: 8px;
-
-    }
-
-
-    .welcome {
-
-      color: #aeb8df;
-
-      margin-bottom: 25px;
-
-    }
-
-
-    .phone-input {
-
-      width: 100%;
-
-      height: 52px;
-
-      padding: 0 16px;
-
-      border: none;
-
-      outline: none;
-
-      border-radius: 14px;
-
-      background: #182047;
-
-      color: #ffffff;
-
-      font-size: 16px;
-
-      margin-bottom: 14px;
-
-      text-align: right;
-
-    }
-
-
-    .phone-input::placeholder {
-
-      color: #8993bd;
-
-    }
-
-
-    .main-btn {
-
-      width: 100%;
-
-      height: 52px;
-
-      border: none;
-
-      border-radius: 14px;
-
-      background: #6c5ce7;
-
-      color: #ffffff;
-
-      font-size: 17px;
-
-      font-weight: bold;
-
-      cursor: pointer;
-
-    }
-
-
-    .main-btn:active {
-
-      transform: scale(.98);
-
-    }
-
-
-    .login-note {
-
-      margin-top: 20px;
-
-      color: #8e98bf;
-
-      font-size: 13px;
-
-    }
-
-
-    /* =========================
-       الصفحة الرئيسية
-    ========================= */
-
-    .home-page {
-
-      min-height: 100vh;
-
-      background:
-        linear-gradient(
-          180deg,
-          #0d1433 0%,
-          #05091b 100%
-        );
-
-      padding-bottom: 80px;
-
-    }
-
-
-    .home-header {
-
-      height: 70px;
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: space-between;
-
-      padding: 0 18px;
-
-      border-bottom:
-        1px solid rgba(255,255,255,.08);
-
-      background: #0d1433;
-
-    }
-
-
-    .home-title {
-
-      font-size: 24px;
-
-      font-weight: bold;
-
-    }
-
-
-    .home-star {
-
-      font-size: 30px;
-
-    }
-
-
-    .welcome-user {
-
-      margin: 20px;
-
-      padding: 20px;
-
-      border-radius: 20px;
-
-      background: #151e47;
-
-    }
-
-
-    .welcome-user h2 {
-
-      font-size: 21px;
-
-      margin-bottom: 8px;
-
-    }
-
-
-    .welcome-user p {
-
-      color: #aeb8df;
-
-      font-size: 14px;
-
-    }
-
-
-    .sections {
-
-      display: grid;
-
-      grid-template-columns: repeat(2, 1fr);
-
-      gap: 14px;
-
-      padding: 0 20px;
-
-    }
-
-
-    .section-card {
-
-      min-height: 130px;
-
-      border-radius: 20px;
-
-      background: #111a3d;
-
-      border:
-        1px solid rgba(255,255,255,.06);
-
-      display: flex;
-
-      flex-direction: column;
-
-      align-items: center;
-
-      justify-content: center;
-
-      gap: 10px;
-
-      cursor: pointer;
-
-    }
-
-
-    .section-icon {
-
-      font-size: 38px;
-
-    }
-
-
-    .section-name {
-
-      font-size: 16px;
-
-      font-weight: bold;
-
-    }
-
-
-    /* =========================
-       القائمة السفلية
-    ========================= */
-
-    .bottom-nav {
-
-      position: fixed;
-
-      bottom: 0;
-
-      right: 0;
-
-      left: 0;
-
-      height: 70px;
-
-      background: #0d1433;
-
-      border-top:
-        1px solid rgba(255,255,255,.08);
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: space-around;
-
-    }
-
-
-    .nav-item {
-
-      color: #aeb8df;
-
-      text-align: center;
-
-      font-size: 12px;
-
-      cursor: pointer;
-
-    }
-
-
-    .nav-icon {
-
-      display: block;
-
-      font-size: 25px;
-
-      margin-bottom: 4px;
-
-    }
-
-
-    .nav-item.active {
-
-      color: #ffffff;
-
-    }
-
-
-    .hidden {
-
-      display: none !important;
-
-    }
-
-  </style>
-
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0,
+               maximum-scale=1.0, user-scalable=no">
+
+<title>بنت تجمع العملات</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  background: #17152b;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+  touch-action: none;
+}
+
+#game {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background:
+    linear-gradient(#6ec6ff 0%, #b8edff 65%, #72d572 65%, #45a845 100%);
+}
+
+/* الشمس */
+#sun {
+  position: absolute;
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  background: #ffd83d;
+  top: 45px;
+  right: 35px;
+  box-shadow: 0 0 30px #ffe88a;
+}
+
+/* السحب */
+.cloud {
+  position: absolute;
+  width: 100px;
+  height: 35px;
+  background: white;
+  border-radius: 40px;
+  opacity: .9;
+}
+
+.cloud::before,
+.cloud::after {
+  content: "";
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+}
+
+.cloud::before {
+  width: 45px;
+  height: 45px;
+  left: 15px;
+  top: -20px;
+}
+
+.cloud::after {
+  width: 55px;
+  height: 55px;
+  right: 10px;
+  top: -28px;
+}
+
+.c1 {
+  top: 90px;
+  left: 10%;
+}
+
+.c2 {
+  top: 170px;
+  left: 55%;
+  transform: scale(.8);
+}
+
+/* لوحة المعلومات */
+#info {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  z-index: 20;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.box {
+  background: rgba(0,0,0,.65);
+  color: white;
+  padding: 10px 15px;
+  border-radius: 15px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* البنت */
+#girl {
+  position: absolute;
+  width: 70px;
+  height: 105px;
+  bottom: 90px;
+  left: calc(50% - 35px);
+  z-index: 10;
+}
+
+/* الرأس */
+.head {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  background: #ffd0b0;
+  border-radius: 50%;
+  top: 0;
+  left: 11px;
+  z-index: 3;
+}
+
+/* الشعر */
+.hair {
+  position: absolute;
+  width: 53px;
+  height: 55px;
+  background: #542b1f;
+  border-radius: 50% 50% 45% 45%;
+  top: -5px;
+  left: 8px;
+  z-index: 2;
+}
+
+.hair::after {
+  content: "";
+  position: absolute;
+  width: 17px;
+  height: 48px;
+  background: #542b1f;
+  right: -7px;
+  top: 20px;
+  border-radius: 20px;
+}
+
+/* العين */
+.eye {
+  position: absolute;
+  width: 5px;
+  height: 7px;
+  background: #222;
+  border-radius: 50%;
+  top: 22px;
+  z-index: 5;
+}
+
+.eye1 {
+  left: 23px;
+}
+
+.eye2 {
+  left: 38px;
+}
+
+/* الجسم */
+.body {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  background: #ff5f9e;
+  top: 43px;
+  left: 11px;
+  border-radius: 15px 15px 8px 8px;
+}
+
+/* الذراع */
+.arm {
+  position: absolute;
+  width: 12px;
+  height: 38px;
+  background: #ffd0b0;
+  border-radius: 10px;
+  top: 48px;
+  z-index: 1;
+}
+
+.arm1 {
+  left: 3px;
+  transform: rotate(20deg);
+}
+
+.arm2 {
+  right: 3px;
+  transform: rotate(-20deg);
+}
+
+/* الرجل */
+.leg {
+  position: absolute;
+  width: 13px;
+  height: 30px;
+  background: #ffd0b0;
+  bottom: 0;
+  border-radius: 10px;
+}
+
+.leg1 {
+  left: 17px;
+}
+
+.leg2 {
+  right: 17px;
+}
+
+/* العملة */
+.coin {
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  background: #ffd21c;
+  border: 4px solid #e7a900;
+  border-radius: 50%;
+  z-index: 5;
+  box-shadow: 0 2px 8px rgba(0,0,0,.3);
+}
+
+.coin::after {
+  content: "★";
+  position: absolute;
+  color: #fff1a0;
+  font-size: 18px;
+  left: 6px;
+  top: 3px;
+}
+
+/* زر البداية */
+#startScreen {
+  position: absolute;
+  inset: 0;
+  background: rgba(20,15,45,.9);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+}
+
+#startScreen h1 {
+  font-size: 34px;
+  margin-bottom: 10px;
+}
+
+#startScreen p {
+  font-size: 18px;
+  margin-bottom: 25px;
+}
+
+button {
+  border: 0;
+  background: #ff4f91;
+  color: white;
+  padding: 15px 35px;
+  border-radius: 30px;
+  font-size: 20px;
+  font-weight: bold;
+  box-shadow: 0 5px 15px rgba(0,0,0,.3);
+}
+
+button:active {
+  transform: scale(.95);
+}
+
+/* أزرار الحركة */
+#controls {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  right: 15px;
+  z-index: 30;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.control {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: rgba(0,0,0,.55);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 35px;
+  pointer-events: auto;
+  user-select: none;
+}
+
+/* رسالة النهاية */
+#gameOver {
+  position: absolute;
+  inset: 0;
+  background: rgba(15,10,30,.9);
+  z-index: 90;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: white;
+  text-align: center;
+}
+
+#gameOver h2 {
+  font-size: 35px;
+  margin: 10px;
+}
+
+#gameOver p {
+  font-size: 20px;
+}
+</style>
 </head>
-
 
 <body>
 
+<div id="game">
 
-  <!-- =========================
-       تسجيل الدخول
-  ========================= -->
+  <div id="sun"></div>
 
-  <main
-    id="loginPage"
-    class="page login-page"
-  >
+  <div class="cloud c1"></div>
+  <div class="cloud c2"></div>
 
-    <div class="login-box">
+  <div id="info">
+    <div class="box">🪙 العملات: <span id="score">0</span></div>
+    <div class="box">❤️ <span id="lives">3</span></div>
+  </div>
 
-      <div class="logo">⭐</div>
+  <!-- البنت -->
+  <div id="girl">
 
-      <h1>Family Star</h1>
+    <div class="hair"></div>
 
-      <p class="welcome">
-        أهلاً بك في Family Star
-      </p>
-
-
-      <input
-        id="phoneInput"
-        class="phone-input"
-        type="tel"
-        inputmode="tel"
-        placeholder="اكتب رقم الهاتف"
-      >
-
-
-      <button
-        id="loginButton"
-        class="main-btn"
-        type="button"
-      >
-        تسجيل الدخول
-      </button>
-
-
-      <p class="login-note">
-        برنامج ترفيه وتسلية
-      </p>
-
+    <div class="head">
+      <div class="eye eye1"></div>
+      <div class="eye eye2"></div>
     </div>
 
-  </main>
+    <div class="arm arm1"></div>
+    <div class="arm arm2"></div>
 
+    <div class="body"></div>
 
+    <div class="leg leg1"></div>
+    <div class="leg leg2"></div>
 
-  <!-- =========================
-       الصفحة الرئيسية
-  ========================= -->
+  </div>
 
-  <main
-    id="homePage"
-    class="page home-page hidden"
-  >
+  <!-- أزرار الحركة -->
+  <div id="controls">
+    <div class="control" id="right">➡️</div>
+    <div class="control" id="left">⬅️</div>
+  </div>
 
+  <!-- شاشة البداية -->
+  <div id="startScreen">
+    <h1>👧 مغامرة البنت</h1>
+    <p>حرّك البنت واجمع العملات 🪙</p>
+    <button onclick="startGame()">ابدأ اللعبة</button>
+  </div>
 
-    <header class="home-header">
+  <!-- شاشة النهاية -->
+  <div id="gameOver">
+    <h2>انتهت اللعبة 😢</h2>
+    <p>مجموع العملات: <span id="finalScore">0</span></p>
+    <button onclick="restartGame()">العب مرة أخرى</button>
+  </div>
 
-      <div class="home-title">
-        Family Star
-      </div>
+</div>
 
-      <div class="home-star">
-        ⭐
-      </div>
+<script>
 
-    </header>
+let gameRunning = false;
 
+let score = 0;
+let lives = 3;
 
+let girlX = window.innerWidth / 2 - 35;
 
-    <section class="welcome-user">
+let moveLeft = false;
+let moveRight = false;
 
-      <h2>
-        أهلاً بك 👋
-      </h2>
+let coins = [];
 
-      <p id="userPhoneText">
-        مرحباً بك في Family Star
-      </p>
+const girl = document.getElementById("girl");
+const game = document.getElementById("game");
 
-    </section>
+const scoreText = document.getElementById("score");
+const livesText = document.getElementById("lives");
 
+const leftButton = document.getElementById("left");
+const rightButton = document.getElementById("right");
 
+/* بدء اللعبة */
+function startGame() {
 
-    <section class="sections">
+  document.getElementById("startScreen").style.display = "none";
 
+  score = 0;
+  lives = 3;
 
-      <div
-        class="section-card"
-        id="chatCard"
-      >
+  scoreText.textContent = score;
+  livesText.textContent = lives;
 
-        <div class="section-icon">
-          💬
-        </div>
+  girlX = window.innerWidth / 2 - 35;
 
-        <div class="section-name">
-          الدردشة
-        </div>
+  gameRunning = true;
 
-      </div>
+  createCoin();
+}
 
+/* إعادة اللعبة */
+function restartGame() {
 
+  document.getElementById("gameOver").style.display = "none";
 
-      <div
-        class="section-card"
-        id="statusCard"
-      >
+  coins.forEach(c => c.element.remove());
+  coins = [];
 
-        <div class="section-icon">
-          🟢
-        </div>
+  startGame();
+}
 
-        <div class="section-name">
-          الحالات
-        </div>
+/* حركة البنت */
+function updateGirl() {
 
-      </div>
+  if (!gameRunning) return;
 
+  if (moveLeft) {
+    girlX -= 6;
+  }
 
+  if (moveRight) {
+    girlX += 6;
+  }
 
-      <div
-        class="section-card"
-        id="roomsCard"
-      >
+  const maxX = window.innerWidth - 70;
 
-        <div class="section-icon">
-          🎤
-        </div>
+  if (girlX < 0) {
+    girlX = 0;
+  }
 
-        <div class="section-name">
-          الرومات
-        </div>
+  if (girlX > maxX) {
+    girlX = maxX;
+  }
 
-      </div>
+  girl.style.left = girlX + "px";
+}
 
+/* زر اليسار */
+leftButton.addEventListener("touchstart", function(e) {
+  e.preventDefault();
+  moveLeft = true;
+});
 
+leftButton.addEventListener("touchend", function(e) {
+  e.preventDefault();
+  moveLeft = false;
+});
 
-      <div
-        class="section-card"
-        id="profileCard"
-      >
+leftButton.addEventListener("mousedown", function() {
+  moveLeft = true;
+});
 
-        <div class="section-icon">
-          👤
-        </div>
+leftButton.addEventListener("mouseup", function() {
+  moveLeft = false;
+});
 
-        <div class="section-name">
-          الملف الشخصي
-        </div>
+/* زر اليمين */
+rightButton.addEventListener("touchstart", function(e) {
+  e.preventDefault();
+  moveRight = true;
+});
 
-      </div>
+rightButton.addEventListener("touchend", function(e) {
+  e.preventDefault();
+  moveRight = false;
+});
 
+rightButton.addEventListener("mousedown", function() {
+  moveRight = true;
+});
 
-    </section>
+rightButton.addEventListener("mouseup", function() {
+  moveRight = false;
+});
 
+/* إنشاء عملة */
+function createCoin() {
 
+  if (!gameRunning) return;
 
-    <!-- القائمة السفلية -->
+  const element = document.createElement("div");
 
-    <nav class="bottom-nav">
+  element.className = "coin";
 
+  const x = Math.random() * (window.innerWidth - 40);
 
-      <div
-        class="nav-item active"
-        id="homeNav"
-      >
+  element.style.left = x + "px";
+  element.style.top = "-40px";
 
-        <span class="nav-icon">
-          🏠
-        </span>
+  game.appendChild(element);
 
-        الرئيسية
+  coins.push({
+    element: element,
+    x: x,
+    y: -40,
+    speed: 3 + Math.random() * 3
+  });
 
-      </div>
+  setTimeout(createCoin, 700);
+}
 
+/* فحص التصادم */
+function collision(a, b) {
 
+  const ar = a.getBoundingClientRect();
+  const br = b.getBoundingClientRect();
 
-      <div
-        class="nav-item"
-        id="chatNav"
-      >
+  return !(
+    ar.right < br.left ||
+    ar.left > br.right ||
+    ar.bottom < br.top ||
+    ar.top > br.bottom
+  );
+}
 
-        <span class="nav-icon">
-          💬
-        </span>
+/* تحديث العملات */
+function updateCoins() {
 
-        الدردشة
+  if (!gameRunning) return;
 
-      </div>
+  for (let i = coins.length - 1; i >= 0; i--) {
 
+    const coin = coins[i];
 
+    coin.y += coin.speed;
 
-      <div
-        class="nav-item"
-        id="roomsNav"
-      >
+    coin.element.style.top = coin.y + "px";
 
-        <span class="nav-icon">
-          🎤
-        </span>
+    /* تم جمع العملة */
+    if (collision(girl, coin.element)) {
 
-        الرومات
+      score++;
 
-      </div>
+      scoreText.textContent = score;
 
+      coin.element.remove();
 
+      coins.splice(i, 1);
 
-      <div
-        class="nav-item"
-        id="profileNav"
-      >
+      continue;
+    }
 
-        <span class="nav-icon">
-          👤
-        </span>
+    /* العملة وصلت إلى الأرض */
+    if (coin.y > window.innerHeight) {
 
-        حسابي
+      coin.element.remove();
 
-      </div>
+      coins.splice(i, 1);
 
+      lives--;
 
-    </nav>
+      livesText.textContent = lives;
 
-
-  </main>
-
-
-
-  <script>
-
-
-    /* =========================
-       عناصر تسجيل الدخول
-    ========================= */
-
-    const phoneInput =
-      document.getElementById(
-        "phoneInput"
-      );
-
-
-    const loginButton =
-      document.getElementById(
-        "loginButton"
-      );
-
-
-    const loginPage =
-      document.getElementById(
-        "loginPage"
-      );
-
-
-    const homePage =
-      document.getElementById(
-        "homePage"
-      );
-
-
-    const userPhoneText =
-      document.getElementById(
-        "userPhoneText"
-      );
-
-
-
-    /* =========================
-       تسجيل الدخول
-    ========================= */
-
-    loginButton.addEventListener(
-      "click",
-      function () {
-
-
-        const phone =
-          phoneInput.value.trim();
-
-
-        if (!phone) {
-
-          alert(
-            "اكتب رقم الهاتف أولاً"
-          );
-
-          return;
-
-        }
-
-
-        localStorage.setItem(
-          "familyStarPhone",
-          phone
-        );
-
-
-        showHomePage();
-
+      if (lives <= 0) {
+        endGame();
       }
+    }
+  }
+}
+
+/* نهاية اللعبة */
+function endGame() {
+
+  gameRunning = false;
+
+  document.getElementById("finalScore").textContent = score;
+
+  document.getElementById("gameOver").style.display = "flex";
+
+  saveHighScore();
+}
+
+/* حفظ أعلى نتيجة */
+function saveHighScore() {
+
+  const oldScore =
+    Number(localStorage.getItem("highScore") || 0);
+
+  if (score > oldScore) {
+
+    localStorage.setItem(
+      "highScore",
+      score
     );
+  }
+}
 
+/* حلقة اللعبة */
+function gameLoop() {
 
+  updateGirl();
 
-    /* =========================
-       فتح الرئيسية
-    ========================= */
+  updateCoins();
 
-    function showHomePage() {
+  requestAnimationFrame(gameLoop);
+}
 
+gameLoop();
 
-      const phone =
-        localStorage.getItem(
-          "familyStarPhone"
-        );
-
-
-      loginPage.classList.add(
-        "hidden"
-      );
-
-
-      homePage.classList.remove(
-        "hidden"
-      );
-
-
-      if (phone) {
-
-        userPhoneText.textContent =
-          "رقم الحساب: " + phone;
-
-      }
-
-    }
-
-
-
-    /* =========================
-       فحص الدخول عند فتح الموقع
-    ========================= */
-
-    const savedPhone =
-      localStorage.getItem(
-        "familyStarPhone"
-      );
-
-
-    if (savedPhone) {
-
-      showHomePage();
-
-    }
-
-
-  </script>
-
+</script>
 
 </body>
-
-  </html>
+      </html>
