@@ -863,104 +863,250 @@
 
   <main class="app">
 
-    <!-- ===================================================
-         الرئيسية
-         =================================================== -->
+    <!-- =======================================================
+     الصفحة الرئيسية
+     ======================================================= -->
 
-    <section class="screen active" id="homeScreen">
+<section class="screen active" id="homeScreen">
 
-      <header class="top-header">
-        <div class="header-row">
+  <!-- الهيدر -->
+  <header class="top-header">
 
-          <div class="header-text">
-            <div class="app-name">نور المسلم</div>
-            <div class="app-subtitle">رفيقك في طريق الخير</div>
-          </div>
+    <div class="header-row">
 
-          <button class="header-button"
-                  onclick="openScreen('settingsScreen')">
-            ⚙
-          </button>
+      <div class="header-text">
 
-        </div>
-      </header>
-
-      <div class="screen active">
-
-        <div class="welcome-card">
-          <div class="welcome-title">السلام عليكم ورحمة الله وبركاته</div>
-          <div class="welcome-text">
-            أهلاً بك في نور المسلم، اجعل يومك عامراً بذكر الله وقراءة القرآن.
-          </div>
+        <div class="app-name">
+          نور المسلم
         </div>
 
-        <div class="section-heading">
-          <h3>الوصول السريع</h3>
-          <span>نور المسلم</span>
-        </div>
-
-        <div class="features-grid">
-
-          <button class="feature-card"
-                  onclick="openScreen('quranScreen')">
-            <div class="feature-icon">📖</div>
-            <div class="feature-title">القرآن الكريم</div>
-            <div class="feature-desc">قراءة القرآن الكريم</div>
-          </button>
-
-          <button class="feature-card"
-                  onclick="openScreen('adhkarScreen')">
-            <div class="feature-icon">🤲</div>
-            <div class="feature-title">الأذكار والأدعية</div>
-            <div class="feature-desc">أذكار يومية وأدعية</div>
-          </button>
-
-          <button class="feature-card"
-                  onclick="openScreen('tasbeehScreen')">
-            <div class="feature-icon">📿</div>
-            <div class="feature-title">السبحة</div>
-         <div class="feature-desc">سبحة إلكترونية</div>
-          </button>
-
-          <button class="feature-card"
-                  onclick="openScreen('qiblaScreen')">
-            <div class="feature-icon">🕋</div>
-            <div class="feature-title">القبلة</div>
-            <div class="feature-desc">اتجاه القبلة</div>
-          </button>
-
-          <button class="feature-card"
-                  onclick="openScreen('prayerScreen')">
-            <div class="feature-icon">🕌</div>
-            <div class="feature-title">مواقيت الصلاة</div>
-            <div class="feature-desc">مواعيد الصلوات</div>
-          </button>
-
-          <button class="feature-card"
-                  onclick="openScreen('calendarScreen')">
-            <div class="feature-icon">🌙</div>
-            <div class="feature-title">التقويم الهجري</div>
-            <div class="feature-desc">التاريخ والمناسبات</div>
-          </button>
-
-          <button class="feature-card"
-                  onclick="openScreen('audioScreen')">
-            <div class="feature-icon">🎧</div>
-            <div class="feature-title">القرآن والصوتيات</div>
-            <div class="feature-desc">استماع وتلاوة</div>
-          </button>
-
-          <button class="feature-card"
-                  onclick="openScreen('favoritesScreen')">
-            <div class="feature-icon">⭐</div>
-            <div class="feature-title">المفضلة والحفظ</div>
-            <div class="feature-desc">المحتوى المحفوظ</div>
-          </button>
-
+        <div class="app-subtitle">
+          رفيقك في طريق الخير
         </div>
 
       </div>
-    </section>
+
+      <button
+        class="header-button"
+        onclick="openScreen('settingsScreen')"
+        aria-label="الإعدادات"
+      >
+        ⚙
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <!-- محتوى الرئيسية -->
+  <div>
+
+    <!-- بطاقة الترحيب -->
+    <div class="welcome-card">
+
+      <div class="welcome-title">
+        السلام عليكم ورحمة الله وبركاته
+      </div>
+
+      <div class="welcome-text">
+        أهلاً بك في نور المسلم، اجعل يومك عامراً بذكر الله وقراءة القرآن.
+      </div>
+
+    </div>
+
+
+    <!-- الوصول السريع -->
+    <div class="section-heading">
+
+      <h3>
+        الوصول السريع
+      </h3>
+
+      <span>
+        نور المسلم
+      </span>
+
+    </div>
+
+
+    <!-- بطاقات الخدمات -->
+    <div class="features-grid">
+
+
+      <!-- القرآن الكريم -->
+      <button
+        class="feature-card"
+        onclick="openScreen('quranScreen')"
+      >
+
+        <div class="feature-icon">
+          📖
+        </div>
+
+        <div class="feature-title">
+          القرآن الكريم
+        </div>
+
+        <div class="feature-desc">
+          قراءة القرآن الكريم
+        </div>
+
+      </button>
+
+
+      <!-- الأذكار والأدعية -->
+      <button
+        class="feature-card"
+        onclick="openScreen('adhkarScreen')"
+      >
+
+        <div class="feature-icon">
+          🤲
+        </div>
+
+        <div class="feature-title">
+          الأذكار والأدعية
+        </div>
+
+        <div class="feature-desc">
+          أذكار يومية وأدعية
+        </div>
+
+      </button>
+
+
+      <!-- السبحة -->
+      <button
+        class="feature-card"
+        onclick="openScreen('tasbeehScreen')"
+      >
+
+        <div class="feature-icon">
+          📿
+        </div>
+
+        <div class="feature-title">
+          السبحة
+        </div>
+
+        <div class="feature-desc">
+          سبحة إلكترونية
+        </div>
+
+      </button>
+
+
+      <!-- القبلة -->
+      <button
+        class="feature-card"
+        onclick="openScreen('qiblaScreen')"
+      >
+
+        <div class="feature-icon">
+          🕋
+        </div>
+
+        <div class="feature-title">
+          القبلة
+        </div>
+
+        <div class="feature-desc">
+          اتجاه القبلة
+        </div>
+
+      </button>
+
+
+      <!-- مواقيت الصلاة -->
+      <button
+        class="feature-card"
+        onclick="openScreen('prayerScreen')"
+      >
+
+        <div class="feature-icon">
+          🕌
+        </div>
+
+        <div class="feature-title">
+          مواقيت الصلاة
+        </div>
+
+        <div class="feature-desc">
+          مواعيد الصلوات
+        </div>
+
+      </button>
+
+
+      <!-- التقويم الهجري -->
+      <button
+        class="feature-card"
+        onclick="openScreen('calendarScreen')"
+      >
+
+        <div class="feature-icon">
+          🌙
+        </div>
+
+        <div class="feature-title">
+          التقويم الهجري
+        </div>
+
+        <div class="feature-desc">
+          التاريخ والمناسبات
+        </div>
+
+      </button>
+
+
+      <!-- القرآن والصوتيات -->
+      <button
+        class="feature-card"
+        onclick="openScreen('audioScreen')"
+      >
+
+        <div class="feature-icon">
+          🎧
+        </div>
+
+        <div class="feature-title">
+          القرآن والصوتيات
+        </div>
+
+        <div class="feature-desc">
+          استماع وتلاوة
+        </div>
+
+      </button>
+
+
+      <!-- المفضلة والحفظ -->
+      <button
+        class="feature-card"
+        onclick="openScreen('favoritesScreen')"
+      >
+
+        <div class="feature-icon">
+          ⭐
+        </div>
+
+        <div class="feature-title">
+          المفضلة والحفظ
+        </div>
+
+        <div class="feature-desc">
+          المحتوى المحفوظ
+        </div>
+
+      </button>
+
+
+    </div>
+
+  </div>
+
+        </section>
 
 
     <!-- ===================================================
