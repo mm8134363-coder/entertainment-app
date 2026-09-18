@@ -1324,7 +1324,6 @@ function showToast(message) {
 
 }
 
-
 /* =========================
    تحميل القرآن
    ========================= */
@@ -1344,15 +1343,16 @@ async function loadQuran() {
 
 
     const response =
-      await fetch("./quran.json", {
-        cache: "no-cache"
+      await fetch("./quran.json?v=2", {
+        cache: "no-store"
       });
 
 
     if (!response.ok) {
 
       throw new Error(
-        "Quran file not found"
+        "Quran file not found - HTTP " +
+        response.status
       );
 
     }
@@ -1396,6 +1396,15 @@ async function loadQuran() {
     }
 
 
+    if (!currentSurahs.length) {
+
+      throw new Error(
+        "Quran data is empty"
+      );
+
+    }
+
+
     renderSurahs(currentSurahs);
 
 
@@ -1417,29 +1426,33 @@ async function loadQuran() {
       "تعذر تحميل القرآن الكريم.";
 
 
-    container.innerHTML = `
+    if (container) {
 
-      <div class="no-results">
+      container.innerHTML = `
 
-        تعذر تحميل القرآن الكريم.
+        <div class="no-results">
 
-        <br><br>
+          تعذر تحميل القرآن الكريم.
 
-        تأكد من وجود ملف
+          <br><br>
 
-        <strong>quran.json</strong>
+          تأكد من وجود ملف
 
-        في نفس مجلد
+          <strong>quran.json</strong>
 
-        <strong>index.html</strong>.
+          في نفس مجلد
 
-      </div>
+          <strong>index.html</strong>.
 
-    `;
+        </div>
+
+      `;
+
+    }
 
   }
 
-}
+  }
 
 
 /* =========================
