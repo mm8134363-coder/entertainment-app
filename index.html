@@ -1438,35 +1438,57 @@
     /* =====================================================
        التنقل بين الصفحات
        ===================================================== */
+function openScreen(screenId) {
 
-    function openScreen(screenId) {
+  /* إخفاء كل الشاشات */
+  document.querySelectorAll(".screen").forEach(function(screen) {
 
-      document.querySelectorAll(".screen").forEach(function(screen) {
-        screen.classList.remove("active");
-      });
+    screen.classList.remove("active");
 
-      var screen = document.getElementById(screenId);
+    screen.style.display = "none";
 
-      if (screen) {
-        screen.classList.add("active");
-      }
+  });
 
-      document.querySelectorAll(".nav-btn").forEach(function(button) {
 
-        button.classList.remove("active");
+  /* إظهار الشاشة المطلوبة */
+  var screen = document.getElementById(screenId);
 
-        if (button.dataset.screen === screenId) {
-          button.classList.add("active");
-        }
+  if (screen) {
 
-      });
+    screen.style.display = "block";
 
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
+    /* إعادة تفعيل الكلاس */
+    screen.classList.add("active");
+
+    /* إجبار المتصفح على إعادة رسم الشاشة */
+    void screen.offsetHeight;
+
+  }
+
+
+  /* تحديث زر التنقل السفلي */
+  document.querySelectorAll(".nav-btn").forEach(function(button) {
+
+    button.classList.remove("active");
+
+    if (button.dataset.screen === screenId) {
+
+      button.classList.add("active");
 
     }
+
+  });
+
+
+  /* العودة لأعلى الصفحة مباشرة */
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: "auto"
+  });
+
+    }
+    
 
 
     /* =====================================================
