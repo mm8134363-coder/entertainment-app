@@ -762,7 +762,37 @@ r.appendChild(d);
 });
 
 }
+let currentAudio = null;
 
+function playAyah(surah, ayah) {
+  const surahNumber = String(surah).padStart(3, '0');
+  const ayahNumber = String(ayah).padStart(3, '0');
+
+  const audioUrl =
+    'https://everyayah.com/data/Alafasy_128kbps/' +
+    surahNumber +
+    ayahNumber +
+    '.mp3';
+
+  if (currentAudio) {
+    currentAudio.pause();
+    currentAudio.currentTime = 0;
+  }
+
+  currentAudio = new Audio(audioUrl);
+
+  currentAudio.play()
+    .then(() => {
+      toast('▶ جاري تشغيل الآية');
+    })
+    .catch(() => {
+      toast('تعذر تشغيل الصوت. تأكد من اتصال الإنترنت.');
+    });
+
+  currentAudio.onended = function () {
+    toast('انتهى تشغيل الآية');
+  };
+  }
 function closeReader(){
 
 $('reader').style.display='none';
