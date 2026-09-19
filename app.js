@@ -1,0 +1,27 @@
+let Q=null,current=null,currentVerse=1;
+const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
+const get=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}};
+const set=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
+function clean(t){return (t||'').replace(/\\qt@no\{([^}]*)\}/g,'$1').replace(/[﴿﴾]/g,'').trim()}
+async function boot(){Q=await fetch('data/quran.json').then(r=>r.json());Q.surahs.forEach(s=>s.verses.forEach(v=>v.text=clean(v.text)));if(get('dark',false))document.body.classList.add('dark');renderSurahs(Q.surahs);restoreLast();calcPrayer()}
+function show(id){$$('.screen').forEach(x=>x.classList.remove('active'));$('#'+id)?.classList.add('active');scrollTo(0,0);if(id==='favorites')renderFavs();if(id==='quran')renderSurahs(Q.surahs)}
+function renderSurahs(list){$('#surahList').innerHTML=list.map(s=>`<button class="surah" onclick="openSurah(${s.id})"><span class="num">${s.id}</span><span><b>${s.name}</b><small>${s.verses.length} آية</small></span><span class="go">‹</span></button>`).join('')}
+function openSurah(id,verse=1){current=Q.surahs[id-1];currentVerse=verse;$('#readerTitle').textContent=current.name;$('#verses').innerHTML=current.verses.map(v=>{let f=get('favs',[]).includes(`${id}:${v.n}`);return `<div class="verse" id="v-${v.n}"><button class="star ${f?'on':''}" onclick="fav(${id},${v.n})">${f?'★':'☆'}</button><span class="vnum">${v.n}</span><span class="vtext">${v.text}</span><button class="speak" onclick="speakVerse(${id},${v.n})">🔊</button></div>`}).join('');set('last',{s:id,v:verse});show('reader');setTimeout(()=>$('#v-'+verse)?.scrollIntoView({block:'center'}),80)}
+function fav(s,v){let a=get('favs',[]),k=`${s}:${v}`;a=a.includes(k)?a.filter(x=>x!==k):[...a,k];set('favs',a);openSurah(s,v)}
+function renderFavs(){let a=get('favs',[]);$('#favList').innerHTML=a.length?a.map(k=>{let[s,v]=k.split(':').map(Number),x=Q.surahs[s-1].verses[v-1];return `<button class="card favcard" onclick="openSurah(${s},${v})"><b>${Q.surahs[s-1].name} — الآية ${v}</b><p>${x.text}</p></button>`}).join(''):'<div class="card empty">لا توجد آيات مفضلة بعد.</div>'}
+function restoreLast(){let x=get('last',null);if(x)$('#lastRead').innerHTML=`آخر قراءة: ${Q.surahs[x.s-1].name} — الآية ${x.v}`;else $('#lastRead').innerHTML='ابدأ بقراءة القرآن الكريم';$('#continueBtn').onclick=()=>x&&openSurah(x.s,x.v)}
+$('#search').addEventListener('input',e=>{let q=e.target.value.trim();if(!q)return renderSurahs(Q.surahs);renderSurahs(Q.surahs.filter(s=>s.name.includes(q)||s.verses.some(v=>v.text.includes(q))))});
+$$('[data-go]').forEach(b=>b.onclick=()=>show(b.dataset.go));$$('.back').forEach(b=>b.onclick=()=>show('quran'));
+$('#theme').onclick=()=>{document.body.classList.toggle('dark');set('dark',document.body.classList.contains('dark'))};
+function speak(text){if(!('speechSynthesis'in window)){alert('القراءة الصوتية غير مدعومة على هذا الجهاز.');return}speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(text);u.lang='ar-SA';u.rate=.72;speechSynthesis.speak(u)}
+function speakVerse(s,v){openSurah(s,v);speak(Q.surahs[s-1].verses[v-1].text)}
+$('#play').onclick=()=>current&&speak(current.verses.map(v=>v.text).join(' '));$('#stop').onclick=()=>window.speechSynthesis?.cancel();
+function coords(){return {lat:Number($('#lat')?.value)||30.0444,lon:Number($('#lon')?.value)||31.2357}}
+function qiblaBearing(lat,lon){const ka=21.422487* Math.PI/180, ko=39.826206*Math.PI/180, p=lat*Math.PI/180,l=lon*Math.PI/180;return (Math.atan2(Math.sin(ko-l),Math.cos(p)*Math.tan(ka)-Math.sin(p)*Math.cos(ko-l))*180/Math.PI+360)%360}
+function getQibla(){let c=coords();return qiblaBearing(c.lat,c.lon)}
+function enableCompass(){if(!('DeviceOrientationEvent'in window))return alert('حساس الاتجاه غير متاح على هذا الجهاز.');const go=()=>window.addEventListener('deviceorientationabsolute',e=>{let h=e.webkitCompassHeading??(360-(e.alpha??0));let q=getQibla();$('#needle').style.transform=`rotate(${(q-h+360)%360}deg)`;$('#qiblaText').textContent=`اتجاه القبلة: ${q.toFixed(0)}° من الشمال`},true);if(typeof DeviceOrientationEvent.requestPermission==='function')DeviceOrientationEvent.requestPermission().then(x=>x==='granted'&&go()).catch(()=>alert('لم يتم السماح بالحساس.'));else go()}
+$('#enableCompass').onclick=enableCompass;$('#calcQibla').onclick=()=>$('#qiblaText').textContent=`اتجاه القبلة التقريبي: ${getQibla().toFixed(1)}° من الشمال`;
+function calcPrayer(){let c=coords(),d=new Date(),day=Math.floor((Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())-Date.UTC(d.getFullYear(),0,0))/86400000),season=Math.cos(2*Math.PI*(day-172)/365),base=[['الفجر',5.05],['الشروق',6.35],['الظهر',12.05],['العصر',15.35],['المغرب',18.25],['العشاء',19.55]];let adj=(c.lat-30)*-.015+season*.18;base=base.map(([n,t],i)=>{let x=t+adj+(i===0?-0.1:i===5?0.1:0);let h=Math.floor(x),m=Math.round((x-h)*60);if(m===60){h++;m=0}return [n,`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`]});$('#times').innerHTML=base.map(x=>`<div class="time"><b>${x[0]}</b><span>${x[1]}</span></div>`).join('')}
+$('#saveLocation').onclick=()=>{let c={lat:Number($('#lat').value),lon:Number($('#lon').value)};if(!Number.isFinite(c.lat)||!Number.isFinite(c.lon))return alert('أدخل خط العرض وخط الطول بشكل صحيح.');set('coords',c);calcPrayer();$('#qiblaText').textContent=`اتجاه القبلة: ${qiblaBearing(c.lat,c.lon).toFixed(1)}° من الشمال`};
+(function restoreCoords(){let c=get('coords',null);if(c){$('#lat').value=c.lat;$('#lon').value=c.lon}})();
+boot();
